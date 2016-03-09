@@ -1,0 +1,68 @@
+﻿@model SCM.Tag
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>@AppViews.Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@AppViews.Tag</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.TagType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TagType, new { htmlAttributes = new { @class = "form-control", aria_describedby = "helpBlock1" } })
+                <span id="helpBlock1" class="help-block">C: @AppViews.Customer, R: @AppViews.ServiceRequest</span>
+                @Html.ValidationMessageFor(model => model.TagType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Format, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Format, new { htmlAttributes = new { @class = "form-control", aria_describedby = "helpBlock" } })
+                <span id="helpBlock" class="help-block">
+                    <span class="label label-default">label-default &nbsp;</span>
+                    <span class="label label-primary">label-primary &nbsp;</span>
+                    <span class="label label-info">label-info &nbsp;</span>
+                    <span class="label label-success">label-success &nbsp;</span>
+                    <span class="label label-warning">label-warning &nbsp;</span>
+                    <span class="label label-danger">label-danger &nbsp;</span>
+                </span>
+
+                @Html.ValidationMessageFor(model => model.Format, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@AppViews.Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(AppViews.BackToList, "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

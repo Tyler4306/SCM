@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = AppViews.Contact;
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@AppViews.AppTitle</h3>
+
+<address>
+    @License.Address1<br />
+    @License.Address2<br />
+    <div>
+        <span class="glyphicon glyphicon-phone-alt">&nbsp; </span>
+        @License.Phone
+    </div>
+   
+</address>
+
+<address>
+    <strong>@License.Company</strong>   <a href="mailto:@License.Email">@License.Email</a><br />
+</address>

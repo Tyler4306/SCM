@@ -1,0 +1,154 @@
+﻿@model PagedList.IPagedList<SCM.ServiceRequest>
+@using PagedList.Mvc
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@AppViews.ServiceRequests</h2>
+
+<div class="row">
+    <div class="pull-right">
+        <a id="createBtn" class="btn btn-sm btn-primary" href='/ServiceRequests/Create'><span class="glyphicon glyphicon-plus">&nbsp;</span> @AppViews.Create</a>        
+        &nbsp;
+        <a class="btn btn-sm btn-primary" href="javascript:collectFilter()"><span class="glyphicon glyphicon-filter">&nbsp;</span> @AppViews.Apply</a>
+        &nbsp;
+        <a class="btn btn-sm btn-primary" href="javascript:applyReset()"><span class="glyphicon glyphicon-refresh">&nbsp;</span> @AppViews.Reset</a>
+        &nbsp;
+        <a class="btn btn-sm btn-success" href="javascript:takeCall()"><span class="glyphicon glyphicon-phone-alt">&nbsp;</span> @AppViews.TakeIn</a>
+        &nbsp;
+        @if (Request.IsAuthenticated)
+        {
+            <a class="btn btn-sm btn-success" href="javascript:takeCall()"><span class="glyphicon glyphicon-phone-alt">&nbsp;</span> @AppViews.TakeIn</a>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        @Html.Partial("_RequestsPart", Model)
+    </div>
+    <div class="col-md-4">
+        @Html.Partial("_FilterPart")
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/SCM/scm-requests.js"></script>
+
+    <script>
+        function createUrl() {
+            var url = '/ServiceRequests/Create?qin=' + $("#QIN").val();
+            $("#createBtn").attr("href", url);
+        }
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                e.relatedTarget.empty();
+            })
+
+            $("#pendingRequests").click(function (e) {
+                $("#status").val("pending");
+                collectFilter();
+                callRequestTab(e, '@Url.Action("Requests", new { status = "pending" })', '#pendingList');
+            });
+            $("#delayedRequests").click(function (e) {
+                $("#status").val("delayed");
+                collectFilter();
+                callRequestTab(e, '@Url.Action("Requests", new { status = "delayed" })', '#delayedList');
+            });
+            $("#activeRequests").click(function (e) {
+                $("#status").val("active");
+                collectFilter();
+                callRequestTab(e, '@Url.Action("Requests", new { status = "active" })', '#activeList');
+            });
+
+            $(".filterDuration").click(function (e) {                
+                $(".filterDuration").removeClass("active");
+                $(this).addClass("active");
+            });
+
+            updateTotals();
+        });
+
+        function takeCall() {
+            var url = '@Url.Action("TakeCall")';
+            $.ajax(
+             {
+                 type: 'GET',
+                 url: url,
+                 success: function (result) {
+                     if (result != null) {
+                         resetFilters();
+                         
+                         $("#QIN").val(result.Id);
+                         $("#phone").val(result.CallerId);
+
+                         collectFilter();
+                         createUrl();
+                     }
+                 }
+             }
+             );
+        }
+
+        function resetFilters() {
+            $(".filterDuration").removeClass("active");
+            $("#filterAll").addClass("active");
+            $("#customerName").val('');
+            $("#phone").val('');
+            $("#code").val('');
+            $("#receipt").val('');
+            $("#product").val('');
+            $("#model").val('');
+            $("#sn").val('');
+            $("#tags").val('');
+            $("#status").val('active');
+        }
+
+        function applyReset() {
+            resetFilters();
+            collectFilter();
+        }
+
+        function collectFilter() {
+            var filterDuration = $(".filterDuration.active").data("id");
+            var customerName = $("#customerName").val();
+            var phone = $("#phone").val();
+            var code = $("#code").val();
+            var receipt = $("#receipt").val();
+            var product = $("#product").val();
+            var model = $("#model").val();
+            var sn = $("#sn").val();
+            var tags = $("#tags").val();
+            var status = $("#status").val();
+            var listId = "";
+            if(status == "active")
+                listId = '#activeList';
+            else if (status == "pending")
+                listId = '#pendingList';
+            else if (status == "delayed")
+                listId = '#delayedList';
+            else
+                listId = '#activeList';
+
+            var url = '/ServiceRequests/Requests?status=' + status + '&filterDuration=' + filterDuration + '&customerName=' + customerName + '&phone=' + phone + '&code=' + code + '&receipt=' + receipt + '&product=' + product + '&model=' + model + '&sn=' + sn + '&tags=' + tags;
+            $.ajax(
+             {
+                 type: 'GET',
+                 url: url,
+                 success: function (result) {
+                     $(listId).html(result);
+                     updateTotals();
+                 }
+             }
+             );
+
+
+        }
+
+    </script>
+}

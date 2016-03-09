@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="664b5f9a-cf67-40b1-b35c-af3959913bbe" ChangeDateTime="03/05/2016 08:29:39">
+    <Property Name="ElementName" Value="[dbo].[Tag].[IX_Tag_Name]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[dbo].[Tag]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IX_Tags_Name]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e2c3daa0-9612-4f1c-b8f2-59b42a9c6541" ChangeDateTime="03/05/2016 08:40:24">
+    <Property Name="ElementName" Value="[dbo].[CustomerTags].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CustomerTags]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TagId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ea08cd70-a6e9-47c7-a194-2f02002e9fc3" ChangeDateTime="03/05/2016 08:57:00">
+    <Property Name="ElementName" Value="[dbo].[ServiceRequest].[CancelReasonId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ServiceRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PendingDetails" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1661f91e-b9bf-4b2c-9087-687c5df2347b" ChangeDateTime="03/05/2016 08:58:05">
+    <Property Name="ElementName" Value="[dbo].[ServiceRequest].[PendingDetails]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ServiceRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CancelReasonId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="64e0a75d-f886-4ab4-8cc3-d7c8a133a14f" ChangeDateTime="03/05/2016 09:01:33">
+    <Property Name="ElementName" Value="[dbo].[CK_ServiceRequest_Status_Valid]" />
+    <Property Name="ElementType" Value="SqlCheckConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[ServiceRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[CK_ServiceRequest_StatusDate_Valid]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a1c1bdca-20cd-490d-9a8c-ba638b85c388" ChangeDateTime="03/05/2016 09:03:21">
+    <Property Name="ElementName" Value="[dbo].[CK_ServiceRequest_RQN_Valid]" />
+    <Property Name="ElementType" Value="SqlCheckConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[ServiceRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[CK_ServiceRequest_RQN_Invalid]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2f5757f0-22dc-456c-8920-26553040e5ba" ChangeDateTime="03/05/2016 09:03:27">
+    <Property Name="ElementName" Value="[dbo].[CK_ServiceRequest_StatusDate_Valid]" />
+    <Property Name="ElementType" Value="SqlCheckConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[ServiceRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[CK_ServiceRequest_StatusDate_Invalid]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b57528a4-1c0b-4a98-b11a-cc6447e9224b" ChangeDateTime="03/05/2016 09:08:16">
+    <Property Name="ElementName" Value="[dbo].[ServiceRequests].[IX_ServiceRequests_Status]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[dbo].[ServiceRequests]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IX_ServiceRequests_StatusId]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7bf19e98-7b8a-4c8b-ae18-5556bb88120d" ChangeDateTime="03/05/2016 09:13:59">
+    <Property Name="ElementName" Value="[dbo].[ServiceRequests].[IX_ServiceRequests_PendingReason]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[dbo].[ServiceRequests]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IX_ServiceRequests_PendingReasonId]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f7087447-b1c0-40ed-abee-21ac69944b05" ChangeDateTime="03/05/2016 09:18:01">
+    <Property Name="ElementName" Value="[dbo].[RequestTags].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RequestTags]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TagId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="32034cac-7002-4edb-8a63-7b7bdac59381" ChangeDateTime="03/05/2016 09:35:12">
+    <Property Name="ElementName" Value="[dbo].[FK_PhoneCalls_To_Customer]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[PhoneCalls]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_PhoneCalls_To_Customers]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fa46119e-234f-444c-8a33-0dd5e5a35af5" ChangeDateTime="03/05/2016 09:38:01">
+    <Property Name="ElementName" Value="[dbo].[CallLogs].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CallLogs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Timestamp" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bb1c3403-e7c4-4c93-bd45-d3379a9a2598" ChangeDateTime="03/05/2016 09:38:15">
+    <Property Name="ElementName" Value="[dbo].[CallLogs].[Timestamp]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CallLogs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2bb73b5c-ca0a-4055-8d4e-e0762ff2affd" ChangeDateTime="03/05/2016 10:46:23">
+    <Property Name="ElementName" Value="[dbo].[FK_CustomerTags_To_ServiceRequests]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[CustomerTags]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_CustomerTags_To_Tags]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0f3bd078-413c-492a-a34e-e89e889d80d1" ChangeDateTime="03/08/2016 18:30:14">
+    <Property Name="ElementName" Value="[dbo].[QIN].[ReceivedOn]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QIN]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LogTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="68ec37af-210d-4ac3-a7a7-194a3212cadc" ChangeDateTime="03/08/2016 18:34:43">
+    <Property Name="ElementName" Value="[dbo].[QIN].[Header]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QIN]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="THeader" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e019a2a3-08df-465c-9158-1356e59e63fb" ChangeDateTime="03/08/2016 18:49:12">
+    <Property Name="ElementName" Value="[dbo].[QIN].[TExt]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[QIN]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TExtCode" />
+  </Operation>
+</Operations>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="870807c7a1bb4101bb0b0767b31673fd" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="SCM.Models.CancelReason" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="SCM.Models.Center" Width="1.5" PointX="3" PointY="14.25" />
+        <EntityTypeShape EntityType="SCM.Models.City" Width="1.5" PointX="0.75" PointY="19.625" />
+        <EntityTypeShape EntityType="SCM.Models.Customer" Width="1.5" PointX="3" PointY="17.375" />
+        <EntityTypeShape EntityType="SCM.Models.Department" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="SCM.Models.Engineer" Width="1.5" PointX="3" PointY="6.5" />
+        <EntityTypeShape EntityType="SCM.Models.PendingReason" Width="1.5" PointX="3" PointY="9.625" />
+        <EntityTypeShape EntityType="SCM.Models.Product" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="SCM.Models.Region" Width="1.5" PointX="0.75" PointY="16.875" />
+        <EntityTypeShape EntityType="SCM.Models.ServiceRequest" Width="1.5" PointX="5.25" PointY="2.625" />
+        <EntityTypeShape EntityType="SCM.Models.Tag" Width="1.5" PointX="7.5" PointY="5.125" />
+        <AssociationConnector Association="SCM.Models.FK_ServiceRequests_To_CancelReasons" />
+        <AssociationConnector Association="SCM.Models.FK_ServiceRequests_To_Centers" />
+        <AssociationConnector Association="SCM.Models.FK_Customers_To_Cities" />
+        <AssociationConnector Association="SCM.Models.FK_Regions_To_Cities" />
+        <AssociationConnector Association="SCM.Models.FK_Customers_To_Regions" />
+        <AssociationConnector Association="SCM.Models.FK_ServiceRequest_To_Customers" />
+        <AssociationConnector Association="SCM.Models.FK_Engineers_To_Departments" />
+        <AssociationConnector Association="SCM.Models.FK_Products_To_Departments" />
+        <AssociationConnector Association="SCM.Models.FK_ServiceRequests_To_Departments" />
+        <AssociationConnector Association="SCM.Models.FK_ServiceRequests_To_Engineers" />
+        <AssociationConnector Association="SCM.Models.FK_ServiceRequests_To_PendingReasons" />
+        <AssociationConnector Association="SCM.Models.FK_ServiceRequests_To_Products" />
+        <AssociationConnector Association="SCM.Models.CustomerTags" />
+        <AssociationConnector Association="SCM.Models.RequestTags" />
+        <EntityTypeShape EntityType="SCM.Models.QIN" Width="1.5" PointX="10.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

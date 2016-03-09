@@ -1,0 +1,76 @@
+﻿@model PagedList.IPagedList<SCM.Customer>
+@using PagedList.Mvc
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <a class="sorter" data-sort="Name" href="#">
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+                    </a>
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Mobile)
+                </th>
+                <th>
+                    <a class="sorter" data-sort="City.Name" href="#">
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().CityId)
+                    </a>
+                </th>
+                <th>
+                    <a class="sorter" data-sort="Region.Name" href="#">
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().RegionId)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Tags)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href='@Url.Action("Edit", new { id = item.Id})'><span class="glyphicon glyphicon-edit"></span></a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Region.Name)
+                    </td>
+                    <td>
+                        @foreach(var tag in item.Tags)
+                        {
+                            <span class="label @tag.Format">@tag.Name &nbsp;</span>
+                        }
+                    </td>
+
+                    <td>
+                        <a href='@Url.Action("Delete", new { id = item.Id })'><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => string.Format("javascript: callCustomers('{0}')", page))
+</div>

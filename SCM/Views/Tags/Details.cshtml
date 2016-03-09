@@ -1,0 +1,37 @@
+﻿@model SCM.Tag
+
+
+<h2>@AppViews.Details</h2>
+
+<div>
+    <h4>@AppViews.Tag</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TagType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TagType)
+        </dd>
+                <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Format)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Format)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(AppViews.Edit, "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary" }) |
+    @Html.ActionLink(AppViews.BackToList, "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+</p>

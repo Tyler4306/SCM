@@ -1,0 +1,93 @@
+﻿<h4 class="text-muted">@AppViews.ShowResultsFor</h4>
+<hr />
+<h5><b>@AppViews.Duration</b></h5>
+<p>
+    <div class="btn-group btn-group-sm" role="group" aria-label="">
+        <button type="button" data-id="today" class="filterDuration btn btn-default">@AppViews.Today</button>
+        <button type="button" data-id="week" class="filterDuration btn btn-default">@AppViews.Week</button>
+        <button type="button" data-id="month" class="filterDuration btn btn-default">@AppViews.Month</button>
+        <button id="filterAll" type="button" data-id="all" class="filterDuration btn btn-default active">@AppViews.All</button>
+    </div>       
+</p>
+<h5><b>@AppViews.Customer</b></h5>
+<p>
+    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+        <span class="input-group-addon" id="name-addon"><span class="glyphicon glyphicon-user"></span></span>
+        <input id="customerName" type="text" class="form-control" placeholder="@AppViews.Customer_Name" aria-describedby="name-addon">
+    </div>    
+    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+        <span class="input-group-addon" id="phone-addon"><span class="glyphicon glyphicon-phone"></span></span>
+        <input id="phone" type="text" class="form-control" placeholder="@AppViews.Customer_Phone" aria-describedby="phone-addon">
+    </div>
+    @Html.Hidden("QIN");
+</p>
+<h5><b>@AppViews.ServiceRequest</b></h5>
+<p>
+    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+        <input id="code" type="text" class="form-control" placeholder="@AppViews.SR_RQN">
+    </div>
+    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+        <input id="receipt" type="text" class="form-control input-sm" placeholder="@AppViews.SR_ReceiptNo">
+    </div>
+</p>
+<h5><b>@AppViews.Department</b></h5>
+<p>
+    @foreach (var item in SCM.Utils.DataManager.Departments())
+    {
+        <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+            <input data-id="@item.Id" type="checkbox">
+            <span>@item.Name</span>
+        </div>
+    }
+</p>
+<h5><b>@AppViews.Product</b></h5>
+<p>
+    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+        <span class="input-group-addon" id="product-addon"><span class="glyphicon glyphicon-list"></span></span>
+        <input id="product" type="text" class="form-control" placeholder="@AppViews.Product_Name" aria-describedby="product-addon">
+    </div>
+    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+        <span class="input-group-addon" id="model-addon">M</span>
+        <input id="model" type="text" class="form-control" placeholder="@AppViews.SR_Model" aria-describedby="model-addon">
+    </div>
+    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+        <span class="input-group-addon" id="sn-addon">#</span>
+        <input id="sn" type="text" class="form-control" placeholder="@AppViews.SR_SN" aria-describedby="sn-addon">
+    </div>
+</p>
+<h5><b>@AppViews.Tags</b></h5>
+<p>
+    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+        <span class="input-group-addon" id="tag-addon"><span class="glyphicon glyphicon-tags"></span></span>
+        <input id="tags" type="text" class="form-control" placeholder="@AppViews.Tag" aria-describedby="tag-addon">
+    </div>
+
+    <div>
+        @{
+            if (ViewBag.RelatedTags != null)
+            {
+                var items = ViewBag.RelatedTags as IDictionary<string, int>;
+                foreach (var item in items)
+                {
+                    <div style="margin-bottom: 8px;">
+                        @if (SCM.Utils.PageUtils.IsArabic())
+                        {
+                            <span class='label @SCM.Utils.DataManager.Tags().First(x => x.Name == item.Key).Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@item.Key</span>
+                            <span class="text-capitalize text-muted pull-right">&nbsp; x @item.Value &nbsp;</span>
+                        }
+                        else
+                        {
+                            <span class='label @SCM.Utils.DataManager.Tags().First(x => x.Name == item.Key).Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@item.Key</span>
+                            <span class="text-capitalize text-muted">&nbsp; x @item.Value</span>
+                        }
+                    </div>
+                }
+            }
+        }
+    </div>
+
+</p>
+
+<p class="center-block" style="text-align: center;">
+    <a class="btn btn-sm btn-primary" href="javascript:collectFilter()"><span class="glyphicon glyphicon-filter">&nbsp;</span> @AppViews.Apply</a>
+</p>

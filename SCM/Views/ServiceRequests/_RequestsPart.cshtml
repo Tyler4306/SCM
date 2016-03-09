@@ -1,0 +1,34 @@
+﻿@model PagedList.IPagedList<ServiceRequest>
+@using PagedList.Mvc
+
+<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a id="activeRequests" href="#active" aria-controls="active" role="tab" data-toggle="tab">@AppViews.ActiveRequests &nbsp;<span id="badgeActive" class="badge"></span></a></li>
+        <li role="presentation"><a id="delayedRequests" href="#delayed" aria-controls="delayed" role="tab" data-toggle="tab">@AppViews.DelayedRequests &nbsp;<span id="badgeDelayed" class="badge"></span></a></li>
+        <li role="presentation">
+            <a id="pendingRequests" data-target="#pending" href='' aria-controls="pending" role="tab" data-toggle="tab">@AppViews.PendingRequests &nbsp;<span id="badgePending" class="badge"></span></a>
+        </li>
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="active">
+            <div id="activeList">
+                @Html.Partial("_Requests")
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="delayed">
+            <div id="delayedList">
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="pending">
+            <div id="pendingList">
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,53 @@
+﻿
+@model PagedList.IPagedList<Customer>
+@using PagedList.Mvc
+@using SCM.Models
+
+@Html.Hidden("SelectedCustomer", "")
+
+<div class="table-responsive" style="height:100%;">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Mobile)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="cname">
+                    <td>
+                        <a class="btn btn-link" href="#" data-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@*@Html.PagedListPager(Model, page => Url.Action("FindCustomer", new { page }))*@
+@Html.PagedListPager(Model, page => string.Format("javascript: callCustomers('{0}')", page))

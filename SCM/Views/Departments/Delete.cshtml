@@ -1,0 +1,29 @@
+﻿@model SCM.Department
+
+
+<h2>@AppViews.Delete</h2>
+
+<h3>@AppViews.Delete_Message</h3>
+<div>
+    <h4>@AppViews.Department</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="@AppViews.Delete" class="btn btn-danger" /> |
+            @Html.ActionLink(AppViews.BackToList, "Index",null, htmlAttributes: new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

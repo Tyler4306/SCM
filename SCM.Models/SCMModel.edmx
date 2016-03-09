@@ -1,0 +1,1048 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SCM.Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CancelReasons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="75" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Centers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="RegionId" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsBlackListed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerTags">
+          <Key>
+            <PropertyRef Name="TagId" />
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="TagId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Engineers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PendingReasons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="75" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QIN">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TDate" Type="nvarchar" MaxLength="15" />
+          <Property Name="TTime" Type="nvarchar" MaxLength="15" />
+          <Property Name="TExtCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="TLineNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="THeader" Type="nvarchar" MaxLength="50" />
+          <Property Name="TNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="TDur" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsTaken" Type="bit" Nullable="false" />
+          <Property Name="TakenByExt" Type="nvarchar" MaxLength="10" />
+          <Property Name="TakenBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="TakenOn" Type="datetime" />
+          <Property Name="LogTime" Type="datetime" Nullable="false" />
+          <Property Name="LinkedTo" Type="int" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestTags">
+          <Key>
+            <PropertyRef Name="TagId" />
+            <PropertyRef Name="ServiceRequestId" />
+          </Key>
+          <Property Name="TagId" Type="int" Nullable="false" />
+          <Property Name="ServiceRequestId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="StatusDate" Type="datetime" Nullable="false" />
+          <Property Name="CenterId" Type="int" Nullable="false" />
+          <Property Name="RQN" Type="nvarchar" MaxLength="20" />
+          <Property Name="ReceiptNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="ProductId" Type="nvarchar" MaxLength="3" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="SN" Type="nvarchar" MaxLength="50" />
+          <Property Name="EngineerId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="ClosingDate" Type="datetime" />
+          <Property Name="PendingReasonId" Type="int" />
+          <Property Name="CancelReasonId" Type="int" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagType" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Format" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Customers_To_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_To_Regions">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerTags_To_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="CustomerTags" Type="Self.CustomerTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerTags">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerTags_To_Tags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="CustomerTags" Type="Self.CustomerTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Engineers_To_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Engineers" Type="Self.Engineers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Engineers">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_To_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Regions_To_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Regions" Type="Self.Regions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Regions">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestTags_To_ServiceRequests">
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="1" />
+          <End Role="RequestTags" Type="Self.RequestTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceRequests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestTags">
+              <PropertyRef Name="ServiceRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestTags_To_Tags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="RequestTags" Type="Self.RequestTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequest_To_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequests">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_CancelReasons">
+          <End Role="CancelReasons" Type="Self.CancelReasons" Multiplicity="0..1" />
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CancelReasons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequests">
+              <PropertyRef Name="CancelReasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_Centers">
+          <End Role="Centers" Type="Self.Centers" Multiplicity="1" />
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Centers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequests">
+              <PropertyRef Name="CenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequests">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_Engineers">
+          <End Role="Engineers" Type="Self.Engineers" Multiplicity="0..1" />
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Engineers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequests">
+              <PropertyRef Name="EngineerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_PendingReasons">
+          <End Role="PendingReasons" Type="Self.PendingReasons" Multiplicity="0..1" />
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PendingReasons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequests">
+              <PropertyRef Name="PendingReasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequests">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="q_take_call" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+          <Parameter Name="userext" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="SCMModelsStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CancelReasons" EntityType="Self.CancelReasons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Centers" EntityType="Self.Centers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerTags" EntityType="Self.CustomerTags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Engineers" EntityType="Self.Engineers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PendingReasons" EntityType="Self.PendingReasons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QIN" EntityType="Self.QIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestTags" EntityType="Self.RequestTags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceRequests" EntityType="Self.ServiceRequests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customers_To_Cities" Association="Self.FK_Customers_To_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_To_Regions" Association="Self.FK_Customers_To_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerTags_To_Customers" Association="Self.FK_CustomerTags_To_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CustomerTags" EntitySet="CustomerTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerTags_To_Tags" Association="Self.FK_CustomerTags_To_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="CustomerTags" EntitySet="CustomerTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Engineers_To_Departments" Association="Self.FK_Engineers_To_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Engineers" EntitySet="Engineers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_To_Departments" Association="Self.FK_Products_To_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Regions_To_Cities" Association="Self.FK_Regions_To_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Regions" EntitySet="Regions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestTags_To_ServiceRequests" Association="Self.FK_RequestTags_To_ServiceRequests">
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+            <End Role="RequestTags" EntitySet="RequestTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestTags_To_Tags" Association="Self.FK_RequestTags_To_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="RequestTags" EntitySet="RequestTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequest_To_Customers" Association="Self.FK_ServiceRequest_To_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_CancelReasons" Association="Self.FK_ServiceRequests_To_CancelReasons">
+            <End Role="CancelReasons" EntitySet="CancelReasons" />
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_Centers" Association="Self.FK_ServiceRequests_To_Centers">
+            <End Role="Centers" EntitySet="Centers" />
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_Departments" Association="Self.FK_ServiceRequests_To_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_Engineers" Association="Self.FK_ServiceRequests_To_Engineers">
+            <End Role="Engineers" EntitySet="Engineers" />
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_PendingReasons" Association="Self.FK_ServiceRequests_To_PendingReasons">
+            <End Role="PendingReasons" EntitySet="PendingReasons" />
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_Products" Association="Self.FK_ServiceRequests_To_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SCM.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SCMContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CancelReasons" EntityType="SCM.Models.CancelReason" />
+          <EntitySet Name="Centers" EntityType="SCM.Models.Center" />
+          <EntitySet Name="Cities" EntityType="SCM.Models.City" />
+          <EntitySet Name="Customers" EntityType="SCM.Models.Customer" />
+          <EntitySet Name="Departments" EntityType="SCM.Models.Department" />
+          <EntitySet Name="Engineers" EntityType="SCM.Models.Engineer" />
+          <EntitySet Name="PendingReasons" EntityType="SCM.Models.PendingReason" />
+          <EntitySet Name="Products" EntityType="SCM.Models.Product" />
+          <EntitySet Name="Regions" EntityType="SCM.Models.Region" />
+          <EntitySet Name="ServiceRequests" EntityType="SCM.Models.ServiceRequest" />
+          <EntitySet Name="Tags" EntityType="SCM.Models.Tag" />
+          <AssociationSet Name="FK_ServiceRequests_To_CancelReasons" Association="SCM.Models.FK_ServiceRequests_To_CancelReasons">
+            <End Role="CancelReason" EntitySet="CancelReasons" />
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_Centers" Association="SCM.Models.FK_ServiceRequests_To_Centers">
+            <End Role="Center" EntitySet="Centers" />
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_To_Cities" Association="SCM.Models.FK_Customers_To_Cities">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Regions_To_Cities" Association="SCM.Models.FK_Regions_To_Cities">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Region" EntitySet="Regions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_To_Regions" Association="SCM.Models.FK_Customers_To_Regions">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequest_To_Customers" Association="SCM.Models.FK_ServiceRequest_To_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Engineers_To_Departments" Association="SCM.Models.FK_Engineers_To_Departments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Engineer" EntitySet="Engineers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_To_Departments" Association="SCM.Models.FK_Products_To_Departments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_Departments" Association="SCM.Models.FK_ServiceRequests_To_Departments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_Engineers" Association="SCM.Models.FK_ServiceRequests_To_Engineers">
+            <End Role="Engineer" EntitySet="Engineers" />
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_PendingReasons" Association="SCM.Models.FK_ServiceRequests_To_PendingReasons">
+            <End Role="PendingReason" EntitySet="PendingReasons" />
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_Products" Association="SCM.Models.FK_ServiceRequests_To_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerTags" Association="SCM.Models.CustomerTags">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <AssociationSet Name="RequestTags" Association="SCM.Models.RequestTags">
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <FunctionImport Name="q_take_call" ReturnType="Collection(SCM.Models.q_take_call_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="userext" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="QINs" EntityType="SCM.Models.QIN" />
+        </EntityContainer>
+        <EntityType Name="CancelReason">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_CancelReasons" FromRole="CancelReason" ToRole="ServiceRequest" />
+        </EntityType>
+        <EntityType Name="Center">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Centers" FromRole="Center" ToRole="ServiceRequest" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="SCM.Models.FK_Customers_To_Cities" FromRole="City" ToRole="Customer" />
+          <NavigationProperty Name="Regions" Relationship="SCM.Models.FK_Regions_To_Cities" FromRole="City" ToRole="Region" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsBlackListed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="SCM.Models.FK_Customers_To_Cities" FromRole="Customer" ToRole="City" />
+          <NavigationProperty Name="Region" Relationship="SCM.Models.FK_Customers_To_Regions" FromRole="Customer" ToRole="Region" />
+          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequest_To_Customers" FromRole="Customer" ToRole="ServiceRequest" />
+          <NavigationProperty Name="Tags" Relationship="SCM.Models.CustomerTags" FromRole="Customer" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Engineers" Relationship="SCM.Models.FK_Engineers_To_Departments" FromRole="Department" ToRole="Engineer" />
+          <NavigationProperty Name="Products" Relationship="SCM.Models.FK_Products_To_Departments" FromRole="Department" ToRole="Product" />
+          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Departments" FromRole="Department" ToRole="ServiceRequest" />
+        </EntityType>
+        <EntityType Name="Engineer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Department" Relationship="SCM.Models.FK_Engineers_To_Departments" FromRole="Engineer" ToRole="Department" />
+          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Engineers" FromRole="Engineer" ToRole="ServiceRequest" />
+        </EntityType>
+        <EntityType Name="PendingReason">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_PendingReasons" FromRole="PendingReason" ToRole="ServiceRequest" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Department" Relationship="SCM.Models.FK_Products_To_Departments" FromRole="Product" ToRole="Department" />
+          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="Product" ToRole="ServiceRequest" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="City" Relationship="SCM.Models.FK_Regions_To_Cities" FromRole="Region" ToRole="City" />
+          <NavigationProperty Name="Customers" Relationship="SCM.Models.FK_Customers_To_Regions" FromRole="Region" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="ServiceRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="StatusDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CenterId" Type="Int32" Nullable="false" />
+          <Property Name="RQN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="ProductId" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EngineerId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClosingDate" Type="DateTime" Precision="3" />
+          <Property Name="PendingReasonId" Type="Int32" />
+          <Property Name="CancelReasonId" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CancelReason" Relationship="SCM.Models.FK_ServiceRequests_To_CancelReasons" FromRole="ServiceRequest" ToRole="CancelReason" />
+          <NavigationProperty Name="Center" Relationship="SCM.Models.FK_ServiceRequests_To_Centers" FromRole="ServiceRequest" ToRole="Center" />
+          <NavigationProperty Name="Customer" Relationship="SCM.Models.FK_ServiceRequest_To_Customers" FromRole="ServiceRequest" ToRole="Customer" />
+          <NavigationProperty Name="Department" Relationship="SCM.Models.FK_ServiceRequests_To_Departments" FromRole="ServiceRequest" ToRole="Department" />
+          <NavigationProperty Name="Engineer" Relationship="SCM.Models.FK_ServiceRequests_To_Engineers" FromRole="ServiceRequest" ToRole="Engineer" />
+          <NavigationProperty Name="PendingReason" Relationship="SCM.Models.FK_ServiceRequests_To_PendingReasons" FromRole="ServiceRequest" ToRole="PendingReason" />
+          <NavigationProperty Name="Product" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="ServiceRequest" ToRole="Product" />
+          <NavigationProperty Name="Tags" Relationship="SCM.Models.RequestTags" FromRole="ServiceRequest" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagType" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Format" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="SCM.Models.CustomerTags" FromRole="Tag" ToRole="Customer" />
+          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.RequestTags" FromRole="Tag" ToRole="ServiceRequest" />
+        </EntityType>
+        <Association Name="FK_ServiceRequests_To_CancelReasons">
+          <End Type="SCM.Models.CancelReason" Role="CancelReason" Multiplicity="0..1" />
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CancelReason">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequest">
+              <PropertyRef Name="CancelReasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_Centers">
+          <End Type="SCM.Models.Center" Role="Center" Multiplicity="1" />
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Center">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequest">
+              <PropertyRef Name="CenterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_To_Cities">
+          <End Type="SCM.Models.City" Role="City" Multiplicity="0..1" />
+          <End Type="SCM.Models.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Regions_To_Cities">
+          <End Type="SCM.Models.City" Role="City" Multiplicity="1" />
+          <End Type="SCM.Models.Region" Role="Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Region">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_To_Regions">
+          <End Type="SCM.Models.Region" Role="Region" Multiplicity="0..1" />
+          <End Type="SCM.Models.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequest_To_Customers">
+          <End Type="SCM.Models.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequest">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Engineers_To_Departments">
+          <End Type="SCM.Models.Department" Role="Department" Multiplicity="1" />
+          <End Type="SCM.Models.Engineer" Role="Engineer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Engineer">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_To_Departments">
+          <End Type="SCM.Models.Department" Role="Department" Multiplicity="1" />
+          <End Type="SCM.Models.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_Departments">
+          <End Type="SCM.Models.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequest">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_Engineers">
+          <End Type="SCM.Models.Engineer" Role="Engineer" Multiplicity="0..1" />
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Engineer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequest">
+              <PropertyRef Name="EngineerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_PendingReasons">
+          <End Type="SCM.Models.PendingReason" Role="PendingReason" Multiplicity="0..1" />
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PendingReason">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequest">
+              <PropertyRef Name="PendingReasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceRequests_To_Products">
+          <End Type="SCM.Models.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequest">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CustomerTags">
+          <End Type="SCM.Models.Customer" Role="Customer" Multiplicity="*" />
+          <End Type="SCM.Models.Tag" Role="Tag" Multiplicity="*" />
+        </Association>
+        <Association Name="RequestTags">
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <End Type="SCM.Models.Tag" Role="Tag" Multiplicity="*" />
+        </Association>
+        <EntityType Name="QIN">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TDate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TTime" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TExtCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TLineNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="THeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TDur" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsTaken" Type="Boolean" Nullable="false" />
+          <Property Name="TakenByExt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TakenBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TakenOn" Type="DateTime" Precision="3" />
+          <Property Name="LogTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LinkedTo" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="q_take_call_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="TDate" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TTime" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TExtCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TLineNo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="THeader" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TNo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TDur" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="IsTaken" Nullable="false" />
+          <Property Type="String" Name="TakenByExt" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TakenBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TakenOn" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LogTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="LinkedTo" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SCMModelsStoreContainer" CdmEntityContainer="SCMContext">
+          <EntitySetMapping Name="CancelReasons">
+            <EntityTypeMapping TypeName="SCM.Models.CancelReason">
+              <MappingFragment StoreEntitySet="CancelReasons">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Centers">
+            <EntityTypeMapping TypeName="SCM.Models.Center">
+              <MappingFragment StoreEntitySet="Centers">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="SCM.Models.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="SCM.Models.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="IsBlackListed" ColumnName="IsBlackListed" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="SCM.Models.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Engineers">
+            <EntityTypeMapping TypeName="SCM.Models.Engineer">
+              <MappingFragment StoreEntitySet="Engineers">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PendingReasons">
+            <EntityTypeMapping TypeName="SCM.Models.PendingReason">
+              <MappingFragment StoreEntitySet="PendingReasons">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="SCM.Models.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="SCM.Models.Region">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceRequests">
+            <EntityTypeMapping TypeName="SCM.Models.ServiceRequest">
+              <MappingFragment StoreEntitySet="ServiceRequests">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CancelReasonId" ColumnName="CancelReasonId" />
+                <ScalarProperty Name="PendingReasonId" ColumnName="PendingReasonId" />
+                <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EngineerId" ColumnName="EngineerId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="RQN" ColumnName="RQN" />
+                <ScalarProperty Name="CenterId" ColumnName="CenterId" />
+                <ScalarProperty Name="StatusDate" ColumnName="StatusDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="SCM.Models.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TagType" ColumnName="TagType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CustomerTags" TypeName="SCM.Models.CustomerTags" StoreEntitySet="CustomerTags">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="Id" ColumnName="TagId" />
+            </EndProperty>
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="Id" ColumnName="CustomerId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RequestTags" TypeName="SCM.Models.RequestTags" StoreEntitySet="RequestTags">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="Id" ColumnName="TagId" />
+            </EndProperty>
+            <EndProperty Name="ServiceRequest">
+              <ScalarProperty Name="Id" ColumnName="ServiceRequestId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="q_take_call" FunctionName="SCM.Models.Store.q_take_call">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SCM.Models.q_take_call_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="TTime" ColumnName="TTime" />
+                <ScalarProperty Name="TExtCode" ColumnName="TExtCode" />
+                <ScalarProperty Name="TLineNo" ColumnName="TLineNo" />
+                <ScalarProperty Name="THeader" ColumnName="THeader" />
+                <ScalarProperty Name="TNo" ColumnName="TNo" />
+                <ScalarProperty Name="TDur" ColumnName="TDur" />
+                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
+                <ScalarProperty Name="TakenByExt" ColumnName="TakenByExt" />
+                <ScalarProperty Name="TakenBy" ColumnName="TakenBy" />
+                <ScalarProperty Name="TakenOn" ColumnName="TakenOn" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="LinkedTo" ColumnName="LinkedTo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="QINs">
+            <EntityTypeMapping TypeName="SCM.Models.QIN">
+              <MappingFragment StoreEntitySet="QIN">
+                <ScalarProperty Name="LinkedTo" ColumnName="LinkedTo" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="TakenOn" ColumnName="TakenOn" />
+                <ScalarProperty Name="TakenBy" ColumnName="TakenBy" />
+                <ScalarProperty Name="TakenByExt" ColumnName="TakenByExt" />
+                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
+                <ScalarProperty Name="TDur" ColumnName="TDur" />
+                <ScalarProperty Name="TNo" ColumnName="TNo" />
+                <ScalarProperty Name="THeader" ColumnName="THeader" />
+                <ScalarProperty Name="TLineNo" ColumnName="TLineNo" />
+                <ScalarProperty Name="TExtCode" ColumnName="TExtCode" />
+                <ScalarProperty Name="TTime" ColumnName="TTime" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
