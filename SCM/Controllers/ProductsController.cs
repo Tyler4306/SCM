@@ -62,6 +62,8 @@ namespace SCM.Controllers
             {
                 db.Products.Add(model);
                 db.SaveChanges();
+                Utils.DataManager.ResetProducts();
+
                 return RedirectToAction("Index");
             }
 
@@ -92,6 +94,8 @@ namespace SCM.Controllers
             {
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
+                Utils.DataManager.ResetProducts();
+
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -118,6 +122,7 @@ namespace SCM.Controllers
             var model = db.Products.Find(id);
             db.Products.Remove(model);
             db.SaveChanges();
+            Utils.DataManager.ResetProducts();
             return RedirectToAction("Index");
         }
 

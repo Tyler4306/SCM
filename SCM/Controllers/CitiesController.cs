@@ -59,6 +59,7 @@ namespace SCM.Controllers
             {
                 db.Cities.Add(model);
                 db.SaveChanges();
+                Utils.DataManager.ResetCities();
                 return RedirectToAction("Index");
             }
 
@@ -87,6 +88,8 @@ namespace SCM.Controllers
             {
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
+                Utils.DataManager.ResetCities();
+
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -113,6 +116,7 @@ namespace SCM.Controllers
             var model = db.Cities.Find(id);
             db.Cities.Remove(model);
             db.SaveChanges();
+            Utils.DataManager.ResetCities();
             return RedirectToAction("Index");
         }
 

@@ -62,6 +62,8 @@ namespace SCM.Controllers
             {
                 db.Regions.Add(model);
                 db.SaveChanges();
+                Utils.DataManager.ResetRegions();
+
                 return RedirectToAction("Index");
             }
 
@@ -92,6 +94,8 @@ namespace SCM.Controllers
             {
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
+                Utils.DataManager.ResetRegions();
+
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -118,6 +122,8 @@ namespace SCM.Controllers
             var model = db.Regions.Find(id);
             db.Regions.Remove(model);
             db.SaveChanges();
+            Utils.DataManager.ResetRegions();
+
             return RedirectToAction("Index");
         }
 

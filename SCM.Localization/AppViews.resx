@@ -537,4 +537,37 @@
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
   </data>
+  <data name="StatusCanceled" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="StatusClosed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="StatusOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="StatusPending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="TextCanceledOn" xml:space="preserve">
+    <value>canceled on</value>
+  </data>
+  <data name="TextClosedOn" xml:space="preserve">
+    <value>closed on</value>
+  </data>
+  <data name="TextRequestedOn" xml:space="preserve">
+    <value>requested on</value>
+  </data>
+  <data name="TextStatusOn" xml:space="preserve">
+    <value>status on</value>
+  </data>
+  <data name="ForceReload" xml:space="preserve">
+    <value>Force Reload Requests</value>
+  </data>
+  <data name="CityChangeMsg" xml:space="preserve">
+    <value>The selected region will be removed, do you want to continue?</value>
+  </data>
+  <data name="DepartmentChangeMsg" xml:space="preserve">
+    <value>The selected product and engineer will be removed, do you want to continue?</value>
+  </data>
 </root>

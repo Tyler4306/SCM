@@ -268,6 +268,15 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected region will be removed, do you want to continue?.
+        /// </summary>
+        public static string CityChangeMsg {
+            get {
+                return ResourceManager.GetString("CityChangeMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {
@@ -475,6 +484,15 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected product and engineer will be removed, do you want to continue?.
+        /// </summary>
+        public static string DepartmentChangeMsg {
+            get {
+                return ResourceManager.GetString("DepartmentChangeMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Departments.
         /// </summary>
         public static string Departments {
@@ -579,6 +597,15 @@ namespace SCM {
         public static string Ext {
             get {
                 return ResourceManager.GetString("Ext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Force Reload Requests.
+        /// </summary>
+        public static string ForceReload {
+            get {
+                return ResourceManager.GetString("ForceReload", resourceCulture);
             }
         }
         
@@ -1222,6 +1249,42 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Canceled.
+        /// </summary>
+        public static string StatusCanceled {
+            get {
+                return ResourceManager.GetString("StatusCanceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closed.
+        /// </summary>
+        public static string StatusClosed {
+            get {
+                return ResourceManager.GetString("StatusClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string StatusOpen {
+            get {
+                return ResourceManager.GetString("StatusOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending.
+        /// </summary>
+        public static string StatusPending {
+            get {
+                return ResourceManager.GetString("StatusPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tag.
         /// </summary>
         public static string Tag {
@@ -1281,6 +1344,42 @@ namespace SCM {
         public static string TakeIn {
             get {
                 return ResourceManager.GetString("TakeIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to canceled on.
+        /// </summary>
+        public static string TextCanceledOn {
+            get {
+                return ResourceManager.GetString("TextCanceledOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to closed on.
+        /// </summary>
+        public static string TextClosedOn {
+            get {
+                return ResourceManager.GetString("TextClosedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to requested on.
+        /// </summary>
+        public static string TextRequestedOn {
+            get {
+                return ResourceManager.GetString("TextRequestedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to status on.
+        /// </summary>
+        public static string TextStatusOn {
+            get {
+                return ResourceManager.GetString("TextStatusOn", resourceCulture);
             }
         }
         

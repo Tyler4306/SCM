@@ -59,6 +59,8 @@ namespace SCM.Controllers
             {
                 db.Departments.Add(model);
                 db.SaveChanges();
+                Utils.DataManager.ResetDepartments();
+
                 return RedirectToAction("Index");
             }
 
@@ -87,6 +89,8 @@ namespace SCM.Controllers
             {
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
+                Utils.DataManager.ResetDepartments();
+
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -113,6 +117,7 @@ namespace SCM.Controllers
             var model = db.Departments.Find(id);
             db.Departments.Remove(model);
             db.SaveChanges();
+            Utils.DataManager.ResetDepartments();
             return RedirectToAction("Index");
         }
 

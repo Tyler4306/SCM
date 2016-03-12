@@ -537,4 +537,37 @@
   <data name="Reset" xml:space="preserve">
     <value>إعادة ضبط</value>
   </data>
+  <data name="StatusCanceled" xml:space="preserve">
+    <value>طلب ملغي</value>
+  </data>
+  <data name="StatusClosed" xml:space="preserve">
+    <value>طلب مغلق</value>
+  </data>
+  <data name="StatusOpen" xml:space="preserve">
+    <value>طلب مفتوح</value>
+  </data>
+  <data name="StatusPending" xml:space="preserve">
+    <value>طلب معلق</value>
+  </data>
+  <data name="TextCanceledOn" xml:space="preserve">
+    <value>تاريخ الإلغاء</value>
+  </data>
+  <data name="TextClosedOn" xml:space="preserve">
+    <value>تاريخ الإغلاق</value>
+  </data>
+  <data name="TextRequestedOn" xml:space="preserve">
+    <value>تاريخ الطلب</value>
+  </data>
+  <data name="TextStatusOn" xml:space="preserve">
+    <value>تاريخ الحالة</value>
+  </data>
+  <data name="ForceReload" xml:space="preserve">
+    <value>إعادة تحميل الطلبات</value>
+  </data>
+  <data name="CityChangeMsg" xml:space="preserve">
+    <value>تغيير المدينة سيؤدي إلى إلغاء المنطقة المختارة, هل تريد المتابعة؟</value>
+  </data>
+  <data name="DepartmentChangeMsg" xml:space="preserve">
+    <value>تغيير القسم سيؤدي إلى إلغاء المنتج و المهندس المختارين, هل تريد المتابعة؟</value>
+  </data>
 </root>

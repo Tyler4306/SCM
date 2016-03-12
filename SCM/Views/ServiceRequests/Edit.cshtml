@@ -10,238 +10,351 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <h4>@AppViews.ServiceRequest</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.StatusId)
+    @Html.HiddenFor(model => model.RequestDate)
+    @Html.HiddenFor(model => model.CreatedBy)
+    @Html.HiddenFor(model => model.CreatedOn)
+    @Html.HiddenFor(model => model.UpdatedBy)
+    @Html.HiddenFor(model => model.UpdatedOn)
+    @Html.HiddenFor(model => model.IsDeleted)
+    @Html.HiddenFor(model => model.StatusDate)
+    @Html.HiddenFor(model => model.ClosingDate)
+    @Html.HiddenFor(model => model.CenterId)
+    @Html.Hidden("OldStatus", "")
+    
 
-    <div class="form-horizontal">
-        <h4>@AppViews.ServiceRequest</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+    <div class="row">
+        <div class="pull-left">
+            @Html.ActionLink(AppViews.BackToList, "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+            &nbsp;
+            <input id="btnSave" type="submit" value="@AppViews.Save" disabled="disabled" class="btn btn-primary disabled" />
+        </div>
+        <div class="pull-right">
+            <a id="btnPending" class="btn btn-sm btn-warning" href="#"><span class="glyphicon glyphicon-star">&nbsp;</span> @AppViews.StatusPending</a>
+            &nbsp;
+            <a id="btnCancel" class="btn btn-sm btn-danger" href="#"><span class="glyphicon glyphicon-ban-circle">&nbsp;</span> @AppViews.StatusCanceled</a>
+            &nbsp;
+            <a id="btnClose" class="btn btn-sm btn-success" href="#"><span class="glyphicon glyphicon-folder-close">&nbsp;</span> @AppViews.StatusClosed</a>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">@AppViews.Customer</div>
+                <div class="panel-body">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CustomerId, "CustomerId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.HiddenFor(model => model.CustomerId)
-                <input type="text" id="Customer_Name" value="@Model.Customer.Name" readonly class="form-control" />
-                @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="Customer_Name" class="control-label col-md-2">@AppViews.Customer</label>
+                        <div class="col-md-10">
+                            @Html.HiddenFor(model => model.CustomerId)
+                            <a id="Customer_Name"  href='@Url.Action("Details","Customers", new { id = Model.CustomerId })'>@Model.Customer.Name</a>
+                            @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+                            @if((!string.IsNullOrEmpty(Model.Customer.Phone) || (!string.IsNullOrEmpty(Model.Customer.Mobile))))
+                            {
+                                <p style="margin-top: 5px;">
+                                    @if(!string.IsNullOrEmpty(Model.Customer.Phone))
+                                    {
+                                        <span class="glyphicon glyphicon-phone-alt">&nbsp;</span>
+                                        @Model.Customer.Phone
+                                        <span>&nbsp;</span>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.Customer.Mobile))
+                                    {
+                                        <span class="glyphicon glyphicon-phone">&nbsp;</span>
+                                        @Model.Customer.Mobile
+                                        <span>&nbsp;</span>
+                                    }
+                                </p>
+                            }
+                            <p>
+                                @if (Model.Customer.CityId.HasValue)
+                                {
+                                    <span>@Model.Customer.City.Name &nbsp;</span>
+                                }
+                                @if (Model.Customer.RegionId.HasValue)
+                                {
+                                    <span>@Model.Customer.Region.Name &nbsp;</span>
+                                }
+                                <span>@Model.Customer.Address</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">@AppViews.Product</div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProductId, AppViews.Product, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("ProductId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SN, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">@AppViews.Details</div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control", rows = "5" })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Remarks, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="panel panel-status">
+                <div id="statusName" class="panel-heading"></div>
+                <div class="panel-body">
+                    @if (Model.StatusId < 90 && Model.RequestDate.AddDays(3) < DateTime.Today)
+                     {
+                        <div class="pull-right bg-danger">
+                            <div class="col-md-4">
+                                <p style="text-align:center;">
+                                    <h2>@DateTime.Now.Subtract(Model.RequestDate.AddDays(3)).TotalDays.ToString("0")</h2>
+                                </p>
+                            </div>
+                        </div>
+                    }
+                    <div class="text-info">@Model.Center.Name</div>
+                    <div class="text-muted"><b>requested on</b> @Model.RequestDate.ToShortDateString()</div>
+                    <div class="text-danger"><b>status on</b> @Model.StatusDate.ToShortDateString()</div>
+                    @if (Model.StatusId == 90)
+                    {
+                        <div class="text-danger"><b>canceled on</b> @Model.ClosingDate.Value.ToShortDateString()</div>
+                    }
+                    @if (Model.StatusId == 100)
+                    {
+                        <div class="text-success"><b>closed on</b> @Model.ClosingDate.Value.ToShortDateString()</div>
+                    }
+                    <br />
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DepartmentId, AppViews.Department, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RequestDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RequestDate, new { htmlAttributes = new { @readonly = "", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RequestDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.RQN, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.RQN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.RQN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        @Html.HiddenFor(model => model.StatusId, new { htmlAttributes = new { @class = "form-control" } })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ReceiptNo, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.ReceiptNo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ReceiptNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
+                        <div id="engineerEditor" class="form-group">
+                            @Html.LabelFor(model => model.EngineerId, AppViews.Engineer, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("EngineerId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EngineerId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.StatusId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.HiddenFor(model => model.StatusId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                            <div id="pendingSection" class="form-group hidden">
+                                @Html.LabelFor(model => model.PendingReasonId, AppViews.PendingReason, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("PendingReasonId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.PendingReasonId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StatusDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StatusDate, new { htmlAttributes = new { @readonly="", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StatusDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            <div id="cancelSection" class="form-group hidden">
+                                @Html.LabelFor(model => model.CancelReasonId, AppViews.CancelReason, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("CancelReasonId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CancelReasonId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CenterId, "CenterId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CenterId", null, htmlAttributes: new { @class = "form-control", @readonly="" })
-                @Html.ValidationMessageFor(model => model.CenterId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.RQN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RQN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RQN, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ReceiptNo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ReceiptNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReceiptNo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DepartmentId, "DepartmentId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductId, "ProductId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ProductId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SN, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EngineerId, "EngineerId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("EngineerId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EngineerId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
-                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "width: 100%; max-width:100%;" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
-                @Html.TextAreaFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control", @style = "width: 100%; max-width:100%;" } })
-                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ClosingDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ClosingDate, new { htmlAttributes = new { @class = "form-control", @readonly="" } })
-                @Html.ValidationMessageFor(model => model.ClosingDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PendingReasonId, "PendingReasonId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PendingReasonId", null, htmlAttributes: new { @class = "form-control", @readonly="" })
-                @Html.ValidationMessageFor(model => model.PendingReasonId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CancelReasonId, "CancelReasonId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CancelReasonId", null, htmlAttributes: new { @class = "form-control", @readonly="" })
-                @Html.ValidationMessageFor(model => model.CancelReasonId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <hr />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" , @readonly=""} })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedOn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedOn, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
-                @Html.ValidationMessageFor(model => model.CreatedOn, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedBy, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
-                @Html.ValidationMessageFor(model => model.UpdatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedOn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedOn, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
-                @Html.ValidationMessageFor(model => model.UpdatedOn, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @Html.HiddenFor(model => model.IsDeleted)
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
             $(function () {
-                // Date Range Config
-                $('input[name="RequestDate"]').daterangepicker({
+                if ($("#StatusId").val() === "10") {
+                    $(".panel-status").addClass("panel-default");
+                    $("#statusName").html('@AppViews.StatusOpen');
+                }
+                else if ($("#StatusId").val() === "20") {
+                    $(".panel-status").addClass("panel-warning");
+                    $("#statusName").html('@AppViews.StatusPending');
+                    $("#pendingSection").removeClass("hidden");
+                }
+                else if ($("#StatusId").val() === "90") {
+                    $(".panel-status").addClass("panel-info");
+                    $("#statusName").html('@AppViews.StatusCanceled');
+                    $("#btnPending").addClass("disabled");
+                    $("#btnCancel").addClass("disabled");
+                    $("#btnClose").addClass("disabled");
 
-                    format: "DD/MM/YYYY",
-                    singleDatePicker: true,
-                    showDropdowns: true
-                },
-                    function (start, end, label) {
-                        // alert(start);
+                    if ($("#PendingReasonId").val() == '' || $("#PendingReasonId").val() === "0")
+                        $("#pendingSection").removeClass("hidden");
+                }
+                else if ($("#StatusId").val() === "100") {
+                    $(".panel-status").addClass("panel-success");
+                    $("#statusName").html('@AppViews.StatusClosed');
+                    $("#btnPending").addClass("disabled");
+                    $("#btnCancel").addClass("disabled");
+                    $("#btnClose").addClass("disabled");
+
+                    if ($("#PendingReasonId").val() == '' || $("#PendingReasonId").val() === "0")
+                        $("#pendingSection").removeClass("hidden");
+
+                    $("#cancelSection").removeClass("hidden");
+                }
+
+                $("#btnPending").click(function () {
+                    $("#OldStatus").val($("#StatusId").val());
+                    $("#StatusId").val(20);
+                    $("#pendingSection").removeClass("hidden");
+                    $("#btnSave").removeClass("disabled");
+                    $("#btnSave").removeAttr("disabled");
+                });
+
+                $("#btnCancel").click(function () {
+                    $("#OldStatus").val($("#StatusId").val());
+                    $("#StatusId").val(90);
+                    $("#cancelSection").removeClass("hidden");
+                    $("#btnSave").removeClass("disabled");
+                    $("#btnSave").removeAttr("disabled");
+                });
+
+                $("#btnClose").click(function () {
+                    $("#OldStatus").val($("#StatusId").val());
+                    $("#StatusId").val(100);
+                    $("#btnSave").removeClass("disabled");
+                    $("#btnSave").removeAttr("disabled");
+                });
+
+                $("input,select,textarea").change(function () {
+                    $("#btnSave").removeClass("disabled");
+                    $("#btnSave").removeAttr("disabled");
+                });
+
+                $("#DepartmentId").focusin(function () {
+                    $(this).data('val', $(this).val());
+                });
+
+                $("#DepartmentId").change(function (e) {
+                    debugger;
+                    var id = $("#DepartmentId").val();
+                    var url1 = '@Url.Action("GetEngineers")';
+                    var url2 = '@Url.Action("GetProducts")';
+                    var msg = '@AppViews.DepartmentChangeMsg';
+
+                    if (!confirm(msg))
+                    {
+                        $("#DepartmentId").val($("#DepartmentId").data('val'));
+                        return;
+                    }
+
+                    $("#EngineerId").empty();
+                    $("#ProductId").empty();
+
+                    $.ajax({
+                        contentType: 'application/json',
+                        method: 'GET',
+                        url: url1,
+                        data: {departmentId: id},
+                        success: function (result) {
+                            if(result != null && result.length > 0)
+                            {
+
+                                var html = '<option selected="true" value=""></option>';
+                                for(var i = 0; i < result.length; i++)
+                                {
+                                    var str = '<option value="' + result[i].Id + '">' + result[i].Name + '</option>';
+                                    html = html + str;
+                                }
+                                $("#EngineerId").html(html);
+                            }
+                        }
                     });
 
-                // Date Range Config
-                $('input[name="StatusDate"]').daterangepicker({
+                    $.ajax({
+                        contentType: 'application/json',
+                        method: 'GET',
+                        url: url2,
+                        data: { departmentId: id },
+                        success: function (result) {
+                            if (result != null && result.length > 0) {
 
-                    format: "DD/MM/YYYY",
-                    singleDatePicker: true,
-                    showDropdowns: true
-                },
-                    function (start, end, label) {
-                        // alert(start);
+                                var html = '<option selected="true" value=""></option>';
+                                for (var i = 0; i < result.length; i++) {
+                                    var str = '<option value="' + result[i].Id + '">' + result[i].Name + '</option>';
+                                    html = html + str;
+                                }
+                                $("#ProductId").html(html);
+                            }
+                        }
                     });
 
-                // Date Range Config
-                $('input[name="ClosingDate"]').daterangepicker({
 
-                    format: "DD/MM/YYYY",
-                    singleDatePicker: true,
-                    showDropdowns: true
-                },
-                    function (start, end, label) {
-                        // alert(start);
-                    });
+
+                });
+
+
+
             });
     </script>
+
 }

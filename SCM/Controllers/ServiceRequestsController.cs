@@ -17,6 +17,22 @@ namespace SCM.Controllers
     {
         private SCMContext db = new SCMContext();
 
+        public ActionResult GetEngineers(int departmentId)
+        {
+            var list = DataManager.Engineers().Where(x => x.DepartmentId == departmentId).OrderBy(x => x.Name)
+                .Select(x => new { Id = x.Id, Name = x.Name }).ToList();
+            
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetProducts(int departmentId)
+        {
+            var list = DataManager.Products().Where(x => x.DepartmentId == departmentId).OrderBy(x => x.Name)
+                .Select(x => new { Id = x.Id, Name = x.Name }).ToList();
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Requests
         public ActionResult Index(int? page)
         {
@@ -209,7 +225,11 @@ namespace SCM.Controllers
             //Set default values
             model.CenterId = 1;
             model.StatusId = 10;
-            model.StatusDate = DateTime.Now;
+            if (model.RequestDate >= DateTime.Now)
+                model.StatusDate = model.RequestDate;
+            else
+                model.StatusDate = DateTime.Now;
+
             if (string.IsNullOrEmpty(User.Identity.Name))
             {
                 model.CreatedBy = "SYSTEM";
@@ -226,9 +246,20 @@ namespace SCM.Controllers
 
             if (ModelState.IsValid)
             {
-                db.ServiceRequests.Add(model);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                try
+                {
+                    db.ServiceRequests.Add(model);
+                    db.SaveChanges();
+                    DataManager.AddRequest(model.Id);
+                }
+                catch (Exception e)
+                {
+
+                    throw;
+                }
+
+                return RedirectToAction("Edit", new { id = model.Id});
             }
 
             ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name");
@@ -265,8 +296,24 @@ namespace SCM.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrEmpty(User.Identity.Name))
+                {
+                    serviceRequest.UpdatedBy = "SYSTEM";
+                }
+                else
+                {
+                    serviceRequest.UpdatedBy = User.Identity.Name;
+                }
+                serviceRequest.UpdatedOn = DateTime.Now;
+
+                if(Request["OldStatus"] != serviceRequest.StatusId.ToString())
+                {
+                    serviceRequest.StatusDate = DateTime.Now;
+                }
+
                 db.Entry(serviceRequest).State = EntityState.Modified;
                 db.SaveChanges();
+                DataManager.ChangeRequest(serviceRequest.Id);
                 return RedirectToAction("Index");
             }
             ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name", serviceRequest.CenterId);
@@ -311,6 +358,12 @@ namespace SCM.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult ForceReload()
+        {
+            DataManager.ResetRequests();
+            return RedirectToAction("Index");
         }
     }
 }

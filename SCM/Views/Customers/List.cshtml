@@ -44,6 +44,15 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
+                        @if(item.IsBlackListed)
+                        {
+                            <span class="glyphicon glyphicon-blackboard">&nbsp;</span>
+                        }
+                        else
+                        {
+                            <span>&nbsp;</span>
+                        }
+
                         @Html.DisplayFor(modelItem => item.Phone)
                     </td>
                     <td>

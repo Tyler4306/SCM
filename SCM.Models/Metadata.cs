@@ -184,7 +184,7 @@ namespace SCM
         [Required]
         public int CustomerId { get; set; }
         [Display(Name = "SR_RequestDate", ResourceType = typeof(AppViews))]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm tt}", ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true)]
         [Required]
         public System.DateTime RequestDate { get; set; }
         [Display(Name = "SR_StatusId", ResourceType = typeof(AppViews))]

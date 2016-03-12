@@ -41,6 +41,22 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.RegionId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @HtmlExtensions.MyDropDown("RegionId", ViewBag.RegionId, null)
+                @Html.ValidationMessageFor(model => model.RegionId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="@AppViews.Create" class="btn btn-primary" />
             </div>
@@ -54,4 +70,48 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            $("#CityId").focusin(function () {
+                $(this).data('val', $(this).val());
+            });
+
+            $("#CityId").change(function (e) {
+                debugger;
+                var id = $("#CityId").val();
+                var url = '@Url.Action("GetRegions")';
+                
+                var msg = '@AppViews.CityChangeMsg';
+
+                if (!confirm(msg)) {
+                    $("#CityId").val($("#CityId").data('val'));
+                    return;
+                }
+
+                $("#RegionId").empty();
+                
+
+                $.ajax({
+                    contentType: 'application/json',
+                    method: 'GET',
+                    url: url,
+                    data: { cityId: id },
+                    success: function (result) {
+                        if (result != null && result.length > 0) {
+
+                            var html = '<option selected="true" value=""></option>';
+                            for (var i = 0; i < result.length; i++) {
+                                var str = '<option value="' + result[i].Id + '">' + result[i].Name + '</option>';
+                                html = html + str;
+                            }
+                            $("#RegionId").html(html);
+                        }
+                    }
+                });
+            });
+
+        });
+
+    </script>
 }

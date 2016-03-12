@@ -16,6 +16,14 @@ namespace SCM.Controllers
     {
         private SCMContext db = new SCMContext();
 
+        public ActionResult GetRegions(int cityId)
+        {
+            var list = Utils.DataManager.Regions().Where(x => x.CityId == cityId).OrderBy(x => x.Name)
+                .Select(x => new { Id = x.Id, Name = x.Name }).ToList();
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Index(int? page = null)
         {
             var model = Utils.DataManager.Customers();
@@ -26,7 +34,7 @@ namespace SCM.Controllers
 
         public ActionResult List(int? page = null, string name = null, string sortBy = "Name", string direction = "ASC")
         {
-            var model = Utils.DataManager.Customers().Where(x => string.IsNullOrEmpty(name) || x.Name.Contains(name) || x.Phone == name || x.Mobile == name || x.City.Name.Contains(name) || x.Region.Name.Contains(name)).OrderBy(sortBy + " " + direction).ToList();
+            var model = Utils.DataManager.Customers().Where(x => string.IsNullOrEmpty(name) || x.Name.Contains(name) || x.Phone == name || x.Mobile == name || (x.CityId.HasValue && x.City.Name.Contains(name)) || (x.RegionId.HasValue && x.Region.Name.Contains(name))).OrderBy(sortBy + " " + direction).ToList();
             int pageNumber = page ?? 1;
             int pageSize = 10;
             return PartialView(model.ToPagedList(pageNumber, pageSize));
@@ -79,6 +87,7 @@ namespace SCM.Controllers
             {
                 db.Customers.Add(model);
                 db.SaveChanges();
+                Utils.DataManager.AddCustomer(model.Id);
                 return RedirectToAction("Index");
             }
 
@@ -93,7 +102,7 @@ namespace SCM.Controllers
             }
             var model = db.Customers.Find(id);
             ViewBag.CityId = Utils.ListManager.GetCities();
-            ViewBag.RegionId = Utils.ListManager.GetRegions();
+            ViewBag.RegionId = Utils.ListManager.GetRegions(model.CityId);
             if (model == null)
             {
                 return HttpNotFound();
@@ -105,14 +114,16 @@ namespace SCM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Phone,Mobile,CityId,RegionId,Address,IsBlackListed")] Customer model)
         {
-            ViewBag.CityId = Utils.ListManager.GetCities();
-            ViewBag.RegionId = Utils.ListManager.GetRegions();
+            
             if (ModelState.IsValid)
             {
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
+                Utils.DataManager.ChangeCustomer(model.Id);
                 return RedirectToAction("Index");
             }
+            ViewBag.CityId = Utils.ListManager.GetCities();
+            ViewBag.RegionId = Utils.ListManager.GetRegions(model.CityId);
             return View(model);
         }
 

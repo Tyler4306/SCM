@@ -59,6 +59,7 @@ namespace SCM.Controllers
             {
                 db.Tags.Add(model);
                 db.SaveChanges();
+                Utils.DataManager.ResetTags();
                 return RedirectToAction("Index");
             }
 
@@ -87,6 +88,7 @@ namespace SCM.Controllers
             {
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
+                Utils.DataManager.ResetTags();
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -113,6 +115,7 @@ namespace SCM.Controllers
             var model = db.Tags.Find(id);
             db.Tags.Remove(model);
             db.SaveChanges();
+            Utils.DataManager.ResetTags();
             return RedirectToAction("Index");
         }
 
