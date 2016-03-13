@@ -75,30 +75,30 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="B2BFlag" Type="bit" />
-          <Property Name="CompletionDate" Type="datetime" />
-          <Property Name="InputDate" Type="datetime" />
-          <Property Name="PullingDate" Type="datetime" />
-          <Property Name="Dealer" Type="nvarchar" MaxLength="50" />
-          <Property Name="DealerName" Type="nvarchar" MaxLength="50" />
-          <Property Name="DealerReceiptNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="ASCRemarks" Type="nvarchar" MaxLength="200" />
-          <Property Name="SchComplaintDate" Type="datetime" />
-          <Property Name="SchComplaintCount" Type="int" />
-          <Property Name="SchComplaintRemarks" Type="nvarchar" MaxLength="150" />
-          <Property Name="ASCClaimNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="EsnImeiNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="OutModel" Type="nvarchar" MaxLength="50" />
-          <Property Name="ReceiptDate" Type="datetime" />
-          <Property Name="TransferSendDate" Type="datetime" />
-          <Property Name="TransferReceiptDate" Type="datetime" />
-          <Property Name="FirstPromiseDate" Type="datetime" />
-          <Property Name="Schedule" Type="nvarchar" MaxLength="50" />
-          <Property Name="PromiseDate" Type="datetime" />
-          <Property Name="Schedule1" Type="datetime" />
-          <Property Name="DelayFromPromiseDate" Type="int" />
-          <Property Name="DelayFromReceiptDate" Type="int" />
-          <Property Name="TransferApprovalDate" Type="datetime" />
+          <Property Name="B2BFlag" Type="nvarchar(max)" />
+          <Property Name="CompletionDate" Type="nvarchar(max)" />
+          <Property Name="InputDate" Type="nvarchar(max)" />
+          <Property Name="PullingDate" Type="nvarchar(max)" />
+          <Property Name="Dealer" Type="nvarchar(max)" />
+          <Property Name="DealerName" Type="nvarchar(max)" />
+          <Property Name="DealerReceiptNo" Type="nvarchar(max)" />
+          <Property Name="ASCRemarks" Type="nvarchar(max)" />
+          <Property Name="SchComplaintDate" Type="nvarchar(max)" />
+          <Property Name="SchComplaintCount" Type="nvarchar(max)" />
+          <Property Name="SchComplaintRemarks" Type="nvarchar(max)" />
+          <Property Name="ASCClaimNo" Type="nvarchar(max)" />
+          <Property Name="EsnImeiNo" Type="nvarchar(max)" />
+          <Property Name="OutModel" Type="nvarchar(max)" />
+          <Property Name="ReceiptDate" Type="nvarchar(max)" />
+          <Property Name="TransferSendDate" Type="nvarchar(max)" />
+          <Property Name="TransferReceiptDate" Type="nvarchar(max)" />
+          <Property Name="FirstPromiseDate" Type="nvarchar(max)" />
+          <Property Name="Schedule" Type="nvarchar(max)" />
+          <Property Name="PromiseDate" Type="nvarchar(max)" />
+          <Property Name="Schedule1" Type="nvarchar(max)" />
+          <Property Name="DelayFromPromiseDate" Type="nvarchar(max)" />
+          <Property Name="DelayFromReceiptDate" Type="nvarchar(max)" />
+          <Property Name="TransferApprovalDate" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="PendingReasons">
           <Key>
@@ -896,30 +896,30 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="B2BFlag" Type="Boolean" />
-          <Property Name="CompletionDate" Type="DateTime" Precision="3" />
-          <Property Name="InputDate" Type="DateTime" Precision="3" />
-          <Property Name="PullingDate" Type="DateTime" Precision="3" />
-          <Property Name="Dealer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DealerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DealerReceiptNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ASCRemarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="SchComplaintDate" Type="DateTime" Precision="3" />
-          <Property Name="SchComplaintCount" Type="Int32" />
-          <Property Name="SchComplaintRemarks" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ASCClaimNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EsnImeiNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OutModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ReceiptDate" Type="DateTime" Precision="3" />
-          <Property Name="TransferSendDate" Type="DateTime" Precision="3" />
-          <Property Name="TransferReceiptDate" Type="DateTime" Precision="3" />
-          <Property Name="FirstPromiseDate" Type="DateTime" Precision="3" />
-          <Property Name="Schedule" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PromiseDate" Type="DateTime" Precision="3" />
-          <Property Name="Schedule1" Type="DateTime" Precision="3" />
-          <Property Name="DelayFromPromiseDate" Type="Int32" />
-          <Property Name="DelayFromReceiptDate" Type="Int32" />
-          <Property Name="TransferApprovalDate" Type="DateTime" Precision="3" />
+          <Property Name="B2BFlag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompletionDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InputDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PullingDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dealer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DealerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DealerReceiptNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ASCRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SchComplaintDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SchComplaintCount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SchComplaintRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ASCClaimNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EsnImeiNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OutModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiptDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransferSendDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransferReceiptDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstPromiseDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Schedule" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PromiseDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Schedule1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DelayFromPromiseDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DelayFromReceiptDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransferApprovalDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ServiceRequest" Relationship="SCM.Models.FK_ExServiceRequests_ToServiceRequests" FromRole="ExServiceRequest" ToRole="ServiceRequest" />
         </EntityType>
         <Association Name="FK_ExServiceRequests_ToServiceRequests">

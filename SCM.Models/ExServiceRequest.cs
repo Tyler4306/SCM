@@ -15,30 +15,30 @@ namespace SCM
     public partial class ExServiceRequest
     {
         public int Id { get; set; }
-        public Nullable<bool> B2BFlag { get; set; }
-        public Nullable<System.DateTime> CompletionDate { get; set; }
-        public Nullable<System.DateTime> InputDate { get; set; }
-        public Nullable<System.DateTime> PullingDate { get; set; }
+        public string B2BFlag { get; set; }
+        public string CompletionDate { get; set; }
+        public string InputDate { get; set; }
+        public string PullingDate { get; set; }
         public string Dealer { get; set; }
         public string DealerName { get; set; }
         public string DealerReceiptNo { get; set; }
         public string ASCRemarks { get; set; }
-        public Nullable<System.DateTime> SchComplaintDate { get; set; }
-        public Nullable<int> SchComplaintCount { get; set; }
+        public string SchComplaintDate { get; set; }
+        public string SchComplaintCount { get; set; }
         public string SchComplaintRemarks { get; set; }
         public string ASCClaimNo { get; set; }
         public string EsnImeiNo { get; set; }
         public string OutModel { get; set; }
-        public Nullable<System.DateTime> ReceiptDate { get; set; }
-        public Nullable<System.DateTime> TransferSendDate { get; set; }
-        public Nullable<System.DateTime> TransferReceiptDate { get; set; }
-        public Nullable<System.DateTime> FirstPromiseDate { get; set; }
+        public string ReceiptDate { get; set; }
+        public string TransferSendDate { get; set; }
+        public string TransferReceiptDate { get; set; }
+        public string FirstPromiseDate { get; set; }
         public string Schedule { get; set; }
-        public Nullable<System.DateTime> PromiseDate { get; set; }
-        public Nullable<System.DateTime> Schedule1 { get; set; }
-        public Nullable<int> DelayFromPromiseDate { get; set; }
-        public Nullable<int> DelayFromReceiptDate { get; set; }
-        public Nullable<System.DateTime> TransferApprovalDate { get; set; }
+        public string PromiseDate { get; set; }
+        public string Schedule1 { get; set; }
+        public string DelayFromPromiseDate { get; set; }
+        public string DelayFromReceiptDate { get; set; }
+        public string TransferApprovalDate { get; set; }
     
         public virtual ServiceRequest ServiceRequest { get; set; }
     }

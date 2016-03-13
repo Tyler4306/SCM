@@ -14,7 +14,6 @@ namespace SCM.Controllers
     {
         private SCMContext db = new SCMContext();
 
-
         // GET: ExServiceRequests/Details/5
         public ActionResult Details(int? id)
         {
@@ -29,7 +28,6 @@ namespace SCM.Controllers
             }
             return View(exServiceRequest);
         }
-
 
         // GET: ExServiceRequests/Edit/5
         public ActionResult Edit(int? id)
