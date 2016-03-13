@@ -186,12 +186,11 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EngineersController.cs" />
-    <Compile Include="Controllers\ExServiceRequests1Controller.cs" />
-    <Compile Include="Controllers\ExServiceRequestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegionsController.cs" />
+    <Compile Include="Controllers\ServiceRequestsController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Filters\GlobalRequestFilter.cs" />
     <Compile Include="Global.asax.cs">
