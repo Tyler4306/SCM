@@ -10,12 +10,14 @@ using SCM;
 using PagedList;
 using System.Linq.Dynamic;
 using SCM.Utils;
+using System.Data.Entity.Core.Objects;
 
 namespace SCM.Controllers
 {
     public class ServiceRequestsController : Controller
     {
         private SCMContext db = new SCMContext();
+        private static object locker = new Object();
 
         public ActionResult GetEngineers(int departmentId)
         {
@@ -166,11 +168,16 @@ namespace SCM.Controllers
 
         public JsonResult TakeCall()
         {
-            var result = db.q_take_call("SYSTEM", "102").ToList().FirstOrDefault();
-            if(result == null)
+            q_take_call_Result result = null;
+            lock(locker)
+            {
+                result = db.q_take_call("SYSTEM", "102").ToList().FirstOrDefault();
+
+            }
+            if (result == null)
             {
                 return null;
-            }
+            }            
             //var cust = db.Customers.Find(id);
             //var str = "[{" + string.Format("Id: {0}, Name: \"{1}\"", cust.Id, cust.Name) + "}]";
             var obj = new { Id = result.Id, CallerId = result.TNo};
