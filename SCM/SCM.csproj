@@ -186,6 +186,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EngineersController.cs" />
+    <Compile Include="Controllers\ExServiceRequestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -359,8 +360,8 @@
     <Content Include="Views\AA\Details.cshtml" />
     <Content Include="Views\AA\Edit.cshtml" />
     <Content Include="Views\AA\Index.cshtml" />
-    <Content Include="Views\ExServiceRequests1\Details.cshtml" />
-    <Content Include="Views\ExServiceRequests1\Edit.cshtml" />
+    <Content Include="Views\ExServiceRequests\Details.cshtml" />
+    <Content Include="Views\ExServiceRequests\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

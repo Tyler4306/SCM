@@ -292,6 +292,9 @@ namespace SCM.Controllers
                 {
                     db.ServiceRequests.Add(model);
                     db.SaveChanges();
+                    var exRequest = db.ExServiceRequests.Create();
+                    exRequest.Id = model.Id;
+                    db.SaveChanges();
                     DataManager.AddRequest(model.Id);
                 }
                 catch (Exception e)
