@@ -47,13 +47,26 @@
             <div class="list-group-item @color">
                 @if (item.StatusId < 90 && item.RequestDate.AddDays(3) < DateTime.Today)
                 {
-                    <div class="pull-right bg-danger">
-                        <div class="col-md-4">
-                            <p style="text-align:center;">
-                                <h2>@DateTime.Now.Subtract(item.RequestDate.AddDays(3)).TotalDays.ToString("0")</h2>
-                            </p>
+                    if (SCM.Utils.PageUtils.IsArabic())
+                    {
+                        <div class="pull-left bg-danger">
+                            <div class="col-md-4">
+                                <p style="text-align:center;">
+                                    <h2>@DateTime.Now.Subtract(item.RequestDate.AddDays(3)).TotalDays.ToString("0")</h2>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="pull-right bg-danger">
+                            <div class="col-md-4">
+                                <p style="text-align:center;">
+                                    <h2>@DateTime.Now.Subtract(item.RequestDate.AddDays(3)).TotalDays.ToString("0")</h2>
+                                </p>
+                            </div>
+                        </div>
+                    }
                 }
                 <a href='@Url.Action("Edit", new { id = item.Id })'>
                     <h4 class="list-group-item-heading">@item.Topic()</h4>
@@ -62,33 +75,85 @@
                     <a href='@Url.Action("Details", "Customers", new { id = item.CustomerId })' data-toggle="tooltip" data-placement="right" 
                        title="@item.Customer.Address">@item.Customer.Name</a>
                     &nbsp;
-                    @if(!string.IsNullOrEmpty(@item.Customer.Phone))
+                    @if (!string.IsNullOrEmpty(@item.Customer.Phone))
                     {
-                        <span class="glyphicon glyphicon-phone-alt">&nbsp;@item.Customer.Phone</span>
+                        if (SCM.Utils.PageUtils.IsArabic())
+                        {
+                            <span class="glyphicon glyphicon-phone-alt"></span>
+                            <span>@item.Customer.Phone &nbsp;</span>
+                            
+                        }
+                        else
+                        {
+                            <span class="glyphicon glyphicon-phone-alt">&nbsp;@item.Customer.Phone</span>
+                        }
                     }
                     @if (!string.IsNullOrEmpty(@item.Customer.Mobile))
                     {
-                        <span class="glyphicon glyphicon-phone">&nbsp;@item.Customer.Mobile</span>
+                        if (SCM.Utils.PageUtils.IsArabic())
+                        {
+                            <span class="glyphicon glyphicon-phone"></span>
+                            <span>@item.Customer.Mobile &nbsp;</span>
+
+                        }
+                        else
+                        {
+                            <span class="glyphicon glyphicon-phone">&nbsp;@item.Customer.Mobile</span>
+                        }
+
                     }
                 </h5>
                 <div class="list-group-item-text">@item.Description</div>
+                @if (SCM.Utils.PageUtils.IsArabic())
+                {
+                    <p class="center-block pull-left">
+                        <span style="font-size:xx-small;" class="text-muted">@AppViews.RequestedOn @item.RequestDate.ToString("dddd dd-MM-yyyy")</span>
+                    </p>
+                }
+                else
+                {
+                    <p class="center-block pull-right">
+                        <span style="font-size:xx-small;" class="text-muted">@AppViews.RequestedOn @item.RequestDate.ToString("dddd dd-MM-yyyy")</span>
+                    </p>
+                }
 
-                <p class="center-block pull-right">
-                    <span style="font-size:xx-small;" class="text-muted">@AppViews.RequestedOn @item.RequestDate.ToString("dddd dd-MM-yyyy")</span>
-                </p>
 
 
 
-                <div>
+                <div class="form-inline">
                     @foreach (var tag in item.Tags)
                     {
-                        <span class='label @tag.Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@tag.Name</span>
-                        <span>&nbsp;</span>
+                        if (SCM.Utils.PageUtils.IsArabic())
+                        {
+                            <span class="form-group">
+                                <span class='label @tag.Format'>
+                                    @tag.Name
+                                    <i class="glyphicon glyphicon-tag"></i>
+                                </span>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class='label @tag.Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@tag.Name</span>
+                            <span>&nbsp;</span>
+                        }
                     }
                     @foreach (var tag in item.Customer.Tags)
                     {
-                        <span class='label  @tag.Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@tag.Name</span>
-                        <span>&nbsp;</span>
+                        if (SCM.Utils.PageUtils.IsArabic())
+                        {
+                            <span class="form-group">
+                                <span class='label @tag.Format'>
+                                    @tag.Name
+                                    <i class="glyphicon glyphicon-tag"></i>
+                                </span>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class='label  @tag.Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@tag.Name</span>
+                            <span>&nbsp;</span>
+                        }
                     }
                 </div>
             </div>

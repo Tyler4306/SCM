@@ -79,7 +79,7 @@ namespace SCM {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Firas Jarkas.
+        ///   Looks up a localized string similar to Design and Construction.
         /// </summary>
         public static string Company {
             get {
@@ -97,7 +97,7 @@ namespace SCM {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 933-293333.
+        ///   Looks up a localized string similar to 011-3322313.
         /// </summary>
         public static string Phone {
             get {

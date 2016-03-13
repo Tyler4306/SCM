@@ -273,6 +273,11 @@ namespace SCM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ////var model = db.ServiceRequests.Include(x => x.Customer).Include(x => x.Center).Include(x => x.Department)
+            ////    .Include(x => x.Product).Include(x => x.Engineer).Include(x => x.Customer.City)
+            ////    .Include(x => x.Customer.Region).Include(x => x.PendingReason).Include(x => x.CancelReason)
+            ////    .Include(x => x.Tags).Where(x => x.Id == id).First();
+
             var model = db.ServiceRequests.Find(id);
             
             ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name", model.CenterId);
@@ -294,6 +299,15 @@ namespace SCM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,CustomerId,RequestDate,StatusId,StatusDate,CenterId,RQN,ReceiptNo,DepartmentId,ProductId,Model,SN,EngineerId,Description,Remarks,ClosingDate,PendingReasonId,CancelReasonId,CreatedBy,CreatedOn,UpdatedBy,UpdatedOn,IsDeleted")] ServiceRequest serviceRequest)
         {
+
+            ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name", serviceRequest.CenterId);
+            ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", serviceRequest.DepartmentId);
+            ViewBag.ProductId = new SelectList(DataManager.Products().Where(x => serviceRequest.DepartmentId == null || x.DepartmentId == serviceRequest.DepartmentId), "Id", "Name", serviceRequest.ProductId);
+            ViewBag.EngineerId = new SelectList(DataManager.Engineers().Where(x => serviceRequest.DepartmentId == null || x.DepartmentId == serviceRequest.DepartmentId), "Id", "Name", serviceRequest.EngineerId);
+            ViewBag.PendingReasonId = new SelectList(db.PendingReasons, "Id", "Reason", serviceRequest.PendingReasonId);
+            ViewBag.CancelReasonId = new SelectList(db.CancelReasons, "Id", "Reason", serviceRequest.CancelReasonId);
+            ViewBag.StatusId = Utils.ListManager.GetStatus();
+
             if (ModelState.IsValid)
             {
                 if (string.IsNullOrEmpty(User.Identity.Name))
@@ -313,16 +327,10 @@ namespace SCM.Controllers
 
                 db.Entry(serviceRequest).State = EntityState.Modified;
                 db.SaveChanges();
+                ModelState.Clear();
                 DataManager.ChangeRequest(serviceRequest.Id);
                 return RedirectToAction("Index");
             }
-            ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name", serviceRequest.CenterId);
-            ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", serviceRequest.DepartmentId);
-            ViewBag.ProductId = new SelectList(DataManager.Products().Where(x => serviceRequest.DepartmentId == null || x.DepartmentId == serviceRequest.DepartmentId), "Id", "Name", serviceRequest.ProductId);
-            ViewBag.EngineerId = new SelectList(DataManager.Engineers().Where(x => serviceRequest.DepartmentId == null || x.DepartmentId == serviceRequest.DepartmentId), "Id", "Name", serviceRequest.EngineerId);
-            ViewBag.PendingReasonId = new SelectList(db.PendingReasons, "Id", "Reason", serviceRequest.PendingReasonId);
-            ViewBag.CancelReasonId = new SelectList(db.CancelReasons, "Id", "Reason", serviceRequest.CancelReasonId);
-            ViewBag.StatusId = Utils.ListManager.GetStatus();
 
             return View(serviceRequest);
         }

@@ -31,7 +31,7 @@
         <div class="pull-left">
             @Html.ActionLink(AppViews.BackToList, "Index", null, htmlAttributes: new { @class = "btn btn-default" })
             &nbsp;
-            <input id="btnSave" type="submit" value="@AppViews.Save" disabled="disabled" class="btn btn-primary disabled" />
+            <input id="btnSave" type="submit" value="@AppViews.Save"  class="btn btn-primary " />
         </div>
         <div class="pull-right">
             <a id="btnPending" class="btn btn-sm btn-warning" href="#"><span class="glyphicon glyphicon-star">&nbsp;</span> @AppViews.StatusPending</a>
@@ -147,25 +147,38 @@
                 <div id="statusName" class="panel-heading"></div>
                 <div class="panel-body">
                     @if (Model.StatusId < 90 && Model.RequestDate.AddDays(3) < DateTime.Today)
-                     {
-                        <div class="pull-right bg-danger">
-                            <div class="col-md-4">
-                                <p style="text-align:center;">
-                                    <h2>@DateTime.Now.Subtract(Model.RequestDate.AddDays(3)).TotalDays.ToString("0")</h2>
-                                </p>
+                    {
+                        if (SCM.Utils.PageUtils.IsArabic())
+                        {
+                            <div class="pull-left bg-danger">
+                                <div class="col-md-4">
+                                    <p style="text-align:center;">
+                                        <h2>@DateTime.Now.Subtract(Model.RequestDate.AddDays(3)).TotalDays.ToString("0")</h2>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="pull-right bg-danger">
+                                <div class="col-md-4">
+                                    <p style="text-align:center;">
+                                        <h2>@DateTime.Now.Subtract(Model.RequestDate.AddDays(3)).TotalDays.ToString("0")</h2>
+                                    </p>
+                                </div>
+                            </div>
+                        }
                     }
                     <div class="text-info">@Model.Center.Name</div>
-                    <div class="text-muted"><b>requested on</b> @Model.RequestDate.ToShortDateString()</div>
-                    <div class="text-danger"><b>status on</b> @Model.StatusDate.ToShortDateString()</div>
+                    <div class="text-muted"><b>@AppViews.TextRequestedOn</b> @Model.RequestDate.ToShortDateString()</div>
+                    <div class="text-danger"><b>@AppViews.TextStatusOn</b> @Model.StatusDate.ToShortDateString()</div>
                     @if (Model.StatusId == 90)
                     {
-                        <div class="text-danger"><b>canceled on</b> @Model.ClosingDate.Value.ToShortDateString()</div>
+                        <div class="text-danger"><b>@AppViews.TextCanceledOn</b> @Model.ClosingDate.Value.ToShortDateString()</div>
                     }
                     @if (Model.StatusId == 100)
                     {
-                        <div class="text-success"><b>closed on</b> @Model.ClosingDate.Value.ToShortDateString()</div>
+                        <div class="text-success"><b>@AppViews.TextClosedOn</b> @Model.ClosingDate.Value.ToShortDateString()</div>
                     }
                     <br />
                     <div class="form-horizontal">
