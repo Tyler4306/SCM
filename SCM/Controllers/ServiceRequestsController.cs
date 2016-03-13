@@ -237,6 +237,11 @@ namespace SCM.Controllers
                         model.Customer = qcustomer;
                         model.CustomerId = qcustomer.Id;
                     }
+                    else
+                    {
+                        // First redirect to create customer
+                        return RedirectToAction("Create", "Customers", new { phone = q.TNo });
+                    }
 
                 }
             }

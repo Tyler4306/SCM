@@ -41,18 +41,18 @@
                         <a href='@Url.Action("Edit", new { id = item.Id})'><span class="glyphicon glyphicon-edit"></span></a>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @if(item.IsBlackListed)
+                        @if (item.IsBlackListed)
                         {
-                            <span class="glyphicon glyphicon-blackboard">&nbsp;</span>
+                            <span class="glyphicon glyphicon-alert">&nbsp;</span>
                         }
                         else
                         {
                             <span>&nbsp;</span>
                         }
 
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Phone)
                     </td>
                     <td>

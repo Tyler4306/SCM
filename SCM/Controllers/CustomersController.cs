@@ -34,7 +34,43 @@ namespace SCM.Controllers
 
         public ActionResult List(int? page = null, string name = null, string sortBy = "Name", string direction = "ASC")
         {
-            var model = Utils.DataManager.Customers().Where(x => string.IsNullOrEmpty(name) || x.Name.Contains(name) || x.Phone == name || x.Mobile == name || (x.CityId.HasValue && x.City.Name.Contains(name)) || (x.RegionId.HasValue && x.Region.Name.Contains(name))).OrderBy(sortBy + " " + direction).ToList();
+            var model = Utils.DataManager.Customers().Where(x => string.IsNullOrEmpty(name) || x.Name.Contains(name) || x.Phone == name || x.Mobile == name || (x.CityId.HasValue && x.City.Name.Contains(name)) || (x.RegionId.HasValue && x.Region.Name.Contains(name))); 
+            // .OrderBy(sortBy + " " + direction).ToList();
+            switch(sortBy)
+            {
+                case "City.Name":
+                    if(direction == "DESC")
+                    {
+                        model = model.OrderByDescending(x => (x.CityId.HasValue ? x.City.Name : string.Empty));
+                    }
+                    else
+                    {
+                        model = model.OrderBy(x => (x.CityId.HasValue ? x.City.Name : string.Empty));
+                    }
+                    break;
+                case "Region.Name":
+                    if (direction == "DESC")
+                    {
+                        model = model.OrderByDescending(x => (x.RegionId.HasValue ? x.Region.Name : string.Empty));
+                    }
+                    else
+                    {
+                        model = model.OrderBy(x => (x.RegionId.HasValue ? x.Region.Name : string.Empty));
+                    }
+                    break;
+                default:
+                    if (direction == "DESC")
+                    {
+                        model = model.OrderByDescending(x => x.Name);
+                    }
+                    else
+                    {
+                        model = model.OrderBy(x => x.Name);
+                    }
+                    break;
+
+            }
+            model = model.ToList();
             int pageNumber = page ?? 1;
             int pageSize = 10;
             return PartialView(model.ToPagedList(pageNumber, pageSize));
@@ -69,10 +105,18 @@ namespace SCM.Controllers
             return View(model);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(string phone = null)
         {
             ViewBag.CityId = Utils.ListManager.GetCities();
             ViewBag.RegionId = Utils.ListManager.GetRegions();
+            if(!string.IsNullOrEmpty(phone))
+            {
+                var model = db.Customers.Create();
+                model.Phone = phone;
+                TempData["ForwardToRequests"] = true;
+                return View(model);
+            }
+            
             return View();
         }
 
@@ -88,7 +132,14 @@ namespace SCM.Controllers
                 db.Customers.Add(model);
                 db.SaveChanges();
                 Utils.DataManager.AddCustomer(model.Id);
-                return RedirectToAction("Index");
+                if (TempData["ForwardToRequests"] != null && ((bool)TempData["ForwardToRequests"]) == true)
+                {
+                    return RedirectToAction("Create", "ServiceRequests", new { customerId = model.Id });
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(model);
