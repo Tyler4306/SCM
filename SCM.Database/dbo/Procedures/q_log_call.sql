@@ -20,7 +20,7 @@ AS
 	SET @id = @@IDENTITY;
 
 	-- CLOSE THE CALL BY UPDATING THE LINKED CALL RECORD
-	IF(@textcode IS NOT NULL AND @TNO IS NOT NULL)
+	IF(Len(IsNull(@textcode,N'')) > 0 AND Len(IsNull(@TNO,N'')) > 0)
 		BEGIN
 			DECLARE @linkid INT;
 			DECLARE @linkuser NVARCHAR(50);
@@ -34,9 +34,7 @@ AS
 				@linkdate = TakenOn
 				FROM dbo.QIN
 				WHERE
-					(IsTaken = 1)
-					AND (TakenByExt = @textcode)
-					AND (TNo = @tno)
+					(TNo = @tno)
 					AND (LinkedTo IS NULL)
 				ORDER BY Id
 
