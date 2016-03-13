@@ -90,6 +90,8 @@ namespace SCM.PBX
                 if (InputData != String.Empty)
                 {
                     LogToFile(InputData);
+                    InputData = InputData.Replace("<", " < ");
+                    InputData = InputData.Replace(">", " > ");
                     ProcessMessage(InputData);
                 }
             }
