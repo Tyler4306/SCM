@@ -35,7 +35,7 @@
     @foreach (var item in SCM.Utils.DataManager.Departments())
     {
         <div class="input-group input-group-sm" style="margin-bottom: 5px;">
-            <input data-id="@item.Id" type="checkbox">
+            <input class="filterDepartment" data-id="@item.Id" type="checkbox">
             <span>@item.Name</span>
         </div>
     }

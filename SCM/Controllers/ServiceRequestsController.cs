@@ -49,7 +49,7 @@ namespace SCM.Controllers
             return View(requests.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Requests(int? page = null, string status = "active", string filterDuration = null, string customerName = null, string phone = null, string code = null, string receipt = null, string product = null, string model = null, string sn = null, string tags = null)
+        public ActionResult Requests(int? page = null, string status = "active", string filterDuration = null, string customerName = null, string phone = null, string code = null, string receipt = null, string product = null, string model = null, string sn = null, string tags = null, string filterDepartment = null)
         {
             var requests = DataManager.Requests();
 
@@ -66,7 +66,11 @@ namespace SCM.Controllers
                 default:
                     break;
             }
-
+            var departments = new List<int>();
+            if(!string.IsNullOrEmpty(filterDepartment))
+            {
+                departments.AddRange(filterDepartment.Split(',').Select(x => Convert.ToInt32(x)));
+            }
             requests = (from x in requests
                         where (string.IsNullOrEmpty(customerName) || x.Customer.Name.Contains(customerName))
                         && (string.IsNullOrEmpty(phone) || x.Customer.Phone == phone || x.Customer.Mobile == phone)
@@ -75,6 +79,7 @@ namespace SCM.Controllers
                         && (string.IsNullOrEmpty(product) || x.Product != null || x.Product.Name.Contains(product))
                         && (string.IsNullOrEmpty(model) || x.Model == model)
                         && (string.IsNullOrEmpty(sn) || x.SN == sn)
+                        && (string.IsNullOrEmpty(filterDepartment) || (x.DepartmentId.HasValue && departments.Contains(x.DepartmentId.Value)))
                         select x);
 
             switch(filterDuration)

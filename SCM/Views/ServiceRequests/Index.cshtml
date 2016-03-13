@@ -118,6 +118,7 @@
 
         function resetFilters() {
             $(".filterDuration").removeClass("active");
+            $(".filterDepartment").each(function (index, elem) { elem.checked = false; });
             $("#filterAll").addClass("active");
             $("#customerName").val('');
             $("#phone").val('');
@@ -128,6 +129,7 @@
             $("#sn").val('');
             $("#tags").val('');
             $("#status").val('active');
+            
         }
 
         function applyReset() {
@@ -137,6 +139,18 @@
 
         function collectFilter() {
             var filterDuration = $(".filterDuration.active").data("id");
+            var filterDepartment = '';
+            $(".filterDepartment").each(function (index, elem) {
+                if(elem.checked)
+                {
+                    filterDepartment = filterDepartment + $(this).data("id") + ',';
+                }
+            });
+            if (filterDepartment != null)
+            {
+                filterDepartment = filterDepartment.substr(0, filterDepartment.length - 1);
+            }
+            
             var customerName = $("#customerName").val();
             var phone = $("#phone").val();
             var code = $("#code").val();
@@ -156,7 +170,7 @@
             else
                 listId = '#activeList';
 
-            var url = '/ServiceRequests/Requests?status=' + status + '&filterDuration=' + filterDuration + '&customerName=' + customerName + '&phone=' + phone + '&code=' + code + '&receipt=' + receipt + '&product=' + product + '&model=' + model + '&sn=' + sn + '&tags=' + tags;
+            var url = '/ServiceRequests/Requests?status=' + status + '&filterDuration=' + filterDuration + '&customerName=' + customerName + '&phone=' + phone + '&code=' + code + '&receipt=' + receipt + '&product=' + product + '&model=' + model + '&sn=' + sn + '&tags=' + tags + '&filterDepartment=' + filterDepartment;
             $.ajax(
              {
                  type: 'GET',
