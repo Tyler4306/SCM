@@ -53,5 +53,6 @@ namespace SCM
         public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ExServiceRequest ExServiceRequest { get; set; }
     }
 }

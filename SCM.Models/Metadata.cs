@@ -305,5 +305,64 @@ namespace SCM
     }
     #endregion
 
+    #region ExServiceRequests
+    public class ExServiceRequestMetaData
+    {
+        [Display(Name = "ExtRequest", ResourceType = typeof(ExSvc))]
+        public int Id { get; set; }
+        [Display(Name = "B2BFlag", ResourceType = typeof(ExSvc))]
+        public Nullable<bool> B2BFlag { get; set; }
+        [Display(Name = "CompletionDate", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> CompletionDate { get; set; }
+        [Display(Name = "InputDate", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> InputDate { get; set; }
+        [Display(Name = "PullingDate", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> PullingDate { get; set; }
+        [Display(Name = "Dealer", ResourceType = typeof(ExSvc))]
+        public string Dealer { get; set; }
+        [Display(Name = "DealerName", ResourceType = typeof(ExSvc))]
+        public string DealerName { get; set; }
+        [Display(Name = "DealerReceiptNo", ResourceType = typeof(ExSvc))]
+        public string DealerReceiptNo { get; set; }
+        [Display(Name = "ASCRemarks", ResourceType = typeof(ExSvc))]
+        public string ASCRemarks { get; set; }
+        [Display(Name = "SchComplaintDate", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> SchComplaintDate { get; set; }
+        [Display(Name = "SchComplaintCount", ResourceType = typeof(ExSvc))]
+        public Nullable<int> SchComplaintCount { get; set; }
+        [Display(Name = "SchComplaintRemarks", ResourceType = typeof(ExSvc))]
+        public string SchComplaintRemarks { get; set; }
+        [Display(Name = "ASCClaimNo", ResourceType = typeof(ExSvc))]
+        public string ASCClaimNo { get; set; }
+        [Display(Name = "EsnImeiNo", ResourceType = typeof(ExSvc))]
+        public string EsnImeiNo { get; set; }
+        [Display(Name = "OutModel", ResourceType = typeof(ExSvc))]
+        public string OutModel { get; set; }
+        [Display(Name = "ReceiptDate", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> ReceiptDate { get; set; }
+        [Display(Name = "TransferSendDate", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> TransferSendDate { get; set; }
+        [Display(Name = "TransferReceiptDate", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> TransferReceiptDate { get; set; }
+        [Display(Name = "FirstPromiseDate", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> FirstPromiseDate { get; set; }
+        [Display(Name = "Schedule", ResourceType = typeof(ExSvc))]
+        public string Schedule { get; set; }
+        [Display(Name = "PromiseDate", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> PromiseDate { get; set; }
+        [Display(Name = "Schedule1", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> Schedule1 { get; set; }
+        [Display(Name = "DelayFromPromiseDate", ResourceType = typeof(ExSvc))]
+        public Nullable<int> DelayFromPromiseDate { get; set; }
+        [Display(Name = "DelayFromReceiptDate", ResourceType = typeof(ExSvc))]
+        public Nullable<int> DelayFromReceiptDate { get; set; }
+        [Display(Name = "TransferApprovalDate", ResourceType = typeof(ExSvc))]
+        public Nullable<System.DateTime> TransferApprovalDate { get; set; }
 
+    }
+    [MetadataType(typeof(ExServiceRequestMetaData))]
+    public partial class ExServiceRequest
+    {
+    }
+    #endregion
 }

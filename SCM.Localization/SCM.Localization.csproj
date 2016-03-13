@@ -50,6 +50,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppViews.resx</DependentUpon>
     </Compile>
+    <Compile Include="ExSvc.ar.Designer.cs">
+      <DependentUpon>ExSvc.ar.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ExSvc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExSvc.resx</DependentUpon>
+    </Compile>
     <Compile Include="License.ar.Designer.cs">
       <DependentUpon>License.ar.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -70,6 +80,14 @@
     <EmbeddedResource Include="AppViews.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppViews.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExSvc.ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExSvc.ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExSvc.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExSvc.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="License.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

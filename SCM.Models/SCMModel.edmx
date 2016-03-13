@@ -70,6 +70,36 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="ExServiceRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="B2BFlag" Type="bit" />
+          <Property Name="CompletionDate" Type="datetime" />
+          <Property Name="InputDate" Type="datetime" />
+          <Property Name="PullingDate" Type="datetime" />
+          <Property Name="Dealer" Type="nvarchar" MaxLength="50" />
+          <Property Name="DealerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DealerReceiptNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ASCRemarks" Type="nvarchar" MaxLength="200" />
+          <Property Name="SchComplaintDate" Type="datetime" />
+          <Property Name="SchComplaintCount" Type="int" />
+          <Property Name="SchComplaintRemarks" Type="nvarchar" MaxLength="150" />
+          <Property Name="ASCClaimNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="EsnImeiNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="OutModel" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReceiptDate" Type="datetime" />
+          <Property Name="TransferSendDate" Type="datetime" />
+          <Property Name="TransferReceiptDate" Type="datetime" />
+          <Property Name="FirstPromiseDate" Type="datetime" />
+          <Property Name="Schedule" Type="nvarchar" MaxLength="50" />
+          <Property Name="PromiseDate" Type="datetime" />
+          <Property Name="Schedule1" Type="datetime" />
+          <Property Name="DelayFromPromiseDate" Type="int" />
+          <Property Name="DelayFromReceiptDate" Type="int" />
+          <Property Name="TransferApprovalDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="PendingReasons">
           <Key>
             <PropertyRef Name="Id" />
@@ -214,6 +244,18 @@
             </Principal>
             <Dependent Role="Engineers">
               <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExServiceRequests_ToServiceRequests">
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="1" />
+          <End Role="ExServiceRequests" Type="Self.ExServiceRequests" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceRequests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExServiceRequests">
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -362,6 +404,7 @@
           <EntitySet Name="CustomerTags" EntityType="Self.CustomerTags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Engineers" EntityType="Self.Engineers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExServiceRequests" EntityType="Self.ExServiceRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PendingReasons" EntityType="Self.PendingReasons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QIN" EntityType="Self.QIN" Schema="dbo" store:Type="Tables" />
@@ -388,6 +431,10 @@
           <AssociationSet Name="FK_Engineers_To_Departments" Association="Self.FK_Engineers_To_Departments">
             <End Role="Departments" EntitySet="Departments" />
             <End Role="Engineers" EntitySet="Engineers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExServiceRequests_ToServiceRequests" Association="Self.FK_ExServiceRequests_ToServiceRequests">
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+            <End Role="ExServiceRequests" EntitySet="ExServiceRequests" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_To_Departments" Association="Self.FK_Products_To_Departments">
             <End Role="Departments" EntitySet="Departments" />
@@ -511,6 +558,11 @@
             <Parameter Name="userext" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="QINs" EntityType="SCM.Models.QIN" />
+          <EntitySet Name="ExServiceRequests" EntityType="SCM.Models.ExServiceRequest" />
+          <AssociationSet Name="FK_ExServiceRequests_ToServiceRequests" Association="SCM.Models.FK_ExServiceRequests_ToServiceRequests">
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+            <End Role="ExServiceRequest" EntitySet="ExServiceRequests" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CancelReason">
           <Key>
@@ -639,6 +691,7 @@
           <NavigationProperty Name="PendingReason" Relationship="SCM.Models.FK_ServiceRequests_To_PendingReasons" FromRole="ServiceRequest" ToRole="PendingReason" />
           <NavigationProperty Name="Product" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="ServiceRequest" ToRole="Product" />
           <NavigationProperty Name="Tags" Relationship="SCM.Models.RequestTags" FromRole="ServiceRequest" ToRole="Tag" />
+          <NavigationProperty Name="ExServiceRequest" Relationship="SCM.Models.FK_ExServiceRequests_ToServiceRequests" FromRole="ServiceRequest" ToRole="ExServiceRequest" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -838,6 +891,49 @@
           <Property Type="DateTime" Name="LogTime" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="LinkedTo" Nullable="true" />
         </ComplexType>
+        <EntityType Name="ExServiceRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="B2BFlag" Type="Boolean" />
+          <Property Name="CompletionDate" Type="DateTime" Precision="3" />
+          <Property Name="InputDate" Type="DateTime" Precision="3" />
+          <Property Name="PullingDate" Type="DateTime" Precision="3" />
+          <Property Name="Dealer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DealerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DealerReceiptNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ASCRemarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SchComplaintDate" Type="DateTime" Precision="3" />
+          <Property Name="SchComplaintCount" Type="Int32" />
+          <Property Name="SchComplaintRemarks" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ASCClaimNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EsnImeiNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OutModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiptDate" Type="DateTime" Precision="3" />
+          <Property Name="TransferSendDate" Type="DateTime" Precision="3" />
+          <Property Name="TransferReceiptDate" Type="DateTime" Precision="3" />
+          <Property Name="FirstPromiseDate" Type="DateTime" Precision="3" />
+          <Property Name="Schedule" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PromiseDate" Type="DateTime" Precision="3" />
+          <Property Name="Schedule1" Type="DateTime" Precision="3" />
+          <Property Name="DelayFromPromiseDate" Type="Int32" />
+          <Property Name="DelayFromReceiptDate" Type="Int32" />
+          <Property Name="TransferApprovalDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ServiceRequest" Relationship="SCM.Models.FK_ExServiceRequests_ToServiceRequests" FromRole="ExServiceRequest" ToRole="ServiceRequest" />
+        </EntityType>
+        <Association Name="FK_ExServiceRequests_ToServiceRequests">
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="1" />
+          <End Type="SCM.Models.ExServiceRequest" Role="ExServiceRequest" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExServiceRequest">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1018,6 +1114,37 @@
                 <ScalarProperty Name="TExtCode" ColumnName="TExtCode" />
                 <ScalarProperty Name="TTime" ColumnName="TTime" />
                 <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExServiceRequests">
+            <EntityTypeMapping TypeName="SCM.Models.ExServiceRequest">
+              <MappingFragment StoreEntitySet="ExServiceRequests">
+                <ScalarProperty Name="TransferApprovalDate" ColumnName="TransferApprovalDate" />
+                <ScalarProperty Name="DelayFromReceiptDate" ColumnName="DelayFromReceiptDate" />
+                <ScalarProperty Name="DelayFromPromiseDate" ColumnName="DelayFromPromiseDate" />
+                <ScalarProperty Name="Schedule1" ColumnName="Schedule1" />
+                <ScalarProperty Name="PromiseDate" ColumnName="PromiseDate" />
+                <ScalarProperty Name="Schedule" ColumnName="Schedule" />
+                <ScalarProperty Name="FirstPromiseDate" ColumnName="FirstPromiseDate" />
+                <ScalarProperty Name="TransferReceiptDate" ColumnName="TransferReceiptDate" />
+                <ScalarProperty Name="TransferSendDate" ColumnName="TransferSendDate" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="OutModel" ColumnName="OutModel" />
+                <ScalarProperty Name="EsnImeiNo" ColumnName="EsnImeiNo" />
+                <ScalarProperty Name="ASCClaimNo" ColumnName="ASCClaimNo" />
+                <ScalarProperty Name="SchComplaintRemarks" ColumnName="SchComplaintRemarks" />
+                <ScalarProperty Name="SchComplaintCount" ColumnName="SchComplaintCount" />
+                <ScalarProperty Name="SchComplaintDate" ColumnName="SchComplaintDate" />
+                <ScalarProperty Name="ASCRemarks" ColumnName="ASCRemarks" />
+                <ScalarProperty Name="DealerReceiptNo" ColumnName="DealerReceiptNo" />
+                <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+                <ScalarProperty Name="Dealer" ColumnName="Dealer" />
+                <ScalarProperty Name="PullingDate" ColumnName="PullingDate" />
+                <ScalarProperty Name="InputDate" ColumnName="InputDate" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+                <ScalarProperty Name="B2BFlag" ColumnName="B2BFlag" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -31,6 +31,8 @@
         <AssociationConnector Association="SCM.Models.CustomerTags" />
         <AssociationConnector Association="SCM.Models.RequestTags" />
         <EntityTypeShape EntityType="SCM.Models.QIN" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SCM.Models.ExServiceRequest" Width="1.5" PointX="7.5" PointY="8.25" />
+        <AssociationConnector Association="SCM.Models.FK_ExServiceRequests_ToServiceRequests" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

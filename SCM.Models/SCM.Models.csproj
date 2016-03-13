@@ -69,6 +69,9 @@
     <Compile Include="Engineer.cs">
       <DependentUpon>SCMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ExServiceRequest.cs">
+      <DependentUpon>SCMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Metadata.cs" />
     <Compile Include="PendingReason.cs">
       <DependentUpon>SCMModel.tt</DependentUpon>

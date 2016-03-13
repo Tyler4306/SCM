@@ -1,0 +1,218 @@
+﻿@model SCM.ExServiceRequest
+
+@{
+    ViewBag.Title = AppViews.Details;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>@ExSvc.ExtServiceRequest</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.B2BFlag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.B2BFlag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompletionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompletionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InputDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InputDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PullingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PullingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dealer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dealer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DealerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DealerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DealerReceiptNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DealerReceiptNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ASCRemarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ASCRemarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchComplaintDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchComplaintDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchComplaintCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchComplaintCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchComplaintRemarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchComplaintRemarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ASCClaimNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ASCClaimNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EsnImeiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EsnImeiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OutModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OutModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiptDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiptDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransferSendDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransferSendDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransferReceiptDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransferReceiptDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstPromiseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstPromiseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Schedule)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Schedule)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PromiseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PromiseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Schedule1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Schedule1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DelayFromPromiseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DelayFromPromiseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DelayFromReceiptDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DelayFromReceiptDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransferApprovalDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransferApprovalDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceRequest.RQN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceRequest.RQN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(AppViews.Edit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(ExSvc.BackToRequest, "Edit", "ServiceRequests", new { id = Model.Id })
+</p>

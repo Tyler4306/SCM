@@ -119,4 +119,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="TExtCode" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="98d74e04-4575-4105-8fb8-166490837a54" ChangeDateTime="03/13/2016 20:38:37">
+    <Property Name="ElementName" Value="[dbo].[ExServiceRequests].[SchCompliantDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ExServiceRequests]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SchComplaintDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="20c2d482-ac54-4010-9866-bd13c2c17742" ChangeDateTime="03/13/2016 20:38:46">
+    <Property Name="ElementName" Value="[dbo].[ExServiceRequests].[SchCompliantCount]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ExServiceRequests]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SchComplaintCount" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="96840d0e-93a8-4713-a593-1e7e6ade0059" ChangeDateTime="03/13/2016 20:40:02">
+    <Property Name="ElementName" Value="[dbo].[ExServiceRequests].[EsnNo]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ExServiceRequests]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EsnImeiNo" />
+  </Operation>
 </Operations>
