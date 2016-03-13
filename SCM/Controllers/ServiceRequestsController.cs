@@ -84,35 +84,59 @@ namespace SCM.Controllers
                     break;
                 case "week":
                     int span = 0;
+                    DateTime startDate;
+                    DateTime endDate;
                     switch(DateTime.Today.DayOfWeek)
                     {
                         case DayOfWeek.Sunday:
                             span = 0;
+                            startDate = Convert.ToDateTime(DateTime.Today.ToString("dd/MMM/yyyy") + " 00:00:00");
+                            endDate = Convert.ToDateTime(DateTime.Today.AddDays(7).ToString("dd/MMM/yyyy") + " 23:59:59");
+                            requests = requests.Where(x => x.RequestDate >= startDate && x.RequestDate <= endDate).ToList();
                             break;
                         case DayOfWeek.Monday:
                             span = 1;
+                            startDate = Convert.ToDateTime(DateTime.Today.AddDays(-span).ToString("dd/MMM/yyyy") + " 00:00:00");
+                            endDate = Convert.ToDateTime(DateTime.Today.AddDays(7-span).ToString("dd/MMM/yyyy") + " 23:59:59");
+                            requests = requests.Where(x => x.RequestDate >= startDate && x.RequestDate <= endDate).ToList();
                             break;
                         case DayOfWeek.Tuesday:
                             span = 2;
+                            startDate = Convert.ToDateTime(DateTime.Today.AddDays(-span).ToString("dd/MMM/yyyy") + " 00:00:00");
+                            endDate = Convert.ToDateTime(DateTime.Today.AddDays(7 - span).ToString("dd/MMM/yyyy") + " 23:59:59");
+                            requests = requests.Where(x => x.RequestDate >= startDate && x.RequestDate <= endDate).ToList();
                             break;
                         case DayOfWeek.Wednesday:
                             span = 3;
+                            startDate = Convert.ToDateTime(DateTime.Today.AddDays(-span).ToString("dd/MMM/yyyy") + " 00:00:00");
+                            endDate = Convert.ToDateTime(DateTime.Today.AddDays(7 - span).ToString("dd/MMM/yyyy") + " 23:59:59");
+                            requests = requests.Where(x => x.RequestDate >= startDate && x.RequestDate <= endDate).ToList();
                             break;
                         case DayOfWeek.Thursday:
                             span = 4;
+                            startDate = Convert.ToDateTime(DateTime.Today.AddDays(-span).ToString("dd/MMM/yyyy") + " 00:00:00");
+                            endDate = Convert.ToDateTime(DateTime.Today.AddDays(7 - span).ToString("dd/MMM/yyyy") + " 23:59:59");
+                            requests = requests.Where(x => x.RequestDate >= startDate && x.RequestDate <= endDate).ToList();
                             break;
                         case DayOfWeek.Friday:
                             span = 5;
+                            startDate = Convert.ToDateTime(DateTime.Today.AddDays(-span).ToString("dd/MMM/yyyy") + " 00:00:00");
+                            endDate = Convert.ToDateTime(DateTime.Today.AddDays(7 - span).ToString("dd/MMM/yyyy") + " 23:59:59");
+                            requests = requests.Where(x => x.RequestDate >= startDate && x.RequestDate <= endDate).ToList();
                             break;
                         case DayOfWeek.Saturday:
                             span = 6;
+                            startDate = Convert.ToDateTime(DateTime.Today.AddDays(-span).ToString("dd/MMM/yyyy") + " 00:00:00");
+                            endDate = Convert.ToDateTime(DateTime.Today.AddDays(7 - span).ToString("dd/MMM/yyyy") + " 23:59:59");
+                            requests = requests.Where(x => x.RequestDate >= startDate && x.RequestDate <= endDate).ToList();
                             break;
                         default:
                             span = 0;
+                            startDate = Convert.ToDateTime(DateTime.Today.ToString("dd/MMM/yyyy") + " 00:00:00");
+                            endDate = Convert.ToDateTime(DateTime.Today.AddDays(7).ToString("dd/MMM/yyyy") + " 23:59:59");
+                            requests = requests.Where(x => x.RequestDate >= startDate && x.RequestDate <= endDate).ToList();
                             break;
-
                     }
-                    requests = requests.Where(x => x.RequestDate >= DateTime.Today.AddDays(-span) && x.RequestDate >= DateTime.Today.AddDays(7- span));
                     break;
                 case "month":
                     requests = requests.Where(x => x.RequestDate.Year == DateTime.Today.Year && x.RequestDate.Month == DateTime.Today.Month );
