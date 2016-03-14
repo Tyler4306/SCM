@@ -15,6 +15,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCM.Models", "SCM.Models\SC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCM.PBX", "SCM.PBX\SCM.PBX.csproj", "{C7D3559C-B7A1-4CDA-88B6-7FA2D84DA0FF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{106632C4-5A74-472B-A112-1153AA7867BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogReader", "PbxTest\LogReader\LogReader.csproj", "{6E84DEA2-8110-4351-A50A-808D378E48DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCM.LogCallsTest", "SCM.LogCallsTest\SCM.LogCallsTest\SCM.LogCallsTest.csproj", "{FA5D107F-4030-499B-8EA1-C3A5A6B019AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{1002386D-B21A-4943-B97B-310B3523F2E1}"
+	ProjectSection(SolutionItems) = preProject
+		data\Log From824.txt = data\Log From824.txt
+		data\logggg.txt = data\logggg.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,8 +59,21 @@ Global
 		{C7D3559C-B7A1-4CDA-88B6-7FA2D84DA0FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7D3559C-B7A1-4CDA-88B6-7FA2D84DA0FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7D3559C-B7A1-4CDA-88B6-7FA2D84DA0FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E84DEA2-8110-4351-A50A-808D378E48DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E84DEA2-8110-4351-A50A-808D378E48DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E84DEA2-8110-4351-A50A-808D378E48DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E84DEA2-8110-4351-A50A-808D378E48DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA5D107F-4030-499B-8EA1-C3A5A6B019AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA5D107F-4030-499B-8EA1-C3A5A6B019AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA5D107F-4030-499B-8EA1-C3A5A6B019AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA5D107F-4030-499B-8EA1-C3A5A6B019AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6E84DEA2-8110-4351-A50A-808D378E48DA} = {106632C4-5A74-472B-A112-1153AA7867BE}
+		{FA5D107F-4030-499B-8EA1-C3A5A6B019AD} = {106632C4-5A74-472B-A112-1153AA7867BE}
+		{1002386D-B21A-4943-B97B-310B3523F2E1} = {106632C4-5A74-472B-A112-1153AA7867BE}
 	EndGlobalSection
 EndGlobal
