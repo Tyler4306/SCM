@@ -37,7 +37,7 @@ namespace SCM.Utils
                         qry.ToList(), null,
                         System.Web.Caching.Cache.NoAbsoluteExpiration, new TimeSpan(0, 15, 0));
 
-
+                    Customers();
                 }
             }
 
