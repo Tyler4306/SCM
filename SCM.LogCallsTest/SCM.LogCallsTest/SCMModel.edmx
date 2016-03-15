@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SCMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="20" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="RegionId" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsBlackListed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QIN">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TDate" Type="nvarchar" MaxLength="15" />
+          <Property Name="TTime" Type="nvarchar" MaxLength="15" />
+          <Property Name="TExtCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="TLineNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="THeader" Type="nvarchar" MaxLength="50" />
+          <Property Name="TNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="TDur" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsTaken" Type="bit" Nullable="false" />
+          <Property Name="TakenByExt" Type="nvarchar" MaxLength="10" />
+          <Property Name="TakenBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="TakenOn" Type="datetime" />
+          <Property Name="LogTime" Type="datetime" Nullable="false" />
+          <Property Name="LinkedTo" Type="int" />
+        </EntityType>
+        <EntityType Name="ServiceRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="StatusDate" Type="datetime" Nullable="false" />
+          <Property Name="CenterId" Type="int" Nullable="false" />
+          <Property Name="RQN" Type="nvarchar" MaxLength="20" />
+          <Property Name="ReceiptNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="ProductId" Type="nvarchar" MaxLength="3" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="SN" Type="nvarchar" MaxLength="50" />
+          <Property Name="EngineerId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="ClosingDate" Type="datetime" />
+          <Property Name="PendingReasonId" Type="int" />
+          <Property Name="CancelReasonId" Type="int" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ServiceRequest_To_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequests">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="q_log_call" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tdate" Type="nvarchar" Mode="In" />
+          <Parameter Name="ttime" Type="nvarchar" Mode="In" />
+          <Parameter Name="textcode" Type="nvarchar" Mode="In" />
+          <Parameter Name="tlineno" Type="nvarchar" Mode="In" />
+          <Parameter Name="theader" Type="nvarchar" Mode="In" />
+          <Parameter Name="tno" Type="nvarchar" Mode="In" />
+          <Parameter Name="tdur" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="q_take_call" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+          <Parameter Name="userext" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="SCMModelStoreContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QIN" EntityType="Self.QIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceRequests" EntityType="Self.ServiceRequests" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ServiceRequest_To_Customers" Association="Self.FK_ServiceRequest_To_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SCMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsBlackListed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ServiceRequests" Relationship="Self.FK_ServiceRequest_To_Customers" FromRole="Customers" ToRole="ServiceRequests" />
+        </EntityType>
+        <EntityType Name="QIN">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TDate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TTime" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TExtCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TLineNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="THeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TDur" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsTaken" Type="Boolean" Nullable="false" />
+          <Property Name="TakenByExt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TakenBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TakenOn" Type="DateTime" Precision="3" />
+          <Property Name="LogTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LinkedTo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ServiceRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="StatusDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CenterId" Type="Int32" Nullable="false" />
+          <Property Name="RQN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiptNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="ProductId" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EngineerId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClosingDate" Type="DateTime" Precision="3" />
+          <Property Name="PendingReasonId" Type="Int32" />
+          <Property Name="CancelReasonId" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_ServiceRequest_To_Customers" FromRole="ServiceRequests" ToRole="Customers" />
+        </EntityType>
+        <Association Name="FK_ServiceRequest_To_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="ServiceRequests" Type="Self.ServiceRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequests">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SCMContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="QINs" EntityType="Self.QIN" />
+          <EntitySet Name="ServiceRequests" EntityType="Self.ServiceRequest" />
+          <AssociationSet Name="FK_ServiceRequest_To_Customers" Association="Self.FK_ServiceRequest_To_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ServiceRequests" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <FunctionImport Name="q_log_call">
+            <Parameter Name="tdate" Mode="In" Type="String" />
+            <Parameter Name="ttime" Mode="In" Type="String" />
+            <Parameter Name="textcode" Mode="In" Type="String" />
+            <Parameter Name="tlineno" Mode="In" Type="String" />
+            <Parameter Name="theader" Mode="In" Type="String" />
+            <Parameter Name="tno" Mode="In" Type="String" />
+            <Parameter Name="tdur" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="q_take_call" ReturnType="Collection(SCMModel.q_take_call_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="userext" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="q_take_call_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="TDate" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TTime" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TExtCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TLineNo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="THeader" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TNo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TDur" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="IsTaken" Nullable="false" />
+          <Property Type="String" Name="TakenByExt" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TakenBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TakenOn" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LogTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="LinkedTo" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SCMModelStoreContainer" CdmEntityContainer="SCMContext">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="SCMModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IsBlackListed" ColumnName="IsBlackListed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QINs">
+            <EntityTypeMapping TypeName="SCMModel.QIN">
+              <MappingFragment StoreEntitySet="QIN">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="TTime" ColumnName="TTime" />
+                <ScalarProperty Name="TExtCode" ColumnName="TExtCode" />
+                <ScalarProperty Name="TLineNo" ColumnName="TLineNo" />
+                <ScalarProperty Name="THeader" ColumnName="THeader" />
+                <ScalarProperty Name="TNo" ColumnName="TNo" />
+                <ScalarProperty Name="TDur" ColumnName="TDur" />
+                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
+                <ScalarProperty Name="TakenByExt" ColumnName="TakenByExt" />
+                <ScalarProperty Name="TakenBy" ColumnName="TakenBy" />
+                <ScalarProperty Name="TakenOn" ColumnName="TakenOn" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="LinkedTo" ColumnName="LinkedTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceRequests">
+            <EntityTypeMapping TypeName="SCMModel.ServiceRequest">
+              <MappingFragment StoreEntitySet="ServiceRequests">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StatusDate" ColumnName="StatusDate" />
+                <ScalarProperty Name="CenterId" ColumnName="CenterId" />
+                <ScalarProperty Name="RQN" ColumnName="RQN" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="EngineerId" ColumnName="EngineerId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
+                <ScalarProperty Name="PendingReasonId" ColumnName="PendingReasonId" />
+                <ScalarProperty Name="CancelReasonId" ColumnName="CancelReasonId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="q_log_call" FunctionName="SCMModel.Store.q_log_call" />
+          <FunctionImportMapping FunctionImportName="q_take_call" FunctionName="SCMModel.Store.q_take_call">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SCMModel.q_take_call_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="TTime" ColumnName="TTime" />
+                <ScalarProperty Name="TExtCode" ColumnName="TExtCode" />
+                <ScalarProperty Name="TLineNo" ColumnName="TLineNo" />
+                <ScalarProperty Name="THeader" ColumnName="THeader" />
+                <ScalarProperty Name="TNo" ColumnName="TNo" />
+                <ScalarProperty Name="TDur" ColumnName="TDur" />
+                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
+                <ScalarProperty Name="TakenByExt" ColumnName="TakenByExt" />
+                <ScalarProperty Name="TakenBy" ColumnName="TakenBy" />
+                <ScalarProperty Name="TakenOn" ColumnName="TakenOn" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="LinkedTo" ColumnName="LinkedTo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
