@@ -1,6 +1,6 @@
 ﻿function callRequestTab(e, url, listId) {
     $(this).tab('show');
-    collectFilters();
+    collectFilter();
     //$.ajax(
     //    {
     //        type: 'GET',
@@ -14,19 +14,21 @@
 }
 
 function callRequests(page, status) {
-    var listId = '#' + status + 'List';
-    var url = '/ServiceRequests/Requests?page=' + page + '&status=' + status;
+    
+    collectFilter(page);
+    //var listId = '#' + status + 'List';
+    //var url = '/ServiceRequests/Requests?page=' + page + '&status=' + status;
 
-    $.ajax(
-    {
-        type: 'GET',
-        url: url,
-        success: function (result) {
-            $(listId).html(result);
-            updateTotals();
-        }
-    }
-    );
+    //$.ajax(
+    //{
+    //    type: 'GET',
+    //    url: url,
+    //    success: function (result) {
+    //        $(listId).html(result);
+    //        updateTotals();
+    //    }
+    //}
+    //);
 }
 
 

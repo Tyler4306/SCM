@@ -68,12 +68,27 @@
                     <div style="margin-bottom: 8px;">
                         @if (SCM.Utils.PageUtils.IsArabic())
                         {
-                            <input class="tag" type="checkbox" data-id="@item.Id" />
-                            <span class='label @item.Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@item.Name</span>
-                            if (items.ContainsKey(item.Name))
-                            {
-                                <span class="text-capitalize text-muted pull-right">&nbsp; x @items[item.Name] &nbsp;</span>
-                            }
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <input class="tag" type="checkbox" data-id="@item.Id" />
+                                </div>
+                                <div class="form-group">
+                                    <span class='label @item.Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@item.Name</span>
+                                </div>
+                                <div class="form-group">
+                                    @if (items.ContainsKey(item.Name))
+                                    {
+                                    <span class="text-capitalize text-muted pull-right">&nbsp; x &nbsp;</span>
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    @if (items.ContainsKey(item.Name))
+                                    {
+                                        <span class="text-capitalize text-muted pull-right">@items[item.Name] &nbsp;</span>
+                                    }
+                                </div>
+                            </div>
+
                         }
                         else
                         {

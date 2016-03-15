@@ -133,7 +133,11 @@
             collectFilter();
         }
 
-        function collectFilter() {
+        function collectFilter(page) {
+            var pg = page;
+            if (pg == null)
+                pg = 1;
+
             var filterDuration = $(".filterDuration.active").data("id");
             var filterDepartment = '';
             $(".filterDepartment").each(function (index, elem) {
@@ -176,7 +180,7 @@
             else
                 listId = '#activeList';
 
-            var url = '/ServiceRequests/Requests?status=' + status + '&filterDuration=' + filterDuration + '&customerName=' + customerName + '&phone=' + phone + '&code=' + code + '&receipt=' + receipt + '&product=' + product + '&model=' + model + '&sn=' + sn + '&tags=' + tags + '&filterDepartment=' + filterDepartment;
+            var url = '/ServiceRequests/Requests?page=' + pg + '&status=' + status + '&filterDuration=' + filterDuration + '&customerName=' + customerName + '&phone=' + phone + '&code=' + code + '&receipt=' + receipt + '&product=' + product + '&model=' + model + '&sn=' + sn + '&tags=' + tags + '&filterDepartment=' + filterDepartment;
             $.ajax(
              {
                  type: 'GET',
