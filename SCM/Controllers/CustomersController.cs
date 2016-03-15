@@ -127,6 +127,7 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,Name,Phone,Mobile,CityId,RegionId,Address,IsBlackListed")] Customer model)
         {
             ViewBag.CityId = Utils.ListManager.GetCities();
@@ -168,6 +169,7 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,Name,Phone,Mobile,CityId,RegionId,Address,IsBlackListed")] Customer model)
         {
             
@@ -199,6 +201,7 @@ namespace SCM.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int? id)
         {
             var model = db.Customers.Find(id);

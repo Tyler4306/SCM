@@ -54,6 +54,7 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,Name,DepartmentId,Phone")] Engineer model)
         {
             ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
@@ -87,6 +88,7 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,Name,DepartmentId,Phone")] Engineer model)
         {
             ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
@@ -117,6 +119,7 @@ namespace SCM.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int? id)
         {
             var model = db.Engineers.Find(id);

@@ -20,6 +20,7 @@ namespace SCM.Utils
 
         public static IEnumerable<ServiceRequest> Requests()
         {
+            Customers();
             lock(requestsLock)
             {
                 if (HttpContext.Current.Cache["Requests"] == null)

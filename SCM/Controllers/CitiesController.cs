@@ -52,7 +52,8 @@ namespace SCM.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]     
+        [Authorize]   
         public ActionResult Create([Bind(Include = "Id,Name")] City model)
         {
             if (ModelState.IsValid)
@@ -82,6 +83,7 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,Name")] City model)
         {
             if (ModelState.IsValid)
@@ -111,6 +113,7 @@ namespace SCM.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             var model = db.Cities.Find(id);

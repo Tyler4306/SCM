@@ -213,6 +213,7 @@ namespace SCM.Controllers
             return PartialView("_Requests", requests.ToPagedList(pageNumber, pageSize));
         }
 
+        [Authorize]
         public JsonResult TakeCall()
         {
             q_take_call_Result result = null;
@@ -308,6 +309,7 @@ namespace SCM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,CustomerId,RequestDate,StatusId,StatusDate,CenterId,RQN,ReceiptNo,DepartmentId,ProductId,Model,SN,EngineerId,Description,Remarks,ClosingDate,PendingReasonId,CancelReasonId,CreatedBy,CreatedOn,UpdatedBy,UpdatedOn,IsDeleted")] ServiceRequest model)
         {
             //Set default values
@@ -388,6 +390,7 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,CustomerId,RequestDate,StatusId,StatusDate,CenterId,RQN,ReceiptNo,DepartmentId,ProductId,Model,SN,EngineerId,Description,Remarks,ClosingDate,PendingReasonId,CancelReasonId,CreatedBy,CreatedOn,UpdatedBy,UpdatedOn,IsDeleted")] ServiceRequest serviceRequest)
         {
 
@@ -442,6 +445,7 @@ namespace SCM.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int? id)
         {
             var model = db.ServiceRequests.Find(id);
@@ -474,6 +478,7 @@ namespace SCM.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public void ServiceRequestTags(int requestId, string tags)
         {
             var ctx = new SCMContext();

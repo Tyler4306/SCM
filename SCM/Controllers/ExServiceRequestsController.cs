@@ -50,6 +50,7 @@ namespace SCM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,B2BFlag,CompletionDate,InputDate,PullingDate,Dealer,DealerName,DealerReceiptNo,ASCRemarks,SchComplaintDate,SchComplaintCount,SchComplaintRemarks,ASCClaimNo,EsnImeiNo,OutModel,ReceiptDate,TransferSendDate,TransferReceiptDate,FirstPromiseDate,Schedule,PromiseDate,Schedule1,DelayFromPromiseDate,DelayFromReceiptDate,TransferApprovalDate")] ExServiceRequest exServiceRequest)
         {
             if (ModelState.IsValid)
