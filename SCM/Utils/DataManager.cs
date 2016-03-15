@@ -64,6 +64,7 @@ namespace SCM.Utils
 
         public static void ChangeRequest(int id)
         {
+            Requests();
             lock (requestsLock)
             {
                 if (HttpContext.Current.Cache["Requests"] != null)
@@ -73,10 +74,13 @@ namespace SCM.Utils
                     var request = ctx.ServiceRequests.Find(id);
                     if (request != null)
                     {
-                        list.RemoveAll(x => x.Id == id);
+                        
+                        int index = list.FindIndex(x => x.Id == id);
+                        list.RemoveAt(index);
+                        
                         if (request.StatusId < 90)
                         {
-                            list.Add(request);
+                            list.Insert(index, request);
                         }
                         HttpContext.Current.Cache["Requests"] = list.OrderByDescending(x => x.RequestDate).ToList();
                     }
@@ -133,6 +137,7 @@ namespace SCM.Utils
 
         public static void ChangeCustomer(int id)
         {
+            Customers();
             lock (customersLock)
             {
                 if (HttpContext.Current.Cache["Customers"] != null)
@@ -146,6 +151,14 @@ namespace SCM.Utils
                         list.Add(customer);
                         
                         HttpContext.Current.Cache["Customers"] = list.OrderByDescending(x => x.Name).ToList();
+                        var relatedRequests = customer.ServiceRequests.Where(x => x.StatusId < 90).Select(x => x.Id).ToList();
+                        if (relatedRequests.Count > 0)
+                        {
+                            foreach(var i in relatedRequests)
+                            {
+                                ChangeRequest(i);
+                            }
+                        }
                     }
                 }
             }

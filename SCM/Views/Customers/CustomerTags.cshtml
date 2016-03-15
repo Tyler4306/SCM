@@ -1,0 +1,16 @@
+﻿@model IEnumerable<int>
+
+
+
+<div class="form-inline">
+
+        @foreach (Tag tag in ViewBag.EditTags)
+        {
+                <div class="form-group">
+                    <input class="tag" type="checkbox" data-id="@tag.Id" checked="@Model.Contains(tag.Id)" />
+                    <span class="label @tag.Format">@tag.Name</span>
+                </div>
+        }
+
+</div>
+

@@ -202,6 +202,44 @@ namespace SCM.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult CustomerTags(int customerId)
+        {
+            var ctx = new SCMContext();
+            var customer = ctx.Customers.Find(customerId);
+            ViewBag.EditTags = Utils.DataManager.Tags().Where(x => x.TagType == "C").ToList();
+            return PartialView("CustomerTags", customer.Tags.Select(x => x.Id).ToList());
+        }
+
+        [HttpPost]
+        public void CustomerTags(int customerId, string tags)
+        {
+            var ctx = new SCMContext();
+            var customer = ctx.Customers.Find(customerId);
+            List<int> tagList = tags.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            List<int> customerTags = customer.Tags.Select(x => x.Id).ToList();
+            List<int> deletedTags = customerTags.Where(x => !tagList.Contains(x)).ToList();
+            if (deletedTags.Count > 0)
+            {
+                foreach (int i in deletedTags)
+                {
+                    customer.Tags.Remove(ctx.Tags.Find(i));
+                    customerTags.Remove(i);
+                }
+                ctx.SaveChanges();
+            }
+            tagList.RemoveAll(x => customerTags.Contains(x));
+            if (tagList.Count > 0)
+            {
+                foreach (int id in tagList)
+                {
+                    customer.Tags.Add(ctx.Tags.Find(id));
+                }
+                ctx.SaveChanges();
+            }
+            Utils.DataManager.ChangeCustomer(customerId);
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

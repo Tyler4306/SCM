@@ -66,8 +66,10 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-4">
                 <input type="submit" value="@AppViews.Save" class="btn btn-primary" />
+                &nbsp;|&nbsp;
+                <a id="btnTags" class="btn btn-primary" href="#" >@AppViews.CustomerTags</a>
             </div>
         </div>
     </div>
@@ -77,11 +79,86 @@
     @Html.ActionLink(AppViews.BackToList, "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </div>
 
+<div class="modal fade" id="tagsModal" tabindex="-1" role="dialog" aria-labelledby="tagsModal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="tagsModal-label">@AppViews.CustomerTags</h4>
+            </div>
+            <div class="modal-body">
+                <div id="tags">
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@AppViews.Close</button>
+                <button id="btnSaveTags" type="button" class="btn btn-primary">@AppViews.Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
 <script>
-        $(function () {
+    $(function () {
+
+        $("#btnTags").click(function (e) {
+
+            var url = '/Customers/CustomerTags?customerId=@Model.Id';
+            $("#tags").empty();
+
+            $("#tagsModal").modal("toggle");
+
+
+            $.ajax({
+                method: 'GET',
+                url: url,
+
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                },
+                success: function (result) {
+                    $("#tags").html(result);
+                }
+            });
+
+        });
+
+        $("#btnSaveTags").click(function (e) {
+
+            var url = '/Customers/CustomerTags?customerId=@Model.Id';
+           
+
+            var selectedTags = '';
+            $(".tag").each(function (index, elem) {
+                if (elem.checked) {
+                    selectedTags = selectedTags + $(this).data("id") + ',';
+                }
+            });
+            if (selectedTags != null) {
+                selectedTags = selectedTags.substr(0, selectedTags.length - 1);
+            }
+            url = url + '&tags=' + selectedTags;
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                },
+                success: function (result) {
+                    $("#tagsModal").modal("toggle");
+                }
+            });
+
+        });
+
             $("#CityId").focusin(function () {
                 $(this).data('val', $(this).val());
             });

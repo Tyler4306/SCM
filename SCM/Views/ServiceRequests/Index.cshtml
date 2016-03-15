@@ -126,9 +126,9 @@
             $("#receipt").val('');
             $("#product").val('');
             $("#model").val('');
-            $("#sn").val('');
-            $("#tags").val('');
+            $("#sn").val('');            
             $("#status").val('active');
+            $(".tag").each(function (index, elem) { elem.checked = false; });
             
         }
 
@@ -150,6 +150,16 @@
             {
                 filterDepartment = filterDepartment.substr(0, filterDepartment.length - 1);
             }
+
+            var filterTags = '';
+            $(".tag").each(function (index, elem) {
+                if (elem.checked) {
+                    filterTags = filterTags + $(this).data("id") + ',';
+                }
+            });
+            if (filterTags != null) {
+                filterTags = filterTags.substr(0, filterTags.length - 1);
+            }
             
             var customerName = $("#customerName").val();
             var phone = $("#phone").val();
@@ -158,7 +168,7 @@
             var product = $("#product").val();
             var model = $("#model").val();
             var sn = $("#sn").val();
-            var tags = $("#tags").val();
+            var tags = filterTags
             var status = $("#status").val();
             var listId = "";
             if(status == "active")

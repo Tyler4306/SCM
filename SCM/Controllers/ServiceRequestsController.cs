@@ -44,7 +44,27 @@ namespace SCM.Controllers
             ViewBag.TotalPending = requests.Count(x => x.StatusId == 20);
             ViewBag.TotalDelayed = requests.Count(x => x.StatusId < 90 && x.RequestDate.AddDays(3) < DateTime.Today);
             ViewBag.Status = "active";
-            ViewBag.RelatedTags = requests.SelectMany(x => x.Tags.Union(x.Customer.Tags)).OrderBy(y => y.TagType).ThenBy(y => y.Name).GroupBy(x => x.Name).ToDictionary(x => x.Key, y => y.Count());
+
+            var dic = new Dictionary<string, int>();
+            foreach (var tag in DataManager.Tags().Where(x => x.TagType == "C"))
+            {
+                var cc = requests.Select(x => x.Customer).Distinct().SelectMany(x => x.Tags).Where(x => x.Id == tag.Id);
+                dic[tag.Name] = cc.Count();
+            }
+            foreach (var tag in DataManager.Tags().Where(x => x.TagType == "R"))
+            {
+                var cc = requests.SelectMany(x => x.Tags).Where(x => x.Id == tag.Id);
+                if (dic.ContainsKey(tag.Name))
+                {
+                    dic[tag.Name] = dic[tag.Name] + cc.Count();
+                }
+                else
+                {
+                    dic[tag.Name] = cc.Count();
+                }
+            }
+            ViewBag.RelatedTags = dic;
+            // ViewBag.RelatedTags = requests.SelectMany(x => x.Tags.Union(x.Customer.Tags)).OrderBy(y => y.TagType).ThenBy(y => y.Name).GroupBy(x => x.Name).ToDictionary(x => x.Key, y => y.Count());
 
             int pageSize = 30;
             int pageNumber = (page ?? 1);
@@ -69,10 +89,16 @@ namespace SCM.Controllers
                     break;
             }
             var departments = new List<int>();
-            if(!string.IsNullOrEmpty(filterDepartment))
+            if (!string.IsNullOrEmpty(filterDepartment))
             {
                 departments.AddRange(filterDepartment.Split(',').Select(x => Convert.ToInt32(x)));
             }
+            var filterTags = new List<int>();
+            if (!string.IsNullOrEmpty(tags))
+            {
+                filterTags.AddRange(tags.Split(',').Select(x => Convert.ToInt32(x)));
+            }
+
             requests = (from x in requests
                         where (string.IsNullOrEmpty(customerName) || x.Customer.Name.Contains(customerName))
                         && (string.IsNullOrEmpty(phone) || x.Customer.Phone == phone || x.Customer.Mobile == phone)
@@ -82,6 +108,7 @@ namespace SCM.Controllers
                         && (string.IsNullOrEmpty(model) || x.Model == model)
                         && (string.IsNullOrEmpty(sn) || x.SN == sn)
                         && (string.IsNullOrEmpty(filterDepartment) || (x.DepartmentId.HasValue && departments.Contains(x.DepartmentId.Value)))
+                        && (string.IsNullOrEmpty(tags) || x.Tags.Any(t => filterTags.Contains(t.Id)) || x.Customer.Tags.Any(t => filterTags.Contains(t.Id)))
                         select x);
 
             switch(filterDuration)
@@ -158,7 +185,27 @@ namespace SCM.Controllers
             ViewBag.TotalPending = requests.Count(x => x.StatusId == 20);
             ViewBag.TotalDelayed = requests.Count(x => x.StatusId < 90 && x.RequestDate.AddDays(3) < DateTime.Today);
             ViewBag.Status = status;
-            ViewBag.RelatedTags = requests.SelectMany(x => x.Tags.Union(x.Customer.Tags)).OrderBy(y => y.TagType).ThenBy(y => y.Name).GroupBy(x => x.Name).ToDictionary(x => x.Key, y => y.Count());
+
+            var dic = new Dictionary<string, int>();
+            foreach (var tag in DataManager.Tags().Where(x => x.TagType == "C"))
+            {
+                var cc = requests.Select(x => x.Customer).Distinct().SelectMany(x => x.Tags).Where(x => x.Id == tag.Id);
+                dic[tag.Name] = cc.Count();
+            }
+            foreach (var tag in DataManager.Tags().Where(x => x.TagType == "R"))
+            {
+                var cc = requests.SelectMany(x => x.Tags).Where(x => x.Id == tag.Id);
+                if (dic.ContainsKey(tag.Name))
+                {
+                    dic[tag.Name] = dic[tag.Name] + cc.Count();
+                }
+                else
+                {
+                    dic[tag.Name] = cc.Count();
+                }
+            }
+            ViewBag.RelatedTags = dic;
+            // ViewBag.RelatedTags = requests.SelectMany(x => x.Tags.Union(x.Customer.Tags)).OrderBy(y => y.TagType).ThenBy(y => y.Name).GroupBy(x => x.Name).ToDictionary(x => x.Key, y => y.Count());
 
 
             int pageSize = 30;
@@ -416,6 +463,44 @@ namespace SCM.Controllers
         {
             DataManager.ResetRequests();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ServiceRequestTags(int requestId)
+        {
+            var ctx = new SCMContext();
+            var request = ctx.ServiceRequests.Find(requestId);
+            ViewBag.EditTags = Utils.DataManager.Tags().Where(x => x.TagType == "R").ToList();
+            return PartialView("RequestTags", request.Tags.Select(x => x.Id).ToList());
+        }
+
+        [HttpPost]
+        public void ServiceRequestTags(int requestId, string tags)
+        {
+            var ctx = new SCMContext();
+            var request = ctx.ServiceRequests.Find(requestId);
+            List<int> tagList = tags.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            List<int> requestTags = request.Tags.Select(x => x.Id).ToList();
+            List<int> deletedTags = requestTags.Where(x => !tagList.Contains(x)).ToList();
+            if (deletedTags.Count > 0)
+            {
+                foreach (int i in deletedTags)
+                {
+                    request.Tags.Remove(ctx.Tags.Find(i));
+                    requestTags.Remove(i);
+                }
+                ctx.SaveChanges();
+            }
+            tagList.RemoveAll(x => requestTags.Contains(x));
+            if (tagList.Count > 0)
+            {
+                foreach (int id in tagList)
+                {
+                    request.Tags.Add(ctx.Tags.Find(id));
+                }
+                ctx.SaveChanges();
+            }
+            Utils.DataManager.ChangeRequest(requestId);
+
         }
     }
 }

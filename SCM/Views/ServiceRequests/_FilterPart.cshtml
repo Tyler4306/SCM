@@ -57,33 +57,36 @@
 </p>
 <h5><b>@AppViews.Tags</b></h5>
 <p>
-    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
-        <span class="input-group-addon" id="tag-addon"><span class="glyphicon glyphicon-tags"></span></span>
-        <input id="tags" type="text" class="form-control" placeholder="@AppViews.Tag" aria-describedby="tag-addon">
-    </div>
-
     <div>
-        @{
-            if (ViewBag.RelatedTags != null)
+
+            @if (ViewBag.RelatedTags != null)
             {
                 var items = ViewBag.RelatedTags as IDictionary<string, int>;
-                foreach (var item in items)
+                var allTags = SCM.Utils.DataManager.Tags();
+                foreach (var item in allTags)
                 {
                     <div style="margin-bottom: 8px;">
                         @if (SCM.Utils.PageUtils.IsArabic())
                         {
-                            <span class='label @SCM.Utils.DataManager.Tags().First(x => x.Name == item.Key).Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@item.Key</span>
-                            <span class="text-capitalize text-muted pull-right">&nbsp; x @item.Value &nbsp;</span>
+                            <input class="tag" type="checkbox" data-id="@item.Id" />
+                            <span class='label @item.Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@item.Name</span>
+                            if (items.ContainsKey(item.Name))
+                            {
+                                <span class="text-capitalize text-muted pull-right">&nbsp; x @items[item.Name] &nbsp;</span>
+                            }
                         }
                         else
                         {
-                            <span class='label @SCM.Utils.DataManager.Tags().First(x => x.Name == item.Key).Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@item.Key</span>
-                            <span class="text-capitalize text-muted">&nbsp; x @item.Value</span>
+                            <input class="tag" type="checkbox" data-id="@item.Id" />
+                            <span class='label @item.Format'><span class="glyphicon glyphicon-tag">&nbsp;</span>@item.Name</span>
+                            if (items.ContainsKey(item.Name))
+                            {
+                                <span class="text-capitalize text-muted">&nbsp; x @items[item.Name]</span>
+                            }
                         }
                     </div>
                 }
             }
-        }
     </div>
 
 </p>
