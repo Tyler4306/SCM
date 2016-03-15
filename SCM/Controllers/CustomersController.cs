@@ -76,11 +76,16 @@ namespace SCM.Controllers
             return PartialView(model.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult FindCustomer(int? page)
+        public ActionResult FindCustomer(int? page, string search = null)
         {
+            var list = Utils.DataManager.Customers().Where(x => 
+            (string.IsNullOrEmpty(search) || 
+            x.Name.Contains(search) || 
+            (x.Phone == search) || 
+            (x.Mobile == search))).ToList();
             int pageNumber = page ?? 1;
             int pageSize = 5;
-            return PartialView("_FindCustomer", Utils.DataManager.Customers().ToPagedList(pageNumber, pageSize));
+            return PartialView("_FindCustomer", list.ToPagedList(pageNumber, pageSize));
         }
 
         public JsonResult GetCustomer(int? id)

@@ -592,6 +592,15 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to search for.
+        /// </summary>
+        public static string EnterName {
+            get {
+                return ResourceManager.GetString("EnterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ext..
         /// </summary>
         public static string Ext {

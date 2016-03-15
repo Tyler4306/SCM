@@ -117,7 +117,7 @@
         // FOR AJAX PAgedList MVC
         function callCustomers(page) {
             var listId = '#findCustomerForm';
-            var url = '/Customers/FindCustomer?page=' + page;
+            var url = '/Customers/FindCustomer?page=' + page + '&search=' + $("#txtSearch").val();
 
             $.ajax(
             {

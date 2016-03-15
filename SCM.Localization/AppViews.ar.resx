@@ -570,4 +570,7 @@
   <data name="DepartmentChangeMsg" xml:space="preserve">
     <value>تغيير القسم سيؤدي إلى إلغاء المنتج و المهندس المختارين, هل تريد المتابعة؟</value>
   </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>البحث عن</value>
+  </data>
 </root>

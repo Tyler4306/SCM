@@ -570,4 +570,7 @@
   <data name="DepartmentChangeMsg" xml:space="preserve">
     <value>The selected product and engineer will be removed, do you want to continue?</value>
   </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>search for</value>
+  </data>
 </root>
