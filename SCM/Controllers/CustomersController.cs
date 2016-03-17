@@ -151,6 +151,7 @@ namespace SCM.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -219,6 +220,7 @@ namespace SCM.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public void CustomerTags(int customerId, string tags)
         {
             var ctx = new SCMContext();

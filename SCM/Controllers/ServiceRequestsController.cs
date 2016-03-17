@@ -360,6 +360,7 @@ namespace SCM.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
