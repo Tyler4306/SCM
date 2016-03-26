@@ -18,7 +18,7 @@ namespace SCM.Controllers
 
         public ActionResult Index(int? page = null)
         {
-            var model = db.Tags.ToList();
+            var model = db.Tags.OrderBy(x => x.Name).ToList();
             int pageNumber = page ?? 1;
             int pageSize = 10;
             return View(model.ToPagedList(pageNumber, pageSize));
