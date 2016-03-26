@@ -188,6 +188,7 @@
     <Compile Include="Controllers\ExServiceRequestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PendingReasonsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegionsController.cs" />
     <Compile Include="Controllers\ServiceRequestsController.cs" />
@@ -358,6 +359,12 @@
     <Content Include="Views\ExServiceRequests\Edit.cshtml" />
     <Content Include="Views\Customers\CustomerTags.cshtml" />
     <Content Include="Views\ServiceRequests\RequestTags.cshtml" />
+    <Content Include="Views\PendingReasons\Create.cshtml" />
+    <Content Include="Views\PendingReasons\Delete.cshtml" />
+    <Content Include="Views\PendingReasons\Details.cshtml" />
+    <Content Include="Views\PendingReasons\Edit.cshtml" />
+    <Content Include="Views\PendingReasons\Index.cshtml" />
+    <Content Include="Views\PendingReasons\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

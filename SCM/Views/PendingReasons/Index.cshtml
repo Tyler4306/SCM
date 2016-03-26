@@ -1,0 +1,91 @@
+﻿@model PagedList.IPagedList<SCM.PendingReason>
+@using PagedList.Mvc
+
+
+@{
+    ViewBag.Title = AppViews.PendingReasons;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="form-inline">
+    <div class="form-group">        
+        @*<div class="inner-addon right-addon">
+            <input type="text" class="form-control" id="name" placeholder="Enter name" />
+            <a id="resetName" class="invisible" href="#"><i class="glyphicon glyphicon-remove-circle"></i></a>
+        </div>*@
+        <input type="text" class="form-control" id="name" placeholder="@AppViews.EnterName" />
+    </div>
+    <div class="form-group">
+        <a class="btn btn-primary form-control" href='javascript:callPendingReasons()'><span class="glyphicon glyphicon-search">&nbsp;</span>@AppViews.Search</a>
+    </div>
+    <div class="form-group">
+        <a class="btn btn-primary" href='@Url.Action("Create")'><span class="glyphicon glyphicon-plus">&nbsp;</span>@AppViews.Create</a>
+    </div>
+</div>
+
+@Html.Hidden("sortBy", "Reason")
+@Html.Hidden("direction", "ASC")
+
+<div id="list">
+    @Html.Partial("List", Model)
+</div>
+
+
+
+@section Scripts
+{
+    <script>
+        function callPendingReasons(page) {
+            if (page == null)
+                page = 1;
+
+            var listId = "#list";
+            var name = $("#name").val();
+            var sortBy = $("#sortBy").val();
+            var direction = $("#direction").val();
+            var url = '/PendingReasons/List?page=' + page + '&name=' + name + '&sortBy=' + sortBy + '&direction=' + direction;
+
+            $.ajax(
+            {
+                type: 'GET',
+                url: url,
+                success: function (result) {
+
+                    $(listId).html(result);
+                    initSorts();
+                }
+            }
+            );
+        }
+
+
+        function initSorts() {
+
+            $(".sorter").click(function (e) {
+
+                var sortBy = $(this).data("sort");
+                var direction = $("#direction").val();
+                var lastSortBy = $("#sortBy").val();
+
+                if (sortBy == lastSortBy) {
+                    if (direction == "ASC")
+                        direction = "DESC";
+                    else
+                        direction = "ASC";
+                }
+                else
+                    direction = "ASC";
+
+                $("#sortBy").val(sortBy);
+                $("#direction").val(direction);
+
+                callPendingReasons(1);
+            });
+        }
+
+        $(function () {
+            initSorts();            
+        });
+    </script>
+}
