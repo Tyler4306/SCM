@@ -181,6 +181,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CancelReasonsController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
@@ -365,6 +366,12 @@
     <Content Include="Views\PendingReasons\Edit.cshtml" />
     <Content Include="Views\PendingReasons\Index.cshtml" />
     <Content Include="Views\PendingReasons\List.cshtml" />
+    <Content Include="Views\CancelReasons\Create.cshtml" />
+    <Content Include="Views\CancelReasons\Delete.cshtml" />
+    <Content Include="Views\CancelReasons\Details.cshtml" />
+    <Content Include="Views\CancelReasons\Edit.cshtml" />
+    <Content Include="Views\CancelReasons\Index.cshtml" />
+    <Content Include="Views\CancelReasons\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

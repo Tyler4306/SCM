@@ -1,0 +1,38 @@
+﻿@model PagedList.IPagedList<SCM.CancelReason>
+@using PagedList.Mvc
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <a class="sorter" data-sort="Reason" href="#">
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Reason)
+                    </a>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href='@Url.Action("Edit", new { id = item.Id})'><span class="glyphicon glyphicon-edit"></span></a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                    <td>
+                        <a href='@Url.Action("Delete", new { id = item.Id })'><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => string.Format("javascript: callCancelReasons('{0}')", page))
+</div>
