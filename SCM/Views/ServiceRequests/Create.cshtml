@@ -41,7 +41,7 @@
             @Html.LabelFor(model => model.RequestDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.RequestDate, new { htmlAttributes = new { @class = "form-control" } })*@
-                <input type="text" id="RequestDate" name="RequestDate" class="form-control" value='@Model.RequestDate.ToString("dd/MM/yyyy HH:mm")' />
+                <input type="date" id="RequestDate" name="RequestDate" class="form-control" value='@Model.RequestDate.ToString("yyyy-MM-dd")' pattern="dd/mm/yyyy" />
                 @Html.ValidationMessageFor(model => model.RequestDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -216,7 +216,8 @@
 
             //moment().locale('ar-sa');
           // Date Range Config
-                var rd = $("#RequestDate").val();
+            
+                @*var rd = $("#RequestDate").val();
                 if (rd === "")
                     rd = '@DateTime.Now';
                 $('input[name="RequestDate"]').daterangepicker({
@@ -232,29 +233,29 @@
                     },
                     function (start, end, label) {
                         // alert(start);
-                    });
+                    });*@
 
              // Date Range Config
-                $('input[name="StatusDate"]').daterangepicker({
+                //$('input[name="StatusDate"]').daterangepicker({
 
-                    format: "DD/MM/YYYY",
-                    singleDatePicker: true,
-                    showDropdowns: true
-                },
-                    function (start, end, label) {
-                        // alert(start);
-                    });
+                //    format: "DD/MM/YYYY",
+                //    singleDatePicker: true,
+                //    showDropdowns: true
+                //},
+                //    function (start, end, label) {
+                //        // alert(start);
+                //    });
 
             // Date Range Config
-                $('input[name="ClosingDate"]').daterangepicker({
+                //$('input[name="ClosingDate"]').daterangepicker({
 
-                    format: "DD/MM/YYYY",
-                    singleDatePicker: true,
-                    showDropdowns: true
-                },
-                    function (start, end, label) {
-                        // alert(start);
-                    });
+                //    format: "DD/MM/YYYY",
+                //    singleDatePicker: true,
+                //    showDropdowns: true
+                //},
+                //    function (start, end, label) {
+                //        // alert(start);
+                //    });
 
             });
 </script>
