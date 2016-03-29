@@ -573,4 +573,7 @@
   <data name="EnterName" xml:space="preserve">
     <value>البحث عن</value>
   </data>
+  <data name="ClosedRequests" xml:space="preserve">
+    <value>مغلقة</value>
+  </data>
 </root>

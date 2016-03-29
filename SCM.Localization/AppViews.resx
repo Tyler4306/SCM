@@ -573,4 +573,7 @@
   <data name="EnterName" xml:space="preserve">
     <value>search for</value>
   </data>
+  <data name="ClosedRequests" xml:space="preserve">
+    <value>closed</value>
+  </data>
 </root>

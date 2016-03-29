@@ -286,6 +286,15 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to closed.
+        /// </summary>
+        public static string ClosedRequests {
+            get {
+                return ResourceManager.GetString("ClosedRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         public static string Contact {
