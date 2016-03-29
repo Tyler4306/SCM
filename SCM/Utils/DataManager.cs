@@ -29,7 +29,7 @@ namespace SCM.Utils
 
                     var qry = (from x in ctx.ServiceRequests.Include(x => x.Customer).Include(x => x.Product).Include(x => x.Tags).Include(x => x.Customer.Tags)
                                where (x.StatusId < 90 && !x.IsDeleted) ||
-                                (x.StatusId >= 90 && x.ClosingDate.HasValue && x.ClosingDate.Value.Year >= 2015 && !x.IsDeleted)
+                                (x.StatusId >= 90 && x.ClosingDate.HasValue && x.ClosingDate.Value.Year == DateTime.Today.Year && !x.IsDeleted)
                                orderby x.RequestDate descending
                                select x);
 
