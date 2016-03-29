@@ -43,6 +43,8 @@ namespace SCM.Controllers
             ViewBag.TotalActive = requests.Count(x => x.StatusId < 90);
             ViewBag.TotalPending = requests.Count(x => x.StatusId == 20);
             ViewBag.TotalDelayed = requests.Count(x => x.StatusId < 90 && x.RequestDate.AddDays(3) < DateTime.Today);
+            int c = requests.Count(x => x.StatusId >= 90);
+            ViewBag.TotalClosed = c;
             ViewBag.Status = "active";
 
             var dic = new Dictionary<string, int>();
@@ -80,7 +82,10 @@ namespace SCM.Controllers
                 case "pending":
                     requests = requests.Where(x => x.StatusId == 20);
                     break;
-                case "active":
+                case "closed":
+                    requests = requests.Where(x => x.StatusId >= 90);
+                    break;
+                case "active":                    
                     break;
                 case "delayed":
                     requests = requests.Where(x => x.StatusId < 90 && x.RequestDate.AddDays(3) < DateTime.Today);
@@ -179,11 +184,21 @@ namespace SCM.Controllers
                     break;
             }
 
-            requests = requests.ToList();
-
             ViewBag.TotalActive = requests.Count(x => x.StatusId < 90);
             ViewBag.TotalPending = requests.Count(x => x.StatusId == 20);
             ViewBag.TotalDelayed = requests.Count(x => x.StatusId < 90 && x.RequestDate.AddDays(3) < DateTime.Today);
+            int c = requests.Count(x => x.StatusId >= 90);
+            ViewBag.TotalClosed = c;
+
+            // For not including the closed ones
+            if (status == "active")
+            {
+                requests = requests.Where(x => x.StatusId < 90);
+            }
+
+            requests = requests.ToList();
+
+
             ViewBag.Status = status;
 
             var dic = new Dictionary<string, int>();

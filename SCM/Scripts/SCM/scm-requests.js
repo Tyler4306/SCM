@@ -37,7 +37,9 @@ function updateTotals() {
     var activeCount = $("#totalActive").val();
     var pendingCount = $("#totalPending").val();
     var delayedCount = $("#totalDelayed").val();
+    var closedCount = $("#totalClosed").val();
     $("#badgeActive").text(activeCount);
     $("#badgeDelayed").text(delayedCount);
     $("#badgePending").text(pendingCount);
+    $("#badgeClosed").text(closedCount);
 }

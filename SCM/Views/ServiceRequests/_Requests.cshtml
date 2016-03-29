@@ -13,13 +13,16 @@
     @Html.Hidden("totalDelayed", (int)ViewBag.TotalDelayed)
 }
 
-
-
-
 @if (ViewBag.TotalPending != null)
 {
 @Html.Hidden("totalPending", (int) ViewBag.TotalPending)
 }
+
+@if (ViewBag.TotalClosed != null)
+{
+    @Html.Hidden("totalClosed", (int)ViewBag.TotalClosed)
+}
+
 @if (ViewBag.Status != null)
 {
     @Html.Hidden("status", (string)ViewBag.Status)

@@ -82,6 +82,11 @@
                 collectFilter();
                 callRequestTab(e, '@Url.Action("Requests", new { status = "active" })', '#activeList');
             });
+            $("#closedRequests").click(function (e) {
+                $("#status").val("closed");
+                collectFilter();
+                callRequestTab(e, '@Url.Action("Requests", new { status = "closed" })', '#closedList');
+            });
 
             $(".filterDuration").click(function (e) {                
                 $(".filterDuration").removeClass("active");
@@ -177,6 +182,8 @@
                 listId = '#pendingList';
             else if (status == "delayed")
                 listId = '#delayedList';
+            else if (status == "closed")
+                listId = '#closedList';
             else
                 listId = '#activeList';
 

@@ -8,9 +8,11 @@
         <li role="presentation" class="active"><a id="activeRequests" href="#active" aria-controls="active" role="tab" data-toggle="tab">@AppViews.ActiveRequests &nbsp;<span id="badgeActive" class="badge"></span></a></li>
         <li role="presentation"><a id="delayedRequests" href="#delayed" aria-controls="delayed" role="tab" data-toggle="tab">@AppViews.DelayedRequests &nbsp;<span id="badgeDelayed" class="badge"></span></a></li>
         <li role="presentation">
-            <a id="pendingRequests" data-target="#pending" href='' aria-controls="pending" role="tab" data-toggle="tab">@AppViews.PendingRequests &nbsp;<span id="badgePending" class="badge"></span></a>
+            <a id="pendingRequests" data-target="#pending" href='#pending' aria-controls="pending" role="tab" data-toggle="tab">@AppViews.PendingRequests &nbsp;<span id="badgePending" class="badge"></span></a>
         </li>
-
+        <li role="presentation">
+            <a id="closedRequests" data-target="#closed" href='#closed' aria-controls="closed" role="tab" data-toggle="tab">@AppViews.ClosedRequests &nbsp;<span id="badgeClosed" class="badge"></span></a>
+        </li>
     </ul>
 
     <!-- Tab panes -->
@@ -28,7 +30,10 @@
             <div id="pendingList">
             </div>
         </div>
-
+        <div role="tabpanel" class="tab-pane" id="closed">
+            <div id="closedList">
+            </div>
+        </div>
     </div>
 
 </div>
