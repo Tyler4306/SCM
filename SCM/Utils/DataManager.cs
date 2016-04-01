@@ -80,7 +80,7 @@ namespace SCM.Utils
                         int index = list.FindIndex(x => x.Id == id);
                         list.RemoveAt(index);
                         
-                        if (request.StatusId < 90)
+                        if (request.StatusId < 90 || (request.StatusId >= 90 && request.ClosingDate.HasValue && request.ClosingDate.Value.Year == DateTime.Now.Year))
                         {
                             list.Insert(index, request);
                         }

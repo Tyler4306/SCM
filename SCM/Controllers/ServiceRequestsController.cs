@@ -433,7 +433,13 @@ namespace SCM.Controllers
                 if(Request["OldStatus"] != serviceRequest.StatusId.ToString())
                 {
                     serviceRequest.StatusDate = DateTime.Now;
+                    if (serviceRequest.StatusId >= 90)
+                    {
+                        serviceRequest.ClosingDate = DateTime.Now;
+                    }
                 }
+
+                
 
                 db.Entry(serviceRequest).State = EntityState.Modified;
                 db.SaveChanges();

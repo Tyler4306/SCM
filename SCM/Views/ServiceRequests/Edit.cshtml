@@ -36,12 +36,15 @@
             <input id="btnSave" type="submit" value="@AppViews.Save"  class="btn btn-primary " />
         </div>
         <div class="pull-right">
+            @if (User.IsInRole("Supervisor"))
+            {
             <a id="btnPending" class="btn btn-sm btn-warning" href="#"><span class="glyphicon glyphicon-star">&nbsp;</span> @AppViews.StatusPending</a>
-            &nbsp;
+            <span>&nbsp;</span>
             <a id="btnCancel" class="btn btn-sm btn-danger" href="#"><span class="glyphicon glyphicon-ban-circle">&nbsp;</span> @AppViews.StatusCanceled</a>
-            &nbsp;
+            <span>&nbsp;</span>
             <a id="btnClose" class="btn btn-sm btn-success" href="#"><span class="glyphicon glyphicon-folder-close">&nbsp;</span> @AppViews.StatusClosed</a>
-            &nbsp;
+            <span>&nbsp;</span>
+            }
             <a class="btn btn-sm btn-primary" href='@Url.Action("Edit", "ExServiceRequests", new { id = Model.Id})'><span class="glyphicon glyphicon-expand">&nbsp;</span> @ExSvc.ExtServiceRequest</a>
         </div>
     </div>
@@ -336,6 +339,7 @@
                     $("#btnPending").addClass("disabled");
                     $("#btnCancel").addClass("disabled");
                     $("#btnClose").addClass("disabled");
+                    $("#cancelSection").removeClass("hidden");
 
                     if ($("#PendingReasonId").val() == '' || $("#PendingReasonId").val() === "0")
                         $("#pendingSection").removeClass("hidden");
