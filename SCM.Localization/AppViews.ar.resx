@@ -576,4 +576,10 @@
   <data name="ClosedRequests" xml:space="preserve">
     <value>مغلقة</value>
   </data>
+  <data name="CustomerComments" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>فعال</value>
+  </data>
 </root>
