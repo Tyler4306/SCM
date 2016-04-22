@@ -8,9 +8,10 @@
     [RegionId] INT NULL, 
     [Address] NVARCHAR(200) NULL, 
     [IsBlackListed] BIT NOT NULL DEFAULT 0, 
+    [Comments] NVARCHAR(150) NULL, 
     CONSTRAINT [CK_Customers_Phone_Rquired] CHECK ((Phone Is Not Null) OR (Mobile Is Not Null)), 
-    CONSTRAINT [FK_Customers_To_Cities] FOREIGN KEY (CityId) REFERENCES Cities(Id), 
-    CONSTRAINT [FK_Customers_To_Regions] FOREIGN KEY (RegionId) REFERENCES Regions(Id) 
+    CONSTRAINT [FK_Customers_To_Cities] FOREIGN KEY (CityId) REFERENCES Cities(Id) ON DELETE SET NULL, 
+    CONSTRAINT [FK_Customers_To_Regions] FOREIGN KEY (RegionId) REFERENCES Regions(Id) ON DELETE SET NULL
 )
 
 GO
