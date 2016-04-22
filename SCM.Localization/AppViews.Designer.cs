@@ -340,6 +340,15 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string Customer_Comments {
+            get {
+                return ResourceManager.GetString("Customer_Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
         public static string Customer_Id {
@@ -390,15 +399,6 @@ namespace SCM {
         public static string Customer_RegionId {
             get {
                 return ResourceManager.GetString("Customer_RegionId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Comments.
-        /// </summary>
-        public static string CustomerComments {
-            get {
-                return ResourceManager.GetString("CustomerComments", resourceCulture);
             }
         }
         
