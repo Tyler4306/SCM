@@ -8,7 +8,7 @@
     [CenterId] INT NOT NULL DEFAULT 1, 
     [RQN] NVARCHAR(20) NULL, 
     [ReceiptNo] NVARCHAR(20) NULL, 
-    [DepartmentId] INT NULL, 
+    [DepartmentId] INT NULL DEFAULT 1, 
     [ProductId] NVARCHAR(3) NULL, 
     [Model] NVARCHAR(50) NULL, 
     [SN] NVARCHAR(50) NULL, 
@@ -26,11 +26,11 @@
     CONSTRAINT [FK_ServiceRequest_To_Customers] FOREIGN KEY (CustomerId) REFERENCES Customers(Id), 
     CONSTRAINT [CK_ServiceRequest_StatusDate_Invalid] CHECK (StatusDate >= RequestDate), 
     CONSTRAINT [FK_ServiceRequests_To_Centers] FOREIGN KEY (CenterId) REFERENCES Centers(Id), 
-    CONSTRAINT [FK_ServiceRequests_To_Departments] FOREIGN KEY (DepartmentId) REFERENCES Departments(Id), 
+    CONSTRAINT [FK_ServiceRequests_To_Departments] FOREIGN KEY (DepartmentId) REFERENCES Departments(Id) ON DELETE SET DEFAULT, 
     CONSTRAINT [FK_ServiceRequests_To_Products] FOREIGN KEY (ProductId) REFERENCES Products(Id), 
     CONSTRAINT [FK_ServiceRequests_To_Engineers] FOREIGN KEY (EngineerId) REFERENCES Engineers(Id), 
-    CONSTRAINT [FK_ServiceRequests_To_PendingReasons] FOREIGN KEY (PendingReasonId) REFERENCES PendingReasons(Id), 
-    CONSTRAINT [FK_ServiceRequests_To_CancelReasons] FOREIGN KEY (CancelReasonId) REFERENCES CancelReasons(Id) 
+    CONSTRAINT [FK_ServiceRequests_To_PendingReasons] FOREIGN KEY (PendingReasonId) REFERENCES PendingReasons(Id) ON DELETE SET NULL, 
+    CONSTRAINT [FK_ServiceRequests_To_CancelReasons] FOREIGN KEY (CancelReasonId) REFERENCES CancelReasons(Id) ON DELETE SET NULL
 )
 
 GO
