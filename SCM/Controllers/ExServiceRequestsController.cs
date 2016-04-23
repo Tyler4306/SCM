@@ -57,7 +57,7 @@ namespace SCM.Controllers
             {
                 db.Entry(exServiceRequest).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", "ServiceRequests", new { id = exServiceRequest.Id });
             }
             ViewBag.Id = new SelectList(db.ServiceRequests, "Id", "RQN", exServiceRequest.Id);
             return View(exServiceRequest);

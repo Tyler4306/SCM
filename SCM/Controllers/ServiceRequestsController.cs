@@ -358,6 +358,7 @@ namespace SCM.Controllers
                     db.SaveChanges();
                     var exRequest = db.ExServiceRequests.Create();
                     exRequest.Id = model.Id;
+                    db.ExServiceRequests.Add(exRequest);
                     db.SaveChanges();
                     DataManager.AddRequest(model.Id);
                 }
