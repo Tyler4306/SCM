@@ -128,7 +128,7 @@ namespace SCM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Id,Name,Phone,Mobile,CityId,RegionId,Address,IsBlackListed")] Customer model)
+        public ActionResult Create([Bind(Include = "Id,Name,Phone,Mobile,CityId,RegionId,Address,IsBlackListed,Comments")] Customer model)
         {
             ViewBag.CityId = Utils.ListManager.GetCities();
             ViewBag.RegionId = Utils.ListManager.GetRegions();
@@ -171,7 +171,7 @@ namespace SCM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "Id,Name,Phone,Mobile,CityId,RegionId,Address,IsBlackListed")] Customer model)
+        public ActionResult Edit([Bind(Include = "Id,Name,Phone,Mobile,CityId,RegionId,Address,IsBlackListed,Comments")] Customer model)
         {
             
             if (ModelState.IsValid)

@@ -30,6 +30,20 @@
         <dd>
             @Html.DisplayFor(model => model.Phone)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsBlackListed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsBlackListed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {

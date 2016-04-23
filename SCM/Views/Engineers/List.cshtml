@@ -19,6 +19,11 @@
                         @Html.DisplayNameFor(model => model.FirstOrDefault().DepartmentId)
                     </a>
                 </th>
+                <th>
+                    <a>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().IsActive)
+                    </a>
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -37,6 +42,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Department.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
                     </td>
                     <td>
                         <a href='@Url.Action("Delete", new { id = item.Id })'><span class="glyphicon glyphicon-trash"></span></a>

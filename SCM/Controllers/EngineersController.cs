@@ -55,7 +55,7 @@ namespace SCM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Id,Name,DepartmentId,Phone")] Engineer model)
+        public ActionResult Create([Bind(Include = "Id,Name,DepartmentId,Phone,IsActive")] Engineer model)
         {
             ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
 
@@ -89,7 +89,7 @@ namespace SCM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "Id,Name,DepartmentId,Phone")] Engineer model)
+        public ActionResult Edit([Bind(Include = "Id,Name,DepartmentId,Phone,IsActive")] Engineer model)
         {
             ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
             if (ModelState.IsValid)
