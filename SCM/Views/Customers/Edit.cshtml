@@ -60,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RegionId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @HtmlExtensions.MyDropDown("RegionId", ViewBag.RegionId, null)
+                @HtmlExtensions.MyDropDown("RegionId", ViewBag.RegionId, Model.RegionId)
                 @Html.ValidationMessageFor(model => model.RegionId, "", new { @class = "text-danger" })
             </div>
         </div>
