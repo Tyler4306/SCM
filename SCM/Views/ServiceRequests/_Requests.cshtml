@@ -76,7 +76,7 @@
                 </a>
                 <h5 class="text-primary">
                     <a href='@Url.Action("Details", "Customers", new { id = item.CustomerId })' data-toggle="tooltip" data-placement="right" 
-                       title="@item.Customer.Address">@item.Customer.Name</a>
+                       title="@item.Customer.FullAddress()">@item.Customer.Name</a>
                     &nbsp;
                     @if (!string.IsNullOrEmpty(@item.Customer.Phone))
                     {

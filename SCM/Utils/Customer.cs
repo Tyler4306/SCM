@@ -9,7 +9,7 @@ namespace SCM.Models
     {
         public static string FullAddress(this Customer customer)
         {
-            return string.Format("{0} {1} {2}", customer.Address, (customer.RegionId.HasValue) ? customer.Region.Name : "", (customer.CityId.HasValue) ? customer.City.Name:""  ).Trim();
+            return string.Format("{2} {1} {0}", (customer.RegionId.HasValue) ? customer.Region.Name : "", customer.Address, (customer.CityId.HasValue) ? customer.City.Name:""  ).Trim();
         }
         public static string Topic(this ServiceRequest request)
         {
