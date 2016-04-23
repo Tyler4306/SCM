@@ -27,8 +27,8 @@
     CONSTRAINT [CK_ServiceRequest_StatusDate_Invalid] CHECK (StatusDate >= RequestDate), 
     CONSTRAINT [FK_ServiceRequests_To_Centers] FOREIGN KEY (CenterId) REFERENCES Centers(Id), 
     CONSTRAINT [FK_ServiceRequests_To_Departments] FOREIGN KEY (DepartmentId) REFERENCES Departments(Id) ON DELETE SET DEFAULT, 
-    CONSTRAINT [FK_ServiceRequests_To_Products] FOREIGN KEY (ProductId) REFERENCES Products(Id), 
-    CONSTRAINT [FK_ServiceRequests_To_Engineers] FOREIGN KEY (EngineerId) REFERENCES Engineers(Id), 
+    CONSTRAINT [FK_ServiceRequests_To_Products] FOREIGN KEY (ProductId) REFERENCES Products(Id) ON DELETE SET NULL, 
+    CONSTRAINT [FK_ServiceRequests_To_Engineers] FOREIGN KEY (EngineerId) REFERENCES Engineers(Id) ON DELETE SET NULL, 
     CONSTRAINT [FK_ServiceRequests_To_PendingReasons] FOREIGN KEY (PendingReasonId) REFERENCES PendingReasons(Id) ON DELETE SET NULL, 
     CONSTRAINT [FK_ServiceRequests_To_CancelReasons] FOREIGN KEY (CancelReasonId) REFERENCES CancelReasons(Id) ON DELETE SET NULL
 )
