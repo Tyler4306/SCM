@@ -23,6 +23,7 @@ namespace SCM
         public string Id { get; set; }
         public int DepartmentId { get; set; }
         public string Name { get; set; }
+        public bool IsActive { get; set; }
     
         public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

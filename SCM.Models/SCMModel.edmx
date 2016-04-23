@@ -45,6 +45,7 @@
           <Property Name="RegionId" Type="int" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
           <Property Name="IsBlackListed" Type="bit" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="CustomerTags">
           <Key>
@@ -69,6 +70,7 @@
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ExServiceRequests">
           <Key>
@@ -114,6 +116,7 @@
           <Property Name="Id" Type="nvarchar" MaxLength="3" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="QIN">
           <Key>
@@ -212,7 +215,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerTags_To_Customers">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CustomerTags" Type="Self.CustomerTags" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
@@ -224,7 +229,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerTags_To_Tags">
-          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CustomerTags" Type="Self.CustomerTags" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tags">
@@ -284,7 +291,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RequestTags_To_ServiceRequests">
-          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="1" />
+          <End Role="ServiceRequests" Type="Self.ServiceRequests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RequestTags" Type="Self.RequestTags" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ServiceRequests">
@@ -296,7 +305,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RequestTags_To_Tags">
-          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="RequestTags" Type="Self.RequestTags" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tags">
@@ -606,6 +617,7 @@
           <NavigationProperty Name="Region" Relationship="SCM.Models.FK_Customers_To_Regions" FromRole="Customer" ToRole="Region" />
           <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequest_To_Customers" FromRole="Customer" ToRole="ServiceRequest" />
           <NavigationProperty Name="Tags" Relationship="SCM.Models.CustomerTags" FromRole="Customer" ToRole="Tag" />
+          <Property Name="Comments" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -627,6 +639,7 @@
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Department" Relationship="SCM.Models.FK_Engineers_To_Departments" FromRole="Engineer" ToRole="Department" />
           <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Engineers" FromRole="Engineer" ToRole="ServiceRequest" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="PendingReason">
           <Key>
@@ -645,6 +658,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Department" Relationship="SCM.Models.FK_Products_To_Departments" FromRole="Product" ToRole="Department" />
           <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="Product" ToRole="ServiceRequest" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -968,6 +982,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="SCM.Models.Customer">
               <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="IsBlackListed" ColumnName="IsBlackListed" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
@@ -990,6 +1005,7 @@
           <EntitySetMapping Name="Engineers">
             <EntityTypeMapping TypeName="SCM.Models.Engineer">
               <MappingFragment StoreEntitySet="Engineers">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
@@ -1008,6 +1024,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="SCM.Models.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

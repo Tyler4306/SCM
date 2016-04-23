@@ -29,6 +29,7 @@ namespace SCM
         public Nullable<int> RegionId { get; set; }
         public string Address { get; set; }
         public bool IsBlackListed { get; set; }
+        public string Comments { get; set; }
     
         public virtual City City { get; set; }
         public virtual Region Region { get; set; }

@@ -92,6 +92,8 @@ namespace SCM
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+        [Display(Name = "IsActive", ResourceType = typeof(AppViews))]
+        public bool IsActive { get; set; }
     }
     [MetadataType(typeof(ProductMetadata))]
     public partial class Product
@@ -114,6 +116,8 @@ namespace SCM
         [Display(Name = "Engineer_Phone", ResourceType = typeof(AppViews))]
         [StringLength(20)]
         public string Phone { get; set; }
+        [Display(Name = "IsActive", ResourceType = typeof(AppViews))]
+        public bool IsActive { get; set; }
     }
     [MetadataType(typeof(EngineerMetadata))]
     public partial class Engineer
@@ -145,6 +149,8 @@ namespace SCM
         public string Address { get; set; }
         [Display(Name = "Customer_IsBlackListed", ResourceType = typeof(AppViews))]
         public bool IsBlackListed { get; set; }
+        [Display(Name = "Customer_Comments", ResourceType = typeof(AppViews))]
+        public string Comments { get; set; }
     }
     [MetadataType(typeof(CustomerMetadata))]
     public partial class Customer
