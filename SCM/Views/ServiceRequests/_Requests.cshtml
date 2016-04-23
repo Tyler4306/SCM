@@ -71,8 +71,26 @@
                         </div>
                     }
                 }
-                <a href='@Url.Action("Edit", new { id = item.Id })'>
-                    <h4 class="list-group-item-heading">@item.Topic()</h4>
+                <a title="@item.Remarks" href='@Url.Action("Edit", new { id = item.Id })'>
+                    <h4 class="list-group-item-heading">
+                        @switch (item.StatusId)
+                        {
+                            case 10:
+                                <span class="glyphicon glyphicon-bookmark" title="@AppViews.StatusOpen">&nbsp;</span>
+                                break;
+                            case 20:
+                                <span class="glyphicon glyphicon-star" title='@string.Format("{0} {1}",AppViews.StatusPending, item.PendingReasonId.HasValue? item.PendingReason.Reason : "")'>&nbsp;</span>
+                                break;
+                            case 90:
+                                <span class="glyphicon glyphicon-ban-circle" title='@string.Format("{0} {1}",AppViews.StatusCanceled, item.CancelReasonId.HasValue? item.CancelReason.Reason : "")'>&nbsp;</span>
+                                break;
+                            case 100:
+                                <span class="glyphicon glyphicon-folder-close" title="@AppViews.StatusClosed">&nbsp;</span>
+                                break;
+
+                        }
+                    @item.Topic()
+                    </h4>
                 </a>
                 <h5 class="text-primary">
                     <a href='@Url.Action("Details", "Customers", new { id = item.CustomerId })' data-toggle="tooltip" data-placement="right" 
@@ -105,7 +123,20 @@
                         }
 
                     }
+                    
                 </h5>
+                <h5 style="font-weight:bolder;">@item.Customer.FullAddress()</h5>
+                <div>
+                    @if (item.ProductId != null)
+                    {
+                        <span class="badge">@item.Product.Name</span>
+                    }
+                    @if (item.EngineerId.HasValue)
+                        {
+                        <span class="badge">@item.Engineer.Name</span>
+                    }
+                </div>
+                <hr />
                 <div class="list-group-item-text">@item.Description</div>
                 @if (SCM.Utils.PageUtils.IsArabic())
                 {
@@ -126,9 +157,9 @@
 
                 <div class="form-inline">
                     @foreach (var tag in item.Tags)
-                    {
-                        if (SCM.Utils.PageUtils.IsArabic())
                         {
+                            if (SCM.Utils.PageUtils.IsArabic())
+                            {
                             <span class="form-group">
                                 <span class='label @tag.Format'>
                                     @tag.Name
@@ -143,9 +174,9 @@
                         }
                     }
                     @foreach (var tag in item.Customer.Tags)
-                    {
-                        if (SCM.Utils.PageUtils.IsArabic())
                         {
+                            if (SCM.Utils.PageUtils.IsArabic())
+                            {
                             <span class="form-group">
                                 <span class='label @tag.Format'>
                                     @tag.Name
