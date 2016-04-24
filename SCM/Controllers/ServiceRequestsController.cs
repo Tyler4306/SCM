@@ -21,15 +21,14 @@ namespace SCM.Controllers
 
         public ActionResult GetEngineers(int departmentId)
         {
-            var list = DataManager.Engineers().Where(x => x.DepartmentId == departmentId).OrderBy(x => x.Name)
+            var list = DataManager.Engineers().Where(x => x.DepartmentId == departmentId && x.IsActive).OrderBy(x => x.Name)
                 .Select(x => new { Id = x.Id, Name = x.Name }).ToList();
-            
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetProducts(int departmentId)
         {
-            var list = DataManager.Products().Where(x => x.DepartmentId == departmentId).OrderBy(x => x.Name)
+            var list = DataManager.Products().Where(x => x.DepartmentId == departmentId && x.IsActive).OrderBy(x => x.Name)
                 .Select(x => new { Id = x.Id, Name = x.Name }).ToList();
 
             return Json(list, JsonRequestBehavior.AllowGet);
@@ -392,8 +391,15 @@ namespace SCM.Controllers
             
             ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name", model.CenterId);
             ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", model.DepartmentId);
-            ViewBag.ProductId = new SelectList(DataManager.Products().Where(x => model.DepartmentId == null || x.DepartmentId == model.DepartmentId), "Id", "Name", model.ProductId);
-            ViewBag.EngineerId = new SelectList(DataManager.Engineers().Where(x => model.DepartmentId == null || x.DepartmentId == model.DepartmentId), "Id", "Name", model.EngineerId);
+
+            // get active products
+            var products = DataManager.Products().Where(x => x.Id == model.ProductId || (x.DepartmentId == model.DepartmentId && x.IsActive));
+            ViewBag.ProductId = new SelectList(products, "Id", "Name", model.ProductId);
+
+            // get active engineers
+            var engineers = DataManager.Engineers().Where(x => x.Id == model.EngineerId || (x.DepartmentId == model.DepartmentId && x.IsActive));
+            ViewBag.EngineerId = new SelectList(engineers, "Id", "Name", model.EngineerId);
+
             ViewBag.PendingReasonId = new SelectList(db.PendingReasons, "Id", "Reason", model.PendingReasonId);
             ViewBag.CancelReasonId = new SelectList(db.CancelReasons, "Id", "Reason", model.CancelReasonId);
             ViewBag.StatusId = Utils.ListManager.GetStatus();
@@ -413,8 +419,15 @@ namespace SCM.Controllers
 
             ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name", serviceRequest.CenterId);
             ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", serviceRequest.DepartmentId);
-            ViewBag.ProductId = new SelectList(DataManager.Products().Where(x => serviceRequest.DepartmentId == null || x.DepartmentId == serviceRequest.DepartmentId), "Id", "Name", serviceRequest.ProductId);
-            ViewBag.EngineerId = new SelectList(DataManager.Engineers().Where(x => serviceRequest.DepartmentId == null || x.DepartmentId == serviceRequest.DepartmentId), "Id", "Name", serviceRequest.EngineerId);
+
+            // get active products
+            var products = DataManager.Products().Where(x => x.Id == serviceRequest.ProductId || (x.DepartmentId == serviceRequest.DepartmentId && x.IsActive));
+            ViewBag.ProductId = new SelectList(products, "Id", "Name", serviceRequest.ProductId);
+
+            // get active engineers
+            var engineers = DataManager.Engineers().Where(x => x.Id == serviceRequest.EngineerId || (x.DepartmentId == serviceRequest.DepartmentId && x.IsActive));
+            ViewBag.EngineerId = new SelectList(engineers, "Id", "Name", serviceRequest.EngineerId);
+
             ViewBag.PendingReasonId = new SelectList(db.PendingReasons, "Id", "Reason", serviceRequest.PendingReasonId);
             ViewBag.CancelReasonId = new SelectList(db.CancelReasons, "Id", "Reason", serviceRequest.CancelReasonId);
             ViewBag.StatusId = Utils.ListManager.GetStatus();
