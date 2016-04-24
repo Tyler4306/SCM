@@ -55,6 +55,21 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductId, AppViews.Product, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EngineerId, AppViews.Engineer, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("EngineerId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EngineerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
         
 
         <div class="form-group">
@@ -213,6 +228,63 @@
                     });
 
                 });
+
+            $("#DepartmentId").change(function (e) {
+                
+                var id = $("#DepartmentId").val();
+                var url1 = '@Url.Action("GetEngineers")';
+                var url2 = '@Url.Action("GetProducts")';
+                //var msg = '@AppViews.DepartmentChangeMsg';
+
+
+                //if (!confirm(msg)) {
+                //    $("#DepartmentId").val($("#DepartmentId").data('val'));
+                //    return;
+                //}
+
+                $("#EngineerId").empty();
+                $("#ProductId").empty();
+
+                $.ajax({
+                    contentType: 'application/json',
+                    method: 'GET',
+                    url: url1,
+                    data: { departmentId: id },
+                    success: function (result) {
+                        if (result != null && result.length > 0) {
+
+                            var html = '<option selected="true" value=""></option>';
+                            for (var i = 0; i < result.length; i++) {
+                                var str = '<option value="' + result[i].Id + '">' + result[i].Name + '</option>';
+                                html = html + str;
+                            }
+                            $("#EngineerId").html(html);
+                        }
+                    }
+                });
+
+                $.ajax({
+                    contentType: 'application/json',
+                    method: 'GET',
+                    url: url2,
+                    data: { departmentId: id },
+                    success: function (result) {
+                        if (result != null && result.length > 0) {
+
+                            var html = '<option selected="true" value=""></option>';
+                            for (var i = 0; i < result.length; i++) {
+                                var str = '<option value="' + result[i].Id + '">' + result[i].Name + '</option>';
+                                html = html + str;
+                            }
+                            $("#ProductId").html(html);
+                        }
+                    }
+                });
+
+
+
+            });
+
 
             //moment().locale('ar-sa');
           // Date Range Config

@@ -281,7 +281,16 @@ namespace SCM.Controllers
         public ActionResult Create(int? customerId = null, int? qin = null)
         {
             ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name");
-            ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name");
+            ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", 1);
+            // get active products
+            var products = DataManager.Products().Where(x => (x.DepartmentId == 1 && x.IsActive));
+            ViewBag.ProductId = new SelectList(products, "Id", "Name");
+
+            // get active engineers
+            var engineers = DataManager.Engineers().Where(x => (x.DepartmentId == 1 && x.IsActive));
+            ViewBag.EngineerId = new SelectList(engineers, "Id", "Name");
+
+
             var model = db.ServiceRequests.Create();
             model.RequestDate = DateTime.Now ;
             
@@ -372,6 +381,14 @@ namespace SCM.Controllers
 
             ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name");
             ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name");
+            // get active products
+            var products = DataManager.Products().Where(x => x.Id == model.ProductId || (x.DepartmentId == model.DepartmentId && x.IsActive));
+            ViewBag.ProductId = new SelectList(products, "Id", "Name", model.ProductId);
+
+            // get active engineers
+            var engineers = DataManager.Engineers().Where(x => x.Id == model.EngineerId || (x.DepartmentId == model.DepartmentId && x.IsActive));
+            ViewBag.EngineerId = new SelectList(engineers, "Id", "Name", model.EngineerId);
+
             return View(model);
         }
 
