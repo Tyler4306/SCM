@@ -126,6 +126,7 @@
             $("#code").val('');
             $("#receipt").val('');
             $("#product").val('');
+            $("#engineer").val('');
             $("#model").val('');
             $("#sn").val('');            
             $("#status").val('active');
@@ -171,6 +172,7 @@
             var code = $("#code").val();
             var receipt = $("#receipt").val();
             var product = $("#product").val();
+            var engineer = $("#engineer").val();
             var model = $("#model").val();
             var sn = $("#sn").val();
             var tags = filterTags
@@ -187,7 +189,7 @@
             else
                 listId = '#activeList';
 
-            var url = '/ServiceRequests/Requests?page=' + pg + '&status=' + status + '&filterDuration=' + filterDuration + '&customerName=' + customerName + '&phone=' + phone + '&code=' + code + '&receipt=' + receipt + '&product=' + product + '&model=' + model + '&sn=' + sn + '&tags=' + tags + '&filterDepartment=' + filterDepartment;
+            var url = '/ServiceRequests/Requests?page=' + pg + '&status=' + status + '&filterDuration=' + filterDuration + '&customerName=' + customerName + '&phone=' + phone + '&code=' + code + '&receipt=' + receipt + '&product=' + product + '&engineer=' + engineer + '&model=' + model + '&sn=' + sn + '&tags=' + tags + '&filterDepartment=' + filterDepartment;
             $.ajax(
              {
                  type: 'GET',

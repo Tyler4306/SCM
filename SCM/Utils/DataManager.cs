@@ -265,7 +265,7 @@ namespace SCM.Utils
                 if (HttpContext.Current.Cache["Departments"] == null)
                 {
                     var ctx = new SCMContext();
-                    var qry = ctx.Departments.OrderBy(x => x.Name);
+                    var qry = ctx.Departments.OrderBy(x => x.Id);
 
                     HttpContext.Current.Cache.Insert("Departments",
                         qry.ToList(), null,
