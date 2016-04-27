@@ -178,6 +178,8 @@
                     }
                     <div class="text-info">@Model.Center.Name</div>
                     <div class="text-muted"><b>@AppViews.TextRequestedOn</b> @Model.RequestDate.ToShortDateString()</div>
+                    <div class="text-info">@AppViews.SR_CreatedBy.ToLower() @Model.CreatedBy</div>
+                    <div class="text-info">@AppViews.SR_UpdatedBy.ToLower() @Model.UpdatedBy</div>
                     <div class="text-danger"><b>@AppViews.TextStatusOn</b> @Model.StatusDate.ToShortDateString()</div>
                     @if (Model.StatusId == 90)
                     {
