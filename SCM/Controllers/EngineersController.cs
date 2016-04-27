@@ -46,6 +46,7 @@ namespace SCM.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
@@ -54,7 +55,7 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,Name,DepartmentId,Phone,IsActive")] Engineer model)
         {
             ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
@@ -88,7 +89,7 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,Name,DepartmentId,Phone,IsActive")] Engineer model)
         {
             ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
@@ -103,6 +104,7 @@ namespace SCM.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -119,7 +121,7 @@ namespace SCM.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int? id)
         {
             var model = db.Engineers.Find(id);

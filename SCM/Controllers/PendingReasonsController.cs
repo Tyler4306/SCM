@@ -46,6 +46,7 @@ namespace SCM.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -53,7 +54,7 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,Reason")] PendingReason model)
         {
             if (ModelState.IsValid)
@@ -82,7 +83,7 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,Reason")] PendingReason model)
         {
             if (ModelState.IsValid)
@@ -95,6 +96,7 @@ namespace SCM.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,7 +113,7 @@ namespace SCM.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             var model = db.PendingReasons.Find(id);

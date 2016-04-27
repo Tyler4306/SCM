@@ -496,6 +496,7 @@ namespace SCM.Controllers
             return View(serviceRequest);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -512,7 +513,7 @@ namespace SCM.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int? id)
         {
             var model = db.ServiceRequests.Find(id);

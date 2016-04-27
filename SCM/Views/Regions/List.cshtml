@@ -33,7 +33,14 @@
                         @Html.DisplayFor(modelItem => item.City.Name)
                     </td>
                     <td>
+                        @if (User.IsInRole("Admin"))
+                        {
                         <a href='@Url.Action("Delete", new { id = item.Id })'><span class="glyphicon glyphicon-trash"></span></a>
+                        }
+                        else
+                        {
+                            <span>&nbsp;</span>
+                        }
                     </td>
                 </tr>
             }
