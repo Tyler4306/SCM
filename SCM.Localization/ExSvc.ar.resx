@@ -154,7 +154,7 @@
     <value>Ext. Request</value>
   </data>
   <data name="ExtServiceRequest" xml:space="preserve">
-    <value>Ext. Service Request</value>
+    <value>بيانات ملحقة</value>
   </data>
   <data name="FirstPromiseDate" xml:space="preserve">
     <value>First Promise Date</value>
