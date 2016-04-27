@@ -597,4 +597,16 @@
   <data name="Merge" xml:space="preserve">
     <value>Merge</value>
   </data>
+  <data name="RequestsDepartmentMod" xml:space="preserve">
+    <value>Requests Modifier By Department</value>
+  </data>
+  <data name="RequestsDepartmentMod_DepartmentId1" xml:space="preserve">
+    <value>Department 1</value>
+  </data>
+  <data name="RequestsDepartmentMod_DepartmentId2" xml:space="preserve">
+    <value>Department 2</value>
+  </data>
+  <data name="RequestsDepartmentMod_Update" xml:space="preserve">
+    <value>Update All Requests</value>
+  </data>
 </root>

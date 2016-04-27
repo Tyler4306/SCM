@@ -1024,6 +1024,42 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requests Modifier By Department.
+        /// </summary>
+        public static string RequestsDepartmentMod {
+            get {
+                return ResourceManager.GetString("RequestsDepartmentMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Department 1.
+        /// </summary>
+        public static string RequestsDepartmentMod_DepartmentId1 {
+            get {
+                return ResourceManager.GetString("RequestsDepartmentMod_DepartmentId1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Department 2.
+        /// </summary>
+        public static string RequestsDepartmentMod_DepartmentId2 {
+            get {
+                return ResourceManager.GetString("RequestsDepartmentMod_DepartmentId2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update All Requests.
+        /// </summary>
+        public static string RequestsDepartmentMod_Update {
+            get {
+                return ResourceManager.GetString("RequestsDepartmentMod_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tag.
         /// </summary>
         public static string RequestTag {

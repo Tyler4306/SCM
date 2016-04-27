@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using SCM.Utils;
 
 namespace SCM.Controllers
 {
@@ -73,6 +74,51 @@ namespace SCM.Controllers
 
                 Utils.DataManager.ResetCustomers();
                 Utils.DataManager.ResetRequests();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult RequestsDepartmentModifier()
+        {
+            ViewBag.DepartmentId1 = new SelectList(DataManager.Departments(), "Id", "Name", 1);
+            ViewBag.DepartmentId2 = new SelectList(DataManager.Departments(), "Id", "Name", 1);
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RequestsDepartmentModifier([Bind(Include = "DepartmentId1,DepartmentId2")] RequestsDepartmentModifier model)
+        {
+           if(ModelState.IsValid)
+            {
+                SCMContext ctx = new SCMContext();
+                var department1 = ctx.Departments.Find(model.DepartmentId1);
+                var department2 = ctx.Departments.Find(model.DepartmentId2);
+
+                var products = department1.Products.ToList();
+                foreach(var p in products)
+                {
+                    p.DepartmentId = department2.Id;
+                }
+
+                var engineers = department1.Engineers.ToList();
+                foreach (var e in engineers)
+                {
+                    e.DepartmentId = department2.Id;
+                }
+
+                var requests = department1.ServiceRequests.ToList();
+                foreach (var r in requests)
+                {
+                    r.DepartmentId = department2.Id;
+                }
+
+                ctx.SaveChanges();
+                Utils.DataManager.ResetDepartments();
+                Utils.DataManager.ResetProducts();
+                Utils.DataManager.ResetEngineers();
+                Utils.DataManager.ResetRequests();
+
             }
             return RedirectToAction("Index", "Home");
         }

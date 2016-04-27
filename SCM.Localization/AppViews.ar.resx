@@ -597,4 +597,16 @@
   <data name="Merge" xml:space="preserve">
     <value>دمج</value>
   </data>
+  <data name="RequestsDepartmentMod" xml:space="preserve">
+    <value>تعديل القسم في الطلبات</value>
+  </data>
+  <data name="RequestsDepartmentMod_DepartmentId1" xml:space="preserve">
+    <value>القسم 1</value>
+  </data>
+  <data name="RequestsDepartmentMod_DepartmentId2" xml:space="preserve">
+    <value>القسم 2</value>
+  </data>
+  <data name="RequestsDepartmentMod_Update" xml:space="preserve">
+    <value>تعديل كافة الطلبات</value>
+  </data>
 </root>
