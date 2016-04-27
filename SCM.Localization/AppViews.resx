@@ -607,6 +607,18 @@
     <value>Department 2</value>
   </data>
   <data name="RequestsDepartmentMod_Update" xml:space="preserve">
-    <value>Update All Requests</value>
+    <value>Update Department in All Requests</value>
+  </data>
+  <data name="RequestsProductMod" xml:space="preserve">
+    <value>Requests Modifier By Product</value>
+  </data>
+  <data name="RequestsProductMod_ProductId1" xml:space="preserve">
+    <value>Product 1</value>
+  </data>
+  <data name="RequestsProductMod_ProductId2" xml:space="preserve">
+    <value>Product 2</value>
+  </data>
+  <data name="RequestsProductMod_Update" xml:space="preserve">
+    <value>Update Product in All Requests</value>
   </data>
 </root>

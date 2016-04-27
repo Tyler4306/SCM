@@ -1051,11 +1051,47 @@ namespace SCM {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update All Requests.
+        ///   Looks up a localized string similar to Update Department in All Requests.
         /// </summary>
         public static string RequestsDepartmentMod_Update {
             get {
                 return ResourceManager.GetString("RequestsDepartmentMod_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requests Modifier By Product.
+        /// </summary>
+        public static string RequestsProductMod {
+            get {
+                return ResourceManager.GetString("RequestsProductMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product 1.
+        /// </summary>
+        public static string RequestsProductMod_ProductId1 {
+            get {
+                return ResourceManager.GetString("RequestsProductMod_ProductId1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product 2.
+        /// </summary>
+        public static string RequestsProductMod_ProductId2 {
+            get {
+                return ResourceManager.GetString("RequestsProductMod_ProductId2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Product in All Requests.
+        /// </summary>
+        public static string RequestsProductMod_Update {
+            get {
+                return ResourceManager.GetString("RequestsProductMod_Update", resourceCulture);
             }
         }
         

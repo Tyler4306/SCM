@@ -204,6 +204,7 @@
     <Compile Include="Models\Account\ManageViewModels.cs" />
     <Compile Include="Models\CustomerMerge.cs" />
     <Compile Include="Models\RequestsDepartmentModifier.cs" />
+    <Compile Include="Models\RequestsProductModifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MasterService.cs" />
     <Compile Include="Startup.cs" />
@@ -377,6 +378,7 @@
     <Content Include="Views\CancelReasons\List.cshtml" />
     <Content Include="Views\Maintenance\CustomerMerge.cshtml" />
     <Content Include="Views\Maintenance\RequestsDepartmentModifier.cshtml" />
+    <Content Include="Views\Maintenance\RequestsProductModifier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

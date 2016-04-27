@@ -607,6 +607,18 @@
     <value>القسم 2</value>
   </data>
   <data name="RequestsDepartmentMod_Update" xml:space="preserve">
-    <value>تعديل كافة الطلبات</value>
+    <value>تعديل القسم في كافة الطلبات</value>
+  </data>
+  <data name="RequestsProductMod" xml:space="preserve">
+    <value>تعديل المنتج في كل الطلبات</value>
+  </data>
+  <data name="RequestsProductMod_ProductId1" xml:space="preserve">
+    <value>منتج 1</value>
+  </data>
+  <data name="RequestsProductMod_ProductId2" xml:space="preserve">
+    <value>منتج 2</value>
+  </data>
+  <data name="RequestsProductMod_Update" xml:space="preserve">
+    <value>تعديل المنتج في كافة الطلبات</value>
   </data>
 </root>

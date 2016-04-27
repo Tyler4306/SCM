@@ -122,5 +122,37 @@ namespace SCM.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult RequestsProductModifier()
+        {
+            ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", 1);
+            ViewBag.ProductId1 = new SelectList(DataManager.Products().Where(x => x.DepartmentId == 1), "Id", "Name", 1);
+            ViewBag.ProductId2 = new SelectList(DataManager.Products().Where(x => x.DepartmentId == 1), "Id", "Name", 1);
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RequestsProductModifier([Bind(Include = "DepartmentId,ProductId1,ProductId2")] RequestsProductModifier model)
+        {
+            if (ModelState.IsValid)
+            {
+                SCMContext ctx = new SCMContext();
+                var department = ctx.Departments.Find(model.DepartmentId);
+                var product1 = ctx.Products.Find(model.ProductId1);
+                var product2 = ctx.Products.Find(model.ProductId2);
+
+                var requests = product1.ServiceRequests.ToList();
+                foreach (var r in requests)
+                {
+                    r.ProductId = product2.Id;
+                }
+
+                ctx.SaveChanges();
+                Utils.DataManager.ResetRequests();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
