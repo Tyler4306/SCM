@@ -127,6 +127,10 @@
                 </h5>
                 <h5 style="font-weight:bolder;">@item.Customer.FullAddress()</h5>
                 <div>
+                    @if (item.DepartmentId.HasValue)
+                    {
+                        <span class="badge">@item.Department.Name</span>
+                    }
                     @if (item.ProductId != null)
                     {
                         <span class="badge">@item.Product.Name</span>
