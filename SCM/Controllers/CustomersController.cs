@@ -208,6 +208,7 @@ namespace SCM.Controllers
             var model = db.Customers.Find(id);
             db.Customers.Remove(model);
             db.SaveChanges();
+            Utils.DataManager.ResetCustomers();
             return RedirectToAction("Index");
         }
 

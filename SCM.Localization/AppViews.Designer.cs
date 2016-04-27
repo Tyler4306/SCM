@@ -403,6 +403,33 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Merge Customers.
+        /// </summary>
+        public static string CustomerMerge {
+            get {
+                return ResourceManager.GetString("CustomerMerge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer 1.
+        /// </summary>
+        public static string CustomerMerge_CustomerId1 {
+            get {
+                return ResourceManager.GetString("CustomerMerge_CustomerId1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer 2.
+        /// </summary>
+        public static string CustomerMerge_CustomerId2 {
+            get {
+                return ResourceManager.GetString("CustomerMerge_CustomerId2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customers.
         /// </summary>
         public static string Customers {
@@ -660,6 +687,24 @@ namespace SCM {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance.
+        /// </summary>
+        public static string Maintenance {
+            get {
+                return ResourceManager.GetString("Maintenance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Merge.
+        /// </summary>
+        public static string Merge {
+            get {
+                return ResourceManager.GetString("Merge", resourceCulture);
             }
         }
         

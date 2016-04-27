@@ -582,4 +582,19 @@
   <data name="IsActive" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="CustomerMerge" xml:space="preserve">
+    <value>Merge Customers</value>
+  </data>
+  <data name="CustomerMerge_CustomerId1" xml:space="preserve">
+    <value>Customer 1</value>
+  </data>
+  <data name="CustomerMerge_CustomerId2" xml:space="preserve">
+    <value>Customer 2</value>
+  </data>
+  <data name="Maintenance" xml:space="preserve">
+    <value>Maintenance</value>
+  </data>
+  <data name="Merge" xml:space="preserve">
+    <value>Merge</value>
+  </data>
 </root>

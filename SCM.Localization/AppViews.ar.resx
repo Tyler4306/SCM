@@ -582,4 +582,19 @@
   <data name="IsActive" xml:space="preserve">
     <value>فعال</value>
   </data>
+  <data name="CustomerMerge" xml:space="preserve">
+    <value>دمج الزبائن</value>
+  </data>
+  <data name="CustomerMerge_CustomerId1" xml:space="preserve">
+    <value>زبون 1</value>
+  </data>
+  <data name="CustomerMerge_CustomerId2" xml:space="preserve">
+    <value>زبون 2</value>
+  </data>
+  <data name="Maintenance" xml:space="preserve">
+    <value>صيانة البيانات</value>
+  </data>
+  <data name="Merge" xml:space="preserve">
+    <value>دمج</value>
+  </data>
 </root>

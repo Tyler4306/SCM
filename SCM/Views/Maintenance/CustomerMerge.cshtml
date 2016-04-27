@@ -1,0 +1,200 @@
+﻿@model SCM.Models.CustomerMerge
+
+@{
+    ViewBag.Title = AppViews.CustomerMerge;
+}
+
+<h2>@AppViews.CustomerMerge</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Hidden("activeSelection")
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerId1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="form-inline">
+                    @Html.HiddenFor(x => x.CustomerId1, new { htmlAttributes = new { @class = "form-control" } })
+
+                    <input type="text" id="Customer_Name1" value="" class="form-control" readonly />
+                    <span>
+                        <a class="btn btn-default" id="btnFind1" href="#"><span class="glyphicon glyphicon-search"></span></a>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(model => model.CustomerId1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerId2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="form-inline">
+                    @Html.HiddenFor(x => x.CustomerId2, new { htmlAttributes = new { @class = "form-control" } })
+
+                    <input type="text" id="Customer_Name2" value="" class="form-control" readonly />
+                    <span>
+                        <a class="btn btn-default" id="btnFind2" href="#"><span class="glyphicon glyphicon-search"></span></a>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(model => model.CustomerId2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@AppViews.Merge" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="modal fade" id="findCustomer" tabindex="-1" role="dialog" aria-labelledby="findCustomer-label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="findCustomer-label">@AppViews.Customers</h4>
+            </div>
+            <div class="modal-body">
+                <div id="findCustomerForm"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@AppViews.Close</button>
+                <a class="btn btn-primary save" href='#'>@AppViews.Save</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        // FOR AJAX PAgedList MVC
+        function callCustomers(page) {
+            var listId = '#findCustomerForm';
+            var url = '/Customers/FindCustomer?page=' + page + '&search=' + $("#txtSearch").val();
+
+            $.ajax(
+            {
+                type: 'GET',
+                url: url,
+                success: function (result) {
+
+                    $(listId).html(result);
+                    updateCustomerClicks();
+                }
+            }
+            );
+        }
+
+        function updateCustomerClicks() {
+            $("tr.cname td a").click(function (e) {
+                var id = $(this).data("id");
+
+                $("#SelectedCustomer").val(id);
+                $("tr.cname").removeClass("active");
+                $(this.parentElement.parentElement).addClass("active");
+            });
+        }
+
+        $(function () {
+            if ($("#CustomerId1").val() === "0")
+                $("#CustomerId1").val('');
+
+            if ($("#CustomerId2").val() === "0")
+                $("#CustomerId2").val('');
+            // FOR MODAL FIND
+
+            $("#btnFind1").click(function (e) {
+                e.preventDefault();
+                $("#activeSelection").val('1');
+
+                var url = '/Customers/FindCustomer';
+
+                $("#findCustomer").modal("toggle");
+
+
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    },
+                    success: function (result) {
+                        $("#findCustomerForm").html(result);
+                        updateCustomerClicks();
+
+                    }
+                });
+
+            });
+
+            $("#btnFind2").click(function (e) {
+                e.preventDefault();
+                $("#activeSelection").val('2');
+
+                var url = '/Customers/FindCustomer';
+
+                $("#findCustomer").modal("toggle");
+
+
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    },
+                    success: function (result) {
+                        $("#findCustomerForm").html(result);
+                        updateCustomerClicks();
+                    }
+                });
+
+            });
+
+                $('#findCustomer').on('show.bs.modal', function (e) {
+                });
+
+                $(".save").click(function (e) {
+                    var id = $("#SelectedCustomer").val();
+                    var url = '@Url.Action("GetCustomer", "Customers")';
+
+                    $.ajax({
+                        url: url,
+                        data: { id: id },
+                        dataType: "json",
+                        method: 'GET',
+                        error: function (xhr, status, error) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            alert(err.Message);
+                        },
+                        success: function (result) {
+                            var activeSelection = $("#activeSelection").val();
+                            if (activeSelection == '1') {
+                                $("#CustomerId1").val(result.Id);
+                                $("#Customer_Name1").val(result.Name);
+                            } else if (activeSelection == '2') {
+                                $("#CustomerId2").val(result.Id);
+                                $("#Customer_Name2").val(result.Name);
+                            }
+
+                            $("#findCustomer").modal('toggle');
+                        }
+                    });
+
+                });
+         });
+    </script>
+}
