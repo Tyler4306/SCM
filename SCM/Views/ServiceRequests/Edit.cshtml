@@ -36,7 +36,7 @@
             <input id="btnSave" type="submit" value="@AppViews.Save"  class="btn btn-primary " />
         </div>
         <div class="pull-right">
-            @if (User.IsInRole("Supervisor"))
+            @if (User.IsInRole("Supervisor") || User.IsInRole("Admin"))
             {
             <a id="btnPending" class="btn btn-sm btn-warning" href="#"><span class="glyphicon glyphicon-star">&nbsp;</span> @AppViews.StatusPending</a>
             <span>&nbsp;</span>
