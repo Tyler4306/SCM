@@ -57,6 +57,11 @@
     <script>
         function createUrl() {
             var url = '/ServiceRequests/Create?qin=' + $("#QIN").val();
+            var phone = $("#phone").val();
+            if (phone != '')
+            {
+                url = url + '&phone=' + phone;
+            }
             $("#createBtn").attr("href", url);
         }
 
@@ -197,6 +202,7 @@
                  success: function (result) {
                      $(listId).html(result);
                      updateTotals();
+                     createUrl();
                  }
              }
              );

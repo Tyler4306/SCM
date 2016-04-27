@@ -279,7 +279,7 @@ namespace SCM.Controllers
         }
 
         // GET: AA/Create
-        public ActionResult Create(int? customerId = null, int? qin = null)
+        public ActionResult Create(int? customerId = null, int? qin = null, string phone = null)
         {
             ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name");
             ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", 1);
@@ -304,6 +304,19 @@ namespace SCM.Controllers
                     model.CustomerId = customerId.Value;
                 }
                 
+            }
+            else if(!string.IsNullOrEmpty(phone))
+            {
+                var customer = db.Customers.FirstOrDefault(x => x.Phone == phone.Trim() || x.Mobile == phone.Trim());
+                if(customer != null)
+                {
+                    model.Customer = customer;
+                    model.CustomerId = customer.Id;
+                }
+                else
+                {
+                    return RedirectToAction("Create", "Customers", new { phone = phone });
+                }
             }
             else if (qin.HasValue)
             {
