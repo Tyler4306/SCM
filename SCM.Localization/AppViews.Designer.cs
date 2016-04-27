@@ -1060,6 +1060,42 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requests Modifier By Engineer.
+        /// </summary>
+        public static string RequestsEngineerMod {
+            get {
+                return ResourceManager.GetString("RequestsEngineerMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Engineer 1.
+        /// </summary>
+        public static string RequestsEngineerMod_EngineerId1 {
+            get {
+                return ResourceManager.GetString("RequestsEngineerMod_EngineerId1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Engineer 2.
+        /// </summary>
+        public static string RequestsEngineerMod_EngineerId2 {
+            get {
+                return ResourceManager.GetString("RequestsEngineerMod_EngineerId2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Engineer in All Requests.
+        /// </summary>
+        public static string RequestsEngineerMod_Update {
+            get {
+                return ResourceManager.GetString("RequestsEngineerMod_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requests Modifier By Product.
         /// </summary>
         public static string RequestsProductMod {
@@ -1087,7 +1123,7 @@ namespace SCM {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Product in All Requests.
+        ///   Looks up a localized string similar to Update Engineer in All Requests.
         /// </summary>
         public static string RequestsProductMod_Update {
             get {

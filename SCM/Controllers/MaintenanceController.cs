@@ -154,5 +154,36 @@ namespace SCM.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult RequestsEngineerModifier()
+        {
+            ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", 1);
+            ViewBag.EngineerId1 = new SelectList(DataManager.Engineers().Where(x => x.DepartmentId == 1), "Id", "Name");
+            ViewBag.EngineerId2 = new SelectList(DataManager.Engineers().Where(x => x.DepartmentId == 1), "Id", "Name");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RequestsEngineerModifier([Bind(Include = "DepartmentId,EngineerId1,EngineerId2")] RequestsEngineerModifier model)
+        {
+            if (ModelState.IsValid)
+            {
+                SCMContext ctx = new SCMContext();
+                var department = ctx.Departments.Find(model.DepartmentId);
+                var engineer1 = ctx.Engineers.Find(model.EngineerId1);
+                var engineer2 = ctx.Engineers.Find(model.EngineerId2);
+
+                var requests = engineer1.ServiceRequests.ToList();
+                foreach (var r in requests)
+                {
+                    r.EngineerId = engineer2.Id;
+                }
+
+                ctx.SaveChanges();
+                Utils.DataManager.ResetRequests();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

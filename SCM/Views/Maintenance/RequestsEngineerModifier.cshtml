@@ -1,0 +1,89 @@
+﻿@model SCM.Models.RequestsEngineerModifier
+
+@{
+    ViewBag.Title = AppViews.RequestsEngineerMod;
+}
+
+<h2>@AppViews.RequestsEngineerMod</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId, AppViews.Department, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EngineerId1, AppViews.RequestsEngineerMod_EngineerId1, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownList("EngineerId1", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EngineerId1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EngineerId2, AppViews.RequestsEngineerMod_EngineerId2, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownList("EngineerId2", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EngineerId2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@AppViews.RequestsEngineerMod_Update" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            $("#DepartmentId").change(function (e) {
+
+                var id = $("#DepartmentId").val();
+                var url1 = '@Url.Action("GetEngineers", "ServiceRequests")';
+
+
+                $("#EngineerId1").empty();
+                $("#EngineerId2").empty();
+
+                $.ajax({
+                    contentType: 'application/json',
+                    method: 'GET',
+                    url: url1,
+                    data: { departmentId: id },
+                    success: function (result) {
+                        if (result != null && result.length > 0) {
+
+                            var html = '';
+                            for (var i = 0; i < result.length; i++) {
+                                var str = '<option value="' + result[i].Id + '">' + result[i].Name + '</option>';
+                                html = html + str;
+                            }
+                            $("#EngineerId1").html(html);
+                            $("#EngineerId2").html(html);
+                        }
+                    }
+                });
+
+            });
+
+        });
+    </script>
+}

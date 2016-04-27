@@ -609,6 +609,18 @@
   <data name="RequestsDepartmentMod_Update" xml:space="preserve">
     <value>Update Department in All Requests</value>
   </data>
+  <data name="RequestsEngineerMod" xml:space="preserve">
+    <value>Requests Modifier By Engineer</value>
+  </data>
+  <data name="RequestsEngineerMod_EngineerId1" xml:space="preserve">
+    <value>Engineer 1</value>
+  </data>
+  <data name="RequestsEngineerMod_EngineerId2" xml:space="preserve">
+    <value>Engineer 2</value>
+  </data>
+  <data name="RequestsEngineerMod_Update" xml:space="preserve">
+    <value>Update Engineer in All Requests</value>
+  </data>
   <data name="RequestsProductMod" xml:space="preserve">
     <value>Requests Modifier By Product</value>
   </data>
@@ -619,6 +631,6 @@
     <value>Product 2</value>
   </data>
   <data name="RequestsProductMod_Update" xml:space="preserve">
-    <value>Update Product in All Requests</value>
+    <value>Update Engineer in All Requests</value>
   </data>
 </root>
