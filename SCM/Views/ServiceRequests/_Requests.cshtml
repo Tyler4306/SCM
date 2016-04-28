@@ -56,14 +56,13 @@
         }
         <div class="list-group" style="margin-bottom: 2px;">
             <div class="list-group-item sideBorders @color">
-                @if (item.StatusId < 90 && item.RequestDate.AddDays(3) < DateTime.Today)
-                {
-                    if (SCM.Utils.PageUtils.IsArabic())
+
+                    @if (SCM.Utils.PageUtils.IsArabic())
                     {
                         <div class="pull-left bg-danger">
                             <div class="col-md-4">
                                 <p style="text-align:center;">
-                                    <h2>@DateTime.Now.Subtract(item.RequestDate.AddDays(3)).TotalDays.ToString("0")</h2>
+                                    <h2>@item.DelayedFor().ToString("0")</h2>
                                 </p>
                             </div>
                         </div>
@@ -73,12 +72,12 @@
                         <div class="pull-right bg-danger">
                             <div class="col-md-4">
                                 <p style="text-align:center;">
-                                    <h2>@DateTime.Now.Subtract(item.RequestDate.AddDays(3)).TotalDays.ToString("0")</h2>
+                                    <h2>@item.DelayedFor().ToString("0")</h2>
                                 </p>
                             </div>
                         </div>
                     }
-                }
+
                 <a title="@item.Remarks" href='@Url.Action("Edit", new { id = item.Id })'>
                     <h4 class="list-group-item-heading">
                         @switch (item.StatusId)
@@ -149,8 +148,6 @@
                     }
                 </div>
                
-                @*<div class="list-group-item-text requestDesc">@item.Description</div>*@
-
                 <p class="bg-info requestDesc">@item.Description</p>
 
                 @if (SCM.Utils.PageUtils.IsArabic())
@@ -203,9 +200,7 @@
                         }
                     }
                 </div>
-                @*<hr class="seperatorLine" />*@
             </div>
-
         </div>
     }
 

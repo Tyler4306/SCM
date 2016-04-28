@@ -11,6 +11,7 @@ using PagedList;
 using System.Linq.Dynamic;
 using SCM.Utils;
 using System.Data.Entity.Core.Objects;
+using SCM.Models;
 
 namespace SCM.Controllers
 {
@@ -211,6 +212,14 @@ namespace SCM.Controllers
                 else
                     requests = requests.OrderBy(x => x.RequestDate).ToList();
             }
+            else if (filterSort == "request_delay")
+            {
+                if (filterSortDir == "desc")
+                    requests = requests.OrderByDescending(x => x.DelayedFor()).ToList();
+                    
+                else
+                    requests = requests.OrderBy(x => x.DelayedFor()).ToList();
+            }
             else
                 requests = requests.OrderByDescending(x => x.UpdatedOn).ToList();
 
@@ -262,23 +271,6 @@ namespace SCM.Controllers
             var obj = new { Id = result.Id, CallerId = result.TNo};
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-
-        //public ActionResult Index_COPY(int? page = null)
-        //{
-        //    var model = db.ServiceRequests.Include(x => x.Center).Include(x => x.Customer).Include(x => x.Department).Include(x => x.Product).Include(x => x.Tags).Include(x => x.Customer.Tags).Where(x => !x.IsDeleted && x.StatusId < 90).ToList();
-        //    int pageNumber = page ?? 1;
-        //    int pageSize = 30;
-        //    return View(model.ToPagedList(pageNumber, pageSize));
-        //}
-
-        //public ActionResult List(int? page = null, string name = null, string sortBy = "Customer.Name", string direction = "ASC")
-        //{
-        //    var model = db.ServiceRequests.Include(x => x.Center).Include(x => x.Customer).Include(x => x.Department).Include(x => x.Product).Include(x => x.Tags).Include(x => x.Customer.Tags).Where(x => !x.IsDeleted && x.StatusId < 90 
-        //        && (string.IsNullOrEmpty(name) || x.Customer.Name.Contains(name) || x.Customer.Phone == name || x.Customer.Mobile == name)).OrderBy(sortBy + " " + direction).ToList();
-        //    int pageNumber = page ?? 1;
-        //    int pageSize = 30;
-        //    return PartialView(model.ToPagedList(pageNumber, pageSize));
-        //}
 
         public ActionResult Details(int? id)
         {

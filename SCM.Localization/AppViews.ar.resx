@@ -651,4 +651,7 @@
   <data name="Filter_SortDesc" xml:space="preserve">
     <value>تنازلي</value>
   </data>
+  <data name="Filter_SortByDelay" xml:space="preserve">
+    <value>فترة التأخير</value>
+  </data>
 </root>

@@ -651,4 +651,7 @@
   <data name="Filter_SortDesc" xml:space="preserve">
     <value>DESC</value>
   </data>
+  <data name="Filter_SortByDelay" xml:space="preserve">
+    <value>delay</value>
+  </data>
 </root>

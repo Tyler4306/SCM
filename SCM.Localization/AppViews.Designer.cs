@@ -682,6 +682,15 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to delay.
+        /// </summary>
+        public static string Filter_SortByDelay {
+            get {
+                return ResourceManager.GetString("Filter_SortByDelay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to update date.
         /// </summary>
         public static string Filter_SortByLastUpdate {

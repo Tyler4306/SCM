@@ -210,7 +210,7 @@
     <Compile Include="Services\MasterService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\AppCache.cs" />
-    <Compile Include="Utils\Customer.cs" />
+    <Compile Include="Utils\ModelExtension.cs" />
     <Compile Include="Utils\DataManager.cs" />
     <Compile Include="Utils\HtmlExtensions.cs" />
     <Compile Include="Utils\ListManager.cs" />
@@ -354,8 +354,6 @@
     <Content Include="Views\ServiceRequests\Delete.cshtml" />
     <Content Include="Views\ServiceRequests\Details.cshtml" />
     <Content Include="Views\ServiceRequests\Edit.cshtml" />
-    <Content Include="Views\ServiceRequests\Index_COPY.cshtml" />
-    <Content Include="Views\ServiceRequests\List.cshtml" />
     <Content Include="Views\ServiceRequests\Index.cshtml" />
     <Content Include="Views\ServiceRequests\_FilterPart.cshtml" />
     <Content Include="Views\ServiceRequests\_Requests.cshtml" />
