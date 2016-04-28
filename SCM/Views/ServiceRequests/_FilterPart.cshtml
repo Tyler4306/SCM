@@ -1,5 +1,16 @@
 ﻿<h4 class="text-muted">@AppViews.ShowResultsFor</h4>
 <hr />
+<h5><b>@AppViews.Filter_SortBy</b></h5>
+<p>
+    <div class="btn-group btn-group-sm" role="group" aria-label="">
+        <button id="sortLastDate" type="button" data-id="last_update" class="filterSort btn btn-default active">@AppViews.Filter_SortByLastUpdate</button>
+        <button type="button" data-id="request_date" class="filterSort btn btn-default">@AppViews.Filter_SortByRequestDate</button>
+    </div>
+    <div class="btn-group btn-group-sm" role="group" aria-label="">
+        <button type="button" data-id="asc" class="filterSortDir btn btn-default">@AppViews.Filter_SortAsc</button>
+        <button id="sortDesc" type="button" data-id="desc" class="filterSortDir btn btn-default active">@AppViews.Filter_SortDesc</button>
+    </div>
+</p>
 <h5><b>@AppViews.Duration</b></h5>
 <p>
     <div class="btn-group btn-group-sm" role="group" aria-label="">

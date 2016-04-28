@@ -664,6 +664,51 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ascending.
+        /// </summary>
+        public static string Filter_SortAsc {
+            get {
+                return ResourceManager.GetString("Filter_SortAsc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort By.
+        /// </summary>
+        public static string Filter_SortBy {
+            get {
+                return ResourceManager.GetString("Filter_SortBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to last update.
+        /// </summary>
+        public static string Filter_SortByLastUpdate {
+            get {
+                return ResourceManager.GetString("Filter_SortByLastUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to request date.
+        /// </summary>
+        public static string Filter_SortByRequestDate {
+            get {
+                return ResourceManager.GetString("Filter_SortByRequestDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to descending.
+        /// </summary>
+        public static string Filter_SortDesc {
+            get {
+                return ResourceManager.GetString("Filter_SortDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Force Reload Requests.
         /// </summary>
         public static string ForceReload {

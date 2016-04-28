@@ -71,12 +71,6 @@
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 var target = e.relatedTarget.hash + 'List';
                 $(target).empty();
-                //e.relatedTarget.empty();
-                //$("#allList").empty();
-                //$("#activeList").empty();
-                //$("#pendingList").empty();
-                //$("#delayedList").empty();
-                //$("#closedList").empty();
             })
 
             $("#allRequests").click(function (e) {
@@ -103,6 +97,16 @@
                 $("#status").val("closed");
                 collectFilter();
                 callRequestTab(e, '@Url.Action("Requests", new { status = "closed" })', '#closedList');
+            });
+
+            $(".filterSort").click(function (e) {
+                $(".filterSort").removeClass("active");
+                $(this).addClass("active");
+            });
+
+            $(".filterSortDir").click(function (e) {
+                $(".filterSortDir").removeClass("active");
+                $(this).addClass("active");
             });
 
             $(".filterDuration").click(function (e) {
@@ -135,6 +139,10 @@
         }
 
         function resetFilters() {
+            $(".filterSort").removeClass("active");
+            $("#sortLastDate").addClass("active");
+            $(".filterSortDir").removeClass("active");
+            $("#sortDesc").addClass("active");
             $(".filterDuration").removeClass("active");
             $(".filterDepartment").each(function (index, elem) { elem.checked = false; });
             $("#filterAll").addClass("active");
@@ -164,7 +172,12 @@
             if (pg == null)
                 pg = 1;
 
+            var filterSort = $(".filterSort.active").data("id");
+
+            var filterSortDir = $(".filterSortDir.active").data("id");
+
             var filterDuration = $(".filterDuration.active").data("id");
+
             var filterDepartment = '';
             $(".filterDepartment").each(function (index, elem) {
                 if(elem.checked)
@@ -212,7 +225,7 @@
             else
                 listId = '#allList';
 
-            var url = '/ServiceRequests/Requests?page=' + pg + '&status=' + status + '&filterDuration=' + filterDuration + '&customerName=' + customerName + '&phone=' + phone + '&code=' + code + '&receipt=' + receipt + '&product=' + product + '&engineer=' + engineer + '&model=' + model + '&sn=' + sn + '&tags=' + tags + '&filterDepartment=' + filterDepartment;
+            var url = '/ServiceRequests/Requests?page=' + pg + '&status=' + status + '&filterDuration=' + filterDuration + '&customerName=' + customerName + '&phone=' + phone + '&code=' + code + '&receipt=' + receipt + '&product=' + product + '&engineer=' + engineer + '&model=' + model + '&sn=' + sn + '&tags=' + tags + '&filterDepartment=' + filterDepartment + '&filterSort=' + filterSort + '&filterSortDir=' + filterSortDir;
             $.ajax(
              {
                  type: 'GET',

@@ -73,7 +73,7 @@ namespace SCM.Controllers
             return View(requests.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Requests(int? page = null, string status = "all", string filterDuration = null, string customerName = null, string phone = null, string code = null, string receipt = null, string product = null,string engineer = null, string model = null, string sn = null, string tags = null, string filterDepartment = null)
+        public ActionResult Requests(int? page = null, string status = "all", string filterDuration = null, string customerName = null, string phone = null, string code = null, string receipt = null, string product = null,string engineer = null, string model = null, string sn = null, string tags = null, string filterDepartment = null, string filterSort = "last_update", string filterSortDir = "desc")
         {
             var requests = DataManager.Requests();
 
@@ -197,9 +197,22 @@ namespace SCM.Controllers
                     break;
             }
 
-
-
-            requests = requests.OrderBy(x => x.StatusId).ThenByDescending(x => x.UpdatedOn).ToList();
+            if(filterSort == "last_update")
+            {
+                if(filterSortDir == "desc")
+                    requests = requests.OrderBy(x => x.StatusId).ThenByDescending(x => x.UpdatedOn).ToList();
+                else
+                    requests = requests.OrderBy(x => x.StatusId).ThenBy(x => x.UpdatedOn).ToList();
+            }
+            else if(filterSort == "request_date")
+            {
+                if (filterSortDir == "desc")
+                    requests = requests.OrderBy(x => x.StatusId).ThenByDescending(x => x.RequestDate).ToList();
+                else
+                    requests = requests.OrderBy(x => x.StatusId).ThenBy(x => x.RequestDate).ToList();
+            }
+            else
+                requests = requests.OrderBy(x => x.StatusId).ThenByDescending(x => x.UpdatedOn).ToList();
 
 
             ViewBag.Status = status;

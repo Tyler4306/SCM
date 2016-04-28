@@ -636,4 +636,19 @@
   <data name="AllRequests" xml:space="preserve">
     <value>all</value>
   </data>
+  <data name="Filter_SortAsc" xml:space="preserve">
+    <value>ascending</value>
+  </data>
+  <data name="Filter_SortBy" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
+  <data name="Filter_SortByLastUpdate" xml:space="preserve">
+    <value>last update</value>
+  </data>
+  <data name="Filter_SortByRequestDate" xml:space="preserve">
+    <value>request date</value>
+  </data>
+  <data name="Filter_SortDesc" xml:space="preserve">
+    <value>descending</value>
+  </data>
 </root>
