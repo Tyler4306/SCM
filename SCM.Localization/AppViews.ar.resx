@@ -633,4 +633,7 @@
   <data name="RequestsProductMod_Update" xml:space="preserve">
     <value>تعديل المنتج في كافة الطلبات</value>
   </data>
+  <data name="AllRequests" xml:space="preserve">
+    <value>كل الطلبات</value>
+  </data>
 </root>

@@ -153,7 +153,7 @@ namespace SCM.Utils
                         list.Add(customer);
                         
                         HttpContext.Current.Cache["Customers"] = list.OrderByDescending(x => x.Name).ToList();
-                        var relatedRequests = customer.ServiceRequests.Where(x => x.StatusId < 90).Select(x => x.Id).ToList();
+                        var relatedRequests = customer.ServiceRequests.Where(x => x.StatusId < 90 || (x.StatusId >= 90 && x.ClosingDate.HasValue && x.ClosingDate.Value.Year == DateTime.Now.Year)).Select(x => x.Id).ToList();
                         if (relatedRequests.Count > 0)
                         {
                             foreach(var i in relatedRequests)

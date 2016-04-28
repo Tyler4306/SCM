@@ -5,7 +5,8 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a id="activeRequests" href="#active" aria-controls="active" role="tab" data-toggle="tab">@AppViews.ActiveRequests &nbsp;<span id="badgeActive" class="badge"></span></a></li>
+        <li role="presentation" class="active"><a id="allRequests" href="#all" aria-controls="all" role="tab" data-toggle="tab">@AppViews.AllRequests &nbsp;<span id="badgeAll" class="badge"></span></a></li>
+        <li role="presentation"><a id="activeRequests" href="#active" aria-controls="active" role="tab" data-toggle="tab">@AppViews.ActiveRequests &nbsp;<span id="badgeActive" class="badge"></span></a></li>
         <li role="presentation"><a id="delayedRequests" href="#delayed" aria-controls="delayed" role="tab" data-toggle="tab">@AppViews.DelayedRequests &nbsp;<span id="badgeDelayed" class="badge"></span></a></li>
         <li role="presentation">
             <a id="pendingRequests" data-target="#pending" href='#pending' aria-controls="pending" role="tab" data-toggle="tab">@AppViews.PendingRequests &nbsp;<span id="badgePending" class="badge"></span></a>
@@ -17,9 +18,13 @@
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="active">
-            <div id="activeList">
+        <div role="tabpanel" class="tab-pane active" id="all">
+            <div id="allList">
                 @Html.Partial("_Requests")
+            </div>
+        </div>        
+        <div role="tabpanel" class="tab-pane" id="active">
+            <div id="activeList">               
             </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="delayed">

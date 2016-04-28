@@ -115,6 +115,15 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to all.
+        /// </summary>
+        public static string AllRequests {
+            get {
+                return ResourceManager.GetString("AllRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
         public static string Apply {

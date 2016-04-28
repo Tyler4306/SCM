@@ -39,12 +39,13 @@ namespace SCM.Controllers
         {
             var requests = DataManager.Requests();
 
+            ViewBag.TotalAll = requests.Count();
             ViewBag.TotalActive = requests.Count(x => x.StatusId < 90);
             ViewBag.TotalPending = requests.Count(x => x.StatusId == 20);
             ViewBag.TotalDelayed = requests.Count(x => x.StatusId < 90 && x.RequestDate.AddDays(3) < DateTime.Today);
             int c = requests.Count(x => x.StatusId >= 90);
             ViewBag.TotalClosed = c;
-            ViewBag.Status = "active";
+            ViewBag.Status = "all";
 
             var dic = new Dictionary<string, int>();
             foreach (var tag in DataManager.Tags().Where(x => x.TagType == "C"))
@@ -72,19 +73,22 @@ namespace SCM.Controllers
             return View(requests.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Requests(int? page = null, string status = "active", string filterDuration = null, string customerName = null, string phone = null, string code = null, string receipt = null, string product = null,string engineer = null, string model = null, string sn = null, string tags = null, string filterDepartment = null)
+        public ActionResult Requests(int? page = null, string status = "all", string filterDuration = null, string customerName = null, string phone = null, string code = null, string receipt = null, string product = null,string engineer = null, string model = null, string sn = null, string tags = null, string filterDepartment = null)
         {
             var requests = DataManager.Requests();
 
             switch (status)
             {
+                case "all":
+                    break;
                 case "pending":
                     requests = requests.Where(x => x.StatusId == 20);
                     break;
                 case "closed":
                     requests = requests.Where(x => x.StatusId >= 90);
                     break;
-                case "active":                    
+                case "active":
+                    requests = requests.Where(x => x.StatusId < 90);
                     break;
                 case "delayed":
                     requests = requests.Where(x => x.StatusId < 90 && x.RequestDate.AddDays(3) < DateTime.Today);
@@ -184,17 +188,13 @@ namespace SCM.Controllers
                     break;
             }
 
+            ViewBag.TotalAll = requests.Count();
             ViewBag.TotalActive = requests.Count(x => x.StatusId < 90);
             ViewBag.TotalPending = requests.Count(x => x.StatusId == 20);
             ViewBag.TotalDelayed = requests.Count(x => x.StatusId < 90 && x.RequestDate.AddDays(3) < DateTime.Today);
             int c = requests.Count(x => x.StatusId >= 90);
             ViewBag.TotalClosed = c;
 
-            // For not including the closed ones
-            if (status == "active")
-            {
-                requests = requests.Where(x => x.StatusId < 90);
-            }
 
             requests = requests.ToList();
 
@@ -247,22 +247,22 @@ namespace SCM.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Index_COPY(int? page = null)
-        {
-            var model = db.ServiceRequests.Include(x => x.Center).Include(x => x.Customer).Include(x => x.Department).Include(x => x.Product).Include(x => x.Tags).Include(x => x.Customer.Tags).Where(x => !x.IsDeleted && x.StatusId < 90).ToList();
-            int pageNumber = page ?? 1;
-            int pageSize = 30;
-            return View(model.ToPagedList(pageNumber, pageSize));
-        }
+        //public ActionResult Index_COPY(int? page = null)
+        //{
+        //    var model = db.ServiceRequests.Include(x => x.Center).Include(x => x.Customer).Include(x => x.Department).Include(x => x.Product).Include(x => x.Tags).Include(x => x.Customer.Tags).Where(x => !x.IsDeleted && x.StatusId < 90).ToList();
+        //    int pageNumber = page ?? 1;
+        //    int pageSize = 30;
+        //    return View(model.ToPagedList(pageNumber, pageSize));
+        //}
 
-        public ActionResult List(int? page = null, string name = null, string sortBy = "Customer.Name", string direction = "ASC")
-        {
-            var model = db.ServiceRequests.Include(x => x.Center).Include(x => x.Customer).Include(x => x.Department).Include(x => x.Product).Include(x => x.Tags).Include(x => x.Customer.Tags).Where(x => !x.IsDeleted && x.StatusId < 90 
-                && (string.IsNullOrEmpty(name) || x.Customer.Name.Contains(name) || x.Customer.Phone == name || x.Customer.Mobile == name)).OrderBy(sortBy + " " + direction).ToList();
-            int pageNumber = page ?? 1;
-            int pageSize = 30;
-            return PartialView(model.ToPagedList(pageNumber, pageSize));
-        }
+        //public ActionResult List(int? page = null, string name = null, string sortBy = "Customer.Name", string direction = "ASC")
+        //{
+        //    var model = db.ServiceRequests.Include(x => x.Center).Include(x => x.Customer).Include(x => x.Department).Include(x => x.Product).Include(x => x.Tags).Include(x => x.Customer.Tags).Where(x => !x.IsDeleted && x.StatusId < 90 
+        //        && (string.IsNullOrEmpty(name) || x.Customer.Name.Contains(name) || x.Customer.Phone == name || x.Customer.Mobile == name)).OrderBy(sortBy + " " + direction).ToList();
+        //    int pageNumber = page ?? 1;
+        //    int pageSize = 30;
+        //    return PartialView(model.ToPagedList(pageNumber, pageSize));
+        //}
 
         public ActionResult Details(int? id)
         {

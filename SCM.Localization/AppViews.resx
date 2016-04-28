@@ -633,4 +633,7 @@
   <data name="RequestsProductMod_Update" xml:space="preserve">
     <value>Update Engineer in All Requests</value>
   </data>
+  <data name="AllRequests" xml:space="preserve">
+    <value>all</value>
+  </data>
 </root>

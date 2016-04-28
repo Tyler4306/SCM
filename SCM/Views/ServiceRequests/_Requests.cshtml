@@ -2,9 +2,14 @@
 @using PagedList.Mvc
 @using SCM.Models
 
+@if (ViewBag.TotalAll != null)
+{
+    @Html.Hidden("totalAll", (int)ViewBag.TotalAll)
+}
+
 @if (ViewBag.TotalActive != null)
 {
-@Html.Hidden("totalActive",(int) ViewBag.TotalActive)
+    @Html.Hidden("totalActive",(int) ViewBag.TotalActive)
 }
 
 

@@ -72,6 +72,11 @@
                 e.relatedTarget.empty();
             })
 
+            $("#allRequests").click(function (e) {
+                $("#status").val("all");
+                collectFilter();
+                callRequestTab(e, '@Url.Action("Requests", new { status = "all" })', '#allList');
+            });
             $("#pendingRequests").click(function (e) {
                 $("#status").val("pending");
                 collectFilter();
@@ -134,7 +139,7 @@
             $("#engineer").val('');
             $("#model").val('');
             $("#sn").val('');            
-            $("#status").val('active');
+            $("#status").val('all');
             $(".tag").each(function (index, elem) { elem.checked = false; });
             
         }
@@ -183,7 +188,9 @@
             var tags = filterTags
             var status = $("#status").val();
             var listId = "";
-            if(status == "active")
+            if(status == "all")
+                listId = '#allList';
+            else if (status == "active")
                 listId = '#activeList';
             else if (status == "pending")
                 listId = '#pendingList';
@@ -192,7 +199,7 @@
             else if (status == "closed")
                 listId = '#closedList';
             else
-                listId = '#activeList';
+                listId = '#allList';
 
             var url = '/ServiceRequests/Requests?page=' + pg + '&status=' + status + '&filterDuration=' + filterDuration + '&customerName=' + customerName + '&phone=' + phone + '&code=' + code + '&receipt=' + receipt + '&product=' + product + '&engineer=' + engineer + '&model=' + model + '&sn=' + sn + '&tags=' + tags + '&filterDepartment=' + filterDepartment;
             $.ajax(
