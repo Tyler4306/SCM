@@ -44,3 +44,31 @@ select
 .textAreaEditor {
     width: 50%;
 }
+
+.sideBorders {
+    border-left-width: 10px;
+}
+
+.openBorder {
+    border-color:  #337AB7;
+}
+
+.pendingBorder {
+    border-color: orange;
+}
+
+.cancelledBorder {
+    border-color: darkred;
+}
+
+.closedBorder {
+    border-color: darkgreen;
+}
+
+.seperatorLine {
+    border-color: darkgray;
+}
+
+.requestDesc {
+  margin: 10px 5px 10px 5px;
+}

@@ -38,21 +38,24 @@
         string color = "";
         switch (item.StatusId)
         {
+            case 10:
+                color = "openBorder"; 
+                break;
             case 20:
-                color = "list-group-item-warning";
+                color = "pendingBorder"; // "list-group-item-warning";
                 break;
             case 90:
-                color = "list-group-item-danger";
+                color = "cancelledBorder"; // "list-group-item-danger";
                 break;
             case 100:
-                color = "list-group-item-success";
+                color = "closedBorder"; // "list-group-item-success";
                 break;
             default:
                 color = "";
                 break;
         }
         <div class="list-group" style="margin-bottom: 2px;">
-            <div class="list-group-item @color">
+            <div class="list-group-item sideBorders @color">
                 @if (item.StatusId < 90 && item.RequestDate.AddDays(3) < DateTime.Today)
                 {
                     if (SCM.Utils.PageUtils.IsArabic())
@@ -81,16 +84,16 @@
                         @switch (item.StatusId)
                         {
                             case 10:
-                                <span class="glyphicon glyphicon-bookmark" title="@AppViews.StatusOpen">&nbsp;</span>
+                                <span class="glyphicon glyphicon-bookmark text-primary" title="@AppViews.StatusOpen">&nbsp;</span>
                                 break;
                             case 20:
-                                <span class="glyphicon glyphicon-star" title='@string.Format("{0} {1}",AppViews.StatusPending, item.PendingReasonId.HasValue? item.PendingReason.Reason : "")'>&nbsp;</span>
+                                <span class="glyphicon glyphicon-star text-warning" title='@string.Format("{0} {1}",AppViews.StatusPending, item.PendingReasonId.HasValue? item.PendingReason.Reason : "")'>&nbsp;</span>
                                 break;
                             case 90:
-                                <span class="glyphicon glyphicon-ban-circle" title='@string.Format("{0} {1}",AppViews.StatusCanceled, item.CancelReasonId.HasValue? item.CancelReason.Reason : "")'>&nbsp;</span>
+                                <span class="glyphicon glyphicon-ban-circle text-danger" title='@string.Format("{0} {1}",AppViews.StatusCanceled, item.CancelReasonId.HasValue? item.CancelReason.Reason : "")'>&nbsp;</span>
                                 break;
                             case 100:
-                                <span class="glyphicon glyphicon-folder-close" title="@AppViews.StatusClosed">&nbsp;</span>
+                                <span class="glyphicon glyphicon-folder-close text-success" title="@AppViews.StatusClosed">&nbsp;</span>
                                 break;
 
                         }
@@ -99,7 +102,7 @@
                 </a>
                 <h5 class="text-primary">
                     <a href='@Url.Action("Details", "Customers", new { id = item.CustomerId })' data-toggle="tooltip" data-placement="right" 
-                       title="@item.Customer.FullAddress()">@item.Customer.Name</a>
+                       title="@item.Customer.Comments">@item.Customer.Name</a>
                     &nbsp;
                     @if (!string.IsNullOrEmpty(@item.Customer.Phone))
                     {
@@ -145,8 +148,11 @@
                         <span class="badge">@item.Engineer.Name</span>
                     }
                 </div>
-                <hr />
-                <div class="list-group-item-text">@item.Description</div>
+               
+                @*<div class="list-group-item-text requestDesc">@item.Description</div>*@
+
+                <p class="bg-info requestDesc">@item.Description</p>
+
                 @if (SCM.Utils.PageUtils.IsArabic())
                 {
                     <p class="center-block pull-left">
@@ -160,9 +166,6 @@
                     </p>
                     <br />
                 }
-
-
-
 
                 <div class="form-inline">
                     @foreach (var tag in item.Tags)
@@ -200,6 +203,7 @@
                         }
                     }
                 </div>
+                @*<hr class="seperatorLine" />*@
             </div>
 
         </div>

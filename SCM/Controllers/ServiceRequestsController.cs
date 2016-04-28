@@ -200,19 +200,19 @@ namespace SCM.Controllers
             if(filterSort == "last_update")
             {
                 if(filterSortDir == "desc")
-                    requests = requests.OrderBy(x => x.StatusId).ThenByDescending(x => x.UpdatedOn).ToList();
+                    requests = requests.OrderByDescending(x => x.UpdatedOn).ToList();
                 else
-                    requests = requests.OrderBy(x => x.StatusId).ThenBy(x => x.UpdatedOn).ToList();
+                    requests = requests.OrderBy(x => x.UpdatedOn).ToList();
             }
             else if(filterSort == "request_date")
             {
                 if (filterSortDir == "desc")
-                    requests = requests.OrderBy(x => x.StatusId).ThenByDescending(x => x.RequestDate).ToList();
+                    requests = requests.OrderByDescending(x => x.RequestDate).ToList();
                 else
-                    requests = requests.OrderBy(x => x.StatusId).ThenBy(x => x.RequestDate).ToList();
+                    requests = requests.OrderBy(x => x.RequestDate).ToList();
             }
             else
-                requests = requests.OrderBy(x => x.StatusId).ThenByDescending(x => x.UpdatedOn).ToList();
+                requests = requests.OrderByDescending(x => x.UpdatedOn).ToList();
 
 
             ViewBag.Status = status;

@@ -664,7 +664,7 @@ namespace SCM {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ascending.
+        ///   Looks up a localized string similar to ASC.
         /// </summary>
         public static string Filter_SortAsc {
             get {
@@ -682,7 +682,7 @@ namespace SCM {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to last update.
+        ///   Looks up a localized string similar to update date.
         /// </summary>
         public static string Filter_SortByLastUpdate {
             get {
@@ -700,7 +700,7 @@ namespace SCM {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to descending.
+        ///   Looks up a localized string similar to DESC.
         /// </summary>
         public static string Filter_SortDesc {
             get {
