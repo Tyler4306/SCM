@@ -69,7 +69,14 @@
             $('[data-toggle="tooltip"]').tooltip();
 
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                e.relatedTarget.empty();
+                var target = e.relatedTarget.hash + 'List';
+                $(target).empty();
+                //e.relatedTarget.empty();
+                //$("#allList").empty();
+                //$("#activeList").empty();
+                //$("#pendingList").empty();
+                //$("#delayedList").empty();
+                //$("#closedList").empty();
             })
 
             $("#allRequests").click(function (e) {
@@ -98,7 +105,7 @@
                 callRequestTab(e, '@Url.Action("Requests", new { status = "closed" })', '#closedList');
             });
 
-            $(".filterDuration").click(function (e) {                
+            $(".filterDuration").click(function (e) {
                 $(".filterDuration").removeClass("active");
                 $(this).addClass("active");
             });
@@ -115,7 +122,7 @@
                  success: function (result) {
                      if (result != null) {
                          resetFilters();
-                         
+
                          $("#QIN").val(result.Id);
                          $("#phone").val(result.CallerId);
 
@@ -138,15 +145,18 @@
             $("#product").val('');
             $("#engineer").val('');
             $("#model").val('');
-            $("#sn").val('');            
+            $("#sn").val('');
             $("#status").val('all');
             $(".tag").each(function (index, elem) { elem.checked = false; });
-            
+
         }
 
         function applyReset() {
             resetFilters();
+            $('#allRequests').tab('show');
             collectFilter();
+            
+            //callRequestTab(e, '@Url.Action("Requests", new { status = "all" })', '#allList');
         }
 
         function collectFilter(page) {
@@ -176,7 +186,7 @@
             if (filterTags != null) {
                 filterTags = filterTags.substr(0, filterTags.length - 1);
             }
-            
+
             var customerName = $("#customerName").val();
             var phone = $("#phone").val();
             var code = $("#code").val();
@@ -187,6 +197,7 @@
             var sn = $("#sn").val();
             var tags = filterTags
             var status = $("#status").val();
+            // var status = "all";
             var listId = "";
             if(status == "all")
                 listId = '#allList';

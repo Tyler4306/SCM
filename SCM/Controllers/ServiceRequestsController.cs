@@ -77,25 +77,7 @@ namespace SCM.Controllers
         {
             var requests = DataManager.Requests();
 
-            switch (status)
-            {
-                case "all":
-                    break;
-                case "pending":
-                    requests = requests.Where(x => x.StatusId == 20);
-                    break;
-                case "closed":
-                    requests = requests.Where(x => x.StatusId >= 90);
-                    break;
-                case "active":
-                    requests = requests.Where(x => x.StatusId < 90);
-                    break;
-                case "delayed":
-                    requests = requests.Where(x => x.StatusId < 90 && x.RequestDate.AddDays(3) < DateTime.Today);
-                    break;
-                default:
-                    break;
-            }
+
             var departments = new List<int>();
             if (!string.IsNullOrEmpty(filterDepartment))
             {
@@ -195,8 +177,29 @@ namespace SCM.Controllers
             int c = requests.Count(x => x.StatusId >= 90);
             ViewBag.TotalClosed = c;
 
+            switch (status)
+            {
+                case "all":
+                    break;
+                case "pending":
+                    requests = requests.Where(x => x.StatusId == 20);
+                    break;
+                case "closed":
+                    requests = requests.Where(x => x.StatusId >= 90);
+                    break;
+                case "active":
+                    requests = requests.Where(x => x.StatusId < 90);
+                    break;
+                case "delayed":
+                    requests = requests.Where(x => x.StatusId < 90 && x.RequestDate.AddDays(3) < DateTime.Today);
+                    break;
+                default:
+                    break;
+            }
 
-            requests = requests.ToList();
+
+
+            requests = requests.OrderBy(x => x.StatusId).ThenByDescending(x => x.UpdatedOn).ToList();
 
 
             ViewBag.Status = status;
