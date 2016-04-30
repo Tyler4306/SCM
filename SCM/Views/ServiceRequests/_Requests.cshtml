@@ -100,6 +100,7 @@
                     </h4>
                 </a>
                 <h5 class="text-primary">
+                    <a class="glyphicon glyphicon-user" href="javascript:$('#customerName').val('@item.Customer.Name');collectFilter();"></a>
                     <a href='@Url.Action("Details", "Customers", new { id = item.CustomerId })' data-toggle="tooltip" data-placement="right" 
                        title="@item.Customer.Comments">@item.Customer.Name</a>
                     &nbsp;
@@ -107,26 +108,26 @@
                     {
                         if (SCM.Utils.PageUtils.IsArabic())
                         {
-                            <span class="glyphicon glyphicon-phone-alt"></span>
+                            <a class="glyphicon glyphicon-phone-alt" href="javascript:$('#phone').val('@item.Customer.Phone');collectFilter();"></a>
                             <span>@item.Customer.Phone &nbsp;</span>
                             
                         }
                         else
                         {
-                            <span class="glyphicon glyphicon-phone-alt">&nbsp;@item.Customer.Phone</span>
+                            <a class="glyphicon glyphicon-phone-alt" href="javascript:$('#phone').val('@item.Customer.Phone');collectFilter();">&nbsp;@item.Customer.Phone</a>
                         }
                     }
                     @if (!string.IsNullOrEmpty(@item.Customer.Mobile))
                     {
                         if (SCM.Utils.PageUtils.IsArabic())
                         {
-                            <span class="glyphicon glyphicon-phone"></span>
+                            <a class="glyphicon glyphicon-phone" href="javascript:$('#phone').val('@item.Customer.Mobile');collectFilter();"></a>
                             <span>@item.Customer.Mobile &nbsp;</span>
 
                         }
                         else
                         {
-                            <span class="glyphicon glyphicon-phone">&nbsp;@item.Customer.Mobile</span>
+                            <a class="glyphicon glyphicon-phone" href="javascript:$('#phone').val('@item.Customer.Mobile');collectFilter();">&nbsp;@item.Customer.Mobile</a>
                         }
 
                     }
@@ -140,11 +141,11 @@
                     }
                     @if (item.ProductId != null)
                     {
-                        <span class="badge">@item.Product.Name</span>
+                        <span class="label label-warning"><a href="javascript:$('#product').val('@item.Product.Name');collectFilter();">@item.Product.Name</a></span>
                     }
                     @if (item.EngineerId.HasValue)
                         {
-                        <span class="badge">@item.Engineer.Name</span>
+                        <span class="label label-warning"><a href="javascript:$('#engineer').val('@item.Engineer.Name');collectFilter();">@item.Engineer.Name</a></span>
                     }
                 </div>
                
