@@ -654,4 +654,7 @@
   <data name="Filter_SortByDelay" xml:space="preserve">
     <value>delay</value>
   </data>
+  <data name="RPT_Requests" xml:space="preserve">
+    <value>Print</value>
+  </data>
 </root>
