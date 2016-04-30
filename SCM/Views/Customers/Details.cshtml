@@ -1,5 +1,5 @@
 ﻿@model SCM.Customer
-
+@using SCM.Models
 
 <h2>@AppViews.Details</h2>
 
@@ -36,14 +36,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Phone)
+            @Model.PhoneFormatted()
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Mobile)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Mobile)
+            @Model.MobileFormatted()
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.CityId)

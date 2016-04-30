@@ -116,12 +116,12 @@
                         if (SCM.Utils.PageUtils.IsArabic())
                         {
                             <a class="glyphicon glyphicon-phone-alt" href="javascript:$('#phone').val('@item.Customer.Phone');collectFilter();"></a>
-                            <span>@item.Customer.Phone &nbsp;</span>
+                            <span>@item.Customer.PhoneFormatted() &nbsp;</span>
                             
                         }
                         else
                         {
-                            <a class="glyphicon glyphicon-phone-alt" href="javascript:$('#phone').val('@item.Customer.Phone');collectFilter();">&nbsp;@item.Customer.Phone</a>
+                            <a class="glyphicon glyphicon-phone-alt" href="javascript:$('#phone').val('@item.Customer.Phone');collectFilter();">&nbsp;@item.Customer.PhoneFormatted()</a>
                         }
                     }
                     @if (!string.IsNullOrEmpty(@item.Customer.Mobile))
@@ -129,12 +129,12 @@
                         if (SCM.Utils.PageUtils.IsArabic())
                         {
                             <a class="glyphicon glyphicon-phone" href="javascript:$('#phone').val('@item.Customer.Mobile');collectFilter();"></a>
-                            <span>@item.Customer.Mobile &nbsp;</span>
+                            <span>@item.Customer.MobileFormatted() &nbsp;</span>
 
                         }
                         else
                         {
-                            <a class="glyphicon glyphicon-phone" href="javascript:$('#phone').val('@item.Customer.Mobile');collectFilter();">&nbsp;@item.Customer.Mobile</a>
+                            <a class="glyphicon glyphicon-phone" href="javascript:$('#phone').val('@item.Customer.Mobile');collectFilter();">&nbsp;@item.Customer.MobileFormatted()</a>
                         }
 
                     }

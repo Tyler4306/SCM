@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<SCM.Customer>
 @using PagedList.Mvc
+@using SCM.Models;
 
 <div class="table-responsive">
     <table class="table table-hover table-striped">
@@ -71,10 +72,10 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
+                        @item.PhoneFormatted()
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Mobile)
+                        @item.MobileFormatted()
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.City.Name)
