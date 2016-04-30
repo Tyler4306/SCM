@@ -100,7 +100,14 @@
                     </h4>
                 </a>
                 <h5 class="text-primary">
-                    <a class="glyphicon glyphicon-user" href="javascript:$('#customerName').val('@item.Customer.Name');collectFilter();"></a>
+                    @if (item.Customer.IsBlackListed)
+                    {
+                        <a class="glyphicon glyphicon-alert" href="javascript:$('#customerName').val('@item.Customer.Name');collectFilter();"></a>
+                    }
+                    else
+                    {
+                        <a class="glyphicon glyphicon-user" href="javascript:$('#customerName').val('@item.Customer.Name');collectFilter();"></a>
+                    }
                     <a href='@Url.Action("Details", "Customers", new { id = item.CustomerId })' data-toggle="tooltip" data-placement="right" 
                        title="@item.Customer.Comments">@item.Customer.Name</a>
                     &nbsp;

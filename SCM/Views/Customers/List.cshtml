@@ -6,6 +6,7 @@
         <thead>
             <tr>
                 <th></th>
+                <th></th>
                 <th>
                     <a class="sorter" data-sort="Name" href="#">
                         @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
@@ -37,6 +38,7 @@
                         <span class="glyphicon glyphicon-star">&nbsp</span>@AppViews.StatusPending
                     </a>
                 </th>
+               
                 <th>
                     <a href="#">
                         <span class="glyphicon glyphicon-folder-close">&nbsp</span>@AppViews.StatusClosed
@@ -62,9 +64,10 @@
                         }
                         else
                         {
-                            <span>&nbsp;</span>
+                            <span class="glyphicon glyphicon-user">&nbsp;</span>
                         }
-
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
@@ -94,6 +97,7 @@
                             <span class="label @tag.Format">@tag.Name &nbsp;</span>
                         }
                     </td>
+
 
                     <td>
                         @if (User.IsInRole("Admin"))
