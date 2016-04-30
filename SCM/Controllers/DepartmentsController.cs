@@ -18,7 +18,7 @@ namespace SCM.Controllers
 
         public ActionResult Index(int? page = null)
         {
-            var model = db.Departments.ToList();
+            var model = db.Departments.OrderBy(x => x.Id).ToList();
             int pageNumber = page ?? 1;
             int pageSize = 10;
             return View(model.ToPagedList(pageNumber, pageSize));
@@ -119,10 +119,13 @@ namespace SCM.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
-            var model = db.Departments.Find(id);
-            db.Departments.Remove(model);
-            db.SaveChanges();
-            Utils.DataManager.ResetDepartments();
+            if (id > 1)
+            {
+                var model = db.Departments.Find(id);
+                db.Departments.Remove(model);
+                db.SaveChanges();
+                Utils.DataManager.ResetDepartments();
+            }
             return RedirectToAction("Index");
         }
 

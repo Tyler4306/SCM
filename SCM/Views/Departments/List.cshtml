@@ -25,7 +25,7 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @if (User.IsInRole("Admin"))
+                        @if (User.IsInRole("Admin") && item.Id > 1)
                         {
                         <a href='@Url.Action("Delete", new { id = item.Id })'><span class="glyphicon glyphicon-trash"></span></a>
                         }
