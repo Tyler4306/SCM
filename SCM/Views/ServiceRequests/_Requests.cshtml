@@ -109,8 +109,9 @@
                         <a class="glyphicon glyphicon-user" href="javascript:$('#customerName').val('@item.Customer.Name');collectFilter();"></a>
                     }
                     <span>&nbsp;</span>
-                    <a href='@Url.Action("Details", "Customers", new { id = item.CustomerId })' data-toggle="tooltip" data-placement="right" 
-                       title="@item.Customer.Comments">@item.Customer.Name</a>
+                    <a style="font-weight: bold;" href='@Url.Action("Details", "Customers", new { id = item.CustomerId })' data-toggle="tooltip" data-placement="right"
+                        title="@item.Customer.Comments">@item.Customer.Name</a>
+
                     &nbsp;
                     @if (!string.IsNullOrEmpty(@item.Customer.Phone))
                     {
@@ -141,7 +142,8 @@
                     }
                     
                 </h5>
-                <h5 style="font-weight:bolder;">@item.Customer.FullAddress()</h5>
+                @*<h5 style="font-weight:bolder;">@item.Customer.FullAddress()</h5>*@
+                <h6 class="text-muted" >@item.Customer.FullAddress()</h6>
                 <div>
                     @if (item.DepartmentId.HasValue)
                     {

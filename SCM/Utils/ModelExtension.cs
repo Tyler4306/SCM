@@ -19,13 +19,18 @@ namespace SCM.Models
             if (!string.IsNullOrEmpty(phone))
             {
                 phone = phone.Trim();
-                if (phone.Length > 4 && (phone.StartsWith("09") || phone.StartsWith("+9")))
+                if(phone.Length > 5 && (phone.StartsWith("00") || phone.StartsWith("+")))
                 {
-                    return string.Format("({0})-{1}", phone.Substring(1, 3), phone.Substring(4));
+                    phone = phone.Replace("+", "00");
+                    return string.Format("({0})-{1}", phone.Substring(2, 3), phone.Substring(5));
+                }
+                else if (phone.Length > 4 && (phone.StartsWith("09") || phone.StartsWith("+9")))
+                {
+                    return string.Format("{0}-{1}", phone.Substring(0, 4), phone.Substring(4));
                 }
                 else if (phone.Length > 3 && (phone.StartsWith("0") || phone.StartsWith("+")) && phone[1] != '9' )
                 {
-                    return string.Format("({0})-{1}", phone.Substring(1, 2), phone.Substring(3));
+                    return string.Format("{0}-{1}", phone.Substring(0, 3), phone.Substring(3));
                 }
                 else
                     return phone;
@@ -39,13 +44,18 @@ namespace SCM.Models
             if (!string.IsNullOrEmpty(phone))
             {
                 phone = phone.Trim();
-                if (phone.Length > 4 && (phone.StartsWith("09") || phone.StartsWith("+9")))
+                if (phone.Length > 5 && (phone.StartsWith("00") || phone.StartsWith("+")))
                 {
-                    return string.Format("({0})-{1}", phone.Substring(1, 3), phone.Substring(4));
+                    phone = phone.Replace("+", "00");
+                    return string.Format("({0})-{1}", phone.Substring(2, 3), phone.Substring(5));
+                }
+                else if (phone.Length > 4 && (phone.StartsWith("09") || phone.StartsWith("+9")))
+                {
+                    return string.Format("{0}-{1}", phone.Substring(0, 4), phone.Substring(4));
                 }
                 else if (phone.Length > 3 && (phone.StartsWith("0") || phone.StartsWith("+")) && phone[1] != '9')
                 {
-                    return string.Format("({0})-{1}", phone.Substring(1, 2), phone.Substring(3));
+                    return string.Format("{0}-{1}", phone.Substring(0, 3), phone.Substring(3));
                 }
                 else
                     return phone;
@@ -54,7 +64,6 @@ namespace SCM.Models
                 return "";
         }
         #endregion
-
 
         #region Service Request Extensions
         public static string Topic(this ServiceRequest request)
@@ -86,13 +95,19 @@ namespace SCM.Models
             if (!string.IsNullOrEmpty(phone))
             {
                 phone = phone.Trim();
-                if (phone.Length > 4 && (phone.StartsWith("09") || phone.StartsWith("+9")))
+
+                if (phone.Length > 5 && (phone.StartsWith("00") || phone.StartsWith("+")))
                 {
-                    return string.Format("({0})-{1}", phone.Substring(1, 3), phone.Substring(4));
+                    phone = phone.Replace("+", "00");
+                    return string.Format("({0})-{1}", phone.Substring(2, 3), phone.Substring(5));
+                }
+                else if (phone.Length > 4 && (phone.StartsWith("09") || phone.StartsWith("+9")))
+                {
+                    return string.Format("{0}-{1}", phone.Substring(0, 4), phone.Substring(4));
                 }
                 else if (phone.Length > 3 && (phone.StartsWith("0") || phone.StartsWith("+")) && phone[1] != '9')
                 {
-                    return string.Format("({0})-{1}", phone.Substring(1, 2), phone.Substring(3));
+                    return string.Format("{0}-{1}", phone.Substring(0, 3), phone.Substring(3));
                 }
                 else
                     return phone;
