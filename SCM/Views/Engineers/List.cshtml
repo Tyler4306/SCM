@@ -20,9 +20,26 @@
                         @Html.DisplayNameFor(model => model.FirstOrDefault().DepartmentId)
                     </a>
                 </th>
+
                 <th>
                     <a>
                         @Html.DisplayNameFor(model => model.FirstOrDefault().IsActive)
+                    </a>
+                </th>
+                <th>
+                    <a>
+                        <span class="glyphicon glyphicon-bookmark">&nbsp</span>@AppViews.StatusOpen
+                    </a>
+                </th>
+                <th>
+                    <a>
+                        <span class="glyphicon glyphicon-star">&nbsp</span>@AppViews.StatusPending
+                    </a>
+                </th>
+
+                <th>
+                    <a>
+                        <span class="glyphicon glyphicon-folder-close">&nbsp</span>@AppViews.StatusClosed
                     </a>
                 </th>
                 <th></th>
@@ -46,6 +63,15 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                    <td>
+                        @SCM.Utils.DataManager.Requests().Count(x => x.EngineerId == item.Id && x.StatusId == 10)
+                    </td>
+                    <td>
+                        @SCM.Utils.DataManager.Requests().Count(x => x.EngineerId == item.Id && x.StatusId == 20)
+                    </td>
+                    <td>
+                        @SCM.Utils.DataManager.Requests().Count(x => x.EngineerId == item.Id && x.StatusId == 100)
                     </td>
                     <td>
                         @if (User.IsInRole("Admin"))
