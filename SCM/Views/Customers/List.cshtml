@@ -57,6 +57,8 @@
                 <tr>
                     <td>
                         <a href='@Url.Action("Edit", new { id = item.Id})'><span class="glyphicon glyphicon-edit"></span></a>
+                        &nbsp;
+                        <a href='@Url.Action("Create", "ServiceRequests", new { customerId = item.Id})'><span class="glyphicon glyphicon-plus"></span></a>
                     </td>
                     <td>
                         @if (item.IsBlackListed)
