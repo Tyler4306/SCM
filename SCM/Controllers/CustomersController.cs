@@ -114,6 +114,7 @@ namespace SCM.Controllers
         {
             ViewBag.CityId = Utils.ListManager.GetCities();
             ViewBag.RegionId = Utils.ListManager.GetRegions();
+            
             if(!string.IsNullOrEmpty(phone))
             {
                 var model = db.Customers.Create();
@@ -144,7 +145,7 @@ namespace SCM.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Edit", new { id = model.Id});
                 }
             }
 
