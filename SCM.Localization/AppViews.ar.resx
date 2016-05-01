@@ -657,4 +657,7 @@
   <data name="RPT_Requests" xml:space="preserve">
     <value>طباعة</value>
   </data>
+  <data name="Location" xml:space="preserve">
+    <value>الموقع</value>
+  </data>
 </root>

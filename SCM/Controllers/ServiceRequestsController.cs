@@ -40,6 +40,9 @@ namespace SCM.Controllers
         {
             var requests = DataManager.Requests();
 
+            ViewBag.CityId = Utils.ListManager.GetCities();
+            ViewBag.RegionId = Utils.ListManager.GetRegions();
+
             ViewBag.TotalAll = requests.Count();
             ViewBag.TotalActive = requests.Count(x => x.StatusId < 90);
             ViewBag.TotalPending = requests.Count(x => x.StatusId == 20);
@@ -77,10 +80,12 @@ namespace SCM.Controllers
             return View(requests.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Requests(int? page = null, string status = "all", string filterDuration = null, string customerName = null, string phone = null, string code = null, string receipt = null, string product = null,string engineer = null, string model = null, string sn = null, string tags = null, string filterDepartment = null, string filterSort = "last_update", string filterSortDir = "desc")
+        public ActionResult Requests(int? page = null, string status = "all", string filterDuration = null, string customerName = null, string phone = null, string code = null, string receipt = null, string product = null,string engineer = null, string model = null, string sn = null, string tags = null, string filterDepartment = null, string filterSort = "last_update", string filterSortDir = "desc", int? city = null, int? region = null)
         {
             var requests = DataManager.Requests();
 
+            ViewBag.CityId = Utils.ListManager.GetCities();
+            ViewBag.RegionId = Utils.ListManager.GetRegions();
 
             var departments = new List<int>();
             if (!string.IsNullOrEmpty(filterDepartment))
@@ -96,6 +101,8 @@ namespace SCM.Controllers
             requests = (from x in requests
                         where (string.IsNullOrEmpty(customerName) || x.Customer.Name.Contains(customerName))
                         && (string.IsNullOrEmpty(phone) || x.Customer.Phone == phone || x.Customer.Mobile == phone)
+                        && (!city.HasValue || x.Customer.CityId == city.Value)
+                        && (!region.HasValue || x.Customer.RegionId == region.Value)
                         && (string.IsNullOrEmpty(code) || x.RQN == code)
                         && (string.IsNullOrEmpty(receipt) || x.ReceiptNo == receipt)
                         && (string.IsNullOrEmpty(product) || (x.Product != null && x.Product.Name.Contains(product)))

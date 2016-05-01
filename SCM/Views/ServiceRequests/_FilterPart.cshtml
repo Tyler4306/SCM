@@ -33,6 +33,15 @@
     </div>
     @Html.Hidden("QIN")
 </p>
+<h5><b>@AppViews.Location</b></h5>
+<p>
+    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+        @HtmlExtensions.MyDropDown("city", ViewBag.CityId, null)
+    </div>
+    <div class="input-group input-group-sm" style="margin-bottom: 5px;">
+        @HtmlExtensions.MyDropDown("region", ViewBag.RegionId, null)
+    </div>
+</p>
 <h5><b>@AppViews.ServiceRequest</b></h5>
 <p>
     <div class="input-group input-group-sm" style="margin-bottom: 5px;">
