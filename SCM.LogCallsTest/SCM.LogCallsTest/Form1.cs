@@ -65,8 +65,8 @@ namespace SCM.LogCallsTest
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var ext = "102";
-            var user = "SYSTEM";
+            var ext = txtExt.Text;
+            var user = txtUserName.Text;
             var theDate = Convert.ToDateTime(date.Text, System.Globalization.CultureInfo.InvariantCulture);
             var dt = theDate.ToString("MM/dd/yy");
             var tt = theDate.ToString("HH:mm tt");
