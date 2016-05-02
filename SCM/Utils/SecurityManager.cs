@@ -57,7 +57,7 @@ namespace SCM.Utils
             Id = CreateUser("User105", "user105@scm.com", "105", "User105@123");
         }
 
-        private bool createRole(string roleName)
+        public bool createRole(string roleName)
         {
             if (!RoleManager.RoleExists(roleName))
             {
@@ -70,7 +70,7 @@ namespace SCM.Utils
 
             return false;
         }
-        private string CreateUser(string userName, string email, string ext, string password)
+        public string CreateUser(string userName, string email, string ext, string password)
         {
             var user = new ApplicationUser();
             user.UserName = userName;
@@ -86,7 +86,17 @@ namespace SCM.Utils
         }
         public void AddUserToRole(string userId, string role)
         {
-            UserManager.AddToRole(userId, role);
+            UserManager.AddToRole(userId, role);           
+        }
+        public string GetUserExt(string userName)
+        {
+            ApplicationUser user = UserManager.FindByName(userName);
+            if (user != null)
+            {
+                return user.Ext;
+            }
+            else
+                return "";
         }
     }
 }

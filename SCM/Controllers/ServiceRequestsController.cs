@@ -269,9 +269,13 @@ namespace SCM.Controllers
         public JsonResult TakeCall()
         {
             q_take_call_Result result = null;
+            SecurityManager sm = new SecurityManager();
+            string name = User.Identity.Name;
+            string ext = sm.GetUserExt(name);
+
             lock(locker)
             {
-                result = db.q_take_call("SYSTEM", "102").ToList().FirstOrDefault();
+                result = db.q_take_call(User.Identity.Name, ext).ToList().FirstOrDefault();
 
             }
             if (result == null)
