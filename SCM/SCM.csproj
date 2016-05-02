@@ -228,6 +228,7 @@
     <Compile Include="Utils\HtmlExtensions.cs" />
     <Compile Include="Utils\ListManager.cs" />
     <Compile Include="Utils\PageUtils.cs" />
+    <Compile Include="Utils\SecurityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\ajax-loader.gif" />

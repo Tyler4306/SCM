@@ -9,6 +9,7 @@ namespace SCM
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            Utils.SecurityManager.InitializeRolesAndUsers();
         }
     }
 }
