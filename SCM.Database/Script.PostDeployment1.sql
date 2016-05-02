@@ -12,10 +12,11 @@ Post-Deployment Script Template
 
 INSERT INTO dbo.Centers VALUES (1, N'Sons of Zouheir Ghreiwati', N'SY0005050012S');
 
-INSERT INTO dbo.Departments VALUES (N'Undefined');
-INSERT INTO dbo.Departments VALUES (N'Home Appliances');
-INSERT INTO dbo.Departments VALUES (N'Electronics');
-INSERT INTO dbo.Departments VALUES (N'Air Conditions');
+INSERT INTO dbo.Departments VALUES (N'NA');
+INSERT INTO dbo.Departments VALUES (N'AC + Electronice');
+INSERT INTO dbo.Departments VALUES (N'HA');
+INSERT INTO dbo.Departments VALUES (N'Carry-In Repair');
+INSERT INTO dbo.Departments VALUES (N'Agents');
 
 SET IDENTITY_INSERT dbo.Tags ON;
 INSERT INTO DBO.Tags (Id, TagType, Name, Format) VALUES (1, N'C', N'General End User', N'label-default');
@@ -28,5 +29,6 @@ INSERT INTO DBO.Tags (Id, TagType, Name, Format) VALUES (7, N'R', N'HM', N'label
 INSERT INTO DBO.Tags (Id, TagType, Name, Format) VALUES (8, N'R', N'In Warranty', N'label-primary');
 INSERT INTO DBO.Tags (Id, TagType, Name, Format) VALUES (9, N'R', N'Out of Warranty', N'label-warning');
 INSERT INTO DBO.Tags (Id, TagType, Name, Format) VALUES (10, N'R', N'Extended Card', N'label-warning');
+INSERT INTO DBO.Tags (Id, TagType, Name, Format) VALUES (11, N'R', N'DOA', N'label-warning');
 SET IDENTITY_INSERT dbo.Tags OFF;
 
