@@ -35,7 +35,7 @@ namespace SCM
         public static MvcHtmlString MyDropDownStr(string name, object data, object value)
         {
             StringBuilder sb = new StringBuilder(512);
-            string Id = (string) value;
+            string Id = (value == null) ? string.Empty : (string) value;
             if (data != null)
             {
                 sb.AppendFormat("<select name='{0}' id='{0}' class = 'form-control'>", name);

@@ -21,13 +21,13 @@ namespace SCM.Utils
         {
             return DataManager.Departments().ToDictionary(x => x.Id, y => y.Name);
         }
-        public static IDictionary<string, string> GetProducts()
+        public static IDictionary<string, string> GetProducts(string id = null)
         {
-            return DataManager.Products().ToDictionary(x => x.Id, y => y.Name);
+            return DataManager.Products().Where(x => x.Id == id || x.IsActive ).ToDictionary(x => x.Id, y => y.Name);
         }
-        public static IDictionary<int, string> GetEngineers(int? departmentId = null)
+        public static IDictionary<int, string> GetEngineers(int? departmentId = null, int? id = null)
         {
-            return DataManager.Engineers().Where(x => departmentId == null || !departmentId.HasValue || x.Department.Id == departmentId.Value).ToDictionary(x => x.Id, y => y.Name);
+            return DataManager.Engineers().Where(x => x.Id == id || (x.IsActive && (departmentId == null || !departmentId.HasValue || x.Department.Id == departmentId.Value) ) ).ToDictionary(x => x.Id, y => y.Name);
         }
         public static IDictionary<int, string> GetPendingReasons()
         {

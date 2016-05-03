@@ -125,6 +125,7 @@ namespace SCM.Controllers
                 db.Departments.Remove(model);
                 db.SaveChanges();
                 Utils.DataManager.ResetDepartments();
+                Utils.DataManager.ResetRequests();
             }
             return RedirectToAction("Index");
         }

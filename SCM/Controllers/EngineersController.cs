@@ -128,6 +128,7 @@ namespace SCM.Controllers
             db.Engineers.Remove(model);
             db.SaveChanges();
             Utils.DataManager.ResetEngineers();
+            Utils.DataManager.ResetRequests();
             return RedirectToAction("Index");
         }
 
