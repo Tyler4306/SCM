@@ -27,14 +27,6 @@ namespace SCM.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetProducts(int departmentId)
-        {
-            var list = DataManager.Products().Where(x => x.DepartmentId == departmentId && x.IsActive).OrderBy(x => x.Name)
-                .Select(x => new { Id = x.Id, Name = x.Name }).ToList();
-
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-
         // GET: Requests
         public ActionResult Index(int? page)
         {
@@ -308,7 +300,7 @@ namespace SCM.Controllers
             ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name");
             ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", 1);
             // get active products
-            var products = DataManager.Products().Where(x => (x.DepartmentId == 1 && x.IsActive));
+            var products = DataManager.Products().Where(x => x.IsActive);
             ViewBag.ProductId = new SelectList(products, "Id", "Name");
 
             // get active engineers
@@ -411,7 +403,7 @@ namespace SCM.Controllers
                 catch (Exception e)
                 {
 
-                    throw;
+                    throw e;
                 }
 
                 return RedirectToAction("Edit", new { id = model.Id});
@@ -420,7 +412,7 @@ namespace SCM.Controllers
             ViewBag.CenterId = new SelectList(DataManager.Centers(), "Id", "Name");
             ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name");
             // get active products
-            var products = DataManager.Products().Where(x => x.Id == model.ProductId || (x.DepartmentId == model.DepartmentId && x.IsActive));
+            var products = DataManager.Products().Where(x => x.Id == model.ProductId || x.IsActive);
             ViewBag.ProductId = new SelectList(products, "Id", "Name", model.ProductId);
 
             // get active engineers
@@ -448,7 +440,7 @@ namespace SCM.Controllers
             ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", model.DepartmentId);
 
             // get active products
-            var products = DataManager.Products().Where(x => x.Id == model.ProductId || (x.DepartmentId == model.DepartmentId && x.IsActive));
+            var products = DataManager.Products().Where(x => x.Id == model.ProductId || x.IsActive);
             ViewBag.ProductId = new SelectList(products, "Id", "Name", model.ProductId);
 
             // get active engineers
@@ -476,7 +468,7 @@ namespace SCM.Controllers
             ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", serviceRequest.DepartmentId);
 
             // get active products
-            var products = DataManager.Products().Where(x => x.Id == serviceRequest.ProductId || (x.DepartmentId == serviceRequest.DepartmentId && x.IsActive));
+            var products = DataManager.Products().Where(x => x.Id == serviceRequest.ProductId ||x.IsActive);
             ViewBag.ProductId = new SelectList(products, "Id", "Name", serviceRequest.ProductId);
 
             // get active engineers

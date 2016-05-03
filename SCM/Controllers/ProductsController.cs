@@ -18,7 +18,7 @@ namespace SCM.Controllers
 
         public ActionResult Index(int? page = null)
         {
-            var model = db.Products.Include(x => x.Department).ToList();
+            var model = db.Products.ToList();
             int pageNumber = page ?? 1;
             int pageSize = 10;
             return View(model.ToPagedList(pageNumber, pageSize));
@@ -26,7 +26,7 @@ namespace SCM.Controllers
 
         public ActionResult List(int? page = null, string name = null, string sortBy = "Name", string direction = "ASC")
         {
-            var model = db.Products.Include(x => x.Department).Where(x => string.IsNullOrEmpty(name) || x.Id.Contains(name) || x.Name.Contains(name) || x.Department.Name.Contains(name)).OrderBy(sortBy + " " + direction).ToList();
+            var model = db.Products.Where(x => string.IsNullOrEmpty(name) || x.Id.Contains(name) || x.Name.Contains(name) ).OrderBy(sortBy + " " + direction).ToList();
             int pageNumber = page ?? 1;
             int pageSize = 10;
             return PartialView(model.ToPagedList(pageNumber, pageSize));
@@ -48,17 +48,16 @@ namespace SCM.Controllers
 
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
-        {
-            ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
+        {            
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "Id,Name,DepartmentId,IsActive")] Product model)
+        public ActionResult Create([Bind(Include = "Id,Name,IsActive")] Product model)
         {
-            ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
+            
 
             if (ModelState.IsValid)
             {
@@ -79,7 +78,7 @@ namespace SCM.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var model = db.Products.Find(id);
-            ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
+            
             if (model == null)
             {
                 return HttpNotFound();
@@ -90,9 +89,9 @@ namespace SCM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "Id,Name,DepartmentId,IsActive")] Product model)
+        public ActionResult Edit([Bind(Include = "Id,Name,IsActive")] Product model)
         {
-            ViewBag.DepartmentId = Utils.ListManager.GetDepartments();
+            
             if (ModelState.IsValid)
             {
                 db.Entry(model).State = EntityState.Modified;

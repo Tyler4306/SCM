@@ -114,7 +114,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="3" Nullable="false" />
-          <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
@@ -263,18 +262,6 @@
             </Principal>
             <Dependent Role="ExServiceRequests">
               <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Products_To_Departments">
-          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
-          <End Role="Products" Type="Self.Products" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departments">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Products">
-              <PropertyRef Name="DepartmentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -447,10 +434,6 @@
             <End Role="ServiceRequests" EntitySet="ServiceRequests" />
             <End Role="ExServiceRequests" EntitySet="ExServiceRequests" />
           </AssociationSet>
-          <AssociationSet Name="FK_Products_To_Departments" Association="Self.FK_Products_To_Departments">
-            <End Role="Departments" EntitySet="Departments" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
           <AssociationSet Name="FK_Regions_To_Cities" Association="Self.FK_Regions_To_Cities">
             <End Role="Cities" EntitySet="Cities" />
             <End Role="Regions" EntitySet="Regions" />
@@ -504,7 +487,6 @@
           <EntitySet Name="Departments" EntityType="SCM.Models.Department" />
           <EntitySet Name="Engineers" EntityType="SCM.Models.Engineer" />
           <EntitySet Name="PendingReasons" EntityType="SCM.Models.PendingReason" />
-          <EntitySet Name="Products" EntityType="SCM.Models.Product" />
           <EntitySet Name="Regions" EntityType="SCM.Models.Region" />
           <EntitySet Name="ServiceRequests" EntityType="SCM.Models.ServiceRequest" />
           <EntitySet Name="Tags" EntityType="SCM.Models.Tag" />
@@ -536,10 +518,6 @@
             <End Role="Department" EntitySet="Departments" />
             <End Role="Engineer" EntitySet="Engineers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Products_To_Departments" Association="SCM.Models.FK_Products_To_Departments">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
           <AssociationSet Name="FK_ServiceRequests_To_Departments" Association="SCM.Models.FK_ServiceRequests_To_Departments">
             <End Role="Department" EntitySet="Departments" />
             <End Role="ServiceRequest" EntitySet="ServiceRequests" />
@@ -550,10 +528,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_ServiceRequests_To_PendingReasons" Association="SCM.Models.FK_ServiceRequests_To_PendingReasons">
             <End Role="PendingReason" EntitySet="PendingReasons" />
-            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServiceRequests_To_Products" Association="SCM.Models.FK_ServiceRequests_To_Products">
-            <End Role="Product" EntitySet="Products" />
             <End Role="ServiceRequest" EntitySet="ServiceRequests" />
           </AssociationSet>
           <AssociationSet Name="CustomerTags" Association="SCM.Models.CustomerTags">
@@ -573,6 +547,11 @@
           <AssociationSet Name="FK_ExServiceRequests_ToServiceRequests" Association="SCM.Models.FK_ExServiceRequests_ToServiceRequests">
             <End Role="ServiceRequest" EntitySet="ServiceRequests" />
             <End Role="ExServiceRequest" EntitySet="ExServiceRequests" />
+          </AssociationSet>
+          <EntitySet Name="Products" EntityType="SCM.Models.Product" />
+          <AssociationSet Name="FK_ServiceRequests_To_Products" Association="SCM.Models.FK_ServiceRequests_To_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CancelReason">
@@ -626,7 +605,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Engineers" Relationship="SCM.Models.FK_Engineers_To_Departments" FromRole="Department" ToRole="Engineer" />
-          <NavigationProperty Name="Products" Relationship="SCM.Models.FK_Products_To_Departments" FromRole="Department" ToRole="Product" />
           <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Departments" FromRole="Department" ToRole="ServiceRequest" />
         </EntityType>
         <EntityType Name="Engineer">
@@ -648,17 +626,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Reason" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_PendingReasons" FromRole="PendingReason" ToRole="ServiceRequest" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Department" Relationship="SCM.Models.FK_Products_To_Departments" FromRole="Product" ToRole="Department" />
-          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="Product" ToRole="ServiceRequest" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -703,9 +670,9 @@
           <NavigationProperty Name="Department" Relationship="SCM.Models.FK_ServiceRequests_To_Departments" FromRole="ServiceRequest" ToRole="Department" />
           <NavigationProperty Name="Engineer" Relationship="SCM.Models.FK_ServiceRequests_To_Engineers" FromRole="ServiceRequest" ToRole="Engineer" />
           <NavigationProperty Name="PendingReason" Relationship="SCM.Models.FK_ServiceRequests_To_PendingReasons" FromRole="ServiceRequest" ToRole="PendingReason" />
-          <NavigationProperty Name="Product" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="ServiceRequest" ToRole="Product" />
           <NavigationProperty Name="Tags" Relationship="SCM.Models.RequestTags" FromRole="ServiceRequest" ToRole="Tag" />
           <NavigationProperty Name="ExServiceRequest" Relationship="SCM.Models.FK_ExServiceRequests_ToServiceRequests" FromRole="ServiceRequest" ToRole="ExServiceRequest" />
+          <NavigationProperty Name="Product" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="ServiceRequest" ToRole="Product" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -802,18 +769,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Products_To_Departments">
-          <End Type="SCM.Models.Department" Role="Department" Multiplicity="1" />
-          <End Type="SCM.Models.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ServiceRequests_To_Departments">
           <End Type="SCM.Models.Department" Role="Department" Multiplicity="0..1" />
           <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
@@ -847,18 +802,6 @@
             </Principal>
             <Dependent Role="ServiceRequest">
               <PropertyRef Name="PendingReasonId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServiceRequests_To_Products">
-          <End Type="SCM.Models.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ServiceRequest">
-              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -948,6 +891,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="Product" ToRole="ServiceRequest" />
+        </EntityType>
+        <Association Name="FK_ServiceRequests_To_Products">
+          <End Type="SCM.Models.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequest">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1017,16 +981,6 @@
             <EntityTypeMapping TypeName="SCM.Models.PendingReason">
               <MappingFragment StoreEntitySet="PendingReasons">
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="SCM.Models.Product">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1162,6 +1116,15 @@
                 <ScalarProperty Name="InputDate" ColumnName="InputDate" />
                 <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
                 <ScalarProperty Name="B2BFlag" ColumnName="B2BFlag" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="SCM.Models.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

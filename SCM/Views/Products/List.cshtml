@@ -17,11 +17,6 @@
                     </a>
                 </th>
                 <th>
-                    <a class="sorter" data-sort="Department.Name" href="#">
-                        @Html.DisplayNameFor(model => model.FirstOrDefault().DepartmentId)
-                    </a>
-                </th>
-                <th>
                     <a>
                         @Html.DisplayNameFor(model => model.FirstOrDefault().IsActive)
                     </a>
@@ -57,9 +52,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Department.Name)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IsActive)

@@ -18,7 +18,6 @@ namespace SCM
         public Department()
         {
             this.Engineers = new HashSet<Engineer>();
-            this.Products = new HashSet<Product>();
             this.ServiceRequests = new HashSet<ServiceRequest>();
         }
     
@@ -27,8 +26,6 @@ namespace SCM
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Engineer> Engineers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
     }

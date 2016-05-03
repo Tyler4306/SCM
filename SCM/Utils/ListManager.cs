@@ -21,9 +21,9 @@ namespace SCM.Utils
         {
             return DataManager.Departments().ToDictionary(x => x.Id, y => y.Name);
         }
-        public static IDictionary<string, string> GetProducts(int? departmentId = null)
+        public static IDictionary<string, string> GetProducts()
         {
-            return DataManager.Products().Where(x => departmentId == null || !departmentId.HasValue || x.Department.Id == departmentId.Value).ToDictionary(x => x.Id, y => y.Name);
+            return DataManager.Products().ToDictionary(x => x.Id, y => y.Name);
         }
         public static IDictionary<int, string> GetEngineers(int? departmentId = null)
         {

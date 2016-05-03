@@ -17,7 +17,7 @@ namespace SCM.Utils
 
         public SecurityManager()
         {
-            ApplicationDbContext context = new ApplicationDbContext();
+            context = new ApplicationDbContext();
 
             RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));

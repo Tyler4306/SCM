@@ -85,9 +85,6 @@ namespace SCM
     {
         [Display(Name = "Product_Id", ResourceType = typeof(AppViews))]
         public string Id { get; set; }
-        [Display(Name = "Product_DepartmentId", ResourceType = typeof(AppViews))]
-        [Required]
-        public int DepartmentId { get; set; }
         [Display(Name = "Product_Name", ResourceType = typeof(AppViews))]
         [Required]
         [StringLength(50)]

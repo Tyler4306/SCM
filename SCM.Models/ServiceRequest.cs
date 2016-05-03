@@ -50,9 +50,9 @@ namespace SCM
         public virtual Department Department { get; set; }
         public virtual Engineer Engineer { get; set; }
         public virtual PendingReason PendingReason { get; set; }
-        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tag> Tags { get; set; }
         public virtual ExServiceRequest ExServiceRequest { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

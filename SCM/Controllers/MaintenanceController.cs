@@ -95,12 +95,6 @@ namespace SCM.Controllers
                 var department1 = ctx.Departments.Find(model.DepartmentId1);
                 var department2 = ctx.Departments.Find(model.DepartmentId2);
 
-                var products = department1.Products.ToList();
-                foreach(var p in products)
-                {
-                    p.DepartmentId = department2.Id;
-                }
-
                 var engineers = department1.Engineers.ToList();
                 foreach (var e in engineers)
                 {
@@ -115,7 +109,6 @@ namespace SCM.Controllers
 
                 ctx.SaveChanges();
                 Utils.DataManager.ResetDepartments();
-                Utils.DataManager.ResetProducts();
                 Utils.DataManager.ResetEngineers();
                 Utils.DataManager.ResetRequests();
 
@@ -125,20 +118,18 @@ namespace SCM.Controllers
 
         public ActionResult RequestsProductModifier()
         {
-            ViewBag.DepartmentId = new SelectList(DataManager.Departments(), "Id", "Name", 1);
-            ViewBag.ProductId1 = new SelectList(DataManager.Products().Where(x => x.DepartmentId == 1), "Id", "Name", 1);
-            ViewBag.ProductId2 = new SelectList(DataManager.Products().Where(x => x.DepartmentId == 1), "Id", "Name", 1);
+            ViewBag.ProductId1 = new SelectList(DataManager.Products(), "Id", "Name", 1);
+            ViewBag.ProductId2 = new SelectList(DataManager.Products(), "Id", "Name", 1);
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RequestsProductModifier([Bind(Include = "DepartmentId,ProductId1,ProductId2")] RequestsProductModifier model)
+        public ActionResult RequestsProductModifier([Bind(Include = "ProductId1,ProductId2")] RequestsProductModifier model)
         {
             if (ModelState.IsValid)
             {
                 SCMContext ctx = new SCMContext();
-                var department = ctx.Departments.Find(model.DepartmentId);
                 var product1 = ctx.Products.Find(model.ProductId1);
                 var product2 = ctx.Products.Find(model.ProductId2);
 
