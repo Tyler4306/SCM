@@ -484,6 +484,105 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Done!.
+        /// </summary>
+        public static string DataImport_Done {
+            get {
+                return ResourceManager.GetString("DataImport_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        public static string DataImport_Import {
+            get {
+                return ResourceManager.GetString("DataImport_Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing master data 1/5.
+        /// </summary>
+        public static string DataImport_Phase1 {
+            get {
+                return ResourceManager.GetString("DataImport_Phase1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing master data 2/5.
+        /// </summary>
+        public static string DataImport_Phase2 {
+            get {
+                return ResourceManager.GetString("DataImport_Phase2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing master data 3/5.
+        /// </summary>
+        public static string DataImport_Phase3 {
+            get {
+                return ResourceManager.GetString("DataImport_Phase3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing master data 4/5.
+        /// </summary>
+        public static string DataImport_Phase4 {
+            get {
+                return ResourceManager.GetString("DataImport_Phase4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing master data 5/5.
+        /// </summary>
+        public static string DataImport_Phase5 {
+            get {
+                return ResourceManager.GetString("DataImport_Phase5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing customers data.
+        /// </summary>
+        public static string DataImport_Phase6 {
+            get {
+                return ResourceManager.GetString("DataImport_Phase6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing requests.
+        /// </summary>
+        public static string DataImport_Phase7 {
+            get {
+                return ResourceManager.GetString("DataImport_Phase7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requests File.
+        /// </summary>
+        public static string DataImport_RequestsFile {
+            get {
+                return ResourceManager.GetString("DataImport_RequestsFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import Data.
+        /// </summary>
+        public static string DataImport_Title {
+            get {
+                return ResourceManager.GetString("DataImport_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to delayed.
         /// </summary>
         public static string DelayedRequests {

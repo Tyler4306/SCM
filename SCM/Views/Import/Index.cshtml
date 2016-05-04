@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = AppViews.DataImport_Title;
+}
+
+<h2>@AppViews.DataImport_Title</h2>
+<hr />
+<form id="f" action='@Url.Action("UploadRequests")' method="post" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.Label(AppViews.DataImport_RequestsFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                <input name="requestsFile" type="file" accept=".xlsx" />
+                <div id="phase"></div>
+                <span id="status" class="progress-bar" role="progressbar" aria-valuenow="0"
+                     aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                    0%
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button id="startProcess" class="btn btn-primary" type="submit" href="#">@AppViews.DataImport_Import</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts
+{
+    <script>
+        function getStatus() {
+            var url = '@Url.Action("GetProgress")';
+            $.ajax(
+             {
+                 type: 'GET',
+                 url: url,
+                 success: function (result) {
+                     if (result != null && result.length > 0) {
+                         var data = result[0];
+                         if (result[1] != 'done') {
+                             if (data != "100") {
+                                 $('#status').css("width", data + '%').attr('aria-valuenow', data);
+                                 $('#status').html(' ' + data + '%');
+                                 $('#phase').html(result[1]);
+                                 window.setTimeout("getStatus()", 300);
+                             }
+                         }
+                         else {
+                             $('#phase').html('');
+                             $('#status').html('@AppViews.DataImport_Done');                                
+                         }
+                     }
+                 }
+             });
+        }
+
+        $(function () {
+
+            $('#startProcess').click(function () {
+                getStatus();
+                $("#f").submit();
+                
+            });
+
+        });
+    </script>    
+}
+
