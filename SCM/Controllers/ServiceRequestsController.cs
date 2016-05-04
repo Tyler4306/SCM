@@ -451,10 +451,12 @@ namespace SCM.Controllers
             // get active engineers
             // var engineers = DataManager.Engineers().Where(x => x.Id == model.EngineerId || (x.DepartmentId == model.DepartmentId && x.IsActive));
             ViewBag.EngineerId = Utils.ListManager.GetEngineers(model.DepartmentId, model.EngineerId);
-                // new SelectList(engineers, "Id", "Name", model.EngineerId);
+            // new SelectList(engineers, "Id", "Name", model.EngineerId);
 
-            ViewBag.PendingReasonId = new SelectList(db.PendingReasons, "Id", "Reason", model.PendingReasonId);
-            ViewBag.CancelReasonId = new SelectList(db.CancelReasons, "Id", "Reason", model.CancelReasonId);
+            ViewBag.PendingReasonId = Utils.ListManager.GetPendingReasons();
+            // new SelectList(db.PendingReasons, "Id", "Reason", model.PendingReasonId);
+            ViewBag.CancelReasonId = Utils.ListManager.GetCancelReasons();
+                // new SelectList(db.CancelReasons, "Id", "Reason", model.CancelReasonId);
             ViewBag.StatusId = Utils.ListManager.GetStatus();
 
             if (model == null)
@@ -481,10 +483,12 @@ namespace SCM.Controllers
             // get active engineers
             // var engineers = DataManager.Engineers().Where(x => x.Id == serviceRequest.EngineerId || (x.DepartmentId == serviceRequest.DepartmentId && x.IsActive));
             ViewBag.EngineerId = Utils.ListManager.GetEngineers(serviceRequest.DepartmentId, serviceRequest.EngineerId);
-                // new SelectList(engineers, "Id", "Name", serviceRequest.EngineerId);
+            // new SelectList(engineers, "Id", "Name", serviceRequest.EngineerId);
 
-            ViewBag.PendingReasonId = new SelectList(db.PendingReasons, "Id", "Reason", serviceRequest.PendingReasonId);
-            ViewBag.CancelReasonId = new SelectList(db.CancelReasons, "Id", "Reason", serviceRequest.CancelReasonId);
+            ViewBag.PendingReasonId = Utils.ListManager.GetPendingReasons();
+            // new SelectList(db.PendingReasons, "Id", "Reason", serviceRequest.PendingReasonId);
+            ViewBag.CancelReasonId = Utils.ListManager.GetCancelReasons(); 
+            // new SelectList(db.CancelReasons, "Id", "Reason", serviceRequest.CancelReasonId);
             ViewBag.StatusId = Utils.ListManager.GetStatus();
 
             if (ModelState.IsValid)

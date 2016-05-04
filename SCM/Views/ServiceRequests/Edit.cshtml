@@ -224,22 +224,29 @@
                                 @Html.ValidationMessageFor(model => model.EngineerId, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                            <div id="pendingSection" class="form-group hidden">
-                                @Html.LabelFor(model => model.PendingReasonId, AppViews.PendingReason, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
-                                    @Html.DropDownList("PendingReasonId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.PendingReasonId, "", new { @class = "text-danger" })
+                            @if (Model.StatusId == 20)
+                            {
+                                <div id="pendingSection" class="form-group hidden">
+                                    @Html.LabelFor(model => model.PendingReasonId, AppViews.PendingReason, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @*@Html.DropDownList("PendingReasonId", null, htmlAttributes: new { @class = "form-control" })*@
+                                        @HtmlExtensions.MyDropDown("PendingReasonId", ViewBag.PendingReasonId, Model.PendingReasonId)
+                                        @Html.ValidationMessageFor(model => model.PendingReasonId, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
-                            </div>
+                            }
 
-                            <div id="cancelSection" class="form-group hidden">
-                                @Html.LabelFor(model => model.CancelReasonId, AppViews.CancelReason, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-8">
-                                    @Html.DropDownList("CancelReasonId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.CancelReasonId, "", new { @class = "text-danger" })
+                            @if (Model.StatusId == 90)
+                            {
+                                <div id="cancelSection" class="form-group hidden">
+                                    @Html.LabelFor(model => model.CancelReasonId, AppViews.CancelReason, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @*@Html.DropDownList("CancelReasonId", null, htmlAttributes: new { @class = "form-control" })*@
+                                        @HtmlExtensions.MyDropDown("CancelReasonId", ViewBag.CancelReasonId, Model.CancelReasonId)
+                                        @Html.ValidationMessageFor(model => model.CancelReasonId, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
-                            </div>
+                            }
 
                         </div>
                 </div>
