@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace SCM.Controllers
 { 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ImportController : Controller
     {
         public static ImportManager manager { get; set; }
