@@ -416,6 +416,10 @@ namespace SCM.Utils
                     item.IsDeleted = false;
                     ctx.ServiceRequests.Add(item);
                     ctx.SaveChanges();
+                    var exItem = ctx.ExServiceRequests.Create();
+                    exItem.Id = item.Id;
+                    ctx.ExServiceRequests.Add(exItem);
+                    ctx.SaveChanges();
                 }
                 catch (Exception ex)
                 {

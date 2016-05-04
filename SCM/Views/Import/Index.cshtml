@@ -47,9 +47,13 @@
                                  $('#phase').html(result[1]);
                                  window.setTimeout("getStatus()", 300);
                              }
+                             else
+                             {
+                                 
+                             }
                          }
                          else {
-                             $('#phase').html('');
+                             $('#phase').html('@AppViews.DataImport_Done');
                              $('#status').html('@AppViews.DataImport_Done'); 
                              
                          }
