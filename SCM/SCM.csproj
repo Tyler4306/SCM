@@ -230,7 +230,7 @@
     <Compile Include="Models\Maintenance\RequestsDepartmentModifier.cs" />
     <Compile Include="Models\Maintenance\RequestsEngineerModifier.cs" />
     <Compile Include="Models\Maintenance\RequestsProductModifier.cs" />
-    <Compile Include="Models\ServiceRequestRecord.cs" />
+    <Compile Include="Models\Import\ServiceRequestRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report.aspx.cs">
       <DependentUpon>Report.aspx</DependentUpon>
