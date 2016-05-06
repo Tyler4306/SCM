@@ -12,11 +12,13 @@
             <div class="col-md-6">
                 <input name="requestsFile" class="form-control" type="file" accept=".xlsx" />
                 <br />
-                <div id="phase"></div>
-                <span id="status" class="progress-bar" role="progressbar" aria-valuenow="0"
-                     aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                    0%
-                </span>
+                <div id="statusBar">
+                    <div id="phase"></div>
+                    <span id="status" class="progress-bar" role="progressbar" aria-valuenow="0"
+                          aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                        0%
+                    </span>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -38,31 +40,34 @@
                  type: 'GET',
                  url: url,
                  success: function (result) {
+                     var progress = '0';
+                     var phase = '';
+
+                     $("#statusBar").show();
+
                      if (result != null && result.length > 0) {
-                         var data = result[0];
-                         if (result[1] != 'done') {
-                             if (data != "100") {
-                                 $('#status').css("width", data + '%').attr('aria-valuenow', data);
-                                 $('#status').html(' ' + data + '%');
-                                 $('#phase').html(result[1]);
-                                 window.setTimeout("getStatus()", 300);
-                             }
-                             else
-                             {
-                                 
-                             }
-                         }
-                         else {
-                             $('#phase').html('@AppViews.DataImport_Done');
-                             $('#status').html('@AppViews.DataImport_Done'); 
-                             
-                         }
+
+                         progress = result[0];
+                         phase = result[1];
+
+                        $('#status').css("width", progress + '%').attr('aria-valuenow', progress);
+                        $('#status').html(' ' + progress + '%');
+                        $('#phase').html(phase);
+                     }
+                     if (phase != 'done') {
+                         window.setTimeout("getStatus()", 300);
+                     }
+                     else
+                     {
+                         $("#statusBar").hide();
                      }
                  }
              });
         }
 
         $(function () {
+
+            $("#statusBar").hide();
 
             $('#startProcess').click(function () {
                 

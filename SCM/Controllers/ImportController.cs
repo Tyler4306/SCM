@@ -14,7 +14,22 @@ namespace SCM.Controllers
     [Authorize(Roles = "Admin")]
     public class ImportController : Controller
     {
-        public static ImportManager manager { get; set; }
+        private static ImportManager _manager = null;
+
+        public static ImportManager manager
+        {
+            get
+            {
+                if (_manager == null)
+                    _manager = new ImportManager();
+
+                return _manager;
+            }
+        }
+
+        static ImportController()
+        {            
+        }
 
         // GET: Import
         public ActionResult Index()
@@ -26,13 +41,8 @@ namespace SCM.Controllers
         public ActionResult GetProgress()
         {
             var result = new string[2];
-            result[0] = "0";
-            result[1] = "";
-            if (manager != null)
-            {
-                result[0] = manager.Progress.ToString();
-                result[1] = manager.Phase;
-            }
+            result[0] = manager.Progress.ToString();
+            result[1] = manager.Phase;
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -58,7 +68,7 @@ namespace SCM.Controllers
                 reader.Configuration.RegisterClassMap<ServiceRequestRecordMap>();
                 requests = reader.GetRecords<ServiceRequestRecord>().ToList();
             }
-            manager = new Utils.ImportManager();
+            //manager = new Utils.ImportManager();
             manager.Import(requests);
 
             Utils.DataManager.ResetCities();

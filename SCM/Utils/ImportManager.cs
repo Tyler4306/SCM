@@ -11,8 +11,8 @@ namespace SCM.Utils
     {
         public int Progress { get; set; }
         public string Phase { get; set; }
-        int total = 0;
-        int counter = 1;
+        int total = 1;
+        int counter = 0;
 
         public void Import(IEnumerable<ServiceRequestRecord> data)
         {
@@ -51,22 +51,41 @@ namespace SCM.Utils
                     catch(Exception ex)
                     {
                         tx.Rollback();
-                        //throw ex;
+                        throw ex;
                     }
                 }
             }
         }
 
+        private void ResetProgress()
+        {
+            total = 1;
+            Progress = 0;
+            counter = 0;
+        }
+
+        private void UpdateProgress()
+        {
+            counter++;
+            if (total > 0 && counter <= total)
+            {
+                Progress = (int)(((double)counter / total) * 100.0);
+            }
+            else
+                Progress = 100;
+        }
+        
         private void ImportProducts(SCMContext ctx, ref IEnumerable<ServiceRequestRecord> data)
         {
-            Progress = 0;
-            counter = 1;
-            total = data.Count();
+            ResetProgress();            
 
             var curList = ctx.Products.Select(x => x.Id).ToList();
             var dic = new Dictionary<string, Product>();
             var objects = data.Select(x => new { Id = x.Service_Product_Code, Name = x.SVC_Product, IsActive = true }).Distinct().Where(x => !string.IsNullOrEmpty(x.Id)).ToList();
-            foreach(var item in objects.Where(x => !curList.Contains(x.Id)))
+            var objectsToAdd = objects.Where(x => !curList.Contains(x.Id));
+
+            total = objectsToAdd.Count();
+            foreach (var item in objectsToAdd)
             {
                 var rec = new Product() { Id = item.Id, Name = item.Name, IsActive = item.IsActive };
                 ctx.Products.Add(rec);
@@ -75,11 +94,7 @@ namespace SCM.Utils
                 {
                     dic.Add(rec.Id, rec);
                 }
-                counter++;
-                if (total > 0 && counter <= total)
-                {
-                    Progress = Convert.ToInt32(counter * 100 / (double)total);
-                }
+                UpdateProgress();
             }
             foreach (var item in ctx.Products)
             {
@@ -92,18 +107,20 @@ namespace SCM.Utils
             {
                 item.ProductId = item.Service_Product_Code;
             }
+            Progress = 100;
         }
 
         private void ImportCities(SCMContext ctx, ref IEnumerable<ServiceRequestRecord> data)
         {
-            Progress = 0;
-            counter = 1;
-            total = data.Count();
+            ResetProgress();
 
             var curList = ctx.Cities.Select(x => x.Name.Trim()).ToList();
             var dic = new Dictionary<string, City>();
             var objects = data.Select(x => new { Name = x.City_Name.Trim() }).Distinct().Where(x => !string.IsNullOrEmpty(x.Name)).ToList();
-            foreach (var item in objects.Where(x => !curList.Contains(x.Name)))
+            var objectsToAdd = objects.Where(x => !curList.Contains(x.Name));
+
+            total = objectsToAdd.Count();
+            foreach (var item in objectsToAdd)
             {
                 var rec = new City() { Name = item.Name };
                 ctx.Cities.Add(rec);
@@ -112,11 +129,8 @@ namespace SCM.Utils
                 {
                     dic.Add(rec.Name, rec);
                 }
-                counter++;
-                if (total > 0 && counter <= total)
-                {
-                    Progress = Convert.ToInt32(counter * 100 / (double)total);
-                }
+
+                UpdateProgress();
             }
             foreach (var item in ctx.Cities)
             {
@@ -136,17 +150,21 @@ namespace SCM.Utils
                     item.CityId = null;
                 }
             }
+
+            Progress = 100;
         }
 
         private void ImportPendingReasons(SCMContext ctx, ref IEnumerable<ServiceRequestRecord> data)
         {
-            Progress = 0;
-            counter = 1;
-            total = data.Count();
+            ResetProgress();
+
             var curList = ctx.PendingReasons.Select(x => x.Reason.Trim()).ToList();
             var dic = new Dictionary<string, PendingReason>();
             var objects = data.Select(x => new { Reason = x.Pending_Reason.Trim() }).Distinct().Where(x => !string.IsNullOrEmpty(x.Reason)).ToList();
-            foreach (var item in objects.Where(x => !curList.Contains(x.Reason)))
+
+            var objectsToAdd = objects.Where(x => !curList.Contains(x.Reason));
+            total = objectsToAdd.Count();
+            foreach (var item in objectsToAdd)
             {
                 var rec = new PendingReason() { Reason = item.Reason };
                 ctx.PendingReasons.Add(rec);
@@ -155,11 +173,8 @@ namespace SCM.Utils
                 {
                     dic.Add(rec.Reason, rec);
                 }
-                counter++;
-                if (total > 0 && counter <= total)
-                {
-                    Progress = Convert.ToInt32(counter * 100 / (double)total);
-                }
+
+                UpdateProgress();
             }
             foreach (var item in ctx.PendingReasons)
             {
@@ -179,17 +194,21 @@ namespace SCM.Utils
                     item.PendingReasonId = null;
                 }
             }
+
+            Progress = 100;
         }
 
         private void ImportCancelReasons(SCMContext ctx, ref IEnumerable<ServiceRequestRecord> data)
         {
-            Progress = 0;
-            counter = 1;
-            total = data.Count();
+            ResetProgress();
+
             var curList = ctx.CancelReasons.Select(x => x.Reason.Trim()).ToList();
             var dic = new Dictionary<string, CancelReason>();
             var objects = data.Select(x => new { Reason = x.Cancel_Reason.Trim() }).Distinct().Where(x => !string.IsNullOrEmpty(x.Reason)).ToList();
-            foreach (var item in objects.Where(x => !curList.Contains(x.Reason)))
+
+            var objectToAdd = objects.Where(x => !curList.Contains(x.Reason));
+            total = objectToAdd.Count();
+            foreach (var item in objectToAdd)
             {
                 var rec = new CancelReason() { Reason = item.Reason };
                 ctx.CancelReasons.Add(rec);
@@ -198,11 +217,8 @@ namespace SCM.Utils
                 {
                     dic.Add(rec.Reason, rec);
                 }
-                counter++;
-                if (total > 0 && counter <= total)
-                {
-                    Progress = Convert.ToInt32(counter * 100 / (double)total);
-                }
+
+                UpdateProgress();
             }
             foreach (var item in ctx.CancelReasons)
             {
@@ -222,18 +238,22 @@ namespace SCM.Utils
                     item.CancelReasonId = null;
                 }
             }
+
+            Progress = 100;
         }
 
         private void ImportCustomers(SCMContext ctx, ref IEnumerable<ServiceRequestRecord> data)
         {
-            Progress = 0;
-            counter = 1;
-            total = data.Count();
+            ResetProgress();
+
             var curList = ctx.Customers.Select(x => x.Name.Trim()).ToList();
             var dic = new Dictionary<string, Customer>();
             var tags = ctx.Tags.Where(x => x.TagType == "C").ToDictionary(x=> x.Name, y => y);
             var objects = data.Select(x => new { Name = x.Customer_Name.Trim(), Phone = x.Customer_Phone_No, Mobile = x.Cellular_No, City = x.CityId, Address = x.Address, CustomerType = x.Customer_Type }).Distinct().Where(x => !string.IsNullOrEmpty(x.Name)).ToList();
-            foreach (var item in objects.Where(x => !curList.Contains(x.Name)))
+
+            var objectsToAdd = objects.Where(x => !curList.Contains(x.Name));
+            total = objectsToAdd.Count();
+            foreach (var item in objectsToAdd)
             {
                 var rec = new Customer() { Name = item.Name, Phone = item.Phone, Mobile = item.Mobile, CityId = item.City, Address = item.Address  };
                 if (string.IsNullOrEmpty(rec.Phone) && string.IsNullOrEmpty(rec.Mobile))
@@ -267,11 +287,7 @@ namespace SCM.Utils
                     ctx.SaveChanges();
                 }
 
-                counter++;
-                if (total > 0 && counter <= total)
-                {
-                    Progress = Convert.ToInt32(counter * 100 / (double)total);
-                }
+                UpdateProgress();
             }
             foreach (var item in ctx.Customers)
             {
@@ -280,25 +296,31 @@ namespace SCM.Utils
                     dic.Add(item.Name, item);
                 }
             }
+            ResetProgress();
+            total = data.Count();
             foreach (var item in data)
             {
                 if (dic.ContainsKey(item.Customer_Name.Trim()))
                 {
                     item.CustomerId = dic[item.Customer_Name.Trim()].Id;
                 }
+                UpdateProgress();
             }
+
+            Progress = 100;
         }
 
         private void ImportEngineers(SCMContext ctx, ref IEnumerable<ServiceRequestRecord> data)
         {
-            Progress = 0;
-            counter = 1;
-            total = data.Count();
+            ResetProgress();
 
             var curList = ctx.Engineers.Select(x => x.Name.Trim()).ToList();
             var dic = new Dictionary<string, Engineer>();
             var objects = data.Select(x => new { Name = x.SVC_Engineer_Name.Trim() }).Distinct().Where(x => !string.IsNullOrEmpty(x.Name)).ToList();
-            foreach (var item in objects.Where(x => !curList.Contains(x.Name)))
+            var objectsToAdd = objects.Where(x => !curList.Contains(x.Name));
+            total = objectsToAdd.Count();
+
+            foreach (var item in objectsToAdd)
             {
                 var rec = new Engineer() { Name = item.Name, DepartmentId = 1, IsActive = true };
                 ctx.Engineers.Add(rec);
@@ -308,11 +330,7 @@ namespace SCM.Utils
                     dic.Add(rec.Name, rec);
                 }
 
-                counter++;
-                if (total > 0 && counter <= total)
-                {
-                    Progress = Convert.ToInt32(counter * 100 / (double)total);
-                }
+                UpdateProgress();
             }
             foreach (var item in ctx.Engineers)
             {
@@ -332,13 +350,13 @@ namespace SCM.Utils
                     item.EngineerId = null;
                 }
             }
+
+            Progress = 100;
         }
 
         private void ImportRequests(SCMContext ctx, ref IEnumerable<ServiceRequestRecord> data)
         {
-            Progress = 0;
-            counter = 1;
-            total = data.Count();
+            ResetProgress();
 
             var list = data.Where(x => !string.IsNullOrEmpty(x.Receipt_No)).ToDictionary(x => x.Receipt_No, y => y.SysID);
             var dic = new Dictionary<string,int>();
@@ -350,11 +368,11 @@ namespace SCM.Utils
 
             var rqns = list.Keys.ToArray();
             var ids = new List<int>();
-            
 
-            foreach (var item in ctx.ServiceRequests.Where(x => !string.IsNullOrEmpty(x.RQN) && rqns.Contains(x.RQN)))
+            var objectsToUpdate = ctx.ServiceRequests.Where(x => !string.IsNullOrEmpty(x.RQN) && rqns.Contains(x.RQN));
+            total = objectsToUpdate.Count();
+            foreach (var item in objectsToUpdate)
             {
-
                 var sr = data.First(x => x.SysID == list[item.RQN]);
                 if (sr.EngineerId.HasValue && sr.EngineerId.Value > 0)
                     item.EngineerId = sr.EngineerId;
@@ -373,14 +391,14 @@ namespace SCM.Utils
                 item.UpdatedBy = HttpContext.Current.User.Identity.Name;
                 ids.Add(sr.SysID);
 
-                counter++;
-                if(total > 0 && counter <= total)
-                {
-                    Progress = Convert.ToInt32(counter * 100 / (double) total);
-                }
+                UpdateProgress();
             }
             ctx.SaveChanges();
-            foreach (var sr in data.Where(x => !ids.Contains(x.SysID)))
+
+            ResetProgress();
+            var objectsToAdd = data.Where(x => !ids.Contains(x.SysID));
+            total = objectsToAdd.Count();
+            foreach (var sr in objectsToAdd)
             {
                 var item = ctx.ServiceRequests.Create();
                 System.Diagnostics.Debug.Print(sr.SysID.ToString());
@@ -420,6 +438,7 @@ namespace SCM.Utils
                     exItem.Id = item.Id;
                     ctx.ExServiceRequests.Add(exItem);
                     ctx.SaveChanges();
+                    
                 }
                 catch (Exception ex)
                 {
@@ -438,14 +457,12 @@ namespace SCM.Utils
 
                     ctx.SaveChanges();
                 }
-                counter++;
-                if (total > 0 && counter <= total)
-                {
-                    Progress = Convert.ToInt32(counter * 100 / (double) total);
-                }
 
+                UpdateProgress();
             }
             ctx.SaveChanges();
+
+            Progress = 100;
         }
     }
 }
