@@ -89,6 +89,9 @@
     <Compile Include="Region.cs">
       <DependentUpon>SCMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Report.cs">
+      <DependentUpon>SCMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SCMModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

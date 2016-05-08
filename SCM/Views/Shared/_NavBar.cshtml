@@ -12,7 +12,14 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink(AppViews.Customers, "Index", "Customers")</li>
                 <li>@Html.ActionLink(AppViews.ServiceRequests, "Index", "ServiceRequests")</li>
-                <li>@Html.ActionLink(AppViews.Reports, "Index", "Reports")</li>
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        @AppViews.Reports <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @Html.Action("Index", "Reports")
+                    </ul>
+                </li>
 
                 <li>@Html.ActionLink(AppViews.About, "About", "Home")</li>
                 <li>@Html.ActionLink(AppViews.Contact, "Contact", "Home")</li>

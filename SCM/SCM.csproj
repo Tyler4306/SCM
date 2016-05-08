@@ -212,6 +212,7 @@
     <Compile Include="Controllers\PendingReasonsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegionsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ServiceRequestsController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Filters\GlobalRequestFilter.cs" />
@@ -221,6 +222,11 @@
     <Compile Include="Models\Account\AccountViewModels.cs" />
     <Compile Include="Models\Account\IdentityModels.cs" />
     <Compile Include="Models\Account\ManageViewModels.cs" />
+    <Compile Include="Models\DSGeneral.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSGeneral.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Models\DSRequests.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -231,13 +237,14 @@
     <Compile Include="Models\Maintenance\RequestsEngineerModifier.cs" />
     <Compile Include="Models\Maintenance\RequestsProductModifier.cs" />
     <Compile Include="Models\Import\ServiceRequestRecord.cs" />
+    <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report.aspx.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
+    <Compile Include="ReportPage.aspx.cs">
+      <DependentUpon>ReportPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Report.aspx.designer.cs">
-      <DependentUpon>Report.aspx</DependentUpon>
+    <Compile Include="ReportPage.aspx.designer.cs">
+      <DependentUpon>ReportPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Services\MasterService.cs" />
     <Compile Include="Startup.cs" />
@@ -272,7 +279,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Report.aspx" />
+    <Content Include="ReportPage.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.rtl.min.js" />
@@ -292,6 +299,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Models\DSRequests.xsc">
       <DependentUpon>DSRequests.xsd</DependentUpon>
+    </Content>
+    <Content Include="Models\DSGeneral.xsc">
+      <DependentUpon>DSGeneral.xsd</DependentUpon>
+    </Content>
+    <None Include="Models\DSGeneral.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSGeneral.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Models\DSGeneral.xss">
+      <DependentUpon>DSGeneral.xsd</DependentUpon>
     </Content>
     <None Include="Models\DSRequests.xsd">
       <SubType>Designer</SubType>
@@ -426,6 +444,8 @@
     <Content Include="Views\Maintenance\RequestsProductModifier.cshtml" />
     <Content Include="Views\Maintenance\RequestsEngineerModifier.cshtml" />
     <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\GetReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -452,6 +472,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\General.rdlc" />
     <EmbeddedResource Include="Reports\Requests.rdlc" />
   </ItemGroup>
   <PropertyGroup>

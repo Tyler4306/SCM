@@ -1,0 +1,7 @@
+﻿@model IEnumerable<SCM.Report>
+
+    @foreach (var r in Model)
+    {
+        <li><a href="~/Reports/GetReport/@r.Id">@r.Name</a></li>
+    }
+

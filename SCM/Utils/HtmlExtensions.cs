@@ -20,6 +20,7 @@ namespace SCM
                 if (!Id.HasValue || Id.Value == 0)
                         sb.AppendFormat("<option value=''>{0}</option>", AppViews.SelectValue);
 
+                
                 foreach (var x in (data as IDictionary<int, string>))
                 {
                     if (x.Key == Id)

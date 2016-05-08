@@ -40,6 +40,7 @@ namespace SCM
         public virtual DbSet<QIN> QINs { get; set; }
         public virtual DbSet<ExServiceRequest> ExServiceRequests { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
     
         public virtual ObjectResult<q_take_call_Result> q_take_call(string user, string userext)
         {

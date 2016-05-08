@@ -12,7 +12,7 @@ Post-Deployment Script Template
 
 INSERT INTO dbo.Centers VALUES (1, N'Sons of Zouheir Ghreiwati', N'SY0005050012S');
 
-INSERT INTO dbo.Departments VALUES (N'NA');
+INSERT INTO dbo.Departments VALUES (N'Undefined');
 INSERT INTO dbo.Departments VALUES (N'AC + Electronice');
 INSERT INTO dbo.Departments VALUES (N'HA');
 INSERT INTO dbo.Departments VALUES (N'Carry-In Repair');

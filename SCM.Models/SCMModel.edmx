@@ -144,6 +144,80 @@
           <Property Name="CityId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SubTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="Command" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FilterByDate" Type="bit" Nullable="false" />
+          <Property Name="FilterByCustomer" Type="bit" Nullable="false" />
+          <Property Name="FilterByDepartment" Type="bit" Nullable="false" />
+          <Property Name="FilterByEngineer" Type="bit" Nullable="false" />
+          <Property Name="FilterByProduct" Type="bit" Nullable="false" />
+          <Property Name="FilterByStatus" Type="bit" Nullable="false" />
+          <Property Name="FilterByCity" Type="bit" Nullable="false" />
+          <Property Name="FilterByRegion" Type="bit" Nullable="false" />
+          <Property Name="FilterByTag" Type="bit" Nullable="false" />
+          <Property Name="FilterByText1" Type="bit" Nullable="false" />
+          <Property Name="FilterByText2" Type="bit" Nullable="false" />
+          <Property Name="FilterByNumber1" Type="bit" Nullable="false" />
+          <Property Name="FilterByNumber2" Type="bit" Nullable="false" />
+          <Property Name="FilterByDate1" Type="bit" Nullable="false" />
+          <Property Name="FilterByDate2" Type="bit" Nullable="false" />
+          <Property Name="Text1Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Text2Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number1Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number2Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date1Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date2Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="GVisible" Type="bit" Nullable="false" />
+          <Property Name="GHeader" Type="nvarchar" MaxLength="50" />
+          <Property Name="F1Visible" Type="bit" />
+          <Property Name="F1Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="F1Map" Type="nvarchar" MaxLength="3" />
+          <Property Name="F1Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="F1Total" Type="nvarchar" MaxLength="50" />
+          <Property Name="F2Visible" Type="bit" />
+          <Property Name="F2Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="F2Map" Type="nvarchar" MaxLength="3" />
+          <Property Name="F2Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="F2Total" Type="nvarchar" MaxLength="50" />
+          <Property Name="F3Visible" Type="bit" />
+          <Property Name="F3Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="F3Map" Type="nvarchar" MaxLength="3" />
+          <Property Name="F3Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="F3Total" Type="nvarchar" MaxLength="50" />
+          <Property Name="F4Visible" Type="bit" />
+          <Property Name="F4Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="F4Map" Type="nvarchar" MaxLength="3" />
+          <Property Name="F4Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="F4Total" Type="nvarchar" MaxLength="50" />
+          <Property Name="F5Visible" Type="bit" />
+          <Property Name="F5Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="F5Map" Type="nvarchar" MaxLength="3" />
+          <Property Name="F5Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="F5Total" Type="nvarchar" MaxLength="50" />
+          <Property Name="F6Visible" Type="bit" />
+          <Property Name="F6Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="F6Map" Type="nvarchar" MaxLength="3" />
+          <Property Name="F6Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="F6Total" Type="nvarchar" MaxLength="50" />
+          <Property Name="F7Visible" Type="bit" />
+          <Property Name="F7Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="F7Map" Type="nvarchar" MaxLength="3" />
+          <Property Name="F7Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="F7Total" Type="nvarchar" MaxLength="50" />
+          <Property Name="F8Visible" Type="bit" />
+          <Property Name="F8Header" Type="nvarchar" MaxLength="50" />
+          <Property Name="F8Map" Type="nvarchar" MaxLength="3" />
+          <Property Name="F8Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="F8Total" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="RequestTags">
           <Key>
             <PropertyRef Name="TagId" />
@@ -407,6 +481,7 @@
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QIN" EntityType="Self.QIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequestTags" EntityType="Self.RequestTags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceRequests" EntityType="Self.ServiceRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
@@ -553,6 +628,7 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="ServiceRequest" EntitySet="ServiceRequests" />
           </AssociationSet>
+          <EntitySet Name="Reports" EntityType="SCM.Models.Report" />
         </EntityContainer>
         <EntityType Name="CancelReason">
           <Key>
@@ -912,6 +988,80 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SubTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Command" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FilterByDate" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByCustomer" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByDepartment" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByEngineer" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByProduct" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByStatus" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByCity" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByRegion" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByTag" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByText1" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByText2" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByNumber1" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByNumber2" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByDate1" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByDate2" Type="Boolean" Nullable="false" />
+          <Property Name="Text1Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text2Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number1Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number2Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date1Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date2Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GVisible" Type="Boolean" Nullable="false" />
+          <Property Name="GHeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F1Visible" Type="Boolean" />
+          <Property Name="F1Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F1Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F1Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F1Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F2Visible" Type="Boolean" />
+          <Property Name="F2Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F2Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F2Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F2Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F3Visible" Type="Boolean" />
+          <Property Name="F3Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F3Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F3Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F3Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F4Visible" Type="Boolean" />
+          <Property Name="F4Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F4Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F4Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F4Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F5Visible" Type="Boolean" />
+          <Property Name="F5Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F5Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F5Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F5Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F6Visible" Type="Boolean" />
+          <Property Name="F6Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F6Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F6Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F6Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F7Visible" Type="Boolean" />
+          <Property Name="F7Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F7Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F7Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F7Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F8Visible" Type="Boolean" />
+          <Property Name="F8Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F8Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F8Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F8Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1124,6 +1274,81 @@
             <EntityTypeMapping TypeName="SCM.Models.Product">
               <MappingFragment StoreEntitySet="Products">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="SCM.Models.Report">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="F8Total" ColumnName="F8Total" />
+                <ScalarProperty Name="F8Color" ColumnName="F8Color" />
+                <ScalarProperty Name="F8Map" ColumnName="F8Map" />
+                <ScalarProperty Name="F8Header" ColumnName="F8Header" />
+                <ScalarProperty Name="F8Visible" ColumnName="F8Visible" />
+                <ScalarProperty Name="F7Total" ColumnName="F7Total" />
+                <ScalarProperty Name="F7Color" ColumnName="F7Color" />
+                <ScalarProperty Name="F7Map" ColumnName="F7Map" />
+                <ScalarProperty Name="F7Header" ColumnName="F7Header" />
+                <ScalarProperty Name="F7Visible" ColumnName="F7Visible" />
+                <ScalarProperty Name="F6Total" ColumnName="F6Total" />
+                <ScalarProperty Name="F6Color" ColumnName="F6Color" />
+                <ScalarProperty Name="F6Map" ColumnName="F6Map" />
+                <ScalarProperty Name="F6Header" ColumnName="F6Header" />
+                <ScalarProperty Name="F6Visible" ColumnName="F6Visible" />
+                <ScalarProperty Name="F5Total" ColumnName="F5Total" />
+                <ScalarProperty Name="F5Color" ColumnName="F5Color" />
+                <ScalarProperty Name="F5Map" ColumnName="F5Map" />
+                <ScalarProperty Name="F5Header" ColumnName="F5Header" />
+                <ScalarProperty Name="F5Visible" ColumnName="F5Visible" />
+                <ScalarProperty Name="F4Total" ColumnName="F4Total" />
+                <ScalarProperty Name="F4Color" ColumnName="F4Color" />
+                <ScalarProperty Name="F4Map" ColumnName="F4Map" />
+                <ScalarProperty Name="F4Header" ColumnName="F4Header" />
+                <ScalarProperty Name="F4Visible" ColumnName="F4Visible" />
+                <ScalarProperty Name="F3Total" ColumnName="F3Total" />
+                <ScalarProperty Name="F3Color" ColumnName="F3Color" />
+                <ScalarProperty Name="F3Map" ColumnName="F3Map" />
+                <ScalarProperty Name="F3Header" ColumnName="F3Header" />
+                <ScalarProperty Name="F3Visible" ColumnName="F3Visible" />
+                <ScalarProperty Name="F2Total" ColumnName="F2Total" />
+                <ScalarProperty Name="F2Color" ColumnName="F2Color" />
+                <ScalarProperty Name="F2Map" ColumnName="F2Map" />
+                <ScalarProperty Name="F2Header" ColumnName="F2Header" />
+                <ScalarProperty Name="F2Visible" ColumnName="F2Visible" />
+                <ScalarProperty Name="F1Total" ColumnName="F1Total" />
+                <ScalarProperty Name="F1Color" ColumnName="F1Color" />
+                <ScalarProperty Name="F1Map" ColumnName="F1Map" />
+                <ScalarProperty Name="F1Header" ColumnName="F1Header" />
+                <ScalarProperty Name="F1Visible" ColumnName="F1Visible" />
+                <ScalarProperty Name="GHeader" ColumnName="GHeader" />
+                <ScalarProperty Name="GVisible" ColumnName="GVisible" />
+                <ScalarProperty Name="Date2Title" ColumnName="Date2Title" />
+                <ScalarProperty Name="Date1Title" ColumnName="Date1Title" />
+                <ScalarProperty Name="Number2Title" ColumnName="Number2Title" />
+                <ScalarProperty Name="Number1Title" ColumnName="Number1Title" />
+                <ScalarProperty Name="Text2Title" ColumnName="Text2Title" />
+                <ScalarProperty Name="Text1Title" ColumnName="Text1Title" />
+                <ScalarProperty Name="FilterByDate2" ColumnName="FilterByDate2" />
+                <ScalarProperty Name="FilterByDate1" ColumnName="FilterByDate1" />
+                <ScalarProperty Name="FilterByNumber2" ColumnName="FilterByNumber2" />
+                <ScalarProperty Name="FilterByNumber1" ColumnName="FilterByNumber1" />
+                <ScalarProperty Name="FilterByText2" ColumnName="FilterByText2" />
+                <ScalarProperty Name="FilterByText1" ColumnName="FilterByText1" />
+                <ScalarProperty Name="FilterByTag" ColumnName="FilterByTag" />
+                <ScalarProperty Name="FilterByRegion" ColumnName="FilterByRegion" />
+                <ScalarProperty Name="FilterByCity" ColumnName="FilterByCity" />
+                <ScalarProperty Name="FilterByStatus" ColumnName="FilterByStatus" />
+                <ScalarProperty Name="FilterByProduct" ColumnName="FilterByProduct" />
+                <ScalarProperty Name="FilterByEngineer" ColumnName="FilterByEngineer" />
+                <ScalarProperty Name="FilterByDepartment" ColumnName="FilterByDepartment" />
+                <ScalarProperty Name="FilterByCustomer" ColumnName="FilterByCustomer" />
+                <ScalarProperty Name="FilterByDate" ColumnName="FilterByDate" />
+                <ScalarProperty Name="Command" ColumnName="Command" />
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

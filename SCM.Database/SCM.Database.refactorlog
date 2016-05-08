@@ -140,4 +140,67 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="EsnImeiNo" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="d44ac38c-ba27-47a0-a089-e289114f9497" ChangeDateTime="05/08/2016 07:06:44">
+    <Property Name="ElementName" Value="[dbo].[Reports].[FromDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FilterOnDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="35a305d7-c438-4b64-9d7b-4cac42edc8e3" ChangeDateTime="05/08/2016 07:07:03">
+    <Property Name="ElementName" Value="[dbo].[Reports].[ToDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Filter" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="299b196d-bfca-4f74-a7bd-4b18f512b8c2" ChangeDateTime="05/08/2016 07:07:07">
+    <Property Name="ElementName" Value="[dbo].[Reports].[FilterOnDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FilterByDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5f179ffe-92b3-4381-98ac-3443d4fee16c" ChangeDateTime="05/08/2016 07:07:59">
+    <Property Name="ElementName" Value="[dbo].[Reports].[Filter]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FilterByStatus" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="12c15d90-98f9-41e7-ab15-b4dfaba92b14" ChangeDateTime="05/08/2016 07:11:19">
+    <Property Name="ElementName" Value="[dbo].[Reports].[FilterText1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FilterByStatus" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7f843e88-f7bd-418b-9787-2b1562449237" ChangeDateTime="05/08/2016 07:11:45">
+    <Property Name="ElementName" Value="[dbo].[Reports].[FilterText]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FilterById" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7502b11b-f944-481a-85ef-ff75ae22e38d" ChangeDateTime="05/08/2016 07:12:08">
+    <Property Name="ElementName" Value="[dbo].[Reports].[FilterById]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FilterByCity" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="21e79a65-b6b7-4d1b-b3d3-7bf8a5810c58" ChangeDateTime="05/08/2016 07:16:04">
+    <Property Name="ElementName" Value="[dbo].[Reports].[Text1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Text1Title" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f55ac880-1634-41e3-a0ee-8356382cf9fb" ChangeDateTime="05/08/2016 07:16:20">
+    <Property Name="ElementName" Value="[dbo].[Reports].[Text2]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reports]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Text2Title" />
+  </Operation>
 </Operations>

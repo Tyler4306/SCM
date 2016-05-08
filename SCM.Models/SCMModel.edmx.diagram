@@ -32,6 +32,7 @@
         <AssociationConnector Association="SCM.Models.FK_ExServiceRequests_ToServiceRequests" />
         <EntityTypeShape EntityType="SCM.Models.Product" Width="1.5" PointX="0.75" PointY="0.875" />
         <AssociationConnector Association="SCM.Models.FK_ServiceRequests_To_Products" />
+        <EntityTypeShape EntityType="SCM.Models.Report" Width="1.5" PointX="10.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

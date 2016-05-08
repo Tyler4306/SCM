@@ -1177,6 +1177,69 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date Range.
+        /// </summary>
+        public static string Report_FilterByDate {
+            get {
+                return ResourceManager.GetString("Report_FilterByDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string Report_FromDate {
+            get {
+                return ResourceManager.GetString("Report_FromDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report.
+        /// </summary>
+        public static string Report_Id {
+            get {
+                return ResourceManager.GetString("Report_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report Name.
+        /// </summary>
+        public static string Report_Name {
+            get {
+                return ResourceManager.GetString("Report_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub Title.
+        /// </summary>
+        public static string Report_SubTitle {
+            get {
+                return ResourceManager.GetString("Report_SubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Report_Title {
+            get {
+                return ResourceManager.GetString("Report_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string Report_ToDate {
+            get {
+                return ResourceManager.GetString("Report_ToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reports.
         /// </summary>
         public static string Reports {

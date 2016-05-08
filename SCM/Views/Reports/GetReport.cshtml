@@ -1,0 +1,469 @@
+﻿@using SCM.Models
+@model ReportViewModel
+
+@{
+    ViewBag.Title = "GetReport";
+}
+
+<h2>@Model.Report.Name</h2>
+<h5>@Model.Report.Description</h5>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Model.Report.FilterByDate)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="date" id="FromDate" name="FromDate" class="form-control" value='@DateTime.Parse("1/1/" + DateTime.Today.Year.ToString()).ToString("dd/MM/yyyy")' pattern="dd/mm/yyyy" />
+                    @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="date" id="ToDate" name="ToDate" class="form-control" value='@DateTime.Today.ToString("dd/MM/yyyy")' pattern="dd/mm/yyyy" />
+                    @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.FromDate);
+            Html.HiddenFor(model => model.ToDate);
+        }
+
+        @if (Model.Report.FilterByCustomer)
+        {
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="form-inline">
+                        @Html.HiddenFor(x => x.CustomerId, new { htmlAttributes = new { @class = "form-control" } })
+
+                        <input type="text" id="Customer_Name" value="" class="form-control" readonly />
+                        <span>
+                            <a class="btn btn-default" id="btnFindCustomer" href="#"><span class="glyphicon glyphicon-search"></span></a>
+                        </span>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.CustomerId);
+        }
+
+        @if (Model.Report.FilterByDepartment)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.DepartmentId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @HtmlExtensions.MyDropDown("DepartmentId", ViewBag.DepartmentId, null)
+                    @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.DepartmentId);
+        }
+
+
+
+
+        @if (Model.Report.FilterByEngineer)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.EngineerId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @HtmlExtensions.MyDropDown("EngineerId", ViewBag.EngineerId, null)
+                    @Html.ValidationMessageFor(model => model.EngineerId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.EngineerId);
+        }
+
+
+
+
+        @if (Model.Report.FilterByProduct)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @HtmlExtensions.MyDropDownStr("ProductId", ViewBag.ProductId, null)
+                    @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.ProductId);
+        }
+
+
+
+
+        @if (Model.Report.FilterByStatus)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Report.FilterByStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <span>
+                        <span>@Html.EditorFor(model => model.IsStatusActive) &nbsp; @AppViews.StatusOpen</span>
+                        <span>@Html.EditorFor(model => model.IsStatusPending) &nbsp; @AppViews.StatusPending</span>
+                        <span>@Html.EditorFor(model => model.IsStatusCancelled) &nbsp; @AppViews.StatusCanceled</span>
+                        <span>@Html.EditorFor(model => model.IsStatusClosed) &nbsp; @AppViews.StatusClosed</span>
+                    </span>
+
+                    @Html.ValidationMessageFor(model => model.IsStatusActive, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.IsStatusPending, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.IsStatusCancelled, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.IsStatusClosed, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        }
+        else
+        {
+            Html.HiddenFor(model => model.IsStatusActive);
+            Html.HiddenFor(model => model.IsStatusPending);
+            Html.HiddenFor(model => model.IsStatusCancelled);
+            Html.HiddenFor(model => model.IsStatusClosed);
+        }
+
+
+
+
+        @if (Model.Report.FilterByCity)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.CityId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @HtmlExtensions.MyDropDown("CityId", ViewBag.CityId, null)
+                    @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.CityId);
+        }
+
+
+
+
+        @if (Model.Report.FilterByRegion)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegionId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @HtmlExtensions.MyDropDown("RegionId", ViewBag.RegionId, null)
+                    @Html.ValidationMessageFor(model => model.RegionId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.RegionId);
+        }
+
+
+
+
+        @if(Model.Report.FilterByTag)
+        {
+            @Html.HiddenFor(model => model.TagsFilter)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Report.FilterByTag, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    
+                        @foreach (Tag tag in ViewBag.Tags)
+                        {
+                            <span>
+                                <input class="tag" type="checkbox" data-id="@tag.Id" />
+                                <span class="label @tag.Format">@tag.Name</span>
+                            </span>
+                            <span>&nbsp;</span>
+                        }
+                        
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.TagsFilter);
+        }
+
+
+
+
+        @if (Model.Report.FilterByText1)
+        {
+            <div class="form-group">
+                @Html.Label(Model.Report.Text1Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Text1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Text1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.Text1);
+        }
+
+
+
+
+        @if (Model.Report.FilterByText2)
+        {
+            <div class="form-group">
+                @Html.Label(Model.Report.Text2Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Text2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Text2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.Text2);
+        }
+
+
+
+
+        @if (Model.Report.FilterByNumber1)
+        {
+            <div class="form-group">
+                @Html.Label(Model.Report.Number1Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Number1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Number1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.Number1);
+        }
+
+
+
+
+        @if (Model.Report.FilterByNumber2)
+        {
+            <div class="form-group">
+                @Html.Label(Model.Report.Number2Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Number2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Number2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.Number2);
+        }
+
+
+
+
+        @if (Model.Report.FilterByDate1)
+        {
+            <div class="form-group">
+                @Html.Label(Model.Report.Date1Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="date" id="Date1" name="Date1" class="form-control" pattern="dd/mm/yyyy" />
+                    @Html.ValidationMessageFor(model => model.Date1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.Date1);
+        }
+
+
+
+
+        @if (Model.Report.FilterByDate2)
+        {
+            <div class="form-group">
+                @Html.Label(Model.Report.Date2Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="date" id="Date2" name="Date2" class="form-control" pattern="dd/mm/yyyy" />
+                    @Html.ValidationMessageFor(model => model.Date2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        else
+        {
+            Html.HiddenFor(model => model.Date2);
+        }
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Generate" class="btn btn-primary" />               
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="modal fade" id="findCustomer" tabindex="-1" role="dialog" aria-labelledby="findCustomer-label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="findCustomer-label">@AppViews.Customers</h4>
+            </div>
+            <div class="modal-body">
+                <div id="findCustomerForm"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@AppViews.Close</button>
+                <a class="btn btn-primary save" href='#'>@AppViews.Save</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function collectTags() {
+            var selectedTags = '';
+            $(".tag").each(function (index, elem) {
+                if (elem.checked) {
+                    selectedTags = selectedTags + $(this).data("id") + ',';
+                }
+            });
+            if (selectedTags != null) {
+                selectedTags = selectedTags.substr(0, selectedTags.length - 1);
+            }
+            $("#TagsFilter").val(selectedTags);
+        }
+
+        function callCustomers(page) {
+            var listId = '#findCustomerForm';
+            var url = '/Customers/FindCustomer?page=' + page + '&search=' + $("#txtSearch").val();
+
+            $.ajax(
+            {
+                type: 'GET',
+                url: url,
+                success: function (result) {
+
+                    $(listId).html(result);
+                    updateCustomerClicks();
+                }
+            }
+            );
+        }
+
+        function updateCustomerClicks() {
+            $("tr.cname td a").click(function (e) {
+                var id = $(this).data("id");
+
+                $("#SelectedCustomer").val(id);
+                $("tr.cname").removeClass("active");
+                $(this.parentElement.parentElement).addClass("active");
+            });
+        }
+        $(function () {
+            $(".tag").change(function () {
+                collectTags();
+            });
+
+            if ($("#CustomerId").val() === "0")
+                $("#CustomerId").val('');
+
+            $("#btnFindCustomer").click(function (e) {
+                e.preventDefault();
+                var url = '/Customers/FindCustomer';
+
+                $("#findCustomer").modal("toggle");
+
+
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    },
+                    success: function (result) {
+                        $("#findCustomerForm").html(result);
+                        updateCustomerClicks();
+
+                    }
+                });
+
+            });
+
+            $('#findCustomer').on('show.bs.modal', function (e) {
+            });
+
+            $(".save").click(function (e) {
+                var id = $("#SelectedCustomer").val();
+                var url = '@Url.Action("GetCustomer", "Customers")';
+
+                $.ajax({
+                    url: url,
+                    data: { id: id },
+                    dataType: "json",
+                    method: 'GET',
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    },
+                    success: function (result) {
+                        $("#CustomerId").val(result.Id);
+                        $("#Customer_Name").val(result.Name);
+                        $("#findCustomer").modal('toggle');
+                    }
+                });
+
+            });
+
+        });
+    </script>
+}

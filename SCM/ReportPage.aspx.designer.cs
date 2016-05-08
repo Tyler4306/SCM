@@ -10,7 +10,7 @@
 namespace SCM {
     
     
-    public partial class Report {
+    public partial class ReportPage {
         
         /// <summary>
         /// form1 control.

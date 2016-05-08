@@ -78,6 +78,7 @@
     <Build Include="dbo\Procedures\q_take_call.sql" />
     <Build Include="dbo\Tables\CallArchives.sql" />
     <Build Include="dbo\Tables\ExServiceRequests.sql" />
+    <Build Include="dbo\Tables\Reports.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SCM.Database.refactorlog" />

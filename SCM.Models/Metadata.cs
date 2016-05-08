@@ -368,4 +368,42 @@ namespace SCM
     {
     }
     #endregion
+
+    #region Reports
+    public class ReportMetadata
+    {
+        [Display(Name = "Report_Id", ResourceType = typeof(AppViews))]
+        public string Id { get; set; }
+        [Display(Name = "Report_Name", ResourceType = typeof(AppViews))]
+        [Required]
+        public string Name { get; set; }
+        [Display(Name = "Report_Title", ResourceType = typeof(AppViews))]
+        public string Title { get; set; }
+        [Display(Name = "Report_SubTitle", ResourceType = typeof(AppViews))]
+        public string SubTitle { get; set; }
+        [Display(Name = "Report_FilterByDate", ResourceType = typeof(AppViews))]
+        public bool FilterByDate { get; set; }
+        [Display(Name = "Customer", ResourceType = typeof(AppViews))]
+        public bool FilterByCustomer { get; set; }
+        [Display(Name = "Department", ResourceType = typeof(AppViews))]
+        public bool FilterByDepartment { get; set; }
+        [Display(Name = "Engineer", ResourceType = typeof(AppViews))]
+        public bool FilterByEngineer { get; set; }
+        [Display(Name = "Product", ResourceType = typeof(AppViews))]
+        public bool FilterByProduct { get; set; }
+        [Display(Name = "SR_StatusId", ResourceType = typeof(AppViews))]
+        public bool FilterByStatus { get; set; }
+        [Display(Name = "City", ResourceType = typeof(AppViews))]
+        public bool FilterByCity { get; set; }
+        [Display(Name = "Region", ResourceType = typeof(AppViews))]
+        public bool FilterByRegion { get; set; }
+        [Display(Name = "Tag", ResourceType = typeof(AppViews))]
+        public bool FilterByTag { get; set; }
+
+    }
+    [MetadataType(typeof(ReportMetadata))]
+    public partial class Report
+    {
+    }
+    #endregion
 }
