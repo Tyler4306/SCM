@@ -79,33 +79,33 @@ namespace SCM.Utils
         {
             ResetProgress();            
 
-            var curList = ctx.Products.Select(x => x.Id).ToList();
+            var curList = ctx.Products.Select(x => x.Id.ToUpper()).ToList();
             var dic = new Dictionary<string, Product>();
-            var objects = data.Select(x => new { Id = x.Service_Product_Code, Name = x.SVC_Product, IsActive = true }).Distinct().Where(x => !string.IsNullOrEmpty(x.Id)).ToList();
-            var objectsToAdd = objects.Where(x => !curList.Contains(x.Id));
+            var objects = data.Select(x => new { Id = x.Service_Product_Code, Name = x.SVC_Product.Trim(), IsActive = true }).Distinct().Where(x => !string.IsNullOrEmpty(x.Id)).ToList();
+            var objectsToAdd = objects.Where(x => !curList.Contains(x.Id.ToUpper()));
 
             total = objectsToAdd.Count();
             foreach (var item in objectsToAdd)
             {
-                var rec = new Product() { Id = item.Id, Name = item.Name, IsActive = item.IsActive };
+                var rec = new Product() { Id = item.Id, Name = item.Name.Trim(), IsActive = item.IsActive };
                 ctx.Products.Add(rec);
                 ctx.SaveChanges();
-                if(!dic.ContainsKey(rec.Id))
+                if(!dic.ContainsKey(rec.Id.ToUpper()))
                 {
-                    dic.Add(rec.Id, rec);
+                    dic.Add(rec.Id.ToUpper(), rec);
                 }
                 UpdateProgress();
             }
             foreach (var item in ctx.Products)
             {
-                if(!dic.ContainsKey(item.Id))
+                if(!dic.ContainsKey(item.Id.ToUpper()))
                 {
-                    dic.Add(item.Id, item);
+                    dic.Add(item.Id.ToUpper(), item);
                 }
             }
             foreach(var item in data)
             {
-                item.ProductId = item.Service_Product_Code;
+                item.ProductId = item.Service_Product_Code.ToUpper();
             }
             Progress = 100;
         }
@@ -114,36 +114,36 @@ namespace SCM.Utils
         {
             ResetProgress();
 
-            var curList = ctx.Cities.Select(x => x.Name.Trim()).ToList();
+            var curList = ctx.Cities.Select(x => x.Name.ToUpper()).ToList();
             var dic = new Dictionary<string, City>();
-            var objects = data.Select(x => new { Name = x.City_Name.Trim() }).Distinct().Where(x => !string.IsNullOrEmpty(x.Name)).ToList();
-            var objectsToAdd = objects.Where(x => !curList.Contains(x.Name));
+            var objects = data.Select(x => new { Name = x.City_Name }).Distinct().Where(x => !string.IsNullOrEmpty(x.Name)).ToList();
+            var objectsToAdd = objects.Where(x => !curList.Contains(x.Name.ToUpper()));
 
             total = objectsToAdd.Count();
             foreach (var item in objectsToAdd)
             {
-                var rec = new City() { Name = item.Name };
+                var rec = new City() { Name = item.Name.ToUpper() };
                 ctx.Cities.Add(rec);
                 ctx.SaveChanges();
-                if (!dic.ContainsKey(rec.Name))
+                if (!dic.ContainsKey(rec.Name.ToUpper()))
                 {
-                    dic.Add(rec.Name, rec);
+                    dic.Add(rec.Name.ToUpper(), rec);
                 }
 
                 UpdateProgress();
             }
             foreach (var item in ctx.Cities)
             {
-                if (!dic.ContainsKey(item.Name))
+                if (!dic.ContainsKey(item.Name.ToUpper()))
                 {
-                    dic.Add(item.Name, item);
+                    dic.Add(item.Name.ToUpper(), item);
                 }
             }
             foreach (var item in data)
             {
                 if (!string.IsNullOrEmpty(item.City_Name))
                 {
-                    item.CityId = dic[item.City_Name].Id;
+                    item.CityId = dic[item.City_Name.ToUpper()].Id;
                 }
                 else
                 {
@@ -158,9 +158,9 @@ namespace SCM.Utils
         {
             ResetProgress();
 
-            var curList = ctx.PendingReasons.Select(x => x.Reason.Trim()).ToList();
+            var curList = ctx.PendingReasons.Select(x => x.Reason).ToList();
             var dic = new Dictionary<string, PendingReason>();
-            var objects = data.Select(x => new { Reason = x.Pending_Reason.Trim() }).Distinct().Where(x => !string.IsNullOrEmpty(x.Reason)).ToList();
+            var objects = data.Select(x => new { Reason = x.Pending_Reason }).Distinct().Where(x => !string.IsNullOrEmpty(x.Reason)).ToList();
 
             var objectsToAdd = objects.Where(x => !curList.Contains(x.Reason));
             total = objectsToAdd.Count();
@@ -169,25 +169,25 @@ namespace SCM.Utils
                 var rec = new PendingReason() { Reason = item.Reason };
                 ctx.PendingReasons.Add(rec);
                 ctx.SaveChanges();
-                if (!dic.ContainsKey(rec.Reason))
+                if (!dic.ContainsKey(rec.Reason.ToUpper()))
                 {
-                    dic.Add(rec.Reason, rec);
+                    dic.Add(rec.Reason.ToUpper(), rec);
                 }
 
                 UpdateProgress();
             }
             foreach (var item in ctx.PendingReasons)
             {
-                if (!dic.ContainsKey(item.Reason))
+                if (!dic.ContainsKey(item.Reason.ToUpper()))
                 {
-                    dic.Add(item.Reason, item);
+                    dic.Add(item.Reason.ToUpper(), item);
                 }
             }
             foreach (var item in data)
             {
                 if (!string.IsNullOrEmpty(item.Pending_Reason))
                 {
-                    item.PendingReasonId = dic[item.Pending_Reason].Id;
+                    item.PendingReasonId = dic[item.Pending_Reason.ToUpper()].Id;
                 }
                 else
                 {
@@ -202,9 +202,9 @@ namespace SCM.Utils
         {
             ResetProgress();
 
-            var curList = ctx.CancelReasons.Select(x => x.Reason.Trim()).ToList();
+            var curList = ctx.CancelReasons.Select(x => x.Reason).ToList();
             var dic = new Dictionary<string, CancelReason>();
-            var objects = data.Select(x => new { Reason = x.Cancel_Reason.Trim() }).Distinct().Where(x => !string.IsNullOrEmpty(x.Reason)).ToList();
+            var objects = data.Select(x => new { Reason = x.Cancel_Reason }).Distinct().Where(x => !string.IsNullOrEmpty(x.Reason)).ToList();
 
             var objectToAdd = objects.Where(x => !curList.Contains(x.Reason));
             total = objectToAdd.Count();
@@ -213,25 +213,25 @@ namespace SCM.Utils
                 var rec = new CancelReason() { Reason = item.Reason };
                 ctx.CancelReasons.Add(rec);
                 ctx.SaveChanges();
-                if (!dic.ContainsKey(rec.Reason))
+                if (!dic.ContainsKey(rec.Reason.ToUpper()))
                 {
-                    dic.Add(rec.Reason, rec);
+                    dic.Add(rec.Reason.ToUpper(), rec);
                 }
 
                 UpdateProgress();
             }
             foreach (var item in ctx.CancelReasons)
             {
-                if (!dic.ContainsKey(item.Reason))
+                if (!dic.ContainsKey(item.Reason.ToUpper()))
                 {
-                    dic.Add(item.Reason, item);
+                    dic.Add(item.Reason.ToUpper(), item);
                 }
             }
             foreach (var item in data)
             {
                 if (!string.IsNullOrEmpty(item.Cancel_Reason))
                 {
-                    item.CancelReasonId = dic[item.Cancel_Reason].Id;
+                    item.CancelReasonId = dic[item.Cancel_Reason.ToUpper()].Id;
                 }
                 else
                 {
@@ -246,10 +246,10 @@ namespace SCM.Utils
         {
             ResetProgress();
 
-            var curList = ctx.Customers.Select(x => x.Name.Trim()).ToList();
+            var curList = ctx.Customers.Select(x => x.Name).ToList();
             var dic = new Dictionary<string, Customer>();
             var tags = ctx.Tags.Where(x => x.TagType == "C").ToDictionary(x=> x.Name, y => y);
-            var objects = data.Select(x => new { Name = x.Customer_Name.Trim(), Phone = x.Customer_Phone_No, Mobile = x.Cellular_No, City = x.CityId, Address = x.Address, CustomerType = x.Customer_Type }).Distinct().Where(x => !string.IsNullOrEmpty(x.Name)).ToList();
+            var objects = data.Select(x => new { Name = x.Customer_Name, Phone = x.Customer_Phone_No, Mobile = x.Cellular_No, City = x.CityId, Address = x.Address, CustomerType = x.Customer_Type }).Distinct().Where(x => !string.IsNullOrEmpty(x.Name)).ToList();
 
             var objectsToAdd = objects.Where(x => !curList.Contains(x.Name));
             total = objectsToAdd.Count();
@@ -260,9 +260,9 @@ namespace SCM.Utils
                     rec.Phone = "011XXXX";
                 ctx.Customers.Add(rec);
                 ctx.SaveChanges();
-                if (!dic.ContainsKey(rec.Name))
+                if (!dic.ContainsKey(rec.Name.ToUpper()))
                 {
-                    dic.Add(rec.Name, rec);
+                    dic.Add(rec.Name.ToUpper(), rec);
                 }
 
                 // Add Customer Tags
@@ -291,18 +291,18 @@ namespace SCM.Utils
             }
             foreach (var item in ctx.Customers)
             {
-                if (!dic.ContainsKey(item.Name))
+                if (!dic.ContainsKey(item.Name.ToUpper()))
                 {
-                    dic.Add(item.Name, item);
+                    dic.Add(item.Name.ToUpper(), item);
                 }
             }
             ResetProgress();
             total = data.Count();
             foreach (var item in data)
             {
-                if (dic.ContainsKey(item.Customer_Name.Trim()))
+                if (!string.IsNullOrEmpty(item.Customer_Name) && dic.ContainsKey(item.Customer_Name))
                 {
-                    item.CustomerId = dic[item.Customer_Name.Trim()].Id;
+                    item.CustomerId = dic[item.Customer_Name.ToUpper()].Id;
                 }
                 UpdateProgress();
             }
@@ -314,9 +314,9 @@ namespace SCM.Utils
         {
             ResetProgress();
 
-            var curList = ctx.Engineers.Select(x => x.Name.Trim()).ToList();
+            var curList = ctx.Engineers.Select(x => x.Name).ToList();
             var dic = new Dictionary<string, Engineer>();
-            var objects = data.Select(x => new { Name = x.SVC_Engineer_Name.Trim() }).Distinct().Where(x => !string.IsNullOrEmpty(x.Name)).ToList();
+            var objects = data.Select(x => new { Name = x.SVC_Engineer_Name }).Distinct().Where(x => !string.IsNullOrEmpty(x.Name)).ToList();
             var objectsToAdd = objects.Where(x => !curList.Contains(x.Name));
             total = objectsToAdd.Count();
 
@@ -325,25 +325,25 @@ namespace SCM.Utils
                 var rec = new Engineer() { Name = item.Name, DepartmentId = 1, IsActive = true };
                 ctx.Engineers.Add(rec);
                 ctx.SaveChanges();
-                if (!dic.ContainsKey(rec.Name))
+                if (!dic.ContainsKey(rec.Name.ToUpper()))
                 {
-                    dic.Add(rec.Name, rec);
+                    dic.Add(rec.Name.ToUpper(), rec);
                 }
 
                 UpdateProgress();
             }
             foreach (var item in ctx.Engineers)
             {
-                if (!dic.ContainsKey(item.Name))
+                if (!dic.ContainsKey(item.Name.ToUpper()))
                 {
-                    dic.Add(item.Name, item);
+                    dic.Add(item.Name.ToUpper(), item);
                 }
             }
             foreach (var item in data)
             {
-                if (!string.IsNullOrEmpty(item.SVC_Engineer_Name.Trim()))
+                if (!string.IsNullOrEmpty(item.SVC_Engineer_Name))
                 {
-                    item.EngineerId = dic[item.SVC_Engineer_Name.Trim()].Id;
+                    item.EngineerId = dic[item.SVC_Engineer_Name.ToUpper()].Id;
                 }
                 else
                 {
