@@ -6,7 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace SCM.Controllers
-{
+{ 
+
     public class ReportsController : Controller
     {
         // GET: Reports
@@ -17,6 +18,7 @@ namespace SCM.Controllers
             return PartialView("Index", scm.Reports.ToList());
         }
 
+        [Authorize]
         public ActionResult GetReport(int? id)
         {
             if (!id.HasValue)
@@ -35,12 +37,13 @@ namespace SCM.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult GetReport(ReportViewModel model)
         {
             // [Bind(Include ="Id,Title,SubTitle,FromDate,ToDate,CustomerId,DepartmentId,EngineerId,ProductId,IsStatusActive,IsStatusPending,IsStatusCancelled,IsStatusClosed,CityId,RegionId,TagsFilter,Text1,Text2,Number1,Number2,Date1,Date2")]
 
-            Session["ReportViewModel"] = model;
-
+            Session[User.Identity.Name + "ReportViewModel"] = model;
+            
             return Redirect("~/ReportPage.aspx?r=g");
         }
     }

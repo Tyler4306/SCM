@@ -1195,6 +1195,15 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate.
+        /// </summary>
+        public static string Report_Generate {
+            get {
+                return ResourceManager.GetString("Report_Generate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Report.
         /// </summary>
         public static string Report_Id {

@@ -714,4 +714,7 @@
   <data name="Report_ToDate" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="Report_Generate" xml:space="preserve">
+    <value>Generate</value>
+  </data>
 </root>

@@ -714,4 +714,7 @@
   <data name="Report_ToDate" xml:space="preserve">
     <value>حتى تاريخ</value>
   </data>
+  <data name="Report_Generate" xml:space="preserve">
+    <value>تقرير</value>
+  </data>
 </root>

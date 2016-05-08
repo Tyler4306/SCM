@@ -248,9 +248,9 @@ namespace SCM.Controllers
             }
             ViewBag.RelatedTags = dic;
             // ViewBag.RelatedTags = requests.SelectMany(x => x.Tags.Union(x.Customer.Tags)).OrderBy(y => y.TagType).ThenBy(y => y.Name).GroupBy(x => x.Name).ToDictionary(x => x.Key, y => y.Count());
-            Session[User.ToString() +  "_Rpt_Requests"] = requests.Select(x => x.Id).ToList();
-            Session[User.ToString() + "_Rpt_Requests_SortBy"] = filterSort;
-            Session[User.ToString() + "_Rpt_Requests_SortDir"] = filterSortDir;
+            Session[User.Identity.Name +  "_Rpt_Requests"] = requests.Select(x => x.Id).ToList();
+            Session[User.Identity.Name + "_Rpt_Requests_SortBy"] = filterSort;
+            Session[User.Identity.Name + "_Rpt_Requests_SortDir"] = filterSortDir;
 
             int pageSize = 30;
             int pageNumber = (page ?? 1);

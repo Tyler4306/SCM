@@ -15,7 +15,7 @@
         <xs:element name="ReportBody" msprop:Generator_TableClassName="ReportBodyDataTable" msprop:Generator_TableVarName="tableReportBody" msprop:Generator_TablePropName="ReportBody" msprop:Generator_RowDeletingName="ReportBodyRowDeleting" msprop:Generator_RowChangingName="ReportBodyRowChanging" msprop:Generator_RowEvHandlerName="ReportBodyRowChangeEventHandler" msprop:Generator_RowDeletedName="ReportBodyRowDeleted" msprop:Generator_UserTableName="ReportBody" msprop:Generator_RowChangedName="ReportBodyRowChanged" msprop:Generator_RowEvArgName="ReportBodyRowChangeEvent" msprop:Generator_RowClassName="ReportBodyRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" default="1" minOccurs="0" />
+              <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" minOccurs="0" />
               <xs:element name="G" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="G" msprop:Generator_ColumnVarNameInTable="columnG" msprop:Generator_ColumnPropNameInTable="GColumn" msprop:Generator_UserColumnName="G" type="xs:string" minOccurs="0" />
               <xs:element name="T1" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="T1" msprop:Generator_ColumnVarNameInTable="columnT1" msprop:Generator_ColumnPropNameInTable="T1Column" msprop:Generator_UserColumnName="T1" type="xs:string" minOccurs="0" />
               <xs:element name="T2" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="T2" msprop:Generator_ColumnVarNameInTable="columnT2" msprop:Generator_ColumnPropNameInTable="T2Column" msprop:Generator_UserColumnName="T2" type="xs:string" minOccurs="0" />
@@ -54,10 +54,6 @@
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1">
-      <xs:selector xpath=".//mstns:ReportBody" />
-      <xs:field xpath="mstns:Id" />
-    </xs:unique>
-    <xs:unique name="ReportParameters_Constraint1" msdata:ConstraintName="Constraint1">
       <xs:selector xpath=".//mstns:ReportParameters" />
       <xs:field xpath="mstns:Id" />
     </xs:unique>

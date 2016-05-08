@@ -635,7 +635,6 @@ namespace SCM.Models {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ReportBodyRow AddReportBodyRow(
-                        int Id, 
                         string G, 
                         string T1, 
                         string T2, 
@@ -661,7 +660,7 @@ namespace SCM.Models {
                         System.DateTime D5) {
                 ReportBodyRow rowReportBodyRow = ((ReportBodyRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        Id,
+                        null,
                         G,
                         T1,
                         T2,
@@ -784,10 +783,8 @@ namespace SCM.Models {
                 base.Columns.Add(this.columnD4);
                 this.columnD5 = new global::System.Data.DataColumn("D5", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnD5);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnId}, false));
-                this.columnId.Unique = true;
-                this.columnId.DefaultValue = ((int)(1));
+                this.columnId.AutoIncrement = true;
+                this.columnId.AutoIncrementSeed = 1;
                 this.columnN1.DefaultValue = ((int)(0));
                 this.columnN2.DefaultValue = ((int)(0));
                 this.columnN3.DefaultValue = ((int)(0));

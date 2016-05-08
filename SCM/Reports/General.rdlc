@@ -189,7 +189,7 @@
               <Width>1.91792cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.57938cm</Width>
+              <Width>5.1723cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -610,17 +610,19 @@ Parameters!F2Map.Value = "F1", Fields!F1.Value,
 Parameters!F2Map.Value = "F2", Fields!F2.Value,
 Parameters!F2Map.Value = "F3", Fields!F3.Value,
 Parameters!F2Map.Value = "F4", Fields!F4.Value,
-Parameters!F2Map.Value = "D1", Fields!D1.Value,
-Parameters!F2Map.Value = "D2", Fields!D2.Value,
-Parameters!F2Map.Value = "D3", Fields!D3.Value,
-Parameters!F2Map.Value = "D4", Fields!D4.Value,
-Parameters!F2Map.Value = "D5", Fields!D5.Value)</Value>
+Parameters!F2Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
+Parameters!F2Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
+Parameters!F2Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
+Parameters!F2Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
+Parameters!F2Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
                               <Style>
                                 <Color>=Parameters!F2Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox251</rd:DefaultName>
@@ -665,17 +667,19 @@ Parameters!F3Map.Value = "F1", Fields!F1.Value,
 Parameters!F3Map.Value = "F2", Fields!F2.Value,
 Parameters!F3Map.Value = "F3", Fields!F3.Value,
 Parameters!F3Map.Value = "F4", Fields!F4.Value,
-Parameters!F3Map.Value = "D1", Fields!D1.Value,
-Parameters!F3Map.Value = "D2", Fields!D2.Value,
-Parameters!F3Map.Value = "D3", Fields!D3.Value,
-Parameters!F3Map.Value = "D4", Fields!D4.Value,
-Parameters!F3Map.Value = "D5", Fields!D5.Value)</Value>
+Parameters!F3Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
+Parameters!F3Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
+Parameters!F3Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
+Parameters!F3Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
+Parameters!F3Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
                               <Style>
                                 <Color>=Parameters!F3Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox255</rd:DefaultName>
@@ -720,17 +724,19 @@ Parameters!F4Map.Value = "F1", Fields!F1.Value,
 Parameters!F4Map.Value = "F2", Fields!F2.Value,
 Parameters!F4Map.Value = "F3", Fields!F3.Value,
 Parameters!F4Map.Value = "F4", Fields!F4.Value,
-Parameters!F4Map.Value = "D1", Fields!D1.Value,
-Parameters!F4Map.Value = "D2", Fields!D2.Value,
-Parameters!F4Map.Value = "D3", Fields!D3.Value,
-Parameters!F4Map.Value = "D4", Fields!D4.Value,
-Parameters!F4Map.Value = "D5", Fields!D5.Value)</Value>
+Parameters!F4Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
+Parameters!F4Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
+Parameters!F4Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
+Parameters!F4Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
+Parameters!F4Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
                               <Style>
                                 <Color>=Parameters!F4Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox259</rd:DefaultName>
@@ -775,17 +781,19 @@ Parameters!F5Map.Value = "F1", Fields!F1.Value,
 Parameters!F5Map.Value = "F2", Fields!F2.Value,
 Parameters!F5Map.Value = "F3", Fields!F3.Value,
 Parameters!F5Map.Value = "F4", Fields!F4.Value,
-Parameters!F5Map.Value = "D1", Fields!D1.Value,
-Parameters!F5Map.Value = "D2", Fields!D2.Value,
-Parameters!F5Map.Value = "D3", Fields!D3.Value,
-Parameters!F5Map.Value = "D4", Fields!D4.Value,
-Parameters!F5Map.Value = "D5", Fields!D5.Value)</Value>
+Parameters!F5Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
+Parameters!F5Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
+Parameters!F5Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
+Parameters!F5Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
+Parameters!F5Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
                               <Style>
                                 <Color>=Parameters!F5Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox263</rd:DefaultName>
@@ -830,17 +838,19 @@ Parameters!F6Map.Value = "F1", Fields!F1.Value,
 Parameters!F6Map.Value = "F2", Fields!F2.Value,
 Parameters!F6Map.Value = "F3", Fields!F3.Value,
 Parameters!F6Map.Value = "F4", Fields!F4.Value,
-Parameters!F6Map.Value = "D1", Fields!D1.Value,
-Parameters!F6Map.Value = "D2", Fields!D2.Value,
-Parameters!F6Map.Value = "D3", Fields!D3.Value,
-Parameters!F6Map.Value = "D4", Fields!D4.Value,
-Parameters!F6Map.Value = "D5", Fields!D5.Value)</Value>
+Parameters!F6Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
+Parameters!F6Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
+Parameters!F6Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
+Parameters!F6Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
+Parameters!F6Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
                               <Style>
                                 <Color>=Parameters!F6Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox267</rd:DefaultName>
@@ -885,17 +895,19 @@ Parameters!F7Map.Value = "F1", Fields!F1.Value,
 Parameters!F7Map.Value = "F2", Fields!F2.Value,
 Parameters!F7Map.Value = "F3", Fields!F3.Value,
 Parameters!F7Map.Value = "F4", Fields!F4.Value,
-Parameters!F7Map.Value = "D1", Fields!D1.Value,
-Parameters!F7Map.Value = "D2", Fields!D2.Value,
-Parameters!F7Map.Value = "D3", Fields!D3.Value,
-Parameters!F7Map.Value = "D4", Fields!D4.Value,
-Parameters!F7Map.Value = "D5", Fields!D5.Value)</Value>
+Parameters!F7Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
+Parameters!F7Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
+Parameters!F7Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
+Parameters!F7Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
+Parameters!F7Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
                               <Style>
                                 <Color>=Parameters!F7Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox271</rd:DefaultName>
@@ -940,17 +952,19 @@ Parameters!F8Map.Value = "F1", Fields!F1.Value,
 Parameters!F8Map.Value = "F2", Fields!F2.Value,
 Parameters!F8Map.Value = "F3", Fields!F3.Value,
 Parameters!F8Map.Value = "F4", Fields!F4.Value,
-Parameters!F8Map.Value = "D1", Fields!D1.Value,
-Parameters!F8Map.Value = "D2", Fields!D2.Value,
-Parameters!F8Map.Value = "D3", Fields!D3.Value,
-Parameters!F8Map.Value = "D4", Fields!D4.Value,
-Parameters!F8Map.Value = "D5", Fields!D5.Value)</Value>
+Parameters!F8Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
+Parameters!F8Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
+Parameters!F8Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
+Parameters!F8Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
+Parameters!F8Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
                               <Style>
                                 <Color>=Parameters!F8Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox275</rd:DefaultName>
@@ -966,6 +980,7 @@ Parameters!F8Map.Value = "D5", Fields!D5.Value)</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1021,7 +1036,14 @@ Parameters!F8Map.Value = "D5", Fields!D5.Value)</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F2Total.Value = "Sum", Sum(Val(Fields!T2.Value), "G")
+                              <Value>=Switch(Parameters!F2Total.Value = "Sum", Sum(Val(Switch
+(
+Parameters!F2Map.Value = "N1", Fields!N1.Value
+,Parameters!F2Map.Value = "N2", Fields!N2.Value
+,Parameters!F2Map.Value = "N3", Fields!N3.Value
+,Parameters!F2Map.Value = "N4", Fields!N4.Value
+,Parameters!F2Map.Value = "N5", Fields!N5.Value
+)), "G")
 ,Parameters!F2Total.Value = "Count", CountDistinct(Fields!T2.Value, "G")
 )</Value>
                               <Style>
@@ -1061,7 +1083,14 @@ Parameters!F8Map.Value = "D5", Fields!D5.Value)</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F3Total.Value = "Sum",  Sum(Val(Fields!T3.Value), "G")
+                              <Value>=Switch(Parameters!F3Total.Value = "Sum",  Sum(Val(Switch
+(
+Parameters!F3Map.Value = "N1", Fields!N1.Value
+,Parameters!F3Map.Value = "N2", Fields!N2.Value
+,Parameters!F3Map.Value = "N3", Fields!N3.Value
+,Parameters!F3Map.Value = "N4", Fields!N4.Value
+,Parameters!F3Map.Value = "N5", Fields!N5.Value
+)), "G")
 ,Parameters!F3Total.Value = "Count", CountDistinct(Fields!T3.Value, "G")
 )</Value>
                               <Style>
@@ -1101,7 +1130,14 @@ Parameters!F8Map.Value = "D5", Fields!D5.Value)</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F4Total.Value = "Sum",  Sum(Val(Fields!T4.Value), "G")
+                              <Value>=Switch(Parameters!F4Total.Value = "Sum",  Sum(Val(Switch
+(
+Parameters!F4Map.Value = "N1", Fields!N1.Value
+,Parameters!F4Map.Value = "N2", Fields!N2.Value
+,Parameters!F4Map.Value = "N3", Fields!N3.Value
+,Parameters!F4Map.Value = "N4", Fields!N4.Value
+,Parameters!F4Map.Value = "N5", Fields!N5.Value
+)), "G")
 ,Parameters!F4Total.Value = "Count", CountDistinct(Fields!T4.Value, "G")
 )</Value>
                               <Style>
@@ -1141,7 +1177,14 @@ Parameters!F8Map.Value = "D5", Fields!D5.Value)</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F5Total.Value = "Sum",  Sum(Val(Fields!T5.Value), "G")
+                              <Value>=Switch(Parameters!F5Total.Value = "Sum",  Sum(Val(Switch
+(
+Parameters!F5Map.Value = "N1", Fields!N1.Value
+,Parameters!F5Map.Value = "N2", Fields!N2.Value
+,Parameters!F5Map.Value = "N3", Fields!N3.Value
+,Parameters!F5Map.Value = "N4", Fields!N4.Value
+,Parameters!F5Map.Value = "N5", Fields!N5.Value
+)), "G")
 ,Parameters!F5Total.Value = "Count", CountDistinct(Fields!T5.Value, "G")
 )</Value>
                               <Style>
@@ -1181,7 +1224,14 @@ Parameters!F8Map.Value = "D5", Fields!D5.Value)</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F6Total.Value = "Sum", Sum(Val(Fields!T6.Value), "G")
+                              <Value>=Switch(Parameters!F6Total.Value = "Sum", Sum(Val(Switch
+(
+Parameters!F6Map.Value = "N1", Fields!N1.Value
+,Parameters!F6Map.Value = "N2", Fields!N2.Value
+,Parameters!F6Map.Value = "N3", Fields!N3.Value
+,Parameters!F6Map.Value = "N4", Fields!N4.Value
+,Parameters!F6Map.Value = "N5", Fields!N5.Value
+)), "G")
 ,Parameters!F6Total.Value = "Count", CountDistinct(Fields!T6.Value, "G")
 )</Value>
                               <Style>
@@ -1221,7 +1271,14 @@ Parameters!F8Map.Value = "D5", Fields!D5.Value)</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F7Total.Value = "Sum", Sum(Val(Fields!T7.Value), "G")
+                              <Value>=Switch(Parameters!F7Total.Value = "Sum", Sum(Val(Switch
+(
+Parameters!F7Map.Value = "N1", Fields!N1.Value
+,Parameters!F7Map.Value = "N2", Fields!N2.Value
+,Parameters!F7Map.Value = "N3", Fields!N3.Value
+,Parameters!F7Map.Value = "N4", Fields!N4.Value
+,Parameters!F7Map.Value = "N5", Fields!N5.Value
+)), "G")
 ,Parameters!F7Total.Value = "Count", CountDistinct(Fields!T7.Value, "G")
 )</Value>
                               <Style>
@@ -1261,7 +1318,14 @@ Parameters!F8Map.Value = "D5", Fields!D5.Value)</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F8Total.Value = "Sum", Sum(Val(Fields!T8.Value), "G")
+                              <Value>=Switch(Parameters!F8Total.Value = "Sum", Sum(Val(Switch
+(
+Parameters!F8Map.Value = "N1", Fields!N1.Value
+,Parameters!F8Map.Value = "N2", Fields!N2.Value
+,Parameters!F8Map.Value = "N3", Fields!N3.Value
+,Parameters!F8Map.Value = "N4", Fields!N4.Value
+,Parameters!F8Map.Value = "N5", Fields!N5.Value
+)), "G")
 ,Parameters!F8Total.Value = "Count", CountDistinct(Fields!T8.Value, "G")
 )</Value>
                               <Style>
@@ -1419,7 +1483,7 @@ Parameters!F8Map.Value = "D5", Fields!D5.Value)</Value>
         <DataSetName>ReportBody</DataSetName>
         <Top>1.78538cm</Top>
         <Height>2.54553cm</Height>
-        <Width>21.49646cm</Width>
+        <Width>24.08938cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>

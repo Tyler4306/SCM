@@ -32,14 +32,14 @@ namespace SCM
 
         public void LoadRequestsReport()
         {
-            if(Session[User.ToString() + "_Rpt_Requests"] == null)
+            if(Session[User.Identity.Name + "_Rpt_Requests"] == null)
             {
                 return;
             }
 
-            List<int> Ids = (List<int>)Session[User.ToString() + "_Rpt_Requests"];
-            string filterSort = (string)Session[User.ToString() + "_Rpt_Requests_SortBy"];
-            string filterSortDir = (string)Session[User.ToString() + "_Rpt_Requests_SortDir"];
+            List<int> Ids = (List<int>)Session[User.Identity.Name + "_Rpt_Requests"];
+            string filterSort = (string)Session[User.Identity.Name + "_Rpt_Requests_SortBy"];
+            string filterSortDir = (string)Session[User.Identity.Name + "_Rpt_Requests_SortDir"];
 
             var requests = Utils.DataManager.Requests().Where(x => Ids.Contains(x.Id));
             if (filterSort == "last_update")
@@ -96,12 +96,12 @@ namespace SCM
 
         public void LoadGeneralReport()
         {
-            if (Session["ReportViewModel"] == null)
+            if (Session[User.Identity.Name + "ReportViewModel"] == null)                
                 return;
 
             var ctx = new SCMContext();
 
-            ReportViewModel rvm = (ReportViewModel)Session["ReportViewModel"];
+            ReportViewModel rvm = (ReportViewModel)Session[User.Identity.Name + "ReportViewModel"];
             rvm.GetReportObject(rvm.Id);
             Report report = rvm.Report;
              
@@ -128,6 +128,7 @@ namespace SCM
                 if (rvm.CustomerId.HasValue && rvm.CustomerId.Value > 0)
                 {
                     para.Description = ctx.Customers.Find(rvm.CustomerId.Value).Name;
+                    
                     report.Command = report.Command.Replace("$CustomerId", rvm.CustomerId.Value.ToString());
                 }
                 else
@@ -266,7 +267,7 @@ namespace SCM
                 para.Description = para.Description.Replace(",", ", ");
                 reportParams.AddReportParametersRow(para);
                 parameterId++;
-                string statList = string.Format("{0}{1}{2}{3}", rvm.IsStatusActive ? "10," : "", rvm.IsStatusPending ? "20," : "", rvm.IsStatusCancelled ? "90," : "", rvm.IsStatusClosed ? "100," : "");
+                string statList = string.Format("0,{0}{1}{2}{3}", rvm.IsStatusActive ? "10," : "", rvm.IsStatusPending ? "20," : "", rvm.IsStatusCancelled ? "90," : "", rvm.IsStatusClosed ? "100," : "");
                 statList = statList.TrimEnd(',');
                 statList = statList.Replace(",", ", ");
 
@@ -280,6 +281,7 @@ namespace SCM
                 para.Id = parameterId;
                 para.Name = "Tags";
                 List<int> tags = new List<int>();
+                tags.Add(0);
                 string[] tagIds = (rvm.TagsFilter ?? "").Split(',');
                 foreach(var t in tagIds)
                 {
@@ -303,7 +305,7 @@ namespace SCM
                     string tagsList = "";
                     foreach(var t in tags)
                     {
-                        tagsList = t.ToString() + ",";
+                        tagsList += t.ToString() + ",";
                     }
                     tagsList = tagsList.TrimEnd(',');
                     tagsList = tagsList.Replace(",", ", ");
@@ -324,7 +326,7 @@ namespace SCM
                 para.Description = rvm.Text1;
                 reportParams.AddReportParametersRow(para);
                 parameterId++;
-                report.Command = report.Command.Replace("$Text1", string.Format("'{0}'", rvm.Text1??""));
+                report.Command = report.Command.Replace("$Text1", string.Format("{0}", rvm.Text1??""));
 
             }
             if (report.FilterByText2)
@@ -336,7 +338,7 @@ namespace SCM
                 para.Description = rvm.Text2;
                 reportParams.AddReportParametersRow(para);
                 parameterId++;
-                report.Command = report.Command.Replace("$Text2", string.Format("'{0}'", rvm.Text2 ?? ""));
+                report.Command = report.Command.Replace("$Text2", string.Format("{0}", rvm.Text2 ?? ""));
             }
             if (report.FilterByNumber1)
             {
@@ -432,49 +434,49 @@ namespace SCM
             p.Add(new ReportParameter("F1Map", report.F1Map));
             p.Add(new ReportParameter("F1Visible", (report.F1Visible.HasValue && report.F1Visible.Value) ? "1": "0"));
             p.Add(new ReportParameter("F1Header", report.F1Header));
-            p.Add(new ReportParameter("F1Color", report.F1Header));
+            p.Add(new ReportParameter("F1Color", report.F1Color));
             p.Add(new ReportParameter("F1Total", report.F1Total));
 
             p.Add(new ReportParameter("F2Map", report.F2Map));
             p.Add(new ReportParameter("F2Visible", (report.F2Visible.HasValue && report.F2Visible.Value) ? "1": "0"));
             p.Add(new ReportParameter("F2Header", report.F2Header));
-            p.Add(new ReportParameter("F2Color", report.F2Header));
+            p.Add(new ReportParameter("F2Color", report.F2Color));
             p.Add(new ReportParameter("F2Total", report.F2Total));
 
             p.Add(new ReportParameter("F3Map", report.F3Map));
             p.Add(new ReportParameter("F3Visible", (report.F3Visible.HasValue && report.F3Visible.Value) ? "1": "0"));
             p.Add(new ReportParameter("F3Header", report.F3Header));
-            p.Add(new ReportParameter("F3Color", report.F3Header));
+            p.Add(new ReportParameter("F3Color", report.F3Color));
             p.Add(new ReportParameter("F3Total", report.F3Total));
 
             p.Add(new ReportParameter("F4Map", report.F4Map));
             p.Add(new ReportParameter("F4Visible", (report.F4Visible.HasValue && report.F4Visible.Value) ? "1": "0"));
             p.Add(new ReportParameter("F4Header", report.F4Header));
-            p.Add(new ReportParameter("F4Color", report.F4Header));
+            p.Add(new ReportParameter("F4Color", report.F4Color));
             p.Add(new ReportParameter("F4Total", report.F4Total));
 
             p.Add(new ReportParameter("F5Map", report.F5Map));
             p.Add(new ReportParameter("F5Visible", (report.F5Visible.HasValue && report.F5Visible.Value) ? "1": "0"));
             p.Add(new ReportParameter("F5Header", report.F5Header));
-            p.Add(new ReportParameter("F5Color", report.F5Header));
+            p.Add(new ReportParameter("F5Color", report.F5Color));
             p.Add(new ReportParameter("F5Total", report.F5Total));
 
             p.Add(new ReportParameter("F6Map", report.F6Map));
             p.Add(new ReportParameter("F6Visible", (report.F6Visible.HasValue && report.F6Visible.Value) ? "1": "0"));
             p.Add(new ReportParameter("F6Header", report.F6Header));
-            p.Add(new ReportParameter("F6Color", report.F6Header));
+            p.Add(new ReportParameter("F6Color", report.F6Color));
             p.Add(new ReportParameter("F6Total", report.F6Total));
 
             p.Add(new ReportParameter("F7Map", report.F7Map));
             p.Add(new ReportParameter("F7Visible", (report.F7Visible.HasValue && report.F7Visible.Value) ? "1": "0"));
             p.Add(new ReportParameter("F7Header", report.F7Header));
-            p.Add(new ReportParameter("F7Color", report.F7Header));
+            p.Add(new ReportParameter("F7Color", report.F7Color));
             p.Add(new ReportParameter("F7Total", report.F7Total));
 
             p.Add(new ReportParameter("F8Map", report.F8Map));
             p.Add(new ReportParameter("F8Visible", (report.F8Visible.HasValue && report.F8Visible.Value) ? "1": "0"));
             p.Add(new ReportParameter("F8Header", report.F8Header));
-            p.Add(new ReportParameter("F8Color", report.F8Header));
+            p.Add(new ReportParameter("F8Color", report.F8Color));
             p.Add(new ReportParameter("F8Total", report.F8Total));
 
 
