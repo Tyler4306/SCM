@@ -290,13 +290,19 @@ namespace SCM
                         tags.Add(tg);
                 }
                 para.Description = "";
-                var tagObjects = ctx.Tags.Where(x => tags.Contains(x.Id)).ToList();
-                foreach (var t in tagObjects)
-                    para.Description += t.Name + ",";
+                if (ctx.Tags.Count() == tagIds.Count())
+                {
+                    para.Description = "All";
+                }
+                else
+                {
+                    var tagObjects = ctx.Tags.Where(x => tags.Contains(x.Id)).ToList();
+                    foreach (var t in tagObjects)
+                        para.Description += t.Name + ",";
 
-                para.Description = para.Description.TrimEnd(',');
-                para.Description = para.Description.Replace(",", ", ");
-
+                    para.Description = para.Description.TrimEnd(',');
+                    para.Description = para.Description.Replace(",", ", ");
+                }
                 reportParams.AddReportParametersRow(para);
                 parameterId++;
 
@@ -406,7 +412,64 @@ namespace SCM
 
 
             DSGeneral.ReportBodyDataTable body = new DSGeneral.ReportBodyDataTable();
-            
+            DSGeneral.ReportHeaderDataTable header = new DSGeneral.ReportHeaderDataTable();
+
+            string titles = "T1,T2,T3,T4,T5,T6,T7,T8,N1,N2,N3,N4,N5,D1,D2,D3,D4,D5";
+            foreach(var s in titles.Split(','))
+            {
+                var h = header.NewReportHeaderRow();
+                h.Code = s;
+                if(report.F1Map == s)
+                {
+                    h.Header = report.F1Header;
+                    h.Color = report.F1Color;
+                    h.Visible = report.F1Visible.HasValue ? report.F1Visible.Value : false;
+                }
+                else if(report.F2Map == s)
+                {
+                    h.Header = report.F2Header;
+                    h.Color = report.F2Color;
+                    h.Visible = report.F2Visible.HasValue ? report.F2Visible.Value : false;
+                }
+                else if (report.F3Map == s)
+                {
+                    h.Header = report.F3Header;
+                    h.Color = report.F3Color;
+                    h.Visible = report.F3Visible.HasValue ? report.F3Visible.Value : false;
+                }
+                else if (report.F4Map == s)
+                {
+                    h.Header = report.F4Header;
+                    h.Color = report.F4Color;
+                    h.Visible = report.F4Visible.HasValue ? report.F4Visible.Value : false;
+                }
+                else if (report.F5Map == s)
+                {
+                    h.Header = report.F5Header;
+                    h.Color = report.F5Color;
+                    h.Visible = report.F5Visible.HasValue ? report.F5Visible.Value : false;
+                }
+                else if (report.F6Map == s)
+                {
+                    h.Header = report.F6Header;
+                    h.Color = report.F6Color;
+                    h.Visible = report.F6Visible.HasValue ? report.F6Visible.Value : false;
+                }
+                else if (report.F7Map == s)
+                {
+                    h.Header = report.F7Header;
+                    h.Color = report.F7Color;
+                    h.Visible = report.F7Visible.HasValue ? report.F7Visible.Value : false;
+                }
+                else if (report.F8Map == s)
+                {
+                    h.Header = report.F8Header;
+                    h.Color = report.F8Color;
+                    h.Visible = report.F8Visible.HasValue ? report.F8Visible.Value : false;
+                }
+
+                header.AddReportHeaderRow(h);
+            }
 
             using (SqlConnection conn = new SqlConnection(ctx.Database.Connection.ConnectionString))
             {
@@ -438,6 +501,8 @@ namespace SCM
             reportViewer.LocalReport.DataSources.Add(rsParameter);
             ReportDataSource rsBody = new ReportDataSource("ReportBody", body.ToList());
             reportViewer.LocalReport.DataSources.Add(rsBody);
+            ReportDataSource rsHeader = new ReportDataSource("ReportHeader", header.ToList());
+            reportViewer.LocalReport.DataSources.Add(rsHeader);
 
             List<ReportParameter> p = new List<ReportParameter>();
             p.Add(new ReportParameter("ParametersVisible", parametersVisible ? "1" : "0" ));
@@ -445,57 +510,6 @@ namespace SCM
             p.Add(new ReportParameter("SubTitle", rvm.SubTitle));
             p.Add(new ReportParameter("GVisible", report.GVisible ? "1" : "0"));
             p.Add(new ReportParameter("GHeader", report.GHeader));
-
-            p.Add(new ReportParameter("F1Map", report.F1Map));
-            p.Add(new ReportParameter("F1Visible", (report.F1Visible.HasValue && report.F1Visible.Value) ? "1": "0"));
-            p.Add(new ReportParameter("F1Header", report.F1Header));
-            p.Add(new ReportParameter("F1Color", report.F1Color));
-            p.Add(new ReportParameter("F1Total", report.F1Total));
-
-            p.Add(new ReportParameter("F2Map", report.F2Map));
-            p.Add(new ReportParameter("F2Visible", (report.F2Visible.HasValue && report.F2Visible.Value) ? "1": "0"));
-            p.Add(new ReportParameter("F2Header", report.F2Header));
-            p.Add(new ReportParameter("F2Color", report.F2Color));
-            p.Add(new ReportParameter("F2Total", report.F2Total));
-
-            p.Add(new ReportParameter("F3Map", report.F3Map));
-            p.Add(new ReportParameter("F3Visible", (report.F3Visible.HasValue && report.F3Visible.Value) ? "1": "0"));
-            p.Add(new ReportParameter("F3Header", report.F3Header));
-            p.Add(new ReportParameter("F3Color", report.F3Color));
-            p.Add(new ReportParameter("F3Total", report.F3Total));
-
-            p.Add(new ReportParameter("F4Map", report.F4Map));
-            p.Add(new ReportParameter("F4Visible", (report.F4Visible.HasValue && report.F4Visible.Value) ? "1": "0"));
-            p.Add(new ReportParameter("F4Header", report.F4Header));
-            p.Add(new ReportParameter("F4Color", report.F4Color));
-            p.Add(new ReportParameter("F4Total", report.F4Total));
-
-            p.Add(new ReportParameter("F5Map", report.F5Map));
-            p.Add(new ReportParameter("F5Visible", (report.F5Visible.HasValue && report.F5Visible.Value) ? "1": "0"));
-            p.Add(new ReportParameter("F5Header", report.F5Header));
-            p.Add(new ReportParameter("F5Color", report.F5Color));
-            p.Add(new ReportParameter("F5Total", report.F5Total));
-
-            p.Add(new ReportParameter("F6Map", report.F6Map));
-            p.Add(new ReportParameter("F6Visible", (report.F6Visible.HasValue && report.F6Visible.Value) ? "1": "0"));
-            p.Add(new ReportParameter("F6Header", report.F6Header));
-            p.Add(new ReportParameter("F6Color", report.F6Color));
-            p.Add(new ReportParameter("F6Total", report.F6Total));
-
-            p.Add(new ReportParameter("F7Map", report.F7Map));
-            p.Add(new ReportParameter("F7Visible", (report.F7Visible.HasValue && report.F7Visible.Value) ? "1": "0"));
-            p.Add(new ReportParameter("F7Header", report.F7Header));
-            p.Add(new ReportParameter("F7Color", report.F7Color));
-            p.Add(new ReportParameter("F7Total", report.F7Total));
-
-            p.Add(new ReportParameter("F8Map", report.F8Map));
-            p.Add(new ReportParameter("F8Visible", (report.F8Visible.HasValue && report.F8Visible.Value) ? "1": "0"));
-            p.Add(new ReportParameter("F8Header", report.F8Header));
-            p.Add(new ReportParameter("F8Color", report.F8Color));
-            p.Add(new ReportParameter("F8Total", report.F8Total));
-
-
-
 
             reportViewer.LocalReport.SetParameters(p);
             reportViewer.LocalReport.Refresh();

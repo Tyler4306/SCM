@@ -132,7 +132,7 @@ select
 
 from ServiceRequests sr
 left outer join Customers cu on sr.CustomerId = cu.Id
-left outer join Engineers e on sr.EngineertId = e.Id
+left outer join Engineers e on sr.EngineerId = e.Id
 left outer join Cities c on cu.CityId = c.Id
 left outer join Regions r on cu.RegionId = r.Id
 left outer join RequestTags rt on rt.ServiceRequestId = sr.Id

@@ -10,10 +10,15 @@ namespace SCM.Models
     {
         public ReportViewModel()
         {
-            FromDate = DateTime.Today;
+            FromDate = new DateTime(DateTime.Today.Year, 1, 1);
             ToDate = DateTime.Today;
+            IsStatusActive = true;
+            IsStatusPending = true;
+            IsStatusCancelled = true;
+            IsStatusClosed = true;
         }
         public ReportViewModel(int id)
+            :this()
         {
             GetReportObject(id);
         }

@@ -39,14 +39,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input type="date" id="FromDate" name="FromDate" class="form-control" value='@DateTime.Parse("1/1/" + DateTime.Today.Year.ToString()).ToString("dd/MM/yyyy")' pattern="dd/mm/yyyy" />
+                    <input type="date" id="FromDate" name="FromDate" class="form-control" value='@Model.FromDate.ToString("yyyy-MM-dd")' pattern="dd/mm/yyyy" />
                     @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input type="date" id="ToDate" name="ToDate" class="form-control" value='@DateTime.Today.ToString("dd/MM/yyyy")' pattern="dd/mm/yyyy" />
+                    <input type="date" id="ToDate" name="ToDate" class="form-control" value='@Model.ToDate.ToString("yyyy-MM-dd")' pattern="dd/mm/yyyy" />
                     @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -211,7 +211,7 @@
                         @foreach (Tag tag in ViewBag.Tags)
                         {
                             <span>
-                                <input class="tag" type="checkbox" data-id="@tag.Id" />
+                                <input class="tag" type="checkbox" data-id="@tag.Id" checked="checked" />
                                 <span class="label @tag.Format">@tag.Name</span>
                             </span>
                             <span>&nbsp;</span>
@@ -370,15 +370,18 @@
     <script>
         function collectTags() {
             var selectedTags = '';
+            var counter = 0;
             $(".tag").each(function (index, elem) {
                 if (elem.checked) {
                     selectedTags = selectedTags + $(this).data("id") + ',';
+                    counter++;
                 }
             });
             if (selectedTags != null) {
                 selectedTags = selectedTags.substr(0, selectedTags.length - 1);
             }
             $("#TagsFilter").val(selectedTags);
+
         }
 
         function callCustomers(page) {
@@ -411,6 +414,8 @@
             $(".tag").change(function () {
                 collectTags();
             });
+
+            collectTags();
 
             if ($("#CustomerId").val() === "0")
                 $("#CustomerId").val('');

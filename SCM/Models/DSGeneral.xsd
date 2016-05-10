@@ -12,7 +12,7 @@
   <xs:element name="DSGeneral" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DSGeneral" msprop:Generator_UserDSName="DSGeneral">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="ReportBody" msprop:Generator_TableClassName="ReportBodyDataTable" msprop:Generator_TableVarName="tableReportBody" msprop:Generator_TablePropName="ReportBody" msprop:Generator_RowDeletingName="ReportBodyRowDeleting" msprop:Generator_RowChangingName="ReportBodyRowChanging" msprop:Generator_RowEvHandlerName="ReportBodyRowChangeEventHandler" msprop:Generator_RowDeletedName="ReportBodyRowDeleted" msprop:Generator_UserTableName="ReportBody" msprop:Generator_RowChangedName="ReportBodyRowChanged" msprop:Generator_RowEvArgName="ReportBodyRowChangeEvent" msprop:Generator_RowClassName="ReportBodyRow">
+        <xs:element name="ReportBody" msprop:Generator_TableClassName="ReportBodyDataTable" msprop:Generator_TableVarName="tableReportBody" msprop:Generator_RowChangedName="ReportBodyRowChanged" msprop:Generator_TablePropName="ReportBody" msprop:Generator_RowDeletingName="ReportBodyRowDeleting" msprop:Generator_RowChangingName="ReportBodyRowChanging" msprop:Generator_RowEvHandlerName="ReportBodyRowChangeEventHandler" msprop:Generator_RowDeletedName="ReportBodyRowDeleted" msprop:Generator_RowClassName="ReportBodyRow" msprop:Generator_UserTableName="ReportBody" msprop:Generator_RowEvArgName="ReportBodyRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" minOccurs="0" />
@@ -42,7 +42,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ReportParameters" msprop:Generator_TableClassName="ReportParametersDataTable" msprop:Generator_TableVarName="tableReportParameters" msprop:Generator_TablePropName="ReportParameters" msprop:Generator_RowDeletingName="ReportParametersRowDeleting" msprop:Generator_RowChangingName="ReportParametersRowChanging" msprop:Generator_RowEvHandlerName="ReportParametersRowChangeEventHandler" msprop:Generator_RowDeletedName="ReportParametersRowDeleted" msprop:Generator_UserTableName="ReportParameters" msprop:Generator_RowChangedName="ReportParametersRowChanged" msprop:Generator_RowEvArgName="ReportParametersRowChangeEvent" msprop:Generator_RowClassName="ReportParametersRow">
+        <xs:element name="ReportParameters" msprop:Generator_TableClassName="ReportParametersDataTable" msprop:Generator_TableVarName="tableReportParameters" msprop:Generator_RowChangedName="ReportParametersRowChanged" msprop:Generator_TablePropName="ReportParameters" msprop:Generator_RowDeletingName="ReportParametersRowDeleting" msprop:Generator_RowChangingName="ReportParametersRowChanging" msprop:Generator_RowEvHandlerName="ReportParametersRowChangeEventHandler" msprop:Generator_RowDeletedName="ReportParametersRowDeleted" msprop:Generator_RowClassName="ReportParametersRow" msprop:Generator_UserTableName="ReportParameters" msprop:Generator_RowEvArgName="ReportParametersRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" default="1" minOccurs="0" />
@@ -51,11 +51,25 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="ReportHeader" msprop:Generator_TableClassName="ReportHeaderDataTable" msprop:Generator_TableVarName="tableReportHeader" msprop:Generator_TablePropName="ReportHeader" msprop:Generator_RowDeletingName="ReportHeaderRowDeleting" msprop:Generator_RowChangingName="ReportHeaderRowChanging" msprop:Generator_RowEvHandlerName="ReportHeaderRowChangeEventHandler" msprop:Generator_RowDeletedName="ReportHeaderRowDeleted" msprop:Generator_UserTableName="ReportHeader" msprop:Generator_RowChangedName="ReportHeaderRowChanged" msprop:Generator_RowEvArgName="ReportHeaderRowChangeEvent" msprop:Generator_RowClassName="ReportHeaderRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Code" msprop:Generator_ColumnVarNameInTable="columnCode" msprop:Generator_ColumnPropNameInRow="Code" msprop:Generator_ColumnPropNameInTable="CodeColumn" msprop:Generator_UserColumnName="Code" type="xs:string" default="" />
+              <xs:element name="Header" msprop:Generator_ColumnVarNameInTable="columnHeader" msprop:Generator_ColumnPropNameInRow="Header" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInTable="HeaderColumn" msprop:Generator_UserColumnName="Header" type="xs:string" minOccurs="0" />
+              <xs:element name="Visible" msprop:Generator_ColumnVarNameInTable="columnVisible" msprop:Generator_ColumnPropNameInRow="Visible" msprop:Generator_ColumnPropNameInTable="VisibleColumn" msprop:Generator_UserColumnName="Visible" type="xs:boolean" default="false" />
+              <xs:element name="Color" msprop:Generator_ColumnVarNameInTable="columnColor" msprop:Generator_ColumnPropNameInRow="Color" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInTable="ColorColumn" msprop:Generator_UserColumnName="Color" type="xs:string" default="Black" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1">
       <xs:selector xpath=".//mstns:ReportParameters" />
       <xs:field xpath="mstns:Id" />
+    </xs:unique>
+    <xs:unique name="ReportHeader_Constraint1" msdata:ConstraintName="Constraint1">
+      <xs:selector xpath=".//mstns:ReportHeader" />
+      <xs:field xpath="mstns:Code" />
     </xs:unique>
   </xs:element>
 </xs:schema>

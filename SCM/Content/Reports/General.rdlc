@@ -157,6 +157,7 @@
         <Visibility>
           <Hidden>= (Parameters!ParametersVisible.Value &lt;&gt; "1")</Hidden>
         </Visibility>
+        <DocumentMapLabel>Parameters</DocumentMapLabel>
         <Style>
           <Border>
             <Color>CornflowerBlue</Color>
@@ -168,7 +169,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>6.05041cm</Width>
+              <Width>2.89687cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.51104cm</Width>
@@ -180,16 +181,46 @@
               <Width>2.31479cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.1825cm</Width>
+              <Width>1.85085cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.62687cm</Width>
+              <Width>2.0502cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.91792cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.1723cm</Width>
+              <Width>4.2198cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.78563cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.73271cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.75917cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.70625cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.78563cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.99729cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.12958cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.07667cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.02375cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.07667cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -216,6 +247,7 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox277</rd:DefaultName>
+                      <DocumentMapLabel>=Fields!G.Value</DocumentMapLabel>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -228,9 +260,19 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <ColSpan>8</ColSpan>
+                    <ColSpan>18</ColSpan>
                   </CellContents>
                 </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
                 <TablixCell />
                 <TablixCell />
                 <TablixCell />
@@ -253,7 +295,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Parameters!F1Header.Value</Value>
+                              <Value>=Lookup("T1", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -288,7 +330,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Parameters!F2Header.Value</Value>
+                              <Value>=Lookup("T2", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -323,7 +365,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Parameters!F3Header.Value</Value>
+                              <Value>=Lookup("T3", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -358,7 +400,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Parameters!F4Header.Value</Value>
+                              <Value>=Lookup("T4", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -393,7 +435,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Parameters!F5Header.Value</Value>
+                              <Value>=Lookup("T5", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -428,7 +470,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Parameters!F6Header.Value</Value>
+                              <Value>=Lookup("T6", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -463,7 +505,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Parameters!F7Header.Value</Value>
+                              <Value>=Lookup("T7", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -498,7 +540,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Parameters!F8Header.Value</Value>
+                              <Value>=Lookup("T8", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -508,6 +550,351 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox273</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox2">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Lookup("N1", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox2</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox6">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Lookup("N2", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox6</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox13">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Lookup("N3", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox13</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox17">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Lookup("N4", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox17</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox22">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Lookup("N5", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox22</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox27">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Lookup("D1", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox27</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox31">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Lookup("D2", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox31</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox35">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Lookup("D3", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox35</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox39">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Lookup("D4", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox39</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>CornflowerBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox43">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Lookup("D5", Fields!Code.Value, Fields!Header.Value, "ReportHeader")</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox43</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -538,30 +925,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F1Map.Value = "T1", Fields!T1.Value,
-Parameters!F1Map.Value = "T2", Fields!T2.Value,
-Parameters!F1Map.Value = "T3", Fields!T3.Value,
-Parameters!F1Map.Value = "T4", Fields!T4.Value,
-Parameters!F1Map.Value = "T5", Fields!T5.Value,
-Parameters!F1Map.Value = "T6", Fields!T6.Value,
-Parameters!F1Map.Value = "T7", Fields!T7.Value,
-Parameters!F1Map.Value = "T8", Fields!T8.Value,
-Parameters!F1Map.Value = "N1", Fields!N1.Value,
-Parameters!F1Map.Value = "N2", Fields!N2.Value,
-Parameters!F1Map.Value = "N3", Fields!N3.Value,
-Parameters!F1Map.Value = "N4", Fields!N4.Value,
-Parameters!F1Map.Value = "N5", Fields!N5.Value,
-Parameters!F1Map.Value = "F1", Fields!F1.Value,
-Parameters!F1Map.Value = "F2", Fields!F2.Value,
-Parameters!F1Map.Value = "F3", Fields!F3.Value,
-Parameters!F1Map.Value = "F4", Fields!F4.Value,
-Parameters!F1Map.Value = "D1", Fields!D1.Value,
-Parameters!F1Map.Value = "D2", Fields!D2.Value,
-Parameters!F1Map.Value = "D3", Fields!D3.Value,
-Parameters!F1Map.Value = "D4", Fields!D4.Value,
-Parameters!F1Map.Value = "D5", Fields!D5.Value)</Value>
+                              <Value>=Fields!T1.Value</Value>
                               <Style>
-                                <Color>=Parameters!F1Color.Value</Color>
+                                <Color>=Variables!T1Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -593,30 +959,9 @@ Parameters!F1Map.Value = "D5", Fields!D5.Value)</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F2Map.Value = "T1", Fields!T1.Value,
-Parameters!F2Map.Value = "T2", Fields!T2.Value,
-Parameters!F2Map.Value = "T3", Fields!T3.Value,
-Parameters!F2Map.Value = "T4", Fields!T4.Value,
-Parameters!F2Map.Value = "T5", Fields!T5.Value,
-Parameters!F2Map.Value = "T6", Fields!T6.Value,
-Parameters!F2Map.Value = "T7", Fields!T7.Value,
-Parameters!F2Map.Value = "T8", Fields!T8.Value,
-Parameters!F2Map.Value = "N1", Fields!N1.Value,
-Parameters!F2Map.Value = "N2", Fields!N2.Value,
-Parameters!F2Map.Value = "N3", Fields!N3.Value,
-Parameters!F2Map.Value = "N4", Fields!N4.Value,
-Parameters!F2Map.Value = "N5", Fields!N5.Value,
-Parameters!F2Map.Value = "F1", Fields!F1.Value,
-Parameters!F2Map.Value = "F2", Fields!F2.Value,
-Parameters!F2Map.Value = "F3", Fields!F3.Value,
-Parameters!F2Map.Value = "F4", Fields!F4.Value,
-Parameters!F2Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
-Parameters!F2Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
-Parameters!F2Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
-Parameters!F2Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
-Parameters!F2Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
+                              <Value>=Fields!T2.Value</Value>
                               <Style>
-                                <Color>=Parameters!F2Color.Value</Color>
+                                <Color>=Variables!T2Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -650,30 +995,9 @@ Parameters!F2Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F3Map.Value = "T1", Fields!T1.Value,
-Parameters!F3Map.Value = "T2", Fields!T2.Value,
-Parameters!F3Map.Value = "T3", Fields!T3.Value,
-Parameters!F3Map.Value = "T4", Fields!T4.Value,
-Parameters!F3Map.Value = "T5", Fields!T5.Value,
-Parameters!F3Map.Value = "T6", Fields!T6.Value,
-Parameters!F3Map.Value = "T7", Fields!T7.Value,
-Parameters!F3Map.Value = "T8", Fields!T8.Value,
-Parameters!F3Map.Value = "N1", Fields!N1.Value,
-Parameters!F3Map.Value = "N2", Fields!N2.Value,
-Parameters!F3Map.Value = "N3", Fields!N3.Value,
-Parameters!F3Map.Value = "N4", Fields!N4.Value,
-Parameters!F3Map.Value = "N5", Fields!N5.Value,
-Parameters!F3Map.Value = "F1", Fields!F1.Value,
-Parameters!F3Map.Value = "F2", Fields!F2.Value,
-Parameters!F3Map.Value = "F3", Fields!F3.Value,
-Parameters!F3Map.Value = "F4", Fields!F4.Value,
-Parameters!F3Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
-Parameters!F3Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
-Parameters!F3Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
-Parameters!F3Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
-Parameters!F3Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
+                              <Value>=Fields!T3.Value</Value>
                               <Style>
-                                <Color>=Parameters!F3Color.Value</Color>
+                                <Color>=Variables!T3Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -707,30 +1031,9 @@ Parameters!F3Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F4Map.Value = "T1", Fields!T1.Value,
-Parameters!F4Map.Value = "T2", Fields!T2.Value,
-Parameters!F4Map.Value = "T3", Fields!T3.Value,
-Parameters!F4Map.Value = "T4", Fields!T4.Value,
-Parameters!F4Map.Value = "T5", Fields!T5.Value,
-Parameters!F4Map.Value = "T6", Fields!T6.Value,
-Parameters!F4Map.Value = "T7", Fields!T7.Value,
-Parameters!F4Map.Value = "T8", Fields!T8.Value,
-Parameters!F4Map.Value = "N1", Fields!N1.Value,
-Parameters!F4Map.Value = "N2", Fields!N2.Value,
-Parameters!F4Map.Value = "N3", Fields!N3.Value,
-Parameters!F4Map.Value = "N4", Fields!N4.Value,
-Parameters!F4Map.Value = "N5", Fields!N5.Value,
-Parameters!F4Map.Value = "F1", Fields!F1.Value,
-Parameters!F4Map.Value = "F2", Fields!F2.Value,
-Parameters!F4Map.Value = "F3", Fields!F3.Value,
-Parameters!F4Map.Value = "F4", Fields!F4.Value,
-Parameters!F4Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
-Parameters!F4Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
-Parameters!F4Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
-Parameters!F4Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
-Parameters!F4Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
+                              <Value>=Fields!T4.Value</Value>
                               <Style>
-                                <Color>=Parameters!F4Color.Value</Color>
+                                <Color>=Variables!T4Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -764,30 +1067,9 @@ Parameters!F4Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F5Map.Value = "T1", Fields!T1.Value,
-Parameters!F5Map.Value = "T2", Fields!T2.Value,
-Parameters!F5Map.Value = "T3", Fields!T3.Value,
-Parameters!F5Map.Value = "T4", Fields!T4.Value,
-Parameters!F5Map.Value = "T5", Fields!T5.Value,
-Parameters!F5Map.Value = "T6", Fields!T6.Value,
-Parameters!F5Map.Value = "T7", Fields!T7.Value,
-Parameters!F5Map.Value = "T8", Fields!T8.Value,
-Parameters!F5Map.Value = "N1", Fields!N1.Value,
-Parameters!F5Map.Value = "N2", Fields!N2.Value,
-Parameters!F5Map.Value = "N3", Fields!N3.Value,
-Parameters!F5Map.Value = "N4", Fields!N4.Value,
-Parameters!F5Map.Value = "N5", Fields!N5.Value,
-Parameters!F5Map.Value = "F1", Fields!F1.Value,
-Parameters!F5Map.Value = "F2", Fields!F2.Value,
-Parameters!F5Map.Value = "F3", Fields!F3.Value,
-Parameters!F5Map.Value = "F4", Fields!F4.Value,
-Parameters!F5Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
-Parameters!F5Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
-Parameters!F5Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
-Parameters!F5Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
-Parameters!F5Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
+                              <Value>=Fields!T5.Value</Value>
                               <Style>
-                                <Color>=Parameters!F5Color.Value</Color>
+                                <Color>=Variables!T5Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -821,30 +1103,9 @@ Parameters!F5Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F6Map.Value = "T1", Fields!T1.Value,
-Parameters!F6Map.Value = "T2", Fields!T2.Value,
-Parameters!F6Map.Value = "T3", Fields!T3.Value,
-Parameters!F6Map.Value = "T4", Fields!T4.Value,
-Parameters!F6Map.Value = "T5", Fields!T5.Value,
-Parameters!F6Map.Value = "T6", Fields!T6.Value,
-Parameters!F6Map.Value = "T7", Fields!T7.Value,
-Parameters!F6Map.Value = "T8", Fields!T8.Value,
-Parameters!F6Map.Value = "N1", Fields!N1.Value,
-Parameters!F6Map.Value = "N2", Fields!N2.Value,
-Parameters!F6Map.Value = "N3", Fields!N3.Value,
-Parameters!F6Map.Value = "N4", Fields!N4.Value,
-Parameters!F6Map.Value = "N5", Fields!N5.Value,
-Parameters!F6Map.Value = "F1", Fields!F1.Value,
-Parameters!F6Map.Value = "F2", Fields!F2.Value,
-Parameters!F6Map.Value = "F3", Fields!F3.Value,
-Parameters!F6Map.Value = "F4", Fields!F4.Value,
-Parameters!F6Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
-Parameters!F6Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
-Parameters!F6Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
-Parameters!F6Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
-Parameters!F6Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
+                              <Value>=Fields!T6.Value</Value>
                               <Style>
-                                <Color>=Parameters!F6Color.Value</Color>
+                                <Color>=Variables!T6Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -878,30 +1139,9 @@ Parameters!F6Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F7Map.Value = "T1", Fields!T1.Value,
-Parameters!F7Map.Value = "T2", Fields!T2.Value,
-Parameters!F7Map.Value = "T3", Fields!T3.Value,
-Parameters!F7Map.Value = "T4", Fields!T4.Value,
-Parameters!F7Map.Value = "T5", Fields!T5.Value,
-Parameters!F7Map.Value = "T6", Fields!T6.Value,
-Parameters!F7Map.Value = "T7", Fields!T7.Value,
-Parameters!F7Map.Value = "T8", Fields!T8.Value,
-Parameters!F7Map.Value = "N1", Fields!N1.Value,
-Parameters!F7Map.Value = "N2", Fields!N2.Value,
-Parameters!F7Map.Value = "N3", Fields!N3.Value,
-Parameters!F7Map.Value = "N4", Fields!N4.Value,
-Parameters!F7Map.Value = "N5", Fields!N5.Value,
-Parameters!F7Map.Value = "F1", Fields!F1.Value,
-Parameters!F7Map.Value = "F2", Fields!F2.Value,
-Parameters!F7Map.Value = "F3", Fields!F3.Value,
-Parameters!F7Map.Value = "F4", Fields!F4.Value,
-Parameters!F7Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
-Parameters!F7Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
-Parameters!F7Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
-Parameters!F7Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
-Parameters!F7Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
+                              <Value>=Fields!T7.Value</Value>
                               <Style>
-                                <Color>=Parameters!F7Color.Value</Color>
+                                <Color>=Variables!T7Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -935,30 +1175,9 @@ Parameters!F7Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F8Map.Value = "T1", Fields!T1.Value,
-Parameters!F8Map.Value = "T2", Fields!T2.Value,
-Parameters!F8Map.Value = "T3", Fields!T3.Value,
-Parameters!F8Map.Value = "T4", Fields!T4.Value,
-Parameters!F8Map.Value = "T5", Fields!T5.Value,
-Parameters!F8Map.Value = "T6", Fields!T6.Value,
-Parameters!F8Map.Value = "T7", Fields!T7.Value,
-Parameters!F8Map.Value = "T8", Fields!T8.Value,
-Parameters!F8Map.Value = "N1", Fields!N1.Value,
-Parameters!F8Map.Value = "N2", Fields!N2.Value,
-Parameters!F8Map.Value = "N3", Fields!N3.Value,
-Parameters!F8Map.Value = "N4", Fields!N4.Value,
-Parameters!F8Map.Value = "N5", Fields!N5.Value,
-Parameters!F8Map.Value = "F1", Fields!F1.Value,
-Parameters!F8Map.Value = "F2", Fields!F2.Value,
-Parameters!F8Map.Value = "F3", Fields!F3.Value,
-Parameters!F8Map.Value = "F4", Fields!F4.Value,
-Parameters!F8Map.Value = "D1", FormatDateTime(Fields!D1.Value, DateFormat.ShortDate),
-Parameters!F8Map.Value = "D2", FormatDateTime(Fields!D2.Value, DateFormat.ShortDate),
-Parameters!F8Map.Value = "D3", FormatDateTime(Fields!D3.Value, DateFormat.ShortDate),
-Parameters!F8Map.Value = "D4", FormatDateTime(Fields!D4.Value, DateFormat.ShortDate),
-Parameters!F8Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortDate))</Value>
+                              <Value>=Fields!T8.Value</Value>
                               <Style>
-                                <Color>=Parameters!F8Color.Value</Color>
+                                <Color>=Variables!T8Color.Value</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -980,7 +1199,366 @@ Parameters!F8Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortD
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox3">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!N1.Value</Value>
+                              <Style>
+                                <Color>=Variables!N1Color.Value</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox7">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!N2.Value</Value>
+                              <Style>
+                                <Color>=Variables!N2Color.Value</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox7</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox14">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!N3.Value</Value>
+                              <Style>
+                                <Color>=Variables!N3Color.Value</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox14</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox19">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!N4.Value</Value>
+                              <Style>
+                                <Color>=Variables!N4Color.Value</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox19</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox23">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!N5.Value</Value>
+                              <Style>
+                                <Color>=Fields!N5.Value</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox23</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox28">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!D1.Value</Value>
+                              <Style>
+                                <Format>d</Format>
+                                <Color>=Variables!D1Color.Value</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox28</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox32">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!D2.Value</Value>
+                              <Style>
+                                <Format>d</Format>
+                                <Color>=Variables!D2Color.Value</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox32</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox36">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!D3.Value</Value>
+                              <Style>
+                                <Format>d</Format>
+                                <Color>=Variables!D3Color.Value</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox36</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox40">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!D4.Value</Value>
+                              <Style>
+                                <Format>d</Format>
+                                <Color>=Variables!D4Color.Value</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox40</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox44">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!D5.Value</Value>
+                              <Style>
+                                <Format>d</Format>
+                                <Color>=Variables!D5Color.Value</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox44</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -998,7 +1576,7 @@ Parameters!F8Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>="Total (" &amp; CountDistinct(Fields!Id.Value,"G") &amp; ") "</Value>
+                              <Value EvaluationMode="Constant" />
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>MidnightBlue</Color>
@@ -1036,16 +1614,7 @@ Parameters!F8Map.Value = "D5", FormatDateTime(Fields!D5.Value, DateFormat.ShortD
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F2Total.Value = "Sum", Sum(Val(Switch
-(
-Parameters!F2Map.Value = "N1", Fields!N1.Value
-,Parameters!F2Map.Value = "N2", Fields!N2.Value
-,Parameters!F2Map.Value = "N3", Fields!N3.Value
-,Parameters!F2Map.Value = "N4", Fields!N4.Value
-,Parameters!F2Map.Value = "N5", Fields!N5.Value
-)), "G")
-,Parameters!F2Total.Value = "Count", CountDistinct(Fields!T2.Value, "G")
-)</Value>
+                              <Value />
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>Maroon</Color>
@@ -1083,16 +1652,7 @@ Parameters!F2Map.Value = "N1", Fields!N1.Value
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F3Total.Value = "Sum",  Sum(Val(Switch
-(
-Parameters!F3Map.Value = "N1", Fields!N1.Value
-,Parameters!F3Map.Value = "N2", Fields!N2.Value
-,Parameters!F3Map.Value = "N3", Fields!N3.Value
-,Parameters!F3Map.Value = "N4", Fields!N4.Value
-,Parameters!F3Map.Value = "N5", Fields!N5.Value
-)), "G")
-,Parameters!F3Total.Value = "Count", CountDistinct(Fields!T3.Value, "G")
-)</Value>
+                              <Value />
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>Maroon</Color>
@@ -1130,16 +1690,7 @@ Parameters!F3Map.Value = "N1", Fields!N1.Value
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F4Total.Value = "Sum",  Sum(Val(Switch
-(
-Parameters!F4Map.Value = "N1", Fields!N1.Value
-,Parameters!F4Map.Value = "N2", Fields!N2.Value
-,Parameters!F4Map.Value = "N3", Fields!N3.Value
-,Parameters!F4Map.Value = "N4", Fields!N4.Value
-,Parameters!F4Map.Value = "N5", Fields!N5.Value
-)), "G")
-,Parameters!F4Total.Value = "Count", CountDistinct(Fields!T4.Value, "G")
-)</Value>
+                              <Value />
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>Maroon</Color>
@@ -1177,16 +1728,7 @@ Parameters!F4Map.Value = "N1", Fields!N1.Value
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F5Total.Value = "Sum",  Sum(Val(Switch
-(
-Parameters!F5Map.Value = "N1", Fields!N1.Value
-,Parameters!F5Map.Value = "N2", Fields!N2.Value
-,Parameters!F5Map.Value = "N3", Fields!N3.Value
-,Parameters!F5Map.Value = "N4", Fields!N4.Value
-,Parameters!F5Map.Value = "N5", Fields!N5.Value
-)), "G")
-,Parameters!F5Total.Value = "Count", CountDistinct(Fields!T5.Value, "G")
-)</Value>
+                              <Value />
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>Maroon</Color>
@@ -1224,16 +1766,7 @@ Parameters!F5Map.Value = "N1", Fields!N1.Value
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F6Total.Value = "Sum", Sum(Val(Switch
-(
-Parameters!F6Map.Value = "N1", Fields!N1.Value
-,Parameters!F6Map.Value = "N2", Fields!N2.Value
-,Parameters!F6Map.Value = "N3", Fields!N3.Value
-,Parameters!F6Map.Value = "N4", Fields!N4.Value
-,Parameters!F6Map.Value = "N5", Fields!N5.Value
-)), "G")
-,Parameters!F6Total.Value = "Count", CountDistinct(Fields!T6.Value, "G")
-)</Value>
+                              <Value />
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>Maroon</Color>
@@ -1271,16 +1804,7 @@ Parameters!F6Map.Value = "N1", Fields!N1.Value
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F7Total.Value = "Sum", Sum(Val(Switch
-(
-Parameters!F7Map.Value = "N1", Fields!N1.Value
-,Parameters!F7Map.Value = "N2", Fields!N2.Value
-,Parameters!F7Map.Value = "N3", Fields!N3.Value
-,Parameters!F7Map.Value = "N4", Fields!N4.Value
-,Parameters!F7Map.Value = "N5", Fields!N5.Value
-)), "G")
-,Parameters!F7Total.Value = "Count", CountDistinct(Fields!T7.Value, "G")
-)</Value>
+                              <Value />
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>Maroon</Color>
@@ -1318,16 +1842,7 @@ Parameters!F7Map.Value = "N1", Fields!N1.Value
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Switch(Parameters!F8Total.Value = "Sum", Sum(Val(Switch
-(
-Parameters!F8Map.Value = "N1", Fields!N1.Value
-,Parameters!F8Map.Value = "N2", Fields!N2.Value
-,Parameters!F8Map.Value = "N3", Fields!N3.Value
-,Parameters!F8Map.Value = "N4", Fields!N4.Value
-,Parameters!F8Map.Value = "N5", Fields!N5.Value
-)), "G")
-,Parameters!F8Total.Value = "Count", CountDistinct(Fields!T8.Value, "G")
-)</Value>
+                              <Value />
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>Maroon</Color>
@@ -1355,6 +1870,381 @@ Parameters!F8Map.Value = "N1", Fields!N1.Value
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox4">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Maroon</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox4</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox8">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Maroon</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox8</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox15">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Maroon</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox15</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox20">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Maroon</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox20</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox24">
+                      <CanGrow>true</CanGrow>
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Maroon</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox24</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox29">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Maroon</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox29</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox33">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Maroon</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox33</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox37">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Maroon</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox37</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox41">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Maroon</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox41</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox45">
+                      <CanShrink>true</CanShrink>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>Maroon</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox45</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightBlue</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
@@ -1363,42 +2253,92 @@ Parameters!F8Map.Value = "N1", Fields!N1.Value
           <TablixMembers>
             <TablixMember>
               <Visibility>
-                <Hidden>=(Parameters!F1Visible.Value &lt;&gt; "1")</Hidden>
+                <Hidden>=(Lookup("T1", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
               </Visibility>
             </TablixMember>
             <TablixMember>
               <Visibility>
-                <Hidden>=(Parameters!F2Visible.Value  &lt;&gt; "1")</Hidden>
+                <Hidden>=(Lookup("T2", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
               </Visibility>
             </TablixMember>
             <TablixMember>
               <Visibility>
-                <Hidden>=(Parameters!F3Visible.Value  &lt;&gt; "1")</Hidden>
+                <Hidden>=(Lookup("T3", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
               </Visibility>
             </TablixMember>
             <TablixMember>
               <Visibility>
-                <Hidden>=(Parameters!F4Visible.Value  &lt;&gt; "1")</Hidden>
+                <Hidden>=(Lookup("T4", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
               </Visibility>
             </TablixMember>
             <TablixMember>
               <Visibility>
-                <Hidden>=(Parameters!F5Visible.Value  &lt;&gt; "1")</Hidden>
+                <Hidden>=(Lookup("T5", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
               </Visibility>
             </TablixMember>
             <TablixMember>
               <Visibility>
-                <Hidden>=(Parameters!F6Visible.Value  &lt;&gt; "1")</Hidden>
+                <Hidden>=(Lookup("T6", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
               </Visibility>
             </TablixMember>
             <TablixMember>
               <Visibility>
-                <Hidden>=(Parameters!F7Visible.Value  &lt;&gt; "1")</Hidden>
+                <Hidden>=(Lookup("T7", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
               </Visibility>
             </TablixMember>
             <TablixMember>
               <Visibility>
-                <Hidden>=(Parameters!F8Visible.Value  &lt;&gt; "1")</Hidden>
+                <Hidden>=(Lookup("T8", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
+              </Visibility>
+            </TablixMember>
+            <TablixMember>
+              <Visibility>
+                <Hidden>=(Lookup("N1", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
+              </Visibility>
+            </TablixMember>
+            <TablixMember>
+              <Visibility>
+                <Hidden>=(Lookup("N2", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
+              </Visibility>
+            </TablixMember>
+            <TablixMember>
+              <Visibility>
+                <Hidden>=(Lookup("N3", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
+              </Visibility>
+            </TablixMember>
+            <TablixMember>
+              <Visibility>
+                <Hidden>=(Lookup("N4", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
+              </Visibility>
+            </TablixMember>
+            <TablixMember>
+              <Visibility>
+                <Hidden>=(Lookup("N5", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
+              </Visibility>
+            </TablixMember>
+            <TablixMember>
+              <Visibility>
+                <Hidden>=(Lookup("D1", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
+              </Visibility>
+            </TablixMember>
+            <TablixMember>
+              <Visibility>
+                <Hidden>=(Lookup("D2", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
+              </Visibility>
+            </TablixMember>
+            <TablixMember>
+              <Visibility>
+                <Hidden>=(Lookup("D3", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
+              </Visibility>
+            </TablixMember>
+            <TablixMember>
+              <Visibility>
+                <Hidden>=(Lookup("D4", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
+              </Visibility>
+            </TablixMember>
+            <TablixMember>
+              <Visibility>
+                <Hidden>=(Lookup("D5", Fields!Code.Value, Fields!Visible.Value, "ReportHeader") &lt;&gt; "1")</Hidden>
               </Visibility>
             </TablixMember>
           </TablixMembers>
@@ -1465,6 +2405,7 @@ Parameters!F8Map.Value = "N1", Fields!N1.Value
                 </TablixMember>
                 <TablixMember>
                   <Group Name="Details2" />
+                  <KeepTogether>true</KeepTogether>
                 </TablixMember>
                 <TablixMember>
                   <Visibility>
@@ -1483,8 +2424,9 @@ Parameters!F8Map.Value = "N1", Fields!N1.Value
         <DataSetName>ReportBody</DataSetName>
         <Top>1.78538cm</Top>
         <Height>2.54553cm</Height>
-        <Width>24.08938cm</Width>
+        <Width>39.14835cm</Width>
         <ZIndex>1</ZIndex>
+        <DocumentMapLabel>=IIF(IsNothing(Parameters!GHeader.Value), "Records", Parameters!GHeader.Value)</DocumentMapLabel>
         <Style>
           <Border>
             <Color>CornflowerBlue</Color>
@@ -1496,102 +2438,96 @@ Parameters!F8Map.Value = "N1", Fields!N1.Value
     <Height>1.9413in</Height>
     <Style />
   </Body>
-  <Width>9.83817in</Width>
+  <Width>15.43069in</Width>
   <Page>
     <PageHeader>
       <Height>2.70849cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Rectangle Name="Rectangle1">
-          <ReportItems>
-            <Textbox Name="Textbox9">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=Parameters!Title.Value</Value>
-                      <Style>
-                        <FontSize>16pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                        <Color>White</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox9</rd:DefaultName>
-              <Top>0.60537cm</Top>
-              <Height>0.78521cm</Height>
-              <Width>17.43604cm</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <VerticalAlign>Middle</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox10">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=Parameters!SubTitle.Value</Value>
-                      <Style>
-                        <FontSize>12pt</FontSize>
-                        <Color>White</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox9</rd:DefaultName>
-              <Top>1.39057cm</Top>
-              <Height>0.62646cm</Height>
-              <Width>17.43604cm</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <VerticalAlign>Middle</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-          </ReportItems>
+        <Textbox Name="Textbox10">
+          <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
-          <Height>2.5cm</Height>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Parameters!SubTitle.Value</Value>
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                    <Color>White</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox9</rd:DefaultName>
+          <Top>1.43362cm</Top>
+          <Left>0.07938cm</Left>
+          <Height>0.62646cm</Height>
           <Width>17.43604cm</Width>
           <Style>
             <Border>
-              <Color>White</Color>
-              <Style>Solid</Style>
+              <Style>None</Style>
             </Border>
-            <BackgroundColor>CornflowerBlue</BackgroundColor>
+            <VerticalAlign>Middle</VerticalAlign>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
           </Style>
-        </Rectangle>
+        </Textbox>
+        <Textbox Name="Textbox9">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Parameters!Title.Value</Value>
+                  <Style>
+                    <FontSize>16pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>White</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox9</rd:DefaultName>
+          <Top>0.64841cm</Top>
+          <Left>0.07938cm</Left>
+          <Height>0.78521cm</Height>
+          <Width>17.43604cm</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <VerticalAlign>Middle</VerticalAlign>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
+          <Color>White</Color>
           <Style>None</Style>
+          <Width>2pt</Width>
         </Border>
+        <BottomBorder>
+          <Style>Solid</Style>
+        </BottomBorder>
+        <BackgroundColor>CornflowerBlue</BackgroundColor>
       </Style>
     </PageHeader>
     <PageFooter>
@@ -1619,13 +2555,13 @@ Parameters!F8Map.Value = "N1", Fields!N1.Value
           <rd:DefaultName>Textbox53</rd:DefaultName>
           <Top>0.17639cm</Top>
           <Height>0.46771cm</Height>
-          <Width>17.43604cm</Width>
+          <Width>4.73604cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
             <TopBorder>
-              <Style>Solid</Style>
+              <Style>None</Style>
             </TopBorder>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
@@ -1638,6 +2574,9 @@ Parameters!F8Map.Value = "N1", Fields!N1.Value
         <Border>
           <Style>None</Style>
         </Border>
+        <TopBorder>
+          <Style>Solid</Style>
+        </TopBorder>
       </Style>
     </PageFooter>
     <PageHeight>29.7cm</PageHeight>
@@ -1795,6 +2734,38 @@ Parameters!F8Map.Value = "N1", Fields!N1.Value
         <rd:DataSetName>DSGeneral</rd:DataSetName>
         <rd:SchemaPath>E:\Git\SCM\SCM\Models\DSGeneral.xsd</rd:SchemaPath>
         <rd:TableName>ReportBody</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="ReportHeader">
+      <Query>
+        <DataSourceName>DSGeneral</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Code">
+          <DataField>Code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Header">
+          <DataField>Header</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Visible">
+          <DataField>Visible</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="Color">
+          <DataField>Color</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DSGeneral</rd:DataSetName>
+        <rd:SchemaPath>E:\Git\SCM\SCM\Models\DSGeneral.xsd</rd:SchemaPath>
+        <rd:TableName>ReportHeader</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -2073,6 +3044,62 @@ Parameters!F8Map.Value = "N1", Fields!N1.Value
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
+  <Variables>
+    <Variable Name="T1Color">
+      <Value>=Lookup("T1", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="T2Color">
+      <Value>=Lookup("T2", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="T3Color">
+      <Value>=Lookup("T3", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="T4Color">
+      <Value>=Lookup("T4", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="T5Color">
+      <Value>=Lookup("T5", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="T6Color">
+      <Value>=Lookup("T6", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="T7Color">
+      <Value>=Lookup("T7", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="T8Color">
+      <Value>=Lookup("T8", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="N1Color">
+      <Value>=Lookup("N1", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="N2Color">
+      <Value>=Lookup("N2", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="N3Color">
+      <Value>=Lookup("N3", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="N4Color">
+      <Value>=Lookup("N4", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="N5Color">
+      <Value>=Lookup("N5", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="D1Color">
+      <Value>=Lookup("D1", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="D2Color">
+      <Value>=Lookup("D2", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="D3Color">
+      <Value>=Lookup("D3", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="D4Color">
+      <Value>=Lookup("D4", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+    <Variable Name="D5Color">
+      <Value>=Lookup("D5", Fields!Code.Value, Fields!Color.Value, "ReportHeader")</Value>
+    </Variable>
+  </Variables>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>5ee88c30-7a6b-422b-9841-93c745f1576b</rd:ReportID>
 </Report>
