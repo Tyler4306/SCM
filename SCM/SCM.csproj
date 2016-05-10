@@ -272,6 +272,7 @@
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\daterangepicker-bs2.css" />
     <Content Include="Content\daterangepicker-bs3.css" />
+    <Content Include="Content\Files\Readme.txt" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
@@ -453,7 +454,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -476,7 +476,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Content\Reports\General.rdlc" />
+    <Content Include="Content\Reports\General.rdlc" />
     <EmbeddedResource Include="Content\Reports\Requests.rdlc" />
   </ItemGroup>
   <PropertyGroup>
