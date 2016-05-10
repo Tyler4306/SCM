@@ -88,6 +88,17 @@ namespace SCM.Utils
         {
             UserManager.AddToRole(userId, role);           
         }
+        public void ToggleUserRole(string userId, string role)
+        {
+            if (UserManager.IsInRole(userId, role))
+            {
+                UserManager.RemoveFromRole(userId, role);
+            }
+            else
+            {
+                UserManager.AddToRole(userId, role);
+            }
+        }
         public string GetUserExt(string userName)
         {
             ApplicationUser user = UserManager.FindByName(userName);

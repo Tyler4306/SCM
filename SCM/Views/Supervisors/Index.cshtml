@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SCM.Models.SupervisorViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@AppViews.Supervisors</h2>
+
+@Html.Hidden("Supervisors")
+
+<a class="btn btn-primary" id="save" href="#">@AppViews.Save</a>
+<br />
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @AppViews.UserName
+                </th>
+                <th>
+                    @AppViews.Supervisor
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <input type="checkbox" class="isSupervisor" data-id="@item.Id" @(item.IsSupervisor ? "checked" : "") />
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function () {
+
+            $(".isSupervisor").change(function () {
+                var list = $("#Supervisors").val();
+                list = list + $(this).data("id") + ',';
+
+                $("#Supervisors").val(list);
+            });
+
+
+            $("#save").click(function () {
+                // collectChecked();
+
+                var url = '/Supervisors/Save';
+                var idList = $("#Supervisors").val();
+
+                $.ajax(
+                {
+                    type: 'GET',
+                    url: url,
+                    data: { idList: idList },
+                    success: function (result) {
+                        $("#Supervisors").val('');
+                    }
+                }
+                );
+
+            });
+
+        });
+    </script>
+}

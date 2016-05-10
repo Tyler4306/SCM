@@ -717,4 +717,10 @@
   <data name="Report_Generate" xml:space="preserve">
     <value>تقرير</value>
   </data>
+  <data name="Supervisor" xml:space="preserve">
+    <value>مشرف</value>
+  </data>
+  <data name="Supervisors" xml:space="preserve">
+    <value>المشرفين</value>
+  </data>
 </root>

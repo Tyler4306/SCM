@@ -1726,6 +1726,24 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Supervisor.
+        /// </summary>
+        public static string Supervisor {
+            get {
+                return ResourceManager.GetString("Supervisor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supervisors.
+        /// </summary>
+        public static string Supervisors {
+            get {
+                return ResourceManager.GetString("Supervisors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tag.
         /// </summary>
         public static string Tag {
