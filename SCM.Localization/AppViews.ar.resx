@@ -723,4 +723,7 @@
   <data name="Supervisors" xml:space="preserve">
     <value>المشرفين</value>
   </data>
+  <data name="Report_TName" xml:space="preserve">
+    <value>القالب</value>
+  </data>
 </root>

@@ -1240,6 +1240,15 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Template.
+        /// </summary>
+        public static string Report_TName {
+            get {
+                return ResourceManager.GetString("Report_TName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To.
         /// </summary>
         public static string Report_ToDate {

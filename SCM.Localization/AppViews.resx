@@ -723,4 +723,7 @@
   <data name="Supervisors" xml:space="preserve">
     <value>Supervisors</value>
   </data>
+  <data name="Report_TName" xml:space="preserve">
+    <value>Template</value>
+  </data>
 </root>

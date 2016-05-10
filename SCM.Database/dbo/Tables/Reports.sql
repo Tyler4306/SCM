@@ -2,6 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Name] NVARCHAR(50) NOT NULL, 
+    [TemplateName] NVARCHAR(50) NOT NULL DEFAULT N'General', 
 	[Description] NVARCHAR(200) ,
     [Title] NVARCHAR(100) NOT NULL, 
     [SubTitle] NVARCHAR(100) NULL, 

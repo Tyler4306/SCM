@@ -377,6 +377,9 @@ namespace SCM
         [Display(Name = "Report_Name", ResourceType = typeof(AppViews))]
         [Required]
         public string Name { get; set; }
+        [Display(Name = "Report_TName", ResourceType = typeof(AppViews))]
+        [Required]
+        public string TemplateName { get; set; }
         [Display(Name = "Report_Title", ResourceType = typeof(AppViews))]
         public string Title { get; set; }
         [Display(Name = "Report_SubTitle", ResourceType = typeof(AppViews))]

@@ -495,7 +495,8 @@ namespace SCM
                 // da.Fill(body);
             }
 
-            reportViewer.LocalReport.ReportPath = Server.MapPath("~/Content/Reports/General.rdlc");
+            string reportFile = string.Format("~/Content/Reports/{0}.rdlc", report.TemplateName);
+            reportViewer.LocalReport.ReportPath = Server.MapPath(reportFile);
             reportViewer.LocalReport.DataSources.Clear();
             ReportDataSource rsParameter = new ReportDataSource("ReportParameters", reportParams.ToList());
             reportViewer.LocalReport.DataSources.Add(rsParameter);
