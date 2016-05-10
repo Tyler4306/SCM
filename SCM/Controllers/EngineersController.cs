@@ -32,6 +32,31 @@ namespace SCM.Controllers
             return PartialView(model.ToPagedList(pageNumber, pageSize));
         }
 
+        public void ApplyActive(string idList)
+        {
+            if(!string.IsNullOrEmpty(idList))
+            {
+                var ids = new List<int>();
+                foreach(var item in idList.Split(','))
+                {
+
+                    int id;
+                    if(int.TryParse(item, out id))
+                    {
+                        if (id > 0)
+                            ids.Add(id);
+                    }
+                }
+
+                foreach(var item in db.Engineers.Where(x => ids.Contains(x.Id)))
+                {
+                    item.IsActive = !item.IsActive;
+                }
+                db.SaveChanges();
+                Utils.DataManager.ResetEngineers();
+            }
+        }
+
         public ActionResult Details(int? id)
         {
             if (id == null)

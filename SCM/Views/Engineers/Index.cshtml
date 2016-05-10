@@ -18,10 +18,19 @@
     <div class="form-group">
         <a class="btn btn-primary" href='@Url.Action("Create")'><span class="glyphicon glyphicon-plus">&nbsp;</span>@AppViews.Create</a>
     </div>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="form-group">
+            <a id="saveChecked" class="btn btn-primary" href="#"><span class="glyphicon glyphicon-floppy-disk">&nbsp;</span>@AppViews.Save</a>
+        </div>
+    }
 </div>
 
 @Html.Hidden("sortBy", "Name")
 @Html.Hidden("direction", "ASC")
+@Html.Hidden("CheckedItems")
+
 
 <div id="list">
     @Html.Partial("List", Model)
@@ -51,6 +60,7 @@
 
                     $(listId).html(result);
                     initSorts();
+                    setActiveFlags();
                 }
             }
             );
@@ -80,9 +90,41 @@
             });
         }
 
+        function setActiveFlags() {
+            $(".isActive").change(function () {
+               
+                var list = $("#CheckedItems").val();
+                list = list + $(this).data("id") + ',';
+
+                $("#CheckedItems").val(list);
+                
+            });
+        }
+
         $(function () {
 
             initSorts();
+
+
+
+            $("#saveChecked").click(function () {
+                // collectChecked();
+                
+                var url = '/Engineers/ApplyActive';
+                var idList = $("#CheckedItems").val();
+                
+                $.ajax(
+                {
+                    type: 'GET',
+                    url: url,
+                    data: { idList: idList },
+                    success: function (result) {
+                        $("#CheckedItems").val('');
+                    }
+                }
+                );
+
+            });
 
         });
     </script>

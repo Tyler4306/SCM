@@ -62,7 +62,14 @@
                         @Html.DisplayFor(modelItem => item.Department.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IsActive)
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <input type="checkbox" class="isActive" data-id="@item.Id" @(item.IsActive ? "checked" : "") />
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.IsActive);
+                        }
                     </td>
                     <td>
                         @SCM.Utils.DataManager.Requests().Count(x => x.EngineerId == item.Id && x.StatusId == 10)
