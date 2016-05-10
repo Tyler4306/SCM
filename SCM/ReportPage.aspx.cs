@@ -86,7 +86,7 @@ namespace SCM
                 ds.AddDSRequestRow(row);
             }
 
-            reportViewer.LocalReport.ReportPath = Server.MapPath("~/Reports/Requests.rdlc");
+            reportViewer.LocalReport.ReportPath = Server.MapPath("~/Content/Reports/Requests.rdlc");
             reportViewer.LocalReport.DisplayName = string.Format("{0}", AppViews.ServiceRequests);
             reportViewer.LocalReport.DataSources.Clear();
             ReportDataSource rs = new ReportDataSource("DSRequests", ds.ToList());
@@ -410,14 +410,29 @@ namespace SCM
 
             using (SqlConnection conn = new SqlConnection(ctx.Database.Connection.ConnectionString))
             {
+                
                 conn.Open();
                 SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandTimeout = 60;
                 cmd.CommandText = report.Command;
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(body);
+                //SqlDataAdapter da = new SqlDataAdapter(cmd);
+                SqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.Default);
+                while(reader.Read())
+                {
+                    DSGeneral.ReportBodyRow row = body.NewReportBodyRow();
+
+                    for(int i = 0; i < reader.FieldCount; i++)
+                    {
+                        string colName = reader.GetName(i);
+                        row[colName] = reader[colName];
+                    }
+                    body.AddReportBodyRow(row);
+                }
+                reader.NextResult();
+                // da.Fill(body);
             }
 
-            reportViewer.LocalReport.ReportPath = Server.MapPath("~/Reports/General.rdlc");
+            reportViewer.LocalReport.ReportPath = Server.MapPath("~/Content/Reports/General.rdlc");
             reportViewer.LocalReport.DataSources.Clear();
             ReportDataSource rsParameter = new ReportDataSource("ReportParameters", reportParams.ToList());
             reportViewer.LocalReport.DataSources.Add(rsParameter);

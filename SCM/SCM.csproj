@@ -449,7 +449,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Files\" />
+    <Folder Include="Content\Files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -472,8 +472,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\General.rdlc" />
-    <EmbeddedResource Include="Reports\Requests.rdlc" />
+    <EmbeddedResource Include="Content\Reports\General.rdlc" />
+    <EmbeddedResource Include="Content\Reports\Requests.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

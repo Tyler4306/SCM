@@ -57,7 +57,7 @@ namespace SCM.Controllers
                 if (hpf.ContentLength == 0)
                     continue;
                 savedFileName = Path.Combine(
-                   Server.MapPath("~/Files"),
+                   Server.MapPath("~/Content/Files"),
                    Path.GetFileName(hpf.FileName));
                 hpf.SaveAs(savedFileName);
             }
