@@ -20,11 +20,6 @@
                     @Html.DisplayNameFor(model => model.FirstOrDefault().Mobile)
                 </th>
                 <th>
-                    <a class="sorter" data-sort="City.Name" href="#">
-                        @Html.DisplayNameFor(model => model.FirstOrDefault().CityId)
-                    </a>
-                </th>
-                <th>
                     <a class="sorter" data-sort="Region.Name" href="#">
                         @Html.DisplayNameFor(model => model.FirstOrDefault().RegionId)
                     </a>
@@ -78,9 +73,6 @@
                     </td>
                     <td>
                         @item.MobileFormatted()
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City.Name)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Region.Name)
