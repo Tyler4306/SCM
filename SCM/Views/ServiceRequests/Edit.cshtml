@@ -224,9 +224,7 @@
                                 @Html.ValidationMessageFor(model => model.EngineerId, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                            @if (Model.StatusId == 20)
-                            {
-                                <div id="pendingSection" class="form-group hidden">
+                                <div id="pendingSection" class='form-group @(Model.StatusId == 20 ? "" : "hidden")'>
                                     @Html.LabelFor(model => model.PendingReasonId, AppViews.PendingReason, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-8">
                                         @*@Html.DropDownList("PendingReasonId", null, htmlAttributes: new { @class = "form-control" })*@
@@ -234,11 +232,8 @@
                                         @Html.ValidationMessageFor(model => model.PendingReasonId, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            }
 
-                            @if (Model.StatusId == 90)
-                            {
-                                <div id="cancelSection" class="form-group hidden">
+                                <div id="cancelSection" class='form-group @(Model.StatusId == 90 ? "" : "hidden")'>
                                     @Html.LabelFor(model => model.CancelReasonId, AppViews.CancelReason, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-8">
                                         @*@Html.DropDownList("CancelReasonId", null, htmlAttributes: new { @class = "form-control" })*@
@@ -246,7 +241,6 @@
                                         @Html.ValidationMessageFor(model => model.CancelReasonId, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            }
 
                         </div>
                 </div>
@@ -279,6 +273,38 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
+        function changeStatus() {
+            if ($("#StatusId").val() === "10") {
+                $(".panel-status").addClass("panel-default");
+                $("#statusName").html('@AppViews.StatusOpen');
+            }
+            else if ($("#StatusId").val() === "20") {
+                $(".panel-status").addClass("panel-warning");
+                $("#statusName").html('@AppViews.StatusPending');
+                $("#pendingSection").removeClass("hidden");
+            }
+            else if ($("#StatusId").val() === "90") {
+                $(".panel-status").addClass("panel-info");
+                $("#statusName").html('@AppViews.StatusCanceled');
+                $("#btnPending").addClass("disabled");
+                $("#btnCancel").addClass("disabled");
+                $("#btnClose").addClass("disabled");
+                $("#cancelSection").removeClass("hidden");
+
+                if ($("#PendingReasonId").val() == '' || $("#PendingReasonId").val() === "0")
+                    $("#pendingSection").removeClass("hidden");
+            }
+            else if ($("#StatusId").val() === "100") {
+                $(".panel-status").addClass("panel-success");
+                $("#statusName").html('@AppViews.StatusClosed');
+                $("#btnPending").addClass("disabled");
+                $("#btnCancel").addClass("disabled");
+                $("#btnClose").addClass("disabled");
+
+            }
+
+        }
+
         $(function () {
 
             $("#btnTags").click(function (e) {
@@ -335,107 +361,79 @@
 
             });
 
-                if ($("#StatusId").val() === "10") {
-                    $(".panel-status").addClass("panel-default");
-                    $("#statusName").html('@AppViews.StatusOpen');
-                }
-                else if ($("#StatusId").val() === "20") {
-                    $(".panel-status").addClass("panel-warning");
-                    $("#statusName").html('@AppViews.StatusPending');
-                    $("#pendingSection").removeClass("hidden");
-                }
-                else if ($("#StatusId").val() === "90") {
-                    $(".panel-status").addClass("panel-info");
-                    $("#statusName").html('@AppViews.StatusCanceled');
-                    $("#btnPending").addClass("disabled");
-                    $("#btnCancel").addClass("disabled");
-                    $("#btnClose").addClass("disabled");
-                    $("#cancelSection").removeClass("hidden");
+            changeStatus();
 
-                    if ($("#PendingReasonId").val() == '' || $("#PendingReasonId").val() === "0")
-                        $("#pendingSection").removeClass("hidden");
-                }
-                else if ($("#StatusId").val() === "100") {
-                    $(".panel-status").addClass("panel-success");
-                    $("#statusName").html('@AppViews.StatusClosed');
-                    $("#btnPending").addClass("disabled");
-                    $("#btnCancel").addClass("disabled");
-                    $("#btnClose").addClass("disabled");
+            $("#btnPending").click(function () {
+                $("#OldStatus").val($("#StatusId").val());
+                $("#StatusId").val(20);
+                $("#pendingSection").removeClass("hidden");
+                $("#btnSave").removeClass("disabled");
+                $("#btnSave").removeAttr("disabled");
+                changeStatus();
+            });
 
-                    if ($("#PendingReasonId").val() == '' || $("#PendingReasonId").val() === "0")
-                        $("#pendingSection").removeClass("hidden");
+            $("#btnCancel").click(function () {
+                $("#OldStatus").val($("#StatusId").val());
+                $("#StatusId").val(90);
+                $("#cancelSection").removeClass("hidden");
+                $("#btnSave").removeClass("disabled");
+                $("#btnSave").removeAttr("disabled");
+                changeStatus();
+            });
 
-                    $("#cancelSection").removeClass("hidden");
-                }
+            $("#btnClose").click(function () {
+                $("#OldStatus").val($("#StatusId").val());
+                $("#StatusId").val(100);
+                $("#btnSave").removeClass("disabled");
+                $("#btnSave").removeAttr("disabled");
+                changeStatus();
+            });
 
-                $("#btnPending").click(function () {
-                    $("#OldStatus").val($("#StatusId").val());
-                    $("#StatusId").val(20);
-                    $("#pendingSection").removeClass("hidden");
-                    $("#btnSave").removeClass("disabled");
-                    $("#btnSave").removeAttr("disabled");
-                });
+            $("input,select,textarea").change(function () {
+                $("#btnSave").removeClass("disabled");
+                $("#btnSave").removeAttr("disabled");
+            });
 
-                $("#btnCancel").click(function () {
-                    $("#OldStatus").val($("#StatusId").val());
-                    $("#StatusId").val(90);
-                    $("#cancelSection").removeClass("hidden");
-                    $("#btnSave").removeClass("disabled");
-                    $("#btnSave").removeAttr("disabled");
-                });
+            $("#DepartmentId").focusin(function () {
+                $(this).data('val', $(this).val());
+            });
 
-                $("#btnClose").click(function () {
-                    $("#OldStatus").val($("#StatusId").val());
-                    $("#StatusId").val(100);
-                    $("#btnSave").removeClass("disabled");
-                    $("#btnSave").removeAttr("disabled");
-                });
-
-                $("input,select,textarea").change(function () {
-                    $("#btnSave").removeClass("disabled");
-                    $("#btnSave").removeAttr("disabled");
-                });
-
-                $("#DepartmentId").focusin(function () {
-                    $(this).data('val', $(this).val());
-                });
-
-                $("#DepartmentId").change(function (e) {
+            $("#DepartmentId").change(function (e) {
                     
-                    var id = $("#DepartmentId").val();
-                    var url1 = '@Url.Action("GetEngineers")';
-                    var msg = '@AppViews.DepartmentChangeMsg';
+                var id = $("#DepartmentId").val();
+                var url1 = '@Url.Action("GetEngineers")';
+                var msg = '@AppViews.DepartmentChangeMsg';
                     
 
-                    if (!confirm(msg))
-                    {
-                        $("#DepartmentId").val($("#DepartmentId").data('val'));
-                        return;
-                    }
+                if (!confirm(msg))
+                {
+                    $("#DepartmentId").val($("#DepartmentId").data('val'));
+                    return;
+                }
 
-                    $("#EngineerId").empty();
+                $("#EngineerId").empty();
 
-                    $.ajax({
-                        contentType: 'application/json',
-                        method: 'GET',
-                        url: url1,
-                        data: {departmentId: id},
-                        success: function (result) {
-                            if(result != null && result.length > 0)
+                $.ajax({
+                    contentType: 'application/json',
+                    method: 'GET',
+                    url: url1,
+                    data: {departmentId: id},
+                    success: function (result) {
+                        if(result != null && result.length > 0)
+                        {
+
+                            var html = '<option selected="true" value=""></option>';
+                            for(var i = 0; i < result.length; i++)
                             {
-
-                                var html = '<option selected="true" value=""></option>';
-                                for(var i = 0; i < result.length; i++)
-                                {
-                                    var str = '<option value="' + result[i].Id + '">' + result[i].Name + '</option>';
-                                    html = html + str;
-                                }
-                                $("#EngineerId").html(html);
+                                var str = '<option value="' + result[i].Id + '">' + result[i].Name + '</option>';
+                                html = html + str;
                             }
+                            $("#EngineerId").html(html);
                         }
-                    });
+                    }
                 });
             });
+        });
     </script>
 
 }
