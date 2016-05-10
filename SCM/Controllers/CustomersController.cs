@@ -96,6 +96,21 @@ namespace SCM.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
+        
+        public ActionResult GetDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = Utils.DataManager.Customers().FirstOrDefault(x => x.Id == id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("_Details", model);
+        }
+
         public ActionResult Details(int? id)
         {
             if (id == null)

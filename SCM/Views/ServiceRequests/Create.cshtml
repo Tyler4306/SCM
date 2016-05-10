@@ -15,7 +15,7 @@
         <h4>@AppViews.ServiceRequest</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -31,6 +31,7 @@
                     }
                     <span>
                         <a class="btn btn-default" id="btnFind" href="#"><span class="glyphicon glyphicon-search"></span></a>
+                        <a class="btn btn-primary" id="btnAdd" href='@Url.Action("Create", new { phone = "011"})'><span class="glyphicon glyphicon-plus"></span></a>
                     </span>
                 </div>
                 @Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })
@@ -126,6 +127,29 @@
     </div>
 </div>
 
+<div class="modal fade" id="detailsCustomer" tabindex="-1" role="dialog" aria-labelledby="detailsCustomer-label"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="detailsCustomer-label">@AppViews.Details</h4>
+            </div>
+            <div class="modal-body">
+                <div id="detailsCustomerForm"></div>
+                @*<div id="loader_with_image" class="text-center">
+                        <img src="~/Content/ajax-loader.gif" />
+                    </div>*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@AppViews.Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
@@ -159,9 +183,34 @@
             });
         }
 
+
         $(function () {
             if ($("#CustomerId").val() === "0")
                 $("#CustomerId").val('');
+
+            $("#Customer_Name").click(function () {
+                
+                var id = $("#CustomerId").val();
+                if (id == '')
+                    return;
+
+                var url = '/Customers/GetDetails/' + id;
+                $("#detailsCustomer").modal("toggle");
+
+
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    },
+                    success: function (result) {
+                        $("#detailsCustomerForm").html(result);
+                    }
+                });
+            });
 
             // Validator
             $.validator = $("form").validate({
@@ -175,6 +224,8 @@
                 $("#btnFind").click(function (e) {
                     e.preventDefault();
 
+                    // $("#Customer_Name").val()) + '&SelectedCustomer=' + $("#SelectedCustomer").val();
+                    
 
                     var url = '/Customers/FindCustomer';
 

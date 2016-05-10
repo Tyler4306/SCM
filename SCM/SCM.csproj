@@ -446,6 +446,7 @@
     <Content Include="Views\Import\Index.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\GetReport.cshtml" />
+    <Content Include="Views\Customers\_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
