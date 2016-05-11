@@ -12,7 +12,7 @@ AS
 		FROM dbo.QIN
 		WHERE 
 			(IsTaken = 0)
-			AND (TExtCode IS NULL)
+			AND (TExtCode IS NULL OR TExtCode = '')
 			AND (TNo IS NOT NULL)
 			AND (LinkedTo IS NULL)
 		ORDER BY Id
