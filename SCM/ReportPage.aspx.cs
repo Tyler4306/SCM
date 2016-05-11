@@ -208,7 +208,7 @@ namespace SCM
                 if (!string.IsNullOrEmpty(rvm.ProductId))
                 {
                     para.Description = ctx.Products.Find(rvm.ProductId).Name;
-                    report.Command = report.Command.Replace("$ProductId", string.Format("'{0}'", rvm.DepartmentId.Value.ToString()));
+                    report.Command = report.Command.Replace("$ProductId", string.Format("{0}", rvm.ProductId));
                 }
                 else
                 {
