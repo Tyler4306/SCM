@@ -222,6 +222,8 @@ namespace SCM
         [Display(Name = "SR_Remarks", ResourceType = typeof(AppViews))]
         [StringLength(100)]
         public string Remarks { get; set; }
+        [Display(Name = "SR_Cost", ResourceType = typeof(AppViews))]
+        public Nullable<int> Cost { get; set; }
         [Display(Name = "SR_ClosingDate", ResourceType = typeof(AppViews))]
         public Nullable<System.DateTime> ClosingDate { get; set; }
         [Display(Name = "SR_PendingReasonId", ResourceType = typeof(AppViews))]

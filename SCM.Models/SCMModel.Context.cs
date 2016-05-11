@@ -27,20 +27,21 @@ namespace SCM
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<CallArchive> CallArchives { get; set; }
         public virtual DbSet<CancelReason> CancelReasons { get; set; }
         public virtual DbSet<Center> Centers { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Engineer> Engineers { get; set; }
+        public virtual DbSet<ExServiceRequest> ExServiceRequests { get; set; }
         public virtual DbSet<PendingReason> PendingReasons { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<QIN> QINs { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
-        public virtual DbSet<QIN> QINs { get; set; }
-        public virtual DbSet<ExServiceRequest> ExServiceRequests { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Report> Reports { get; set; }
     
         public virtual ObjectResult<q_take_call_Result> q_take_call(string user, string userext)
         {

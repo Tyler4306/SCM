@@ -1519,6 +1519,15 @@ namespace SCM {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cost.
+        /// </summary>
+        public static string SR_Cost {
+            get {
+                return ResourceManager.GetString("SR_Cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created By.
         /// </summary>
         public static string SR_CreatedBy {

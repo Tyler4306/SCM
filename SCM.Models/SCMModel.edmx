@@ -11,6 +11,25 @@
           </Key>
           <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="CallArchives">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TDate" Type="nvarchar" MaxLength="15" />
+          <Property Name="TTime" Type="nvarchar" MaxLength="15" />
+          <Property Name="TExtCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="TLineNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="THeader" Type="nvarchar" MaxLength="50" />
+          <Property Name="TNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="TDur" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsTaken" Type="bit" Nullable="false" />
+          <Property Name="TakenByExt" Type="nvarchar" MaxLength="10" />
+          <Property Name="TakenBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="TakenOn" Type="datetime" />
+          <Property Name="LogTime" Type="datetime" Nullable="false" />
+          <Property Name="LinkedTo" Type="int" />
+        </EntityType>
         <EntityType Name="CancelReasons">
           <Key>
             <PropertyRef Name="Id" />
@@ -246,6 +265,7 @@
           <Property Name="EngineerId" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="Cost" Type="int" />
           <Property Name="ClosingDate" Type="datetime" />
           <Property Name="PendingReasonId" Type="int" />
           <Property Name="CancelReasonId" Type="int" />
@@ -470,6 +490,7 @@
         </Function>
         <EntityContainer Name="SCMModelsStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CallArchives" EntityType="Self.CallArchives" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CancelReasons" EntityType="Self.CancelReasons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Centers" EntityType="Self.Centers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
@@ -556,14 +577,23 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SCM.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SCMContext" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="q_take_call" ReturnType="Collection(SCM.Models.q_take_call_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="userext" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CallArchives" EntityType="SCM.Models.CallArchive" />
           <EntitySet Name="CancelReasons" EntityType="SCM.Models.CancelReason" />
           <EntitySet Name="Centers" EntityType="SCM.Models.Center" />
           <EntitySet Name="Cities" EntityType="SCM.Models.City" />
           <EntitySet Name="Customers" EntityType="SCM.Models.Customer" />
           <EntitySet Name="Departments" EntityType="SCM.Models.Department" />
           <EntitySet Name="Engineers" EntityType="SCM.Models.Engineer" />
+          <EntitySet Name="ExServiceRequests" EntityType="SCM.Models.ExServiceRequest" />
           <EntitySet Name="PendingReasons" EntityType="SCM.Models.PendingReason" />
+          <EntitySet Name="Products" EntityType="SCM.Models.Product" />
+          <EntitySet Name="QINs" EntityType="SCM.Models.QIN" />
           <EntitySet Name="Regions" EntityType="SCM.Models.Region" />
+          <EntitySet Name="Reports" EntityType="SCM.Models.Report" />
           <EntitySet Name="ServiceRequests" EntityType="SCM.Models.ServiceRequest" />
           <EntitySet Name="Tags" EntityType="SCM.Models.Tag" />
           <AssociationSet Name="FK_ServiceRequests_To_CancelReasons" Association="SCM.Models.FK_ServiceRequests_To_CancelReasons">
@@ -602,8 +632,16 @@
             <End Role="Engineer" EntitySet="Engineers" />
             <End Role="ServiceRequest" EntitySet="ServiceRequests" />
           </AssociationSet>
+          <AssociationSet Name="FK_ExServiceRequests_ToServiceRequests" Association="SCM.Models.FK_ExServiceRequests_ToServiceRequests">
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+            <End Role="ExServiceRequest" EntitySet="ExServiceRequests" />
+          </AssociationSet>
           <AssociationSet Name="FK_ServiceRequests_To_PendingReasons" Association="SCM.Models.FK_ServiceRequests_To_PendingReasons">
             <End Role="PendingReason" EntitySet="PendingReasons" />
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceRequests_To_Products" Association="SCM.Models.FK_ServiceRequests_To_Products">
+            <End Role="Product" EntitySet="Products" />
             <End Role="ServiceRequest" EntitySet="ServiceRequests" />
           </AssociationSet>
           <AssociationSet Name="CustomerTags" Association="SCM.Models.CustomerTags">
@@ -614,23 +652,42 @@
             <End Role="ServiceRequest" EntitySet="ServiceRequests" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
-          <FunctionImport Name="q_take_call" ReturnType="Collection(SCM.Models.q_take_call_Result)">
-            <Parameter Name="user" Mode="In" Type="String" />
-            <Parameter Name="userext" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="QINs" EntityType="SCM.Models.QIN" />
-          <EntitySet Name="ExServiceRequests" EntityType="SCM.Models.ExServiceRequest" />
-          <AssociationSet Name="FK_ExServiceRequests_ToServiceRequests" Association="SCM.Models.FK_ExServiceRequests_ToServiceRequests">
-            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
-            <End Role="ExServiceRequest" EntitySet="ExServiceRequests" />
-          </AssociationSet>
-          <EntitySet Name="Products" EntityType="SCM.Models.Product" />
-          <AssociationSet Name="FK_ServiceRequests_To_Products" Association="SCM.Models.FK_ServiceRequests_To_Products">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
-          </AssociationSet>
-          <EntitySet Name="Reports" EntityType="SCM.Models.Report" />
-        </EntityContainer>
+          </EntityContainer>
+        <ComplexType Name="q_take_call_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="TDate" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TTime" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TExtCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TLineNo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="THeader" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TNo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TDur" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="IsTaken" Nullable="false" />
+          <Property Type="String" Name="TakenByExt" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TakenBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TakenOn" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LogTime" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="LinkedTo" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CallArchive">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TDate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TTime" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TExtCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TLineNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="THeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TDur" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsTaken" Type="Boolean" Nullable="false" />
+          <Property Name="TakenByExt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TakenBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TakenOn" Type="DateTime" Precision="3" />
+          <Property Name="LogTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LinkedTo" Type="Int32" />
+        </EntityType>
         <EntityType Name="CancelReason">
           <Key>
             <PropertyRef Name="Id" />
@@ -669,11 +726,11 @@
           <Property Name="RegionId" Type="Int32" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IsBlackListed" Type="Boolean" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="City" Relationship="SCM.Models.FK_Customers_To_Cities" FromRole="Customer" ToRole="City" />
           <NavigationProperty Name="Region" Relationship="SCM.Models.FK_Customers_To_Regions" FromRole="Customer" ToRole="Region" />
           <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequest_To_Customers" FromRole="Customer" ToRole="ServiceRequest" />
           <NavigationProperty Name="Tags" Relationship="SCM.Models.CustomerTags" FromRole="Customer" ToRole="Tag" />
-          <Property Name="Comments" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -692,9 +749,40 @@
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="SCM.Models.FK_Engineers_To_Departments" FromRole="Engineer" ToRole="Department" />
           <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Engineers" FromRole="Engineer" ToRole="ServiceRequest" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExServiceRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="B2BFlag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompletionDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InputDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PullingDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dealer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DealerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DealerReceiptNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ASCRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SchComplaintDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SchComplaintCount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SchComplaintRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ASCClaimNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EsnImeiNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OutModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiptDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransferSendDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransferReceiptDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstPromiseDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Schedule" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PromiseDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Schedule1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DelayFromPromiseDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DelayFromReceiptDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransferApprovalDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServiceRequest" Relationship="SCM.Models.FK_ExServiceRequests_ToServiceRequests" FromRole="ExServiceRequest" ToRole="ServiceRequest" />
         </EntityType>
         <EntityType Name="PendingReason">
           <Key>
@@ -703,6 +791,34 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Reason" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_PendingReasons" FromRole="PendingReason" ToRole="ServiceRequest" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="Product" ToRole="ServiceRequest" />
+        </EntityType>
+        <EntityType Name="QIN">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TDate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TTime" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TExtCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TLineNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="THeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TDur" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsTaken" Type="Boolean" Nullable="false" />
+          <Property Name="TakenByExt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TakenBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TakenOn" Type="DateTime" Precision="3" />
+          <Property Name="LogTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LinkedTo" Type="Int32" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -713,6 +829,81 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="City" Relationship="SCM.Models.FK_Regions_To_Cities" FromRole="Region" ToRole="City" />
           <NavigationProperty Name="Customers" Relationship="SCM.Models.FK_Customers_To_Regions" FromRole="Region" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TemplateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SubTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Command" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FilterByDate" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByCustomer" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByDepartment" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByEngineer" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByProduct" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByStatus" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByCity" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByRegion" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByTag" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByText1" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByText2" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByNumber1" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByNumber2" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByDate1" Type="Boolean" Nullable="false" />
+          <Property Name="FilterByDate2" Type="Boolean" Nullable="false" />
+          <Property Name="Text1Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text2Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number1Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number2Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date1Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date2Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GVisible" Type="Boolean" Nullable="false" />
+          <Property Name="GHeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F1Visible" Type="Boolean" />
+          <Property Name="F1Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F1Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F1Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F1Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F2Visible" Type="Boolean" />
+          <Property Name="F2Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F2Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F2Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F2Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F3Visible" Type="Boolean" />
+          <Property Name="F3Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F3Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F3Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F3Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F4Visible" Type="Boolean" />
+          <Property Name="F4Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F4Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F4Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F4Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F5Visible" Type="Boolean" />
+          <Property Name="F5Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F5Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F5Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F5Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F6Visible" Type="Boolean" />
+          <Property Name="F6Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F6Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F6Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F6Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F7Visible" Type="Boolean" />
+          <Property Name="F7Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F7Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F7Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F7Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F8Visible" Type="Boolean" />
+          <Property Name="F8Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F8Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="F8Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F8Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ServiceRequest">
           <Key>
@@ -733,6 +924,7 @@
           <Property Name="EngineerId" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Int32" />
           <Property Name="ClosingDate" Type="DateTime" Precision="3" />
           <Property Name="PendingReasonId" Type="Int32" />
           <Property Name="CancelReasonId" Type="Int32" />
@@ -746,10 +938,10 @@
           <NavigationProperty Name="Customer" Relationship="SCM.Models.FK_ServiceRequest_To_Customers" FromRole="ServiceRequest" ToRole="Customer" />
           <NavigationProperty Name="Department" Relationship="SCM.Models.FK_ServiceRequests_To_Departments" FromRole="ServiceRequest" ToRole="Department" />
           <NavigationProperty Name="Engineer" Relationship="SCM.Models.FK_ServiceRequests_To_Engineers" FromRole="ServiceRequest" ToRole="Engineer" />
-          <NavigationProperty Name="PendingReason" Relationship="SCM.Models.FK_ServiceRequests_To_PendingReasons" FromRole="ServiceRequest" ToRole="PendingReason" />
-          <NavigationProperty Name="Tags" Relationship="SCM.Models.RequestTags" FromRole="ServiceRequest" ToRole="Tag" />
           <NavigationProperty Name="ExServiceRequest" Relationship="SCM.Models.FK_ExServiceRequests_ToServiceRequests" FromRole="ServiceRequest" ToRole="ExServiceRequest" />
+          <NavigationProperty Name="PendingReason" Relationship="SCM.Models.FK_ServiceRequests_To_PendingReasons" FromRole="ServiceRequest" ToRole="PendingReason" />
           <NavigationProperty Name="Product" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="ServiceRequest" ToRole="Product" />
+          <NavigationProperty Name="Tags" Relationship="SCM.Models.RequestTags" FromRole="ServiceRequest" ToRole="Tag" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -870,92 +1062,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ServiceRequests_To_PendingReasons">
-          <End Type="SCM.Models.PendingReason" Role="PendingReason" Multiplicity="0..1" />
-          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PendingReason">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ServiceRequest">
-              <PropertyRef Name="PendingReasonId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CustomerTags">
-          <End Type="SCM.Models.Customer" Role="Customer" Multiplicity="*" />
-          <End Type="SCM.Models.Tag" Role="Tag" Multiplicity="*" />
-        </Association>
-        <Association Name="RequestTags">
-          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
-          <End Type="SCM.Models.Tag" Role="Tag" Multiplicity="*" />
-        </Association>
-        <EntityType Name="QIN">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TDate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="TTime" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="TExtCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="TLineNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="THeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TDur" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IsTaken" Type="Boolean" Nullable="false" />
-          <Property Name="TakenByExt" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="TakenBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TakenOn" Type="DateTime" Precision="3" />
-          <Property Name="LogTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LinkedTo" Type="Int32" />
-        </EntityType>
-        <ComplexType Name="q_take_call_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="TDate" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="TTime" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="TExtCode" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="TLineNo" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="THeader" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TNo" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="TDur" Nullable="true" MaxLength="20" />
-          <Property Type="Boolean" Name="IsTaken" Nullable="false" />
-          <Property Type="String" Name="TakenByExt" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="TakenBy" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="TakenOn" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="LogTime" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="LinkedTo" Nullable="true" />
-        </ComplexType>
-        <EntityType Name="ExServiceRequest">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="B2BFlag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CompletionDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InputDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PullingDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Dealer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DealerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DealerReceiptNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ASCRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SchComplaintDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SchComplaintCount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SchComplaintRemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ASCClaimNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EsnImeiNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="OutModel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ReceiptDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TransferSendDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TransferReceiptDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FirstPromiseDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Schedule" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PromiseDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Schedule1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DelayFromPromiseDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DelayFromReceiptDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TransferApprovalDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ServiceRequest" Relationship="SCM.Models.FK_ExServiceRequests_ToServiceRequests" FromRole="ExServiceRequest" ToRole="ServiceRequest" />
-        </EntityType>
         <Association Name="FK_ExServiceRequests_ToServiceRequests">
           <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="1" />
           <End Type="SCM.Models.ExServiceRequest" Role="ExServiceRequest" Multiplicity="0..1" />
@@ -968,15 +1074,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ServiceRequests" Relationship="SCM.Models.FK_ServiceRequests_To_Products" FromRole="Product" ToRole="ServiceRequest" />
-        </EntityType>
+        <Association Name="FK_ServiceRequests_To_PendingReasons">
+          <End Type="SCM.Models.PendingReason" Role="PendingReason" Multiplicity="0..1" />
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PendingReason">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequest">
+              <PropertyRef Name="PendingReasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ServiceRequests_To_Products">
           <End Type="SCM.Models.Product" Role="Product" Multiplicity="0..1" />
           <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
@@ -989,87 +1098,60 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Report">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TemplateName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SubTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Command" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="FilterByDate" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByCustomer" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByDepartment" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByEngineer" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByProduct" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByStatus" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByCity" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByRegion" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByTag" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByText1" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByText2" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByNumber1" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByNumber2" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByDate1" Type="Boolean" Nullable="false" />
-          <Property Name="FilterByDate2" Type="Boolean" Nullable="false" />
-          <Property Name="Text1Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Text2Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Number1Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Number2Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Date1Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Date2Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GVisible" Type="Boolean" Nullable="false" />
-          <Property Name="GHeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F1Visible" Type="Boolean" />
-          <Property Name="F1Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F1Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="F1Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F1Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F2Visible" Type="Boolean" />
-          <Property Name="F2Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F2Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="F2Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F2Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F3Visible" Type="Boolean" />
-          <Property Name="F3Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F3Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="F3Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F3Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F4Visible" Type="Boolean" />
-          <Property Name="F4Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F4Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="F4Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F4Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F5Visible" Type="Boolean" />
-          <Property Name="F5Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F5Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="F5Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F5Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F6Visible" Type="Boolean" />
-          <Property Name="F6Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F6Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="F6Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F6Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F7Visible" Type="Boolean" />
-          <Property Name="F7Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F7Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="F7Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F7Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F8Visible" Type="Boolean" />
-          <Property Name="F8Header" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F8Map" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="F8Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="F8Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-      </Schema>
+        <Association Name="CustomerTags">
+          <End Type="SCM.Models.Customer" Role="Customer" Multiplicity="*" />
+          <End Type="SCM.Models.Tag" Role="Tag" Multiplicity="*" />
+        </Association>
+        <Association Name="RequestTags">
+          <End Type="SCM.Models.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <End Type="SCM.Models.Tag" Role="Tag" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SCMModelsStoreContainer" CdmEntityContainer="SCMContext">
+          <FunctionImportMapping FunctionImportName="q_take_call" FunctionName="SCM.Models.Store.q_take_call">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SCM.Models.q_take_call_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="TTime" ColumnName="TTime" />
+                <ScalarProperty Name="TExtCode" ColumnName="TExtCode" />
+                <ScalarProperty Name="TLineNo" ColumnName="TLineNo" />
+                <ScalarProperty Name="THeader" ColumnName="THeader" />
+                <ScalarProperty Name="TNo" ColumnName="TNo" />
+                <ScalarProperty Name="TDur" ColumnName="TDur" />
+                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
+                <ScalarProperty Name="TakenByExt" ColumnName="TakenByExt" />
+                <ScalarProperty Name="TakenBy" ColumnName="TakenBy" />
+                <ScalarProperty Name="TakenOn" ColumnName="TakenOn" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="LinkedTo" ColumnName="LinkedTo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CallArchives">
+            <EntityTypeMapping TypeName="SCM.Models.CallArchive">
+              <MappingFragment StoreEntitySet="CallArchives">
+                <ScalarProperty Name="LinkedTo" ColumnName="LinkedTo" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="TakenOn" ColumnName="TakenOn" />
+                <ScalarProperty Name="TakenBy" ColumnName="TakenBy" />
+                <ScalarProperty Name="TakenByExt" ColumnName="TakenByExt" />
+                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
+                <ScalarProperty Name="TDur" ColumnName="TDur" />
+                <ScalarProperty Name="TNo" ColumnName="TNo" />
+                <ScalarProperty Name="THeader" ColumnName="THeader" />
+                <ScalarProperty Name="TLineNo" ColumnName="TLineNo" />
+                <ScalarProperty Name="TExtCode" ColumnName="TExtCode" />
+                <ScalarProperty Name="TTime" ColumnName="TTime" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CancelReasons">
             <EntityTypeMapping TypeName="SCM.Models.CancelReason">
               <MappingFragment StoreEntitySet="CancelReasons">
@@ -1129,118 +1211,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PendingReasons">
-            <EntityTypeMapping TypeName="SCM.Models.PendingReason">
-              <MappingFragment StoreEntitySet="PendingReasons">
-                <ScalarProperty Name="Reason" ColumnName="Reason" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Regions">
-            <EntityTypeMapping TypeName="SCM.Models.Region">
-              <MappingFragment StoreEntitySet="Regions">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ServiceRequests">
-            <EntityTypeMapping TypeName="SCM.Models.ServiceRequest">
-              <MappingFragment StoreEntitySet="ServiceRequests">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CancelReasonId" ColumnName="CancelReasonId" />
-                <ScalarProperty Name="PendingReasonId" ColumnName="PendingReasonId" />
-                <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="EngineerId" ColumnName="EngineerId" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
-                <ScalarProperty Name="RQN" ColumnName="RQN" />
-                <ScalarProperty Name="CenterId" ColumnName="CenterId" />
-                <ScalarProperty Name="StatusDate" ColumnName="StatusDate" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tags">
-            <EntityTypeMapping TypeName="SCM.Models.Tag">
-              <MappingFragment StoreEntitySet="Tags">
-                <ScalarProperty Name="Format" ColumnName="Format" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="TagType" ColumnName="TagType" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="CustomerTags" TypeName="SCM.Models.CustomerTags" StoreEntitySet="CustomerTags">
-            <EndProperty Name="Tag">
-              <ScalarProperty Name="Id" ColumnName="TagId" />
-            </EndProperty>
-            <EndProperty Name="Customer">
-              <ScalarProperty Name="Id" ColumnName="CustomerId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="RequestTags" TypeName="SCM.Models.RequestTags" StoreEntitySet="RequestTags">
-            <EndProperty Name="Tag">
-              <ScalarProperty Name="Id" ColumnName="TagId" />
-            </EndProperty>
-            <EndProperty Name="ServiceRequest">
-              <ScalarProperty Name="Id" ColumnName="ServiceRequestId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="q_take_call" FunctionName="SCM.Models.Store.q_take_call">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SCM.Models.q_take_call_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TDate" ColumnName="TDate" />
-                <ScalarProperty Name="TTime" ColumnName="TTime" />
-                <ScalarProperty Name="TExtCode" ColumnName="TExtCode" />
-                <ScalarProperty Name="TLineNo" ColumnName="TLineNo" />
-                <ScalarProperty Name="THeader" ColumnName="THeader" />
-                <ScalarProperty Name="TNo" ColumnName="TNo" />
-                <ScalarProperty Name="TDur" ColumnName="TDur" />
-                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
-                <ScalarProperty Name="TakenByExt" ColumnName="TakenByExt" />
-                <ScalarProperty Name="TakenBy" ColumnName="TakenBy" />
-                <ScalarProperty Name="TakenOn" ColumnName="TakenOn" />
-                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
-                <ScalarProperty Name="LinkedTo" ColumnName="LinkedTo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="QINs">
-            <EntityTypeMapping TypeName="SCM.Models.QIN">
-              <MappingFragment StoreEntitySet="QIN">
-                <ScalarProperty Name="LinkedTo" ColumnName="LinkedTo" />
-                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
-                <ScalarProperty Name="TakenOn" ColumnName="TakenOn" />
-                <ScalarProperty Name="TakenBy" ColumnName="TakenBy" />
-                <ScalarProperty Name="TakenByExt" ColumnName="TakenByExt" />
-                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
-                <ScalarProperty Name="TDur" ColumnName="TDur" />
-                <ScalarProperty Name="TNo" ColumnName="TNo" />
-                <ScalarProperty Name="THeader" ColumnName="THeader" />
-                <ScalarProperty Name="TLineNo" ColumnName="TLineNo" />
-                <ScalarProperty Name="TExtCode" ColumnName="TExtCode" />
-                <ScalarProperty Name="TTime" ColumnName="TTime" />
-                <ScalarProperty Name="TDate" ColumnName="TDate" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ExServiceRequests">
             <EntityTypeMapping TypeName="SCM.Models.ExServiceRequest">
               <MappingFragment StoreEntitySet="ExServiceRequests">
@@ -1272,11 +1242,48 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PendingReasons">
+            <EntityTypeMapping TypeName="SCM.Models.PendingReason">
+              <MappingFragment StoreEntitySet="PendingReasons">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="SCM.Models.Product">
               <MappingFragment StoreEntitySet="Products">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QINs">
+            <EntityTypeMapping TypeName="SCM.Models.QIN">
+              <MappingFragment StoreEntitySet="QIN">
+                <ScalarProperty Name="LinkedTo" ColumnName="LinkedTo" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="TakenOn" ColumnName="TakenOn" />
+                <ScalarProperty Name="TakenBy" ColumnName="TakenBy" />
+                <ScalarProperty Name="TakenByExt" ColumnName="TakenByExt" />
+                <ScalarProperty Name="IsTaken" ColumnName="IsTaken" />
+                <ScalarProperty Name="TDur" ColumnName="TDur" />
+                <ScalarProperty Name="TNo" ColumnName="TNo" />
+                <ScalarProperty Name="THeader" ColumnName="THeader" />
+                <ScalarProperty Name="TLineNo" ColumnName="TLineNo" />
+                <ScalarProperty Name="TExtCode" ColumnName="TExtCode" />
+                <ScalarProperty Name="TTime" ColumnName="TTime" />
+                <ScalarProperty Name="TDate" ColumnName="TDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="SCM.Models.Region">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1357,7 +1364,63 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="ServiceRequests">
+            <EntityTypeMapping TypeName="SCM.Models.ServiceRequest">
+              <MappingFragment StoreEntitySet="ServiceRequests">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CancelReasonId" ColumnName="CancelReasonId" />
+                <ScalarProperty Name="PendingReasonId" ColumnName="PendingReasonId" />
+                <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EngineerId" ColumnName="EngineerId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="ReceiptNo" ColumnName="ReceiptNo" />
+                <ScalarProperty Name="RQN" ColumnName="RQN" />
+                <ScalarProperty Name="CenterId" ColumnName="CenterId" />
+                <ScalarProperty Name="StatusDate" ColumnName="StatusDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="SCM.Models.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TagType" ColumnName="TagType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CustomerTags" TypeName="SCM.Models.CustomerTags" StoreEntitySet="CustomerTags">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="Id" ColumnName="TagId" />
+            </EndProperty>
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="Id" ColumnName="CustomerId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RequestTags" TypeName="SCM.Models.RequestTags" StoreEntitySet="RequestTags">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="Id" ColumnName="TagId" />
+            </EndProperty>
+            <EndProperty Name="ServiceRequest">
+              <ScalarProperty Name="Id" ColumnName="ServiceRequestId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

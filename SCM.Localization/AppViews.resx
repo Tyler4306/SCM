@@ -726,4 +726,7 @@
   <data name="Report_TName" xml:space="preserve">
     <value>Template</value>
   </data>
+  <data name="SR_Cost" xml:space="preserve">
+    <value>Cost</value>
+  </data>
 </root>

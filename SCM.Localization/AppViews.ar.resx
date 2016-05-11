@@ -726,4 +726,7 @@
   <data name="Report_TName" xml:space="preserve">
     <value>القالب</value>
   </data>
+  <data name="SR_Cost" xml:space="preserve">
+    <value>التكاليف</value>
+  </data>
 </root>

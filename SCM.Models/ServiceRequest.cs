@@ -35,6 +35,7 @@ namespace SCM
         public Nullable<int> EngineerId { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
+        public Nullable<int> Cost { get; set; }
         public Nullable<System.DateTime> ClosingDate { get; set; }
         public Nullable<int> PendingReasonId { get; set; }
         public Nullable<int> CancelReasonId { get; set; }
@@ -49,10 +50,10 @@ namespace SCM
         public virtual Customer Customer { get; set; }
         public virtual Department Department { get; set; }
         public virtual Engineer Engineer { get; set; }
+        public virtual ExServiceRequest ExServiceRequest { get; set; }
         public virtual PendingReason PendingReason { get; set; }
+        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tag> Tags { get; set; }
-        public virtual ExServiceRequest ExServiceRequest { get; set; }
-        public virtual Product Product { get; set; }
     }
 }

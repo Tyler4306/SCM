@@ -15,6 +15,7 @@
     [EngineerId] INT NULL, 
     [Description] NVARCHAR(MAX) NULL, 
     [Remarks] NVARCHAR(100) NULL, 
+	[Cost] INT NULL,
     [ClosingDate] DATETIME NULL, 
     [PendingReasonId] INT NULL, 
     [CancelReasonId] INT NULL, 
