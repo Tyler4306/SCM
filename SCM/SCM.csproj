@@ -477,7 +477,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Reports\General.rdlc" />
-    <EmbeddedResource Include="Content\Reports\Requests.rdlc" />
+    <Content Include="Content\Reports\Requests.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
