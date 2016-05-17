@@ -9,19 +9,19 @@
               <Width>2.05902cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.91653cm</Width>
+              <Width>3.38195cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.13007cm</Width>
+              <Width>3.22979cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>3.43486cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.1384cm</Width>
+              <Width>3.69062cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.84736cm</Width>
+              <Width>3.73cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -169,7 +169,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Status.Value</Value>
+                              <Value>=Fields!Address.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -202,7 +202,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=IIF(Fields!IsDelayed.Value, "Yes", "")</Value>
+                              <Value>=Fields!Product.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -642,7 +642,6 @@
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
           <Top>2.82195cm</Top>
-          <Left>0cm</Left>
           <Height>0.6cm</Height>
           <Width>2.05902cm</Width>
           <ZIndex>2</ZIndex>
@@ -677,7 +676,7 @@
           <Top>2.82195cm</Top>
           <Left>2.05902cm</Left>
           <Height>0.6cm</Height>
-          <Width>4.91653cm</Width>
+          <Width>3.38195cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -708,9 +707,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
           <Top>2.82195cm</Top>
-          <Left>6.97555cm</Left>
+          <Left>5.44097cm</Left>
           <Height>0.6cm</Height>
-          <Width>5.13007cm</Width>
+          <Width>3.22979cm</Width>
           <ZIndex>4</ZIndex>
           <Style>
             <Border>
@@ -741,9 +740,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox7</rd:DefaultName>
           <Top>2.82195cm</Top>
-          <Left>12.10562cm</Left>
+          <Left>8.67076cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.39958cm</Width>
+          <Width>3.43486cm</Width>
           <ZIndex>5</ZIndex>
           <Style>
             <Border>
@@ -762,7 +761,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Status</Value>
+                  <Value>Address</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                     <TextDecoration>None</TextDecoration>
@@ -776,9 +775,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox9</rd:DefaultName>
           <Top>2.82195cm</Top>
-          <Left>15.5052cm</Left>
+          <Left>12.10562cm</Left>
           <Height>0.6cm</Height>
-          <Width>2.1384cm</Width>
+          <Width>3.69062cm</Width>
           <ZIndex>6</ZIndex>
           <Style>
             <Border>
@@ -797,7 +796,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Delayed</Value>
+                  <Value>Product</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                     <TextDecoration>None</TextDecoration>
@@ -811,9 +810,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox11</rd:DefaultName>
           <Top>2.82195cm</Top>
-          <Left>17.67888cm</Left>
+          <Left>15.79624cm</Left>
           <Height>0.6cm</Height>
-          <Width>1.84736cm</Width>
+          <Width>3.73cm</Width>
           <ZIndex>7</ZIndex>
           <Style>
             <Border>
@@ -884,6 +883,14 @@
         </Field>
         <Field Name="Engineer">
           <DataField>Engineer</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Address">
+          <DataField>Address</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Product">
+          <DataField>Product</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

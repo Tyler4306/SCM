@@ -82,7 +82,8 @@ namespace SCM
                 row.Engineer = item.EngineerId.HasValue ? item.Engineer.Name : "";
                 row.IsDelayed = item.IsDelayed();
                 row.Status = Utils.ListManager.GetStatus()[item.StatusId];
-
+                row.Address = item.Customer.FullAddress();
+                row.Product = string.IsNullOrEmpty(item.ProductId) ? "" : item.Product.Name;
                 ds.AddDSRequestRow(row);
             }
 

@@ -293,6 +293,10 @@ namespace SCM.Models {
             
             private global::System.Data.DataColumn columnEngineer;
             
+            private global::System.Data.DataColumn columnAddress;
+            
+            private global::System.Data.DataColumn columnProduct;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSRequestDataTable() {
@@ -384,6 +388,22 @@ namespace SCM.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AddressColumn {
+                get {
+                    return this.columnAddress;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProductColumn {
+                get {
+                    return this.columnProduct;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -419,7 +439,7 @@ namespace SCM.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DSRequestRow AddDSRequestRow(string Customer, string Phone, string Mobile, string Status, bool IsDelayed, string Engineer) {
+            public DSRequestRow AddDSRequestRow(string Customer, string Phone, string Mobile, string Status, bool IsDelayed, string Engineer, string Address, string Product) {
                 DSRequestRow rowDSRequestRow = ((DSRequestRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -428,7 +448,9 @@ namespace SCM.Models {
                         Mobile,
                         Status,
                         IsDelayed,
-                        Engineer};
+                        Engineer,
+                        Address,
+                        Product};
                 rowDSRequestRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDSRequestRow);
                 return rowDSRequestRow;
@@ -465,6 +487,8 @@ namespace SCM.Models {
                 this.columnStatus = base.Columns["Status"];
                 this.columnIsDelayed = base.Columns["IsDelayed"];
                 this.columnEngineer = base.Columns["Engineer"];
+                this.columnAddress = base.Columns["Address"];
+                this.columnProduct = base.Columns["Product"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -484,6 +508,10 @@ namespace SCM.Models {
                 base.Columns.Add(this.columnIsDelayed);
                 this.columnEngineer = new global::System.Data.DataColumn("Engineer", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEngineer);
+                this.columnAddress = new global::System.Data.DataColumn("Address", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAddress);
+                this.columnProduct = new global::System.Data.DataColumn("Product", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProduct);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -741,6 +769,38 @@ namespace SCM.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Address {
+                get {
+                    if (this.IsAddressNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableDSRequest.AddressColumn]));
+                    }
+                }
+                set {
+                    this[this.tableDSRequest.AddressColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Product {
+                get {
+                    if (this.IsProductNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableDSRequest.ProductColumn]));
+                    }
+                }
+                set {
+                    this[this.tableDSRequest.ProductColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCustomerNull() {
                 return this.IsNull(this.tableDSRequest.CustomerColumn);
             }
@@ -809,6 +869,30 @@ namespace SCM.Models {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEngineerNull() {
                 this[this.tableDSRequest.EngineerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAddressNull() {
+                return this.IsNull(this.tableDSRequest.AddressColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAddressNull() {
+                this[this.tableDSRequest.AddressColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsProductNull() {
+                return this.IsNull(this.tableDSRequest.ProductColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetProductNull() {
+                this[this.tableDSRequest.ProductColumn] = global::System.Convert.DBNull;
             }
         }
         
