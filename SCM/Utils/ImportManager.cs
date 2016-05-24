@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Transactions;
+using System.Text;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace SCM.Utils
 {
@@ -50,6 +53,7 @@ namespace SCM.Utils
                     }
                     catch(Exception ex)
                     {
+                        ex.Data["data"] = data;
                         tx.Rollback();
                         throw ex;
                     }
@@ -371,98 +375,142 @@ namespace SCM.Utils
 
             var objectsToUpdate = ctx.ServiceRequests.Where(x => !string.IsNullOrEmpty(x.RQN) && rqns.Contains(x.RQN));
             total = objectsToUpdate.Count();
+            StringBuilder sb1 = new StringBuilder();
+            int counter = 0;
             foreach (var item in objectsToUpdate)
             {
-                var sr = data.First(x => x.SysID == list[item.RQN]);
-                if (sr.EngineerId.HasValue && sr.EngineerId.Value > 0)
-                    item.EngineerId = sr.EngineerId;
-                if (dic.ContainsKey(sr.Status))
+                if(counter >= 9)
                 {
-                    item.StatusId = dic[sr.Status];
+                    DbCommand cmd1 = ctx.Database.Connection.CreateCommand();
+                    cmd1.CommandText = sb1.ToString();
+                    
+                    cmd1.Transaction = ctx.Database.CurrentTransaction.UnderlyingTransaction;
+                    cmd1.ExecuteNonQuery();
+                    sb1 = new StringBuilder();
+                    counter = 0;
+
                 }
-                item.StatusDate = DateTime.Now;
-                if(!string.IsNullOrEmpty(sr.ProductId))
-                    item.ProductId = sr.ProductId;
-                item.Model = sr.Model;
-                item.SN = sr.Serial_No;
-                item.ClosingDate = string.IsNullOrEmpty(sr.Closing_Date) ? DateTime.Now : Convert.ToDateTime(sr.Closing_Date);
-                item.Description = sr.CIC_Remark;
-                item.UpdatedOn = DateTime.Now;
-                item.UpdatedBy = HttpContext.Current.User.Identity.Name;
+                else
+                {
+                    counter++;
+                }
+                var sr = data.First(x => x.SysID == list[item.RQN]);
+
+                string sql = @"UPDATE ServiceRequests SET [EngineerId] = {0}, [StatusId] = {1}, [StatusDate] = (case when [RequestDate] > getdate() then [RequestDate] else getdate() end), [ProductId] = {2}, [Model] = {3}, [SN] = {4}, [ClosingDate] = {5}, [Description] = {6}, UpdatedOn = getdate(), UpdatedBy = '{7}' Where [RQN] = '{8}'; ";
+                var engId = (sr.EngineerId.HasValue && sr.EngineerId.Value > 0) ? sr.EngineerId.ToString() : "NULL";
+                var model = string.IsNullOrEmpty(sr.Model) ? "NULL" : string.Format("N'{0}'", sr.Model.Replace("'", "''"));
+                var rqn = item.RQN;
+                var sn = string.IsNullOrEmpty(sr.Serial_No) ? "NULL" : string.Format("N'{0}'", sr.Serial_No.Replace("'", "''"));
+                DateTime? closingDate = null;
+                if (!string.IsNullOrEmpty(sr.Completion_Date))
+                {
+                    closingDate = Convert.ToDateTime(sr.Completion_Date);
+                }
+                var description = string.IsNullOrEmpty(sr.CIC_Remark) ? "NULL" : string.Format("N'{0}'", sr.CIC_Remark.Replace("'", "''"));
+                var userName = HttpContext.Current.User.Identity.Name;
+                if (!string.IsNullOrEmpty(sr.ProductId))
+                    item.ProductId = "'" + sr.ProductId + "'";
+                else
+                    item.ProductId = "NULL";
+
+                var valsql = string.Format(sql, engId, dic[sr.Status], item.ProductId, model, sn, !closingDate.HasValue ? "NULL" : "'" + closingDate.Value.ToString("dd/MMM/yyyy HH:mm:ss") + "'", description, userName, rqn);
+                sb1.AppendLine(valsql);
+
                 ids.Add(sr.SysID);
 
+
                 UpdateProgress();
+
             }
-            ctx.SaveChanges();
+            if (counter > 0)
+            {
+                DbCommand cmd1 = ctx.Database.Connection.CreateCommand();
+                cmd1.CommandText = sb1.ToString();
+                cmd1.CommandTimeout = 200;
+                cmd1.Transaction = ctx.Database.CurrentTransaction.UnderlyingTransaction;
+                cmd1.ExecuteNonQuery();
+                counter = 0;
+            }
 
             ResetProgress();
             var objectsToAdd = data.Where(x => !ids.Contains(x.SysID));
             total = objectsToAdd.Count();
-            foreach (var sr in objectsToAdd)
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("declare @id int;");
+            try
             {
-                var item = ctx.ServiceRequests.Create();
-                System.Diagnostics.Debug.Print(sr.SysID.ToString());
-                try
+                counter = 0;
+                foreach (var sr in objectsToAdd)
                 {
-                    item.CenterId = 1;
-                    item.CustomerId = sr.CustomerId;
-                    item.DepartmentId = 1;
-                    if (!string.IsNullOrEmpty(sr.Request_Date))
-                        item.RequestDate = Convert.ToDateTime(sr.Request_Date);
-                    else if (!string.IsNullOrEmpty(sr.Receipt_Date))
-                        item.RequestDate = Convert.ToDateTime(sr.Receipt_Date);
-                    else
-                        item.RequestDate = DateTime.Now;
-
-                    if(sr.EngineerId.HasValue && sr.EngineerId.Value > 0)
-                        item.EngineerId = sr.EngineerId;
-                    item.RQN = sr.Receipt_No;
-
-                    if (dic.ContainsKey(sr.Status))
+                    if(counter >= 9)
                     {
-                        item.StatusId = dic[sr.Status];
+                        DbCommand cmd = ctx.Database.Connection.CreateCommand();
+                        cmd.CommandText = sb.ToString();
+                        cmd.Transaction = ctx.Database.CurrentTransaction.UnderlyingTransaction;
+                        cmd.ExecuteNonQuery();
+                        sb = new StringBuilder();
+                        sb.AppendLine("declare @id int;");
+                        counter = 0;
                     }
-                    item.StatusDate = DateTime.Now;
-                    item.Model = sr.Model;
-                    item.SN = sr.Serial_No;
-                    item.ClosingDate = string.IsNullOrEmpty(sr.Closing_Date) ? DateTime.Now : Convert.ToDateTime(sr.Closing_Date);
-                    item.Description = sr.CIC_Remark;
-                    item.CreatedOn = DateTime.Now;
-                    item.CreatedBy = HttpContext.Current.User.Identity.Name;
-                    item.UpdatedOn = DateTime.Now;
-                    item.UpdatedBy = HttpContext.Current.User.Identity.Name;
-                    item.IsDeleted = false;
-                    ctx.ServiceRequests.Add(item);
-                    ctx.SaveChanges();
-                    var exItem = ctx.ExServiceRequests.Create();
-                    exItem.Id = item.Id;
-                    ctx.ExServiceRequests.Add(exItem);
-                    ctx.SaveChanges();
-                    
-                }
-                catch (Exception ex)
-                {
-                    ex.Data["item"] = item;
-                    ex.Data["sr"] = sr;
-                    throw;
-                }
-                if (!string.IsNullOrEmpty(sr.Svc_Type) || !string.IsNullOrEmpty(sr.Warranty_Flag))
-                {
-                    var t = tags.FirstOrDefault(x => x.Name == sr.Svc_Type);
-                    if (t != null)
-                        item.Tags.Add(t);
-                    var t1 = tags.FirstOrDefault(x => x.Name == sr.Warranty_Flag);
-                    if (t1 != null)
-                        item.Tags.Add(t1);
+                    else
+                    {
+                        counter++;
+                    }
+                    string sql = @"INSERT INTO ServiceRequests ([CenterId], [CustomerId], [DepartmentId], [RequestDate], [EngineerId], [RQN], [StatusId], [StatusDate], [Model], [SN], [ClosingDate], [Description], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy], [IsDeleted]) VALUES (1,{0}, 1, '{1}', {2}, '{3}', {4}, '{1}', {5}, {6}, {7}, {8}, getdate(), '{9}', getdate(), '{9}', 0 );";
 
-                    ctx.SaveChanges();
-                }
+                    var requestDate = !string.IsNullOrEmpty(sr.Request_Date) ? Convert.ToDateTime(sr.Request_Date) : DateTime.Now;
+                    var engId = (sr.EngineerId.HasValue && sr.EngineerId.Value > 0) ? sr.EngineerId.ToString() : "NULL";
+                    var model = string.IsNullOrEmpty(sr.Model) ? "NULL" : string.Format("N'{0}'", sr.Model.Replace("'","''"));
+                    var sn = string.IsNullOrEmpty(sr.Serial_No) ? "NULL" : string.Format("N'{0}'", sr.Serial_No.Replace("'","''"));
+                    DateTime? closingDate = null;
+                    if (!string.IsNullOrEmpty(sr.Completion_Date))
+                    {
+                        closingDate = Convert.ToDateTime(sr.Completion_Date);
+                    }
+                    var description = string.IsNullOrEmpty(sr.CIC_Remark) ? "NULL" : string.Format("N'{0}'", sr.CIC_Remark.Replace("'","''"));
+                    var userName = HttpContext.Current.User.Identity.Name;
 
-                UpdateProgress();
+                    string valsql = string.Format(sql, sr.CustomerId, requestDate.ToString("dd/MMM/yyyy HH:mm:ss"), engId
+                        , sr.Receipt_No, dic[sr.Status], model, sn, !closingDate.HasValue ? "NULL" : "'" + closingDate.Value.ToString("dd/MMM/yyyy HH:mm:ss") + "'", description, userName);
+                    sb.AppendLine(valsql);
+                    sb.AppendLine("set @id = @@identity;");
+                    if (!string.IsNullOrEmpty(sr.Svc_Type) || !string.IsNullOrEmpty(sr.Warranty_Flag))
+                    {
+                        var t = tags.FirstOrDefault(x => x.Name == sr.Svc_Type);
+                        if (t != null)
+                        {
+                            sb.AppendFormat("INSERT INTO RequestTags (TagId, ServiceRequestId) VALUES ({0}, @id);", t.Id);
+                            sb.AppendLine();
+                        }
+                        var t1 = tags.FirstOrDefault(x => x.Name == sr.Warranty_Flag);
+                        if (t1 != null)
+                        {
+                            sb.AppendFormat("INSERT INTO RequestTags (TagId, ServiceRequestId) VALUES ({0}, @id);", t1.Id);
+                            sb.AppendLine();
+                        }
+                    }
+
+
+                    System.Diagnostics.Debug.Print(sr.SysID.ToString());
+                    UpdateProgress();
+                }
+                if(counter > 0)
+                {
+                    DbCommand cmd = ctx.Database.Connection.CreateCommand();
+                    cmd.CommandText = sb.ToString();
+                    cmd.Transaction = ctx.Database.CurrentTransaction.UnderlyingTransaction;
+                    cmd.ExecuteNonQuery();
+                }
             }
-            ctx.SaveChanges();
+        catch (Exception ex)
+        {
+            //ex.Data["item"] = item;
+            //ex.Data["sr"] = sr;
+            throw ex;
+        }
+    //ctx.SaveChanges();
 
-            Progress = 100;
+    Progress = 100;
         }
     }
 }

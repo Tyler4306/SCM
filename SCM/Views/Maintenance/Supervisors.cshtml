@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SCM.Models.SupervisorsViewModel>
+
+@{
+    ViewBag.Title = "Supervisors";
+}
+
+<h2>Supervisors</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <input class="btn btn-primary" type="submit" value="@AppViews.Save" />
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Supervisor
+            </th>
+        </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSupervisor)
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => item.IsSupervisor)
+            </td>
+        </tr>
+    }
+
+    </table>
+}
+@section Scripts
+{
+    <script>
+        $(function () {
+
+        });
+    </script>
+}

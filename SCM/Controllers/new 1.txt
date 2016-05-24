@@ -1,0 +1,12 @@
+  
+q_log_call    
+
+
+(IsTaken = 0)
+AND ( is null or Len(IsNull(TExt), '')
+
+
+Add Maintenance Cost
+
+Modify status report to include remarks + description, costs
+request rdlc - add address and product
