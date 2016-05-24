@@ -297,6 +297,8 @@ namespace SCM.Models {
             
             private global::System.Data.DataColumn columnProduct;
             
+            private global::System.Data.DataColumn columnRemarks;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DSRequestDataTable() {
@@ -404,6 +406,14 @@ namespace SCM.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RemarksColumn {
+                get {
+                    return this.columnRemarks;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -439,7 +449,7 @@ namespace SCM.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DSRequestRow AddDSRequestRow(string Customer, string Phone, string Mobile, string Status, bool IsDelayed, string Engineer, string Address, string Product) {
+            public DSRequestRow AddDSRequestRow(string Customer, string Phone, string Mobile, string Status, bool IsDelayed, string Engineer, string Address, string Product, string Remarks) {
                 DSRequestRow rowDSRequestRow = ((DSRequestRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -450,7 +460,8 @@ namespace SCM.Models {
                         IsDelayed,
                         Engineer,
                         Address,
-                        Product};
+                        Product,
+                        Remarks};
                 rowDSRequestRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDSRequestRow);
                 return rowDSRequestRow;
@@ -489,6 +500,7 @@ namespace SCM.Models {
                 this.columnEngineer = base.Columns["Engineer"];
                 this.columnAddress = base.Columns["Address"];
                 this.columnProduct = base.Columns["Product"];
+                this.columnRemarks = base.Columns["Remarks"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -512,6 +524,8 @@ namespace SCM.Models {
                 base.Columns.Add(this.columnAddress);
                 this.columnProduct = new global::System.Data.DataColumn("Product", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnProduct);
+                this.columnRemarks = new global::System.Data.DataColumn("Remarks", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRemarks);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
@@ -801,6 +815,22 @@ namespace SCM.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Remarks {
+                get {
+                    if (this.IsRemarksNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableDSRequest.RemarksColumn]));
+                    }
+                }
+                set {
+                    this[this.tableDSRequest.RemarksColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCustomerNull() {
                 return this.IsNull(this.tableDSRequest.CustomerColumn);
             }
@@ -893,6 +923,18 @@ namespace SCM.Models {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetProductNull() {
                 this[this.tableDSRequest.ProductColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRemarksNull() {
+                return this.IsNull(this.tableDSRequest.RemarksColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRemarksNull() {
+                this[this.tableDSRequest.RemarksColumn] = global::System.Convert.DBNull;
             }
         }
         

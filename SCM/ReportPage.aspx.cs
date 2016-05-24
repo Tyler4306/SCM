@@ -84,6 +84,7 @@ namespace SCM
                 row.Status = Utils.ListManager.GetStatus()[item.StatusId];
                 row.Address = item.Customer.FullAddress();
                 row.Product = string.IsNullOrEmpty(item.ProductId) ? "" : item.Product.Name;
+                row.Remarks = (string.IsNullOrEmpty(item.Description) ? "" : item.Description) + "\r\n" + (string.IsNullOrEmpty(item.Remarks) ? "" : item.Remarks);
                 ds.AddDSRequestRow(row);
             }
 
