@@ -45,9 +45,10 @@ namespace SCM.Utils
                         Phase = AppViews.DataImport_Phase5;
                         ImportEngineers(ctx, ref data);
                         Phase = AppViews.DataImport_Phase6;
-                        ImportCustomers(ctx, ref data);
+                        //ImportCustomers(ctx, ref data);
                         Phase = AppViews.DataImport_Phase7;
-                        ImportRequests(ctx, ref data);
+                        //ImportRequests(ctx, ref data);
+                        ImportCustomersAndRequests(ctx, ref data);
                         Phase = "done";
                         tx.Commit();
                     }
@@ -243,6 +244,190 @@ namespace SCM.Utils
                 }
             }
 
+            Progress = 100;
+        }
+
+        private void ImportCustomersAndRequests(SCMContext ctx, ref IEnumerable<ServiceRequestRecord> data)
+        {
+            ResetProgress();
+            try
+            {
+                // Build db customers dictionary
+                var dicCustomers = new SortedDictionary<string, int>();
+                var dbCustomers = ctx.Customers.OrderBy(x => x.Name).Select(x => new {
+                    Id = x.Id,
+                    Name = x.Name.Trim()
+                    ,
+                    Phone = string.IsNullOrEmpty(x.Phone) ? "X" : x.Phone.Trim()
+                    ,
+                    Mobile = string.IsNullOrEmpty(x.Mobile) ? "X" : x.Mobile.Trim()
+                }).Distinct().ToList();
+                foreach (var cus in dbCustomers)
+                {
+                    if (cus.Phone != "X")
+                        dicCustomers[cus.Phone + "_" + cus.Name] = cus.Id;
+                    if (cus.Mobile != "X")
+                        dicCustomers[cus.Mobile + "_" + cus.Name] = cus.Id;
+                }
+
+                // Build db RQN dictionary
+                var dicRQN = ctx.ServiceRequests.Select(x => new { Id = x.Id, RQN = x.RQN }).OrderBy(x => x.RQN).ToDictionary(x => x.RQN, y => y.Id);
+
+                // Build status, engineers and tags lists
+                var dic = new Dictionary<string, int>();
+                dic.Add("Repair Accepted", 10);
+                dic.Add("Repair Pending", 20);
+                dic.Add("Repair Canceled", 90);
+                dic.Add("Repair Completed", 100);
+                var ctags = ctx.Tags.Where(x => x.TagType == "C").ToList();
+                var rtags = ctx.Tags.Where(x => x.TagType == "R").ToList();
+                // var engineers = ctx.Engineers.OrderBy(x => x.Name).ToDictionary(x => x.Name, y => y.Id);
+
+                // Set progress total
+                total = data.Count();
+
+                // Loop through data
+                int batchCounter = 0;
+                StringBuilder sb = new StringBuilder();
+                //sb.AppendLine("declare @sid int;");
+                //sb.AppendLine("declare @cid int;");
+
+                foreach (var sr in data)
+                {
+                    if (batchCounter >= 9)
+                    {
+                        System.IO.File.AppendAllText("e:/sql.sql", sb.ToString());
+                        DbCommand cmd = ctx.Database.Connection.CreateCommand();
+                        cmd.CommandText = "declare @sid int;\r\n" + "declare @cid int;\r\n" + sb.ToString();
+                        cmd.CommandTimeout = 100;
+                        cmd.Transaction = ctx.Database.CurrentTransaction.UnderlyingTransaction;
+                        cmd.ExecuteNonQuery();
+
+                        batchCounter = 0;
+                        sb.Clear();
+                        //sb.AppendLine("declare @sid int;");
+                        //sb.AppendLine("declare @cid int;");
+                        sb.AppendLine("set @sid = 0;");
+                        sb.AppendLine("set @cid = 0;");
+                    }
+                    else
+                    {
+                        batchCounter++;
+                        sb.AppendLine("set @sid = 0;");
+                        sb.AppendLine("set @cid = 0;");
+                    }
+
+
+                    if (dicRQN.ContainsKey(sr.Receipt_No))
+                    {
+                        // the request exist
+                        string sql = @"UPDATE ServiceRequests SET [EngineerId] = {0}, [StatusId] = {1}, [StatusDate] = (case when [RequestDate] > getdate() then [RequestDate] else getdate() end), [ProductId] = {2}, [Model] = {3}, [SN] = {4}, [ClosingDate] = {5}, [Description] = {6}, UpdatedOn = getdate(), UpdatedBy = '{7}' Where [RQN] = '{8}'; ";
+                        var engId = (sr.EngineerId.HasValue && sr.EngineerId.Value > 0) ? sr.EngineerId.ToString() : "NULL";
+                        var model = string.IsNullOrEmpty(sr.Model) ? "NULL" : string.Format("N'{0}'", sr.Model.Replace("'", "''"));
+                        var rqn = sr.Receipt_No;
+                        var sn = string.IsNullOrEmpty(sr.Serial_No) ? "NULL" : string.Format("N'{0}'", sr.Serial_No.Replace("'", "''"));
+                        var productId = (!string.IsNullOrEmpty(sr.ProductId)) ? "'" + sr.ProductId + "'" : "NULL";
+
+                        DateTime? closingDate = null;
+                        if (!string.IsNullOrEmpty(sr.Completion_Date))
+                        {
+                            closingDate = Convert.ToDateTime(sr.Completion_Date);
+                        }
+                        var description = string.IsNullOrEmpty(sr.CIC_Remark) ? "NULL" : string.Format("N'{0}'", sr.CIC_Remark.Replace("'", "''"));
+                        var userName = HttpContext.Current.User.Identity.Name;
+
+                        var valsql = string.Format(sql, engId, dic[sr.Status], productId, model, sn, !closingDate.HasValue ? "NULL" : "'" + closingDate.Value.ToString("dd/MMM/yyyy HH:mm:ss") + "'", description, userName, rqn);
+                        sb.AppendLine(valsql);
+
+                    }
+                    else
+                    {
+                        // New request
+
+                        // Check Customer
+                        string phoneKey = string.IsNullOrEmpty(sr.Customer_Phone_No) || string.IsNullOrWhiteSpace(sr.Customer_Phone_No) ? "X" : sr.Customer_Phone_No.Trim();
+                        string mobKey = string.IsNullOrEmpty(sr.Cellular_No) || string.IsNullOrWhiteSpace(sr.Cellular_No) ? "X" : sr.Cellular_No.Trim();
+                        string key1 = phoneKey + "_" + sr.Customer_Name.Trim();
+                        string key2 = mobKey + "_" + sr.Customer_Name.Trim();
+                        string customerId = "@cid";
+                        if (dicCustomers.ContainsKey(key1))
+                            customerId = dicCustomers[key1].ToString();
+                        else if (dicCustomers.ContainsKey(key2))
+                            customerId = dicCustomers[key2].ToString();
+                        else
+                        {
+                            // Insert new customer
+
+                            string csql = @"set @cid = IsNull((select Top 1 Id from Customers Where Ltrim(rtrim([Name])) = '{0}' AND  ([Phone] = {1} OR [Mobile] = {2}) ) , 0); IF(@cid = 0) BEGIN  INSERT INTO Customers (Name, Phone, Mobile, CityId, Address) VALUES (N'{0}', {1}, {2}, {3}, {4});  set @cid = @@identity;   END;";
+                            var cPhone = (phoneKey == "X") ? "NULL" : string.Format("N'{0}'", phoneKey.Replace("'", "''"));
+                            var cMobile = (mobKey == "X") ? "NULL" : string.Format("N'{0}'", mobKey.Replace("'", "''"));
+                            if (cPhone == "NULL" && cMobile == "NULL")
+                                cPhone = "011XXXX";
+                            var cCity = sr.CityId.HasValue ? sr.CityId.Value.ToString() : "NULL";
+                            var cAddress = string.IsNullOrEmpty(sr.Address) ? "NULL" : string.Format("N'{0}'", sr.Address.Replace("'", "''"));
+                            string cValSql = string.Format(csql, sr.Customer_Name.Trim(), cPhone, cMobile, cCity, cAddress);
+                            sb.AppendLine(cValSql);
+                            //sb.AppendLine("set @cid = @@identity;");
+                        }
+
+                        string sql = @"INSERT INTO ServiceRequests ([CenterId], [CustomerId], [DepartmentId], [RequestDate], [EngineerId], [RQN], [StatusId], [StatusDate], [Model], [SN], [ClosingDate], [Description], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy], [IsDeleted]) VALUES (1,{0}, 1, '{1}', {2}, '{3}', {4}, '{1}', {5}, {6}, {7}, {8}, getdate(), '{9}', getdate(), '{9}', 0 );";
+
+                        var requestDate = !string.IsNullOrEmpty(sr.Request_Date) ? Convert.ToDateTime(sr.Request_Date) : DateTime.Now;
+                        var engId = (sr.EngineerId.HasValue && sr.EngineerId.Value > 0) ? sr.EngineerId.ToString() : "NULL";
+                        var model = string.IsNullOrEmpty(sr.Model) ? "NULL" : string.Format("N'{0}'", sr.Model.Replace("'", "''"));
+                        var sn = string.IsNullOrEmpty(sr.Serial_No) ? "NULL" : string.Format("N'{0}'", sr.Serial_No.Replace("'", "''"));
+                        var productId = (!string.IsNullOrEmpty(sr.ProductId)) ? "'" + sr.ProductId + "'" : "NULL";
+                        DateTime? closingDate = null;
+                        if (!string.IsNullOrEmpty(sr.Completion_Date))
+                        {
+                            closingDate = Convert.ToDateTime(sr.Completion_Date);
+                        }
+                        var description = string.IsNullOrEmpty(sr.CIC_Remark) ? "NULL" : string.Format("N'{0}'", sr.CIC_Remark.Replace("'", "''"));
+                        var userName = HttpContext.Current.User.Identity.Name;
+
+                        string valsql = string.Format(sql, customerId, requestDate.ToString("dd/MMM/yyyy HH:mm:ss"), engId
+                            , sr.Receipt_No, dic[sr.Status], model, sn, !closingDate.HasValue ? "NULL" : "'" + closingDate.Value.ToString("dd/MMM/yyyy HH:mm:ss") + "'", description, userName);
+                        sb.AppendLine(valsql);
+                        sb.AppendLine("set @sid = @@identity;");
+                        if (!string.IsNullOrEmpty(sr.Svc_Type) || !string.IsNullOrEmpty(sr.Warranty_Flag))
+                        {
+                            var t = rtags.FirstOrDefault(x => x.Name == sr.Svc_Type);
+                            if (t != null)
+                            {
+                                sb.AppendFormat("INSERT INTO RequestTags (TagId, ServiceRequestId) VALUES ({0}, @sid);", t.Id);
+                                sb.AppendLine();
+                            }
+                            var t1 = rtags.FirstOrDefault(x => x.Name == sr.Warranty_Flag);
+                            if (t1 != null)
+                            {
+                                sb.AppendFormat("INSERT INTO RequestTags (TagId, ServiceRequestId) VALUES ({0}, @sid);", t1.Id);
+                                sb.AppendLine();
+                            }
+                        }
+
+                    }
+
+                    UpdateProgress();
+
+                }
+                if (batchCounter > 0)
+                {
+                    System.IO.File.AppendAllText("e:/sql.sql", sb.ToString());
+                    DbCommand cmd = ctx.Database.Connection.CreateCommand();
+                    cmd.CommandText = "declare @sid int;\r\n" + "declare @cid int;\r\n" + sb.ToString();
+                    cmd.CommandTimeout = 100;
+                    cmd.Transaction = ctx.Database.CurrentTransaction.UnderlyingTransaction;
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+
+            //
             Progress = 100;
         }
 
