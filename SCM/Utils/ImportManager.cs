@@ -271,7 +271,8 @@ namespace SCM.Utils
                 }
 
                 // Build db RQN dictionary
-                var dicRQN = ctx.ServiceRequests.Select(x => new { Id = x.Id, RQN = x.RQN }).OrderBy(x => x.RQN).ToDictionary(x => x.RQN, y => y.Id);
+                // var dicRQN = ctx.ServiceRequests.Select(x => new { Id = x.Id, RQN = x.RQN }).OrderBy(x => x.RQN).ToDictionary(x => x.RQN, y => y.Id);
+               var dicRQN = ctx.ServiceRequests.Where(x => !string.IsNullOrEmpty(x.RQN)).Select(x => new { Id = x.Id, RQN = x.RQN }).OrderBy(x => x.RQN).ToDictionary(x => x.RQN, y => y.Id);
 
                 // Build status, engineers and tags lists
                 var dic = new Dictionary<string, int>();
@@ -296,7 +297,7 @@ namespace SCM.Utils
                 {
                     if (batchCounter >= 9)
                     {
-                        System.IO.File.AppendAllText("e:/sql.sql", sb.ToString());
+                        //System.IO.File.AppendAllText("e:/sql.sql", sb.ToString());
                         DbCommand cmd = ctx.Database.Connection.CreateCommand();
                         cmd.CommandText = "declare @sid int;\r\n" + "declare @cid int;\r\n" + sb.ToString();
                         cmd.CommandTimeout = 100;
@@ -412,7 +413,7 @@ namespace SCM.Utils
                 }
                 if (batchCounter > 0)
                 {
-                    System.IO.File.AppendAllText("e:/sql.sql", sb.ToString());
+                    //System.IO.File.AppendAllText("e:/sql.sql", sb.ToString());
                     DbCommand cmd = ctx.Database.Connection.CreateCommand();
                     cmd.CommandText = "declare @sid int;\r\n" + "declare @cid int;\r\n" + sb.ToString();
                     cmd.CommandTimeout = 100;
