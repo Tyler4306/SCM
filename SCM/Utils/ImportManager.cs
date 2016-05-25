@@ -7,6 +7,7 @@ using System.Transactions;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data.Common;
+using System.Globalization;
 
 namespace SCM.Utils
 {
@@ -250,6 +251,8 @@ namespace SCM.Utils
         private void ImportCustomersAndRequests(SCMContext ctx, ref IEnumerable<ServiceRequestRecord> data)
         {
             ResetProgress();
+            string dateFormat = "dd/MM/yyyy";
+
             try
             {
                 // Build db customers dictionary
@@ -332,7 +335,9 @@ namespace SCM.Utils
                         DateTime? closingDate = null;
                         if (!string.IsNullOrEmpty(sr.Completion_Date))
                         {
-                            closingDate = Convert.ToDateTime(sr.Completion_Date);
+                            DateTime dclosing;
+                            if (DateTime.TryParseExact(sr.Completion_Date, dateFormat, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dclosing))
+                                closingDate = dclosing;
                         }
                         var description = string.IsNullOrEmpty(sr.CIC_Remark) ? "NULL" : string.Format("N'{0}'", sr.CIC_Remark.Replace("'", "''"));
                         var userName = HttpContext.Current.User.Identity.Name;
@@ -373,7 +378,13 @@ namespace SCM.Utils
 
                         string sql = @"INSERT INTO ServiceRequests ([CenterId], [CustomerId], [DepartmentId], [RequestDate], [EngineerId], [RQN], [StatusId], [StatusDate], [Model], [SN], [ClosingDate], [Description], [CreatedOn], [CreatedBy], [UpdatedOn], [UpdatedBy], [IsDeleted], [ProductId]) VALUES (1,{0}, 1, '{1}', {2}, '{3}', {4}, '{1}', {5}, {6}, {7}, {8}, getdate(), '{9}', getdate(), '{9}', 0, {10} );";
 
-                        var requestDate = !string.IsNullOrEmpty(sr.Request_Date) ? Convert.ToDateTime(sr.Request_Date) : DateTime.Now;
+                        DateTime requestDate = DateTime.Now;
+                        if (!string.IsNullOrEmpty(sr.Request_Date))
+                        {
+                            DateTime drequest;
+                            if (DateTime.TryParseExact(sr.Request_Date, dateFormat, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out drequest))
+                                requestDate = drequest;
+                        }
                         var engId = (sr.EngineerId.HasValue && sr.EngineerId.Value > 0) ? sr.EngineerId.ToString() : "NULL";
                         var model = string.IsNullOrEmpty(sr.Model) ? "NULL" : string.Format("N'{0}'", sr.Model.Replace("'", "''"));
                         var sn = string.IsNullOrEmpty(sr.Serial_No) ? "NULL" : string.Format("N'{0}'", sr.Serial_No.Replace("'", "''"));
@@ -381,7 +392,9 @@ namespace SCM.Utils
                         DateTime? closingDate = null;
                         if (!string.IsNullOrEmpty(sr.Completion_Date))
                         {
-                            closingDate = Convert.ToDateTime(sr.Completion_Date);
+                            DateTime dclosing;
+                            if (DateTime.TryParseExact(sr.Completion_Date, dateFormat, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dclosing))
+                                closingDate = dclosing;
                         }
                         var description = string.IsNullOrEmpty(sr.CIC_Remark) ? "NULL" : string.Format("N'{0}'", sr.CIC_Remark.Replace("'", "''"));
                         var userName = HttpContext.Current.User.Identity.Name;
