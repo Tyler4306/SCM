@@ -275,7 +275,9 @@ namespace SCM.Utils
 
                 // Build db RQN dictionary
                 // var dicRQN = ctx.ServiceRequests.Select(x => new { Id = x.Id, RQN = x.RQN }).OrderBy(x => x.RQN).ToDictionary(x => x.RQN, y => y.Id);
-               var dicRQN = ctx.ServiceRequests.Where(x => !string.IsNullOrEmpty(x.RQN)).Select(x => new { Id = x.Id, RQN = x.RQN }).OrderBy(x => x.RQN).ToDictionary(x => x.RQN, y => y.Id);
+                var dicRQN = ctx.ServiceRequests.Where(x => !string.IsNullOrEmpty(x.RQN)).Select(x => new { Id = x.Id, RQN = x.RQN }).OrderBy(x => x.RQN).ToDictionary(x => x.Id, y => y.RQN);
+                var dicByPhone = ctx.ServiceRequests.Where(x => x.StatusId < 90 && !string.IsNullOrEmpty(x.RQN) && x.ProductId != null && !string.IsNullOrEmpty(x.Customer.Phone)).Select(x => new { Key = x.Customer.Phone + "_" + x.ProductId, Id = x.Id }).ToDictionary(x => x.Id, y => y.Key);
+                var dicByMobile = ctx.ServiceRequests.Where(x => x.StatusId < 90 && !string.IsNullOrEmpty(x.RQN) && x.ProductId != null && !string.IsNullOrEmpty(x.Customer.Mobile)).Select(x => new { Key = x.Customer.Mobile + "_" + x.ProductId, Id = x.Id }).ToDictionary(x => x.Id, y => y.Key);
 
                 // Build status, engineers and tags lists
                 var dic = new Dictionary<string, int>();
@@ -321,11 +323,22 @@ namespace SCM.Utils
                         sb.AppendLine("set @cid = 0;");
                     }
 
+                    var srByPhone = string.Format("{0}_{1}", sr.Customer_Phone_No ?? "X", sr.Service_Product_Code ?? "X");
+                    var srByMobile = string.Format("{0}_{1}", sr.Cellular_No ?? "X", sr.Service_Product_Code ?? "X");
+                    bool isRqnRegistered = dicRQN.ContainsValue(sr.Receipt_No);
+                    bool isPhoneRegistered = false;
+                    bool isMobileRegistered = false;
+                    if(!isRqnRegistered)
+                    {
+                        isPhoneRegistered = dicByPhone.Values.Contains(srByPhone);
+                        if (!isPhoneRegistered)
+                            isMobileRegistered = dicByMobile.Values.Contains(srByMobile);
+                    }
 
-                    if (dicRQN.ContainsKey(sr.Receipt_No))
+                    if (isRqnRegistered || isPhoneRegistered || isMobileRegistered)
                     {
                         // the request exist
-                        string sql = @"UPDATE ServiceRequests SET [EngineerId] = {0}, [StatusId] = {1}, [StatusDate] = (case when [RequestDate] > getdate() then [RequestDate] else getdate() end), [ProductId] = {2}, [Model] = {3}, [SN] = {4}, [ClosingDate] = {5}, [Description] = {6}, UpdatedOn = getdate(), UpdatedBy = '{7}' Where [RQN] = '{8}'; ";
+                        string sql = @"UPDATE ServiceRequests SET [EngineerId] = {0}, [StatusId] = {1}, [StatusDate] = (case when [RequestDate] > getdate() then [RequestDate] else getdate() end), [ProductId] = {2}, [Model] = {3}, [SN] = {4}, [ClosingDate] = {5}, [Description] = {6}, UpdatedOn = getdate(), UpdatedBy = '{7}' Where {8}; ";
                         var engId = (sr.EngineerId.HasValue && sr.EngineerId.Value > 0) ? sr.EngineerId.ToString() : "NULL";
                         var model = string.IsNullOrEmpty(sr.Model) ? "NULL" : string.Format("N'{0}'", sr.Model.Replace("'", "''"));
                         var rqn = sr.Receipt_No;
@@ -341,8 +354,24 @@ namespace SCM.Utils
                         }
                         var description = string.IsNullOrEmpty(sr.CIC_Remark) ? "NULL" : string.Format("N'{0}'", sr.CIC_Remark.Replace("'", "''"));
                         var userName = HttpContext.Current.User.Identity.Name;
+                        string ws = "";
+                        if (isRqnRegistered)
+                        {
 
-                        var valsql = string.Format(sql, engId, dic[sr.Status], productId, model, sn, !closingDate.HasValue ? "NULL" : "'" + closingDate.Value.ToString("dd/MMM/yyyy HH:mm:ss") + "'", description, userName, rqn);
+                            ws = "[RQN] = '" + rqn + "'";
+                        }
+                        else if (isPhoneRegistered)
+                        {
+                            var idByPhone = dicByPhone.First(x => x.Value == srByPhone).Key;
+                            ws = "[Id] = " + idByPhone.ToString();
+                        }
+                        else if (isMobileRegistered)
+                        {
+                            var idByMobile = dicByMobile.First(x => x.Value == srByMobile).Key;
+                            ws = "[Id] = " + idByMobile.ToString();
+
+                        }
+                        var valsql = string.Format(sql, engId, dic[sr.Status], productId, model, sn, !closingDate.HasValue ? "NULL" : "'" + closingDate.Value.ToString("dd/MMM/yyyy HH:mm:ss") + "'", description, userName, ws);
                         sb.AppendLine(valsql);
 
                     }
